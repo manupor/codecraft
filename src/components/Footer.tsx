@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <img src="/CODECRAFT_LOGO.png" alt="CodeCraft" className="h-10 w-auto" />
+            <img src="/codecraftt-logo.png" alt="CodeCraft" className="h-10 w-auto" />
           </div>
 
           <div className="flex items-center gap-8 text-sm text-zinc-300">
