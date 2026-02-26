@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// TODO: Install the official V0 SDK when available
-// For now, we'll use direct API calls to V0's endpoint
-// Documentation: https://vercel.com/blog/build-your-own-ai-app-builder-with-the-v0-platform-api
-
 export async function POST(req: NextRequest) {
   try {
     const { prompt } = await req.json();
@@ -18,7 +14,6 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.V0_API_KEY;
 
     if (!apiKey || apiKey === "your_v0_api_key_here") {
-      // For development: return mock data
       console.warn("V0_API_KEY not configured. Using mock data.");
       return NextResponse.json({
         demoUrl: generateMockDemoUrl(prompt),
@@ -32,34 +27,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // TODO: Replace this with actual V0 SDK call when available
-    // Example (when SDK is available):
-    /*
-    import { v0 } from "v0-sdk";
-    
-    const chat = await v0.chats.create({
-      message: `Create a complete, high-converting landing page for the following business: ${prompt}. 
-      Requirements:
-      - Responsive, mobile-first design
-      - Modern dark/clean aesthetic
-      - Hero section with headline and CTA
-      - Benefits/Features section
-      - Testimonials
-      - Contact form
-      - Footer
-      - Spanish and English bilingual content if applicable
-      - Tailwind CSS styling
-      - Ready to deploy as static HTML`,
-    });
-
-    return NextResponse.json({
-      demoUrl: chat.demo,
-      files: chat.files,
-      chatId: chat.id,
-    });
-    */
-
-    // For now, make direct API call to V0
+    // Call V0 Platform API directly
     const response = await fetch("https://api.v0.dev/chat", {
       method: "POST",
       headers: {
@@ -67,38 +35,71 @@ export async function POST(req: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        message: `Create a complete, high-converting landing page for the following business: ${prompt}. 
-        Requirements:
-        - Responsive, mobile-first design
-        - Modern dark/clean aesthetic
-        - Hero section with headline and CTA
-        - Benefits/Features section
-        - Testimonials
-        - Contact form
-        - Footer
-        - Spanish and English bilingual content if applicable
-        - Tailwind CSS styling
-        - Ready to deploy as static HTML`,
+        model: "v0-1",
+        messages: [
+          {
+            role: "user",
+            content: `Create a complete, high-converting landing page for the following business: ${prompt}. 
+            
+Requirements:
+- Responsive, mobile-first design
+- Modern, clean aesthetic with dark mode support
+- Hero section with compelling headline and clear CTA
+- Benefits/Features section highlighting key value propositions
+- Social proof section with testimonials
+- Contact form or lead capture
+- Professional footer with links
+- Spanish and English bilingual content if the business location suggests it
+- Use Tailwind CSS for styling
+- Fully functional and ready to deploy
+- Include proper meta tags and SEO optimization
+
+Make it conversion-optimized and visually appealing.`,
+          },
+        ],
       }),
     });
 
     if (!response.ok) {
-      throw new Error(`V0 API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error("V0 API error:", response.status, errorText);
+      throw new Error(`V0 API error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
 
+    // Extract demo URL and files from V0 response
+    const demoUrl = data.url || data.demo || "";
+    const files = data.code?.files || data.files || [];
+
     return NextResponse.json({
-      demoUrl: data.demo || data.demoUrl,
-      files: data.files || [],
-      chatId: data.id || data.chatId,
+      demoUrl,
+      files,
+      chatId: data.id || `v0-${Date.now()}`,
     });
   } catch (error) {
     console.error("Error in generate-landing API:", error);
-    return NextResponse.json(
-      { error: "Failed to generate landing page" },
-      { status: 500 }
-    );
+    
+    // Fallback to mock data if V0 API fails
+    try {
+      const { prompt } = await req.json();
+      return NextResponse.json({
+        demoUrl: generateMockDemoUrl(prompt),
+        files: [
+          {
+            path: "page.tsx",
+            content: generateMockCode(prompt),
+          },
+        ],
+        chatId: `fallback-${Date.now()}`,
+        warning: "Using fallback mock data due to API error",
+      });
+    } catch {
+      return NextResponse.json(
+        { error: "Failed to generate landing page" },
+        { status: 500 }
+      );
+    }
   }
 }
 
