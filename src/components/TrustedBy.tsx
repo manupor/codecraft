@@ -9,6 +9,7 @@ const logos = [
   { src: "/logos/Logo-Reserva-08_GOLD-e1718579433972-768x779.png", alt: "" },
   { src: "/logos/Ruby-Wager-Logo.png", alt: "" },
   { src: "/logos/logo-riviera.png", alt: "" },
+  { src: "/logos/aws.svg", alt: "" },
 ];
 
 export default function TrustedBy() {
