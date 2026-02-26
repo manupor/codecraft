@@ -22,7 +22,7 @@ export default function NavMenu() {
       openMenuButtonColor="#fff"
       changeMenuColorOnOpen={true}
       colors={['transparent', 'transparent']}
-      logoUrl="/CODECRAFT_LOGO.png"
+      logoUrl="/codecraftt-logo.png"
       accentColor="#5227FF"
       isFixed={true}
     />
