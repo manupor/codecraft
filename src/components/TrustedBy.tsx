@@ -25,7 +25,7 @@ export default function TrustedBy() {
           transition={{ duration: 0.6 }}
           className="text-center text-sm font-medium text-zinc-300 uppercase tracking-[0.2em] mb-12"
         >
-          Trusted by
+          Our clients
         </motion.p>
       </div>
 
