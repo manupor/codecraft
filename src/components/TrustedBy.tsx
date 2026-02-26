@@ -5,6 +5,7 @@ import { useRef } from "react";
 import LogoLoop from "./LogoLoop";
 
 const logos = [
+  { src: "/logos/codecraftt logo.png", alt: "" },
   { src: "/logos/OLAVIVO.png", alt: "" },
   { src: "/logos/Logo-Reserva-08_GOLD-e1718579433972-768x779.png", alt: "" },
   { src: "/logos/Ruby-Wager-Logo.png", alt: "" },
