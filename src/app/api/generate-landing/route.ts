@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+// TODO: Install the official V0 SDK when available
+// For now, we'll use direct API calls to V0's endpoint
+// Documentation: https://vercel.com/blog/build-your-own-ai-app-builder-with-the-v0-platform-api
+
+export async function POST(req: NextRequest) {
   try {
-    const { prompt } = await request.json();
+    const { prompt } = await req.json();
 
     if (!prompt || typeof prompt !== "string") {
       return NextResponse.json(
@@ -11,20 +15,84 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Replace this mock generation with a call to your Python backend
-    // Example:
-    // const response = await fetch('https://your-python-backend.com/generate', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ prompt })
-    // });
-    // const data = await response.json();
-    // return NextResponse.json({ html: data.html });
+    const apiKey = process.env.V0_API_KEY;
 
-    // For now, generate a mock HTML based on the prompt
-    const html = generateMockLandingPage(prompt);
+    if (!apiKey || apiKey === "your_v0_api_key_here") {
+      // For development: return mock data
+      console.warn("V0_API_KEY not configured. Using mock data.");
+      return NextResponse.json({
+        demoUrl: generateMockDemoUrl(prompt),
+        files: [
+          {
+            path: "page.tsx",
+            content: generateMockCode(prompt),
+          },
+        ],
+        chatId: `mock-${Date.now()}`,
+      });
+    }
 
-    return NextResponse.json({ html });
+    // TODO: Replace this with actual V0 SDK call when available
+    // Example (when SDK is available):
+    /*
+    import { v0 } from "v0-sdk";
+    
+    const chat = await v0.chats.create({
+      message: `Create a complete, high-converting landing page for the following business: ${prompt}. 
+      Requirements:
+      - Responsive, mobile-first design
+      - Modern dark/clean aesthetic
+      - Hero section with headline and CTA
+      - Benefits/Features section
+      - Testimonials
+      - Contact form
+      - Footer
+      - Spanish and English bilingual content if applicable
+      - Tailwind CSS styling
+      - Ready to deploy as static HTML`,
+    });
+
+    return NextResponse.json({
+      demoUrl: chat.demo,
+      files: chat.files,
+      chatId: chat.id,
+    });
+    */
+
+    // For now, make direct API call to V0
+    const response = await fetch("https://api.v0.dev/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        message: `Create a complete, high-converting landing page for the following business: ${prompt}. 
+        Requirements:
+        - Responsive, mobile-first design
+        - Modern dark/clean aesthetic
+        - Hero section with headline and CTA
+        - Benefits/Features section
+        - Testimonials
+        - Contact form
+        - Footer
+        - Spanish and English bilingual content if applicable
+        - Tailwind CSS styling
+        - Ready to deploy as static HTML`,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`V0 API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    return NextResponse.json({
+      demoUrl: data.demo || data.demoUrl,
+      files: data.files || [],
+      chatId: data.id || data.chatId,
+    });
   } catch (error) {
     console.error("Error in generate-landing API:", error);
     return NextResponse.json(
@@ -34,645 +102,107 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * Mock function to generate HTML based on prompt
- * TODO: Replace this entire function with a call to your Python FastAPI backend
- * that uses an LLM to generate the actual HTML
- */
-function generateMockLandingPage(prompt: string): string {
-  // Extract business name from prompt (simple heuristic)
+// Mock functions for development
+function generateMockDemoUrl(prompt: string): string {
+  // Return a data URL with embedded HTML for demo purposes
+  const html = generateMockHTML(prompt);
+  return `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
+}
+
+function generateMockCode(prompt: string): string {
   const businessMatch = prompt.match(/(?:for|about)\s+(?:a\s+)?([^,\.]+)/i);
-  const businessName = businessMatch
-    ? businessMatch[1].trim()
-    : "Your Business";
+  const businessName = businessMatch ? businessMatch[1].trim() : "Your Business";
 
-  // Extract location if mentioned
-  const locationMatch = prompt.match(/in\s+([^,\.]+(?:,\s*[^,\.]+)?)/i);
-  const location = locationMatch ? locationMatch[1].trim() : "";
+  return `export default function LandingPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      {/* Hero Section */}
+      <section className="container mx-auto px-6 py-20 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          Welcome to <span className="text-green-400">${businessName}</span>
+        </h1>
+        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          ${prompt.substring(0, 150)}
+        </p>
+        <button className="bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-lg text-lg transition">
+          Get Started
+        </button>
+      </section>
 
-  return `
-<!DOCTYPE html>
+      {/* Features */}
+      <section className="container mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold text-center mb-12">Why Choose Us</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-gray-800 p-6 rounded-lg">
+              <h3 className="text-xl font-semibold mb-3">Feature {i}</h3>
+              <p className="text-gray-400">Amazing feature description here</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="container mx-auto px-6 py-20 text-center">
+        <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+        <button className="bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-lg text-lg transition">
+          Contact Us Now
+        </button>
+      </section>
+    </div>
+  );
+}`;
+}
+
+function generateMockHTML(prompt: string): string {
+  const businessMatch = prompt.match(/(?:for|about)\s+(?:a\s+)?([^,\.]+)/i);
+  const businessName = businessMatch ? businessMatch[1].trim() : "Your Business";
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${businessName} - Generated by CodeCraft AI</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #1f2937;
-      background: #ffffff;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e5e7eb;
-      z-index: 1000;
-      padding: 1rem 0;
-    }
-    
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #10b981;
-      text-decoration: none;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    
-    .nav-links a {
-      color: #6b7280;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    
-    .nav-links a:hover {
-      color: #1f2937;
-    }
-    
-    .cta-button {
-      background: #10b981;
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      transition: background 0.3s;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    
-    .cta-button:hover {
-      background: #059669;
-    }
-    
-    /* Hero Section */
-    .hero {
-      padding: 8rem 0 5rem;
-      text-align: center;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-    
-    .hero .highlight {
-      color: #10b981;
-    }
-    
-    .hero p {
-      font-size: 1.25rem;
-      color: #6b7280;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    .button-primary {
-      background: #10b981;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
-      display: inline-block;
-    }
-    
-    .button-primary:hover {
-      background: #059669;
-    }
-    
-    .button-secondary {
-      border: 2px solid #d1d5db;
-      color: #374151;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      display: inline-block;
-    }
-    
-    .button-secondary:hover {
-      border-color: #9ca3af;
-    }
-    
-    /* Features Section */
-    .features {
-      padding: 5rem 0;
-      background: #f9fafb;
-    }
-    
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    
-    .feature-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    
-    .feature-icon {
-      width: 3rem;
-      height: 3rem;
-      background: #d1fae5;
-      border-radius: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    
-    .feature-icon svg {
-      width: 1.5rem;
-      height: 1.5rem;
-      color: #10b981;
-    }
-    
-    .feature-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-    
-    .feature-card p {
-      color: #6b7280;
-    }
-    
-    /* Benefits Section */
-    .benefits {
-      padding: 5rem 0;
-    }
-    
-    .benefits-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    
-    .benefits-text h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-    
-    .benefits-text p {
-      font-size: 1.125rem;
-      color: #6b7280;
-      margin-bottom: 1.5rem;
-    }
-    
-    .benefits-list {
-      list-style: none;
-    }
-    
-    .benefits-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-      color: #374151;
-    }
-    
-    .benefits-list svg {
-      width: 1.5rem;
-      height: 1.5rem;
-      color: #10b981;
-      flex-shrink: 0;
-      margin-top: 0.25rem;
-    }
-    
-    .benefits-cta {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      padding: 3rem;
-      border-radius: 1rem;
-      color: white;
-    }
-    
-    .benefits-cta h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .benefits-cta p {
-      color: #d1fae5;
-      margin-bottom: 1.5rem;
-    }
-    
-    .benefits-cta .cta-button {
-      background: white;
-      color: #10b981;
-    }
-    
-    .benefits-cta .cta-button:hover {
-      background: #f3f4f6;
-    }
-    
-    /* Testimonials */
-    .testimonials {
-      padding: 5rem 0;
-      background: #f9fafb;
-    }
-    
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    
-    .testimonial-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    
-    .stars {
-      display: flex;
-      gap: 0.25rem;
-      margin-bottom: 1rem;
-    }
-    
-    .star {
-      color: #fbbf24;
-      font-size: 1.25rem;
-    }
-    
-    .testimonial-card p {
-      color: #6b7280;
-      margin-bottom: 1rem;
-    }
-    
-    .testimonial-author {
-      font-weight: 600;
-    }
-    
-    .testimonial-role {
-      font-size: 0.875rem;
-      color: #9ca3af;
-    }
-    
-    /* CTA Section */
-    .cta-section {
-      padding: 5rem 0;
-      text-align: center;
-    }
-    
-    .cta-section h2 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-    
-    .cta-section p {
-      font-size: 1.25rem;
-      color: #6b7280;
-      margin-bottom: 2rem;
-    }
-    
-    .email-form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    .email-form input {
-      flex: 1;
-      padding: 1rem 1.5rem;
-      border: 2px solid #d1d5db;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      min-width: 250px;
-    }
-    
-    .email-form input:focus {
-      outline: none;
-      border-color: #10b981;
-    }
-    
-    .email-form button {
-      padding: 1rem 2rem;
-      font-weight: 600;
-    }
-    
-    /* Footer */
-    footer {
-      background: #1f2937;
-      color: white;
-      padding: 3rem 0;
-      text-align: center;
-    }
-    
-    footer .logo {
-      color: #10b981;
-      margin-bottom: 1rem;
-      display: block;
-    }
-    
-    footer p {
-      color: #9ca3af;
-      margin-bottom: 1.5rem;
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-    
-    .footer-links a {
-      color: #9ca3af;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    
-    .footer-links a:hover {
-      color: white;
-    }
-    
-    .copyright {
-      color: #6b7280;
-      font-size: 0.875rem;
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-      }
-      
-      .benefits-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
-      
-      .cta-section h2 {
-        font-size: 2rem;
-      }
-      
-      .email-form {
-        flex-direction: column;
-      }
-      
-      .email-form input {
-        min-width: 100%;
-      }
-    }
-  </style>
+  <title>${businessName}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <a href="#" class="logo">${businessName}</a>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#benefits">Benefits</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#cta" class="cta-button">Get Started</a></li>
-      </ul>
-    </div>
-  </nav>
+<body class="bg-gradient-to-b from-gray-900 to-black text-white">
+  <section class="container mx-auto px-6 py-20 text-center">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+      Welcome to <span class="text-green-400">${businessName}</span>
+    </h1>
+    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+      ${prompt.substring(0, 150)}
+    </p>
+    <button class="bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-lg text-lg transition">
+      Get Started
+    </button>
+  </section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1>Welcome to <span class="highlight">${businessName}</span></h1>
-      ${location ? `<p style="font-size: 1.25rem; color: #6b7280; margin-bottom: 1rem;">Proudly serving ${location}</p>` : ""}
-      <p>${prompt.substring(0, 150)}...</p>
-      <div class="hero-buttons">
-        <a href="#cta" class="button-primary">Get Started Today</a>
-        <a href="#features" class="button-secondary">Learn More</a>
+  <section class="container mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-center mb-12">Why Choose Us</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h3 class="text-xl font-semibold mb-3">Quality Service</h3>
+        <p class="text-gray-400">We deliver exceptional quality in everything we do</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h3 class="text-xl font-semibold mb-3">Fast & Reliable</h3>
+        <p class="text-gray-400">Quick turnaround without compromising quality</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h3 class="text-xl font-semibold mb-3">Great Value</h3>
+        <p class="text-gray-400">Competitive pricing with outstanding results</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2 class="section-title">Why Choose Us</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-          </div>
-          <h3>Quality Service</h3>
-          <p>We deliver exceptional quality in everything we do, ensuring your complete satisfaction.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3>Fast & Reliable</h3>
-          <p>Quick turnaround times without compromising on quality or attention to detail.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3>Great Value</h3>
-          <p>Competitive pricing that delivers outstanding value for your investment.</p>
-        </div>
-      </div>
-    </div>
+  <section class="container mx-auto px-6 py-20 text-center">
+    <h2 class="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+    <button class="bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-lg text-lg transition">
+      Contact Us Now
+    </button>
   </section>
-
-  <!-- Benefits Section -->
-  <section id="benefits" class="benefits">
-    <div class="container">
-      <div class="benefits-content">
-        <div class="benefits-text">
-          <h2>Experience the Difference</h2>
-          <p>We're committed to providing you with an exceptional experience from start to finish.</p>
-          <ul class="benefits-list">
-            <li>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Professional and experienced team</span>
-            </li>
-            <li>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Personalized service tailored to your needs</span>
-            </li>
-            <li>
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Satisfaction guaranteed or your money back</span>
-            </li>
-          </ul>
-        </div>
-        <div class="benefits-cta">
-          <h3>Ready to get started?</h3>
-          <p>Join hundreds of satisfied customers who trust us.</p>
-          <a href="#cta" class="cta-button">Contact Us Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials">
-    <div class="container">
-      <h2 class="section-title">What Our Customers Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="stars">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p>"Absolutely fantastic service! Exceeded all my expectations and delivered exactly what I needed."</p>
-          <p class="testimonial-author">Sarah Johnson</p>
-          <p class="testimonial-role">Business Owner</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p>"Professional, reliable, and a pleasure to work with. Highly recommend to anyone looking for quality."</p>
-          <p class="testimonial-author">Michael Chen</p>
-          <p class="testimonial-role">Marketing Director</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p>"Best decision I made for my business. The results speak for themselves!"</p>
-          <p class="testimonial-author">Emily Rodriguez</p>
-          <p class="testimonial-role">Entrepreneur</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section id="cta" class="cta-section">
-    <div class="container">
-      <h2>Ready to Get Started?</h2>
-      <p>Join us today and experience the difference for yourself.</p>
-      <form class="email-form" onsubmit="event.preventDefault(); alert('Thank you for your interest!');">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="cta-button">Get Started</button>
-      </form>
-      <p style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">No credit card required. Start your free trial today.</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <span class="logo">${businessName}</span>
-      <p>${location ? `Serving ${location} and beyond` : "Serving customers worldwide"}</p>
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Contact</a>
-      </div>
-      <p class="copyright">© ${new Date().getFullYear()} ${businessName}. All rights reserved. Generated by CodeCraft AI.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
 </body>
-</html>
-  `.trim();
+</html>`;
 }

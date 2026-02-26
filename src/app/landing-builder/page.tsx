@@ -1,257 +1,298 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Sparkles, Loader2, Eye } from "lucide-react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const welcomeMessage: Message = {
+  role: "assistant",
+  content:
+    "Hi! Describe the landing page you want to build. Be as specific as possible (business type, location, services, colors, CTA). After payment of $50 USD, I'll generate it for you.",
+};
 
 export default function LandingBuilder() {
-  const [prompt, setPrompt] = useState("");
-  const [generatedHtml, setGeneratedHtml] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [isPaid, setIsPaid] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
-
-  // TODO: Replace with real payment gateway (PayPal/Stripe)
-  const handlePayment = () => {
-    // Simulate payment for now
-    setIsPaid(true);
-  };
+  const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [generatedCode, setGeneratedCode] = useState("");
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [paid, setPaid] = useState(false);
 
   const handleGenerate = async () => {
-    if (!prompt.trim()) {
-      alert("Please enter a description for your landing page");
-      return;
-    }
+    if (!input.trim()) return;
 
-    setIsGenerating(true);
-    setShowPreview(false);
+    // Add user message to chat
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    setLoading(true);
 
     try {
-      // TODO: This will be replaced with a call to Python backend
-      // POST https://your-python-backend.com/generate
-      const response = await fetch("/api/generate-landing", {
+      const res = await fetch("/api/generate-landing", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: input }),
       });
 
-      if (!response.ok) {
+      if (!res.ok) {
         throw new Error("Failed to generate landing page");
       }
 
-      const data = await response.json();
-      setGeneratedHtml(data.html);
-      setShowPreview(true);
+      const data = await res.json();
+      setPreviewUrl(data.demoUrl);
+      setGeneratedCode(data.files?.[0]?.content || "");
+
+      // Add AI response to chat
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "✅ Your landing page is ready! Check the preview on the right. You can copy the code or share the live URL.",
+        },
+      ]);
+
+      setInput("");
+      setActiveTab("preview");
     } catch (error) {
       console.error("Error generating landing:", error);
-      alert("Failed to generate landing page. Please try again.");
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "❌ Sorry, there was an error generating your landing page. Please try again.",
+        },
+      ]);
     } finally {
-      setIsGenerating(false);
+      setLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey && paid && !loading) {
+      e.preventDefault();
+      handleGenerate();
     }
   };
 
   return (
-    <main className="relative min-h-screen bg-black pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="flex h-screen bg-black text-white overflow-hidden">
+      {/* Left Panel - Chat Interface */}
+      <div className="w-full lg:w-2/5 flex flex-col border-r border-gray-800">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-            <Sparkles className="w-4 h-4 text-emerald-500" />
-            <span className="text-sm text-emerald-500 font-medium">
-              AI-Powered Landing Pages
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Generate Your Landing Page
-            <br />
-            <span className="text-emerald-500">in Minutes</span>
-          </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            Describe your business and get a professional, conversion-optimized
-            landing page instantly. Only <span className="text-white font-semibold">$50</span> per landing page.
-          </p>
-        </motion.div>
-
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Left Column - Input */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div>
-              <label
-                htmlFor="prompt"
-                className="block text-sm font-medium text-zinc-300 mb-3"
-              >
-                Describe Your Landing Page
-              </label>
-              <textarea
-                id="prompt"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Example: Landing page for a coffee shop in Alajuela, Costa Rica with online reservations, cozy atmosphere, specialty drinks menu, and customer testimonials section..."
-                className="w-full h-64 px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
-              />
-              <p className="mt-2 text-xs text-zinc-500">
-                Be as detailed as possible. Include your business type, target
-                audience, key features, and desired sections.
-              </p>
-            </div>
-
-            {/* Payment Section */}
-            {!isPaid ? (
-              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-lg">
-                <h3 className="text-lg font-semibold mb-2">Payment Required</h3>
-                <p className="text-sm text-zinc-400 mb-4">
-                  One-time payment of $50 USD to generate your landing page.
-                </p>
-                <button
-                  onClick={handlePayment}
-                  className="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors duration-200"
-                >
-                  Pay $50 USD
-                </button>
-                <p className="mt-3 text-xs text-zinc-500 text-center">
-                  {/* TODO: Connect real payment gateway here (PayPal/Stripe) */}
-                  Secure payment via PayPal or Stripe (coming soon)
-                </p>
-              </div>
-            ) : (
-              <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                <p className="text-emerald-500 font-medium">
-                  ✓ Payment confirmed! You can now generate your landing page.
-                </p>
-              </div>
-            )}
-
-            {/* Generate Button */}
-            <button
-              onClick={handleGenerate}
-              disabled={!isPaid || isGenerating || !prompt.trim()}
-              className="w-full px-6 py-4 bg-white hover:bg-zinc-200 text-black font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isGenerating ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5" />
-                  Generate & Preview
-                </>
-              )}
-            </button>
-          </motion.div>
-
-          {/* Right Column - Preview */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-4"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Eye className="w-5 h-5 text-emerald-500" />
-                Live Preview
-              </h3>
-              {generatedHtml && (
-                <button
-                  onClick={() => setShowPreview(!showPreview)}
-                  className="text-sm text-emerald-500 hover:text-emerald-400"
-                >
-                  {showPreview ? "Hide" : "Show"} Preview
-                </button>
-              )}
-            </div>
-
-            <div className="relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
-              {!generatedHtml ? (
-                <div className="flex items-center justify-center h-[600px] text-zinc-500">
-                  <div className="text-center">
-                    <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p>Your landing page preview will appear here</p>
-                  </div>
-                </div>
-              ) : showPreview ? (
-                <iframe
-                  srcDoc={generatedHtml}
-                  className="w-full h-[600px] bg-white"
-                  title="Landing Page Preview"
-                  sandbox="allow-same-origin"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-[600px] text-zinc-500">
-                  <p>Preview hidden</p>
-                </div>
-              )}
-            </div>
-
-            {generatedHtml && (
-              <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-                <p className="text-sm text-zinc-400 mb-3">
-                  Your landing page is ready! Next steps:
-                </p>
-                <ul className="text-sm text-zinc-300 space-y-2">
-                  <li>• Download the HTML file</li>
-                  <li>• Deploy to your hosting (Vercel, Netlify, etc.)</li>
-                  <li>• Customize further if needed</li>
-                </ul>
-                <button className="mt-4 w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                  Download HTML
-                </button>
-              </div>
-            )}
-          </motion.div>
+        <div className="p-4 border-b border-gray-800 flex items-center gap-2">
+          <span className="font-bold text-green-400">codecraftt</span>
+          <span className="text-gray-400">/ Landing Builder</span>
         </div>
 
-        {/* Features Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 grid md:grid-cols-3 gap-8"
-        >
-          <div className="text-center">
-            <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-6 h-6 text-emerald-500" />
+        {/* Payment Banner */}
+        <div className="mx-4 mt-4 p-3 bg-gray-900 rounded-lg border border-gray-700">
+          <p className="text-sm text-gray-300">
+            💳 One-time:{" "}
+            <span className="text-green-400 font-bold">$50 USD</span> — AI
+            generation + free hosting
+          </p>
+          {!paid && (
+            <button
+              onClick={() => setPaid(true)} // TODO: connect PayPal or Stripe here
+              className="mt-2 w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2 rounded-lg text-sm transition"
+            >
+              Pay & Unlock Generator
+            </button>
+          )}
+          {paid && (
+            <div className="mt-2 text-sm text-green-400 font-medium">
+              ✓ Payment confirmed
             </div>
-            <h4 className="font-semibold mb-2">AI-Powered</h4>
-            <p className="text-sm text-zinc-400">
-              Advanced AI generates professional, conversion-optimized layouts
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Eye className="w-6 h-6 text-emerald-500" />
+          )}
+        </div>
+
+        {/* Messages Chat */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`flex ${
+                msg.role === "user" ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div
+                className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
+                  msg.role === "user"
+                    ? "bg-gray-700 text-white rounded-br-sm"
+                    : "bg-gray-900 text-gray-200 rounded-bl-sm border border-gray-700"
+                }`}
+              >
+                {msg.content}
+              </div>
             </div>
-            <h4 className="font-semibold mb-2">Instant Preview</h4>
-            <p className="text-sm text-zinc-400">
-              See your landing page in real-time before downloading
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Loader2 className="w-6 h-6 text-emerald-500" />
+          ))}
+          {loading && (
+            <div className="flex justify-start">
+              <div className="bg-gray-900 border border-gray-700 px-4 py-2 rounded-2xl rounded-bl-sm">
+                <div className="flex gap-1">
+                  <span
+                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0ms" }}
+                  />
+                  <span
+                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "150ms" }}
+                  />
+                  <span
+                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "300ms" }}
+                  />
+                </div>
+              </div>
             </div>
-            <h4 className="font-semibold mb-2">Ready in Minutes</h4>
-            <p className="text-sm text-zinc-400">
-              From description to deployed landing page in under 5 minutes
-            </p>
+          )}
+        </div>
+
+        {/* Input Bar */}
+        <div className="p-4 border-t border-gray-800">
+          <div className="flex gap-2 bg-gray-900 border border-gray-700 rounded-xl p-2">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Describe your landing page..."
+              rows={2}
+              disabled={!paid}
+              className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
+            />
+            <button
+              onClick={handleGenerate}
+              disabled={loading || !paid || !input.trim()}
+              className="self-end bg-green-500 hover:bg-green-400 disabled:opacity-30 disabled:cursor-not-allowed text-black p-2 rounded-lg transition"
+            >
+              ➤
+            </button>
           </div>
-        </motion.div>
+          <p className="text-xs text-gray-600 mt-1 text-center">
+            Shift+Enter for new line · Enter to send
+          </p>
+        </div>
       </div>
-    </main>
+
+      {/* Right Panel - Preview + Code Tabs */}
+      <div className="hidden lg:flex flex-1 flex-col">
+        {/* Tabs */}
+        <div className="flex border-b border-gray-800 px-4">
+          {(["preview", "code"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-3 text-sm capitalize transition ${
+                activeTab === tab
+                  ? "text-white border-b-2 border-green-400"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+          {previewUrl && !previewUrl.startsWith("data:") && (
+            <a
+              href={previewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto self-center text-xs text-green-400 hover:underline py-3"
+            >
+              ↗ Open live
+            </a>
+          )}
+        </div>
+
+        {/* Tab Content */}
+        <div className="flex-1 overflow-hidden">
+          {activeTab === "preview" ? (
+            previewUrl ? (
+              <iframe
+                src={previewUrl}
+                className="w-full h-full border-0"
+                title="Landing preview"
+                sandbox="allow-scripts allow-same-origin"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full text-gray-600">
+                <span className="text-6xl mb-4">🖥</span>
+                <p>Your landing page preview will appear here</p>
+              </div>
+            )
+          ) : (
+            <div className="h-full overflow-auto bg-gray-950">
+              {generatedCode ? (
+                <SyntaxHighlighter
+                  language="tsx"
+                  style={vscDarkPlus}
+                  customStyle={{
+                    margin: 0,
+                    padding: "1rem",
+                    background: "#0a0a0a",
+                    fontSize: "0.875rem",
+                  }}
+                  showLineNumbers
+                >
+                  {generatedCode}
+                </SyntaxHighlighter>
+              ) : (
+                <div className="flex items-center justify-center h-full">
+                  <span className="text-gray-600">
+                    Generated code will appear here...
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Mobile: Show preview below chat */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 h-1/3 bg-gray-950 border-t border-gray-800">
+        <div className="flex border-b border-gray-800 px-4">
+          {(["preview", "code"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 text-xs capitalize transition ${
+                activeTab === tab
+                  ? "text-white border-b-2 border-green-400"
+                  : "text-gray-500"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+        <div className="h-full overflow-hidden">
+          {activeTab === "preview" ? (
+            previewUrl ? (
+              <iframe
+                src={previewUrl}
+                className="w-full h-full border-0"
+                title="Landing preview"
+                sandbox="allow-scripts allow-same-origin"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full text-gray-600 text-sm">
+                <p>Preview will appear here</p>
+              </div>
+            )
+          ) : (
+            <div className="h-full overflow-auto bg-gray-950 p-2 text-xs">
+              {generatedCode || (
+                <span className="text-gray-600">Code will appear here...</span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
