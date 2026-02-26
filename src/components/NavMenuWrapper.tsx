@@ -8,6 +8,7 @@ const menuItems = [
   { label: 'About', ariaLabel: 'Learn about us', link: '#about' },
   { label: 'Services', ariaLabel: 'View our services', link: '#services' },
   { label: 'Authority', ariaLabel: 'See our track record', link: '#authority' },
+  { label: 'Landing Builder', ariaLabel: 'Generate your landing page', link: '/landing-builder' },
   { label: 'Contact', ariaLabel: 'Get in touch', link: '#cta' },
 ];
 
