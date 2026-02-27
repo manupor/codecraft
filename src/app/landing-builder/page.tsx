@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useSession } from "next-auth/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink } from "lucide-react";
+import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -31,6 +32,7 @@ const welcomeMessage: Message = {
 };
 
 export default function LandingBuilder() {
+  const { data: session } = useSession();
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,6 +49,9 @@ export default function LandingBuilder() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [chatId, setChatId] = useState<string>("");
+  const [currentLandingId, setCurrentLandingId] = useState<string | null>(null);
+  const [landingName, setLandingName] = useState("");
+  const [saving, setSaving] = useState(false);
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -212,6 +217,49 @@ export default function LandingBuilder() {
     if (newWindow) {
       newWindow.document.write(previewHtml);
       newWindow.document.close();
+    }
+  };
+
+  const saveLanding = async () => {
+    if (!session || !generatedCode) {
+      alert("Please generate a landing page first");
+      return;
+    }
+
+    const name = landingName || prompt("Enter a name for this landing page:") || "Untitled Landing";
+    
+    try {
+      setSaving(true);
+      const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+      const token = (session as any)?.accessToken;
+
+      const response = await fetch(`${AUTH_SERVICE_URL}/api/landings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name,
+          html: generatedCode,
+          prompt: history[0]?.prompt || input,
+          provider: 'openai',
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCurrentLandingId(data.landing.id);
+        setLandingName(name);
+        alert("Landing page saved successfully!");
+      } else {
+        alert("Failed to save landing page");
+      }
+    } catch (error) {
+      console.error("Error saving landing:", error);
+      alert("Error saving landing page");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -471,6 +519,17 @@ export default function LandingBuilder() {
           ))}
           {previewHtml && (
             <div className="ml-auto flex items-center gap-2">
+              {session && (
+                <button
+                  onClick={saveLanding}
+                  disabled={saving}
+                  className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
+                  title="Save to dashboard"
+                >
+                  <Save size={14} />
+                  <span>{saving ? "Saving..." : currentLandingId ? "Saved" : "Save"}</span>
+                </button>
+              )}
               <button
                 onClick={handleOpenInNewTab}
                 className="text-xs text-blue-400 hover:text-blue-300 py-3 flex items-center gap-1.5 transition"

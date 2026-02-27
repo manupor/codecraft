@@ -35,13 +35,61 @@ export default function Dashboard() {
   const fetchLandings = async () => {
     try {
       setLoading(true);
-      // TODO: Implement API to fetch user's landings
-      // For now, using mock data
-      setLandings([]);
+      const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+      const token = (session as any)?.accessToken;
+
+      if (!token) {
+        console.error("No access token available");
+        setLandings([]);
+        return;
+      }
+
+      const response = await fetch(`${AUTH_SERVICE_URL}/api/landings`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLandings(data.landings || []);
+      } else {
+        console.error("Failed to fetch landings");
+        setLandings([]);
+      }
     } catch (error) {
       console.error("Error fetching landings:", error);
+      setLandings([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteLanding = async (landingId: string) => {
+    if (!confirm("Are you sure you want to delete this landing?")) {
+      return;
+    }
+
+    try {
+      const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+      const token = (session as any)?.accessToken;
+
+      const response = await fetch(`${AUTH_SERVICE_URL}/api/landings/${landingId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Remove from local state
+        setLandings(landings.filter(l => l.id !== landingId));
+      } else {
+        alert("Failed to delete landing");
+      }
+    } catch (error) {
+      console.error("Error deleting landing:", error);
+      alert("Error deleting landing");
     }
   };
 
@@ -214,13 +262,19 @@ export default function Dashboard() {
                       Updated {new Date(landing.updatedAt).toLocaleDateString()}
                     </p>
                     <div className="flex gap-2">
-                      <button className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition">
+                      <Link
+                        href={`/landing-builder?id=${landing.id}`}
+                        className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition text-center"
+                      >
                         Edit
-                      </button>
-                      <button className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg text-sm font-medium transition">
+                      </Link>
+                      <button
+                        onClick={() => handleDeleteLanding(landing.id)}
+                        className="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg text-sm font-medium transition"
+                        title="Delete landing"
+                      >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
                       </button>
                     </div>
