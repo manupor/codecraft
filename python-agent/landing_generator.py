@@ -470,13 +470,13 @@ Generate the complete HTML with extensive CSS and JavaScript."""
         try:
             if self.provider == "openai":
                 response = self.client.chat.completions.create(
-                    model="gpt-4-turbo-preview",
+                    model="gpt-4o",
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": user_message}
                     ],
                     temperature=0.7,
-                    max_tokens=4000
+                    max_tokens=16000
                 )
                 html_content = response.choices[0].message.content
                 
@@ -489,7 +489,7 @@ Generate the complete HTML with extensive CSS and JavaScript."""
                         {"role": "user", "content": user_message}
                     ],
                     temperature=0.7,
-                    max_tokens=4000
+                    max_tokens=16000
                 )
                 html_content = response.choices[0].message.content
                 
@@ -502,14 +502,14 @@ Generate the complete HTML with extensive CSS and JavaScript."""
                         {"role": "user", "content": user_message}
                     ],
                     temperature=0.7,
-                    max_tokens=4000
+                    max_tokens=16000
                 )
                 html_content = response.choices[0].message.content
                 
             else:  # anthropic
                 response = self.client.messages.create(
                     model="claude-3-5-sonnet-20241022",
-                    max_tokens=4000,
+                    max_tokens=8000,
                     system=system_prompt,
                     messages=[
                         {"role": "user", "content": user_message}
