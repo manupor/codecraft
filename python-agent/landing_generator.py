@@ -116,6 +116,13 @@ class LandingPageGenerator:
 - NO comments outside the HTML
 - Just raw, clean, valid HTML from the very first character
 
+MANDATORY: ALL CSS MUST BE EMBEDDED IN A <style> TAG IN THE <head> SECTION.
+- DO NOT use external stylesheets
+- DO NOT use CDN links for CSS (except Tailwind CDN is allowed)
+- ALL custom styles MUST be in <style></style> tags
+- The <style> tag MUST contain at least 300 lines of CSS
+- If you don't include extensive CSS in <style> tags, your response will be REJECTED
+
 You are an ELITE WEB DESIGNER who creates $50,000 landing pages for Fortune 500 companies.
 
 Your designs are VISUALLY STUNNING, with:
@@ -457,15 +464,30 @@ Every section must be unique and visually impressive."""
 
         user_message = f"""Create an ELITE, VISUALLY STUNNING landing page for: {prompt}
 
-REQUIREMENTS:
+CRITICAL REQUIREMENTS:
 - Make it look like a $50,000 professional design
+- ALL CSS MUST BE EMBEDDED IN <style> TAGS IN THE <head> SECTION
+- Minimum 300 lines of custom CSS inside <style></style> tags
 - Use complex gradients, glassmorphism, and advanced CSS
 - Include smooth animations and micro-interactions
 - Every section must be unique and eye-catching
-- Minimum 300 lines of custom CSS
 - Professional, modern, and conversion-optimized
+- DO NOT use external CSS files or links (except Tailwind CDN)
 
-Generate the complete HTML with extensive CSS and JavaScript."""
+STRUCTURE REQUIRED:
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* YOUR 300+ LINES OF CUSTOM CSS HERE */
+  </style>
+</head>
+<body>
+  <!-- Your HTML content here -->
+</body>
+</html>
+
+Generate the complete HTML with extensive embedded CSS and JavaScript."""
 
         try:
             if self.provider == "openai":
