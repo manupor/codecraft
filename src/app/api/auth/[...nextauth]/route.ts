@@ -58,16 +58,16 @@ const handler = NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // If redirecting to login page, go to landing-builder instead
-      if (url === `${baseUrl}/login` || url === baseUrl) {
-        return `${baseUrl}/landing-builder`;
-      }
-      // If URL already contains a redirect parameter, use it
+      // Always redirect to dashboard after successful login
       if (url.startsWith(baseUrl)) {
+        // If it's a callback from OAuth, go to dashboard
+        if (url.includes('/api/auth/callback')) {
+          return `${baseUrl}/dashboard`;
+        }
         return url;
       }
-      // Default to landing-builder
-      return `${baseUrl}/landing-builder`;
+      // Default to dashboard
+      return `${baseUrl}/dashboard`;
     },
     async jwt({ token, user, account }) {
       if (user) {
