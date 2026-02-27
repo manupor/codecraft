@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# auth-service
+auth-service/node_modules
+auth-service/.env
+
+# kubernetes secrets
+k8s/secrets.yaml

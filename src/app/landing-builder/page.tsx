@@ -1,28 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  timestamp?: number;
+}
+
+interface HistoryEntry {
+  id: string;
+  prompt: string;
+  html: string;
+  timestamp: number;
+}
+
+interface SelectedElement {
+  selector: string;
+  element: HTMLElement;
+  rect: DOMRect;
 }
 
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi! Describe the landing page you want to build. Be as specific as possible (business type, location, services, colors, CTA). After payment of $50 USD, I'll generate it for you.",
+    "Hi! I'm your CodeCraftt Builder.\n\nDescribe the landing page you want — include:\n• Your business name\n• What you sell or offer\n• Your location (city, country)\n• Any colors or style preferences\n• Your main call to action (e.g. 'Book a call', 'Buy now')\n\nI'll generate your live landing page in minutes.",
 };
 
 export default function LandingBuilder() {
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState("");
+  const [previewHtml, setPreviewHtml] = useState("");
   const [generatedCode, setGeneratedCode] = useState("");
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [paid, setPaid] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [selectedElement, setSelectedElement] = useState<SelectedElement | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [currentHistoryIndex, setCurrentHistoryIndex] = useState(-1);
+  const [showHistory, setShowHistory] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [chatId, setChatId] = useState<string>("");
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    const savedHistory = localStorage.getItem('landing-builder-history');
+    if (savedHistory) {
+      try {
+        const parsed = JSON.parse(savedHistory);
+        setHistory(parsed);
+      } catch (e) {
+        console.error('Failed to load history:', e);
+      }
+    }
+  }, []);
+
+  // Save history to localStorage whenever it changes
+  useEffect(() => {
+    if (history.length > 0) {
+      localStorage.setItem('landing-builder-history', JSON.stringify(history));
+    }
+  }, [history]);
 
   const handleGenerate = async () => {
     if (!input.trim()) return;
@@ -32,29 +76,96 @@ export default function LandingBuilder() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/generate-landing", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: input }),
-      });
+      // Detect if this is a modification request (we already have HTML)
+      const isModification = generatedCode.length > 0;
+      
+      let res;
+      if (isModification) {
+        // Use intelligent iteration endpoint
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "🔄 Making targeted changes to your page...",
+            timestamp: Date.now(),
+          },
+        ]);
+
+        res = await fetch("/api/iterate-landing", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            feedback: input,
+            current_html: generatedCode,
+            original_prompt: history[0]?.prompt || ""
+          }),
+        });
+      } else {
+        // Generate new page from scratch
+        res = await fetch("/api/generate-landing", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: input }),
+        });
+      }
 
       if (!res.ok) {
         throw new Error("Failed to generate landing page");
       }
 
       const data = await res.json();
-      setPreviewUrl(data.demoUrl);
-      setGeneratedCode(data.files?.[0]?.content || "");
+      
+      if (isModification && data.html) {
+        // For iterations, we get HTML directly
+        const newHtml = data.html;
+        setPreviewHtml(newHtml);
+        setGeneratedCode(newHtml);
+        
+        // Save to history
+        const newEntry: HistoryEntry = {
+          id: `entry-${Date.now()}`,
+          prompt: input,
+          html: newHtml,
+          timestamp: Date.now(),
+        };
+        setHistory(prev => [...prev, newEntry]);
+        setCurrentHistoryIndex(history.length);
+        
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "✅ Changes applied! Only the requested parts were modified.",
+            timestamp: Date.now(),
+          },
+        ]);
+      } else {
+        // For new generations
+        const htmlContent = data.files?.[1]?.content || data.files?.[0]?.content || "";
+        setPreviewHtml(htmlContent);
+        setGeneratedCode(htmlContent);
+        setChatId(data.chatId || "");
 
-      // Add AI response to chat
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "✅ Your landing page is ready! Check the preview on the right. You can copy the code or share the live URL.",
-        },
-      ]);
+        // Save to history
+        const newEntry: HistoryEntry = {
+          id: data.chatId || `entry-${Date.now()}`,
+          prompt: input,
+          html: data.files?.[1]?.content || data.files?.[0]?.content || "",
+          timestamp: Date.now(),
+        };
+        setHistory(prev => [...prev, newEntry]);
+        setCurrentHistoryIndex(history.length);
+
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "✅ Your landing page is ready! Check the preview on the right. You can:\n• Click 'Edit Mode' to select and modify elements\n• Upload images to replace placeholders\n• Make changes by describing what you want",
+            timestamp: Date.now(),
+          },
+        ]);
+      }
 
       setInput("");
       setActiveTab("preview");
@@ -74,9 +185,168 @@ export default function LandingBuilder() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey && paid && !loading) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleGenerate();
+    }
+  };
+
+  const handleDownloadHTML = () => {
+    if (!previewHtml) return;
+    
+    const blob = new Blob([previewHtml], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'landing-page.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleOpenInNewTab = () => {
+    if (!previewHtml) return;
+    
+    const newWindow = window.open();
+    if (newWindow) {
+      newWindow.document.write(previewHtml);
+      newWindow.document.close();
+    }
+  };
+
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+    setSelectedElement(null);
+    if (!editMode) {
+      // Enable edit mode
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "🎨 Edit mode activated! Click on any element in the preview to select it. You can then:\n• Describe changes you want\n• Upload an image to replace it\n• Modify text, colors, or layout",
+          timestamp: Date.now(),
+        },
+      ]);
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    try {
+      // Convert image to base64
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const base64 = event.target?.result as string;
+        
+        if (selectedElement && iframeRef.current?.contentWindow) {
+          const iframe = iframeRef.current;
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+          if (!iframeDoc) return;
+          const element = iframeDoc.querySelector(selectedElement.selector);
+          
+          if (element) {
+            if (element.tagName === 'IMG') {
+              (element as HTMLImageElement).src = base64;
+            } else {
+              element.setAttribute('style', `${element.getAttribute('style') || ''}; background-image: url(${base64});`);
+            }
+            
+            // Update the HTML
+            const newHtml = iframeDoc.documentElement.outerHTML;
+            setPreviewHtml(newHtml);
+            setGeneratedCode(newHtml);
+            
+            setMessages((prev) => [
+              ...prev,
+              {
+                role: "assistant",
+                content: `✅ Image uploaded and applied to selected element!`,
+                timestamp: Date.now(),
+              },
+            ]);
+          }
+        }
+        setUploadingImage(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setUploadingImage(false);
+    }
+  };
+
+  const handleIframeClick = (e: React.MouseEvent) => {
+    if (!editMode || !iframeRef.current) return;
+
+    const iframe = iframeRef.current;
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (!iframeDoc) return;
+
+    // Get click position relative to iframe
+    const rect = iframe.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Find element at position in iframe
+    const element = iframeDoc.elementFromPoint(x, y) as HTMLElement;
+    if (element && element !== iframeDoc.body && element !== iframeDoc.documentElement) {
+      // Generate a unique selector for the element
+      let selector = element.tagName.toLowerCase();
+      if (element.id) {
+        selector = `#${element.id}`;
+      } else if (element.className) {
+        selector = `${selector}.${element.className.split(' ').join('.')}`;
+      }
+
+      const elementRect = element.getBoundingClientRect();
+      setSelectedElement({
+        selector,
+        element,
+        rect: elementRect,
+      });
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: `🎯 Selected: ${element.tagName}${element.id ? '#' + element.id : ''}${element.className ? '.' + element.className.split(' ')[0] : ''}\n\nWhat would you like to change? You can:\n• Upload an image\n• Change text or colors\n• Modify the layout`,
+          timestamp: Date.now(),
+        },
+      ]);
+    }
+  };
+
+  const loadHistoryEntry = (entry: HistoryEntry) => {
+    setPreviewHtml(entry.html);
+    setGeneratedCode(entry.html);
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: `📜 Loaded from history: "${entry.prompt.substring(0, 50)}..."`,
+        timestamp: Date.now(),
+      },
+    ]);
+    setShowHistory(false);
+  };
+
+  const handleUndo = () => {
+    if (currentHistoryIndex > 0) {
+      const newIndex = currentHistoryIndex - 1;
+      setCurrentHistoryIndex(newIndex);
+      loadHistoryEntry(history[newIndex]);
+    }
+  };
+
+  const handleRedo = () => {
+    if (currentHistoryIndex < history.length - 1) {
+      const newIndex = currentHistoryIndex + 1;
+      setCurrentHistoryIndex(newIndex);
+      loadHistoryEntry(history[newIndex]);
     }
   };
 
@@ -91,23 +361,25 @@ export default function LandingBuilder() {
         </div>
 
         {/* Payment Banner */}
-        <div className="mx-4 mt-4 p-3 bg-gray-900 rounded-lg border border-gray-700">
-          <p className="text-sm text-gray-300">
-            💳 One-time:{" "}
-            <span className="text-green-400 font-bold">$50 USD</span> — AI
-            generation + free hosting
+        <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/20 to-gray-900 rounded-lg border border-green-700/30">
+          <p className="text-sm text-gray-300 mb-1 flex items-center gap-2">
+            <CreditCard size={16} className="text-green-400" />
+            One-time: <span className="text-green-400 font-bold">$50 USD</span>
+          </p>
+          <p className="text-xs text-gray-500 mb-3">
+            Includes: AI generation + hosted URL + source code
           </p>
           {!paid && (
             <button
-              onClick={() => setPaid(true)} // TODO: connect PayPal or Stripe here
-              className="mt-2 w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2 rounded-lg text-sm transition"
+              onClick={() => setPaid(true)} // TODO: connect PayPal button_id here
+              className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2.5 rounded-lg text-sm transition shadow-lg shadow-green-500/20"
             >
-              Pay & Unlock Generator
+              Pay with PayPal →
             </button>
           )}
           {paid && (
-            <div className="mt-2 text-sm text-green-400 font-medium">
-              ✓ Payment confirmed
+            <div className="text-sm text-green-400 font-medium flex items-center gap-2">
+              <Check size={18} /> Payment confirmed
             </div>
           )}
         </div>
@@ -161,7 +433,7 @@ export default function LandingBuilder() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Describe your landing page..."
+              placeholder="e.g. 'Landing page for a hair salon in Heredia, Costa Rica. Elegant style, dark rose colors, CTA: Book appointment online.'"
               rows={2}
               disabled={!paid}
               className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
@@ -181,7 +453,7 @@ export default function LandingBuilder() {
       </div>
 
       {/* Right Panel - Preview + Code Tabs */}
-      <div className="hidden lg:flex flex-1 flex-col">
+      <div className="flex-1 flex flex-col">
         {/* Tabs */}
         <div className="flex border-b border-gray-800 px-4">
           {(["preview", "code"] as const).map((tab) => (
@@ -197,56 +469,179 @@ export default function LandingBuilder() {
               {tab}
             </button>
           ))}
-          {previewUrl && !previewUrl.startsWith("data:") && (
-            <a
-              href={previewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-auto self-center text-xs text-green-400 hover:underline py-3"
-            >
-              ↗ Open live
-            </a>
+          {previewHtml && (
+            <div className="ml-auto flex items-center gap-2">
+              <button
+                onClick={handleOpenInNewTab}
+                className="text-xs text-blue-400 hover:text-blue-300 py-3 flex items-center gap-1.5 transition"
+                title="Open in new tab"
+              >
+                <ExternalLink size={14} />
+                <span>Open</span>
+              </button>
+              <button
+                onClick={handleDownloadHTML}
+                className="text-xs text-green-400 hover:text-green-300 py-3 flex items-center gap-1.5 transition"
+                title="Download HTML file"
+              >
+                <Download size={14} />
+                <span>Download</span>
+              </button>
+            </div>
           )}
         </div>
 
-        {/* Tab Content */}
-        <div className="flex-1 overflow-hidden">
+        {/* Visual Editing Toolbar */}
+        {previewHtml && activeTab === "preview" && (
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-900 border-b border-gray-800">
+            <button
+              onClick={toggleEditMode}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                editMode
+                  ? "bg-green-500 text-black"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
+            >
+              <MousePointer2 size={14} />
+              {editMode ? "Edit Mode ON" : "Edit Mode"}
+            </button>
+
+            {selectedElement && (
+              <>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadingImage}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition disabled:opacity-50"
+                >
+                  <Upload size={14} />
+                  {uploadingImage ? "Uploading..." : "Upload Image"}
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </>
+            )}
+
+            <div className="flex items-center gap-1 ml-auto">
+              <button
+                onClick={handleUndo}
+                disabled={currentHistoryIndex <= 0}
+                className="p-1.5 rounded hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+                title="Undo"
+              >
+                <Undo size={14} />
+              </button>
+              <button
+                onClick={handleRedo}
+                disabled={currentHistoryIndex >= history.length - 1}
+                className="p-1.5 rounded hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
+                title="Redo"
+              >
+                <Redo size={14} />
+              </button>
+              <button
+                onClick={() => setShowHistory(!showHistory)}
+                className="flex items-center gap-1 px-2 py-1.5 rounded hover:bg-gray-800 transition text-xs"
+                title="History"
+              >
+                <History size={14} />
+                <span className="text-gray-400">{history.length}</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* History Panel */}
+        {showHistory && history.length > 0 && (
+          <div className="absolute right-4 top-20 w-80 max-h-96 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 overflow-hidden">
+            <div className="p-3 border-b border-gray-700 flex items-center justify-between">
+              <h3 className="text-sm font-semibold flex items-center gap-2">
+                <History size={16} className="text-green-400" />
+                Generation History
+              </h3>
+              <button
+                onClick={() => setShowHistory(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="overflow-y-auto max-h-80">
+              {history.map((entry, index) => (
+                <button
+                  key={entry.id}
+                  onClick={() => loadHistoryEntry(entry)}
+                  className={`w-full text-left p-3 border-b border-gray-800 hover:bg-gray-800 transition ${
+                    index === currentHistoryIndex ? "bg-gray-800" : ""
+                  }`}
+                >
+                  <p className="text-xs text-gray-400 mb-1">
+                    {new Date(entry.timestamp).toLocaleString()}
+                  </p>
+                  <p className="text-sm text-white line-clamp-2">
+                    {entry.prompt}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Content Tab */}
+        <div className="flex-1 overflow-hidden relative">
           {activeTab === "preview" ? (
-            previewUrl ? (
-              <iframe
-                src={previewUrl}
-                className="w-full h-full border-0"
-                title="Landing preview"
-                sandbox="allow-scripts allow-same-origin"
-              />
+            previewHtml ? (
+              <div 
+                className="w-full h-full relative"
+                onClick={handleIframeClick}
+                style={{ cursor: editMode ? 'crosshair' : 'default' }}
+              >
+                <iframe
+                  ref={iframeRef}
+                  srcDoc={previewHtml}
+                  className="w-full h-full border-0"
+                  title="Landing preview"
+                  style={{ pointerEvents: editMode ? 'none' : 'auto' }}
+                  key={previewHtml.substring(0, 50)}
+                  sandbox="allow-scripts allow-same-origin allow-forms"
+                />
+                {editMode && (
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-lg z-10">
+                    👆 Click any element to select it
+                  </div>
+                )}
+                {selectedElement && (
+                  <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg text-xs shadow-lg z-10">
+                    Selected: <strong>{selectedElement.selector}</strong>
+                  </div>
+                )}
+              </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-full text-gray-600">
-                <span className="text-6xl mb-4">🖥</span>
+                <Monitor size={64} className="mb-4 text-gray-700" />
                 <p>Your landing page preview will appear here</p>
               </div>
             )
           ) : (
-            <div className="h-full overflow-auto bg-gray-950">
+            <div className="h-full overflow-auto p-4 bg-gray-950">
               {generatedCode ? (
                 <SyntaxHighlighter
                   language="tsx"
                   style={vscDarkPlus}
                   customStyle={{
                     margin: 0,
-                    padding: "1rem",
-                    background: "#0a0a0a",
+                    background: "transparent",
                     fontSize: "0.875rem",
                   }}
-                  showLineNumbers
                 >
                   {generatedCode}
                 </SyntaxHighlighter>
               ) : (
-                <div className="flex items-center justify-center h-full">
-                  <span className="text-gray-600">
-                    Generated code will appear here...
-                  </span>
-                </div>
+                <span className="text-gray-600">Generated code will appear here...</span>
               )}
             </div>
           )}
@@ -272,12 +667,12 @@ export default function LandingBuilder() {
         </div>
         <div className="h-full overflow-hidden">
           {activeTab === "preview" ? (
-            previewUrl ? (
+            previewHtml ? (
               <iframe
-                src={previewUrl}
+                srcDoc={previewHtml}
                 className="w-full h-full border-0"
                 title="Landing preview"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts allow-same-origin allow-forms"
               />
             ) : (
               <div className="flex items-center justify-center h-full text-gray-600 text-sm">

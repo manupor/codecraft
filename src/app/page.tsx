@@ -1,10 +1,10 @@
 import NavMenuWrapper from "@/components/NavMenuWrapper";
 import Hero from "@/components/Hero";
-import TrustedBy from "@/components/TrustedBy";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Authority from "@/components/Authority";
-import CTA from "@/components/CTA";
+import TrustBar from "@/components/TrustBar";
+import HowItWorks from "@/components/HowItWorks";
+import ServicesPreview from "@/components/ServicesPreview";
+import Testimonials from "@/components/Testimonials";
+import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import GlobalBackground from "@/components/GlobalBackground";
 
@@ -15,11 +15,11 @@ export default function Home() {
       <div className="relative z-10">
       <NavMenuWrapper />
       <Hero />
-      <TrustedBy />
-      <About />
-      <Services />
-      <Authority />
-      <CTA />
+      <TrustBar />
+      <HowItWorks />
+      <ServicesPreview />
+      <Testimonials />
+      <FinalCTA />
       <Footer />
       </div>
     </main>

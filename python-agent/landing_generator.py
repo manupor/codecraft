@@ -1,0 +1,830 @@
+import os
+import json
+import re
+from openai import OpenAI
+from anthropic import Anthropic
+from dotenv import load_dotenv
+import requests
+from image_generator import ImageGenerator
+
+# Load environment variables from .env file
+load_dotenv()
+
+def extract_clean_html(raw_response: str) -> str:
+    """
+    Extrae SOLO el HTML limpio de la respuesta del modelo.
+    Elimina cualquier texto de razonamiento, markdown, explicaciones.
+    """
+    # 1. Intenta extraer bloque ```html ... ```
+    html_block = re.search(r'```html\s*([\s\S]*?)\s*```', raw_response, re.IGNORECASE)
+    if html_block:
+        return html_block.group(1).strip()
+    
+    # 2. Intenta extraer desde <!DOCTYPE html> o <html>
+    html_tag = re.search(r'(<!DOCTYPE html[\s\S]*?</html>)', raw_response, re.IGNORECASE)
+    if html_tag:
+        return html_tag.group(1).strip()
+    
+    # 3. Extrae desde primer <html> al último </html>
+    start = raw_response.lower().find('<html')
+    end = raw_response.lower().rfind('</html>') + 7
+    if start != -1 and end > start:
+        return raw_response[start:end].strip()
+    
+    # 4. Si todo falla, busca el primer < y extrae desde ahí
+    first_tag = raw_response.find('<')
+    if first_tag != -1:
+        return raw_response[first_tag:].strip()
+    
+    raise ValueError("No se pudo extraer HTML limpio de la respuesta del modelo")
+
+class LandingPageGenerator:
+    def __init__(self, preferred_provider=None, enable_image_generation=True):
+        self.openai_key = os.getenv("OPENAI_API_KEY")
+        self.anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+        self.perplexity_key = os.getenv("PERPLEXITY_API_KEY")
+        self.grok_key = os.getenv("GROK_API_KEY")
+        
+        # Initialize image generator if enabled
+        self.image_generator = None
+        self.enable_image_generation = enable_image_generation
+        if enable_image_generation:
+            try:
+                self.image_generator = ImageGenerator()
+                print("✅ Nano Banana image generation enabled")
+            except Exception as e:
+                print(f"⚠️  Image generation disabled: {str(e)}")
+                self.enable_image_generation = False
+        
+        # Determine which provider to use
+        available_providers = []
+        if self.openai_key:
+            available_providers.append("openai")
+        if self.anthropic_key:
+            available_providers.append("anthropic")
+        if self.perplexity_key:
+            available_providers.append("perplexity")
+        if self.grok_key:
+            available_providers.append("grok")
+        
+        if not available_providers:
+            raise ValueError("No API key found. Set at least one: OPENAI_API_KEY, ANTHROPIC_API_KEY, PERPLEXITY_API_KEY, or GROK_API_KEY")
+        
+        # Use preferred provider if available, otherwise use first available
+        if preferred_provider and preferred_provider in available_providers:
+            self.provider = preferred_provider
+        else:
+            # Priority order: grok > perplexity > openai > anthropic
+            if "grok" in available_providers:
+                self.provider = "grok"
+            elif "perplexity" in available_providers:
+                self.provider = "perplexity"
+            elif "openai" in available_providers:
+                self.provider = "openai"
+            else:
+                self.provider = "anthropic"
+        
+        # Initialize the appropriate client
+        if self.provider == "openai":
+            self.client = OpenAI(api_key=self.openai_key)
+        elif self.provider == "anthropic":
+            self.client = Anthropic(api_key=self.anthropic_key)
+        elif self.provider == "perplexity":
+            # Perplexity uses OpenAI-compatible API
+            self.client = OpenAI(
+                api_key=self.perplexity_key,
+                base_url="https://api.perplexity.ai"
+            )
+        elif self.provider == "grok":
+            # Grok uses OpenAI-compatible API
+            self.client = OpenAI(
+                api_key=self.grok_key,
+                base_url="https://api.x.ai/v1"
+            )
+        
+        self.available_providers = available_providers
+    
+    def generate_landing_page(self, prompt: str) -> dict:
+        """Generate a complete landing page based on user prompt"""
+        
+        system_prompt = """CRITICAL INSTRUCTION: Your response must contain ONLY valid HTML code.
+- Start your response with <!DOCTYPE html>
+- End your response with </html>
+- NO explanations before or after the HTML
+- NO markdown code blocks (no ```html)
+- NO reasoning text like "Given the complexities..."
+- NO comments outside the HTML
+- Just raw, clean, valid HTML from the very first character
+
+You are an ELITE WEB DESIGNER who creates $50,000 landing pages for Fortune 500 companies.
+
+Your designs are VISUALLY STUNNING, with:
+- Complex, layered gradients and depth
+- Sophisticated animations and micro-interactions
+- Professional typography with perfect hierarchy
+- Advanced CSS techniques (glassmorphism, neumorphism, parallax)
+- Pixel-perfect spacing and alignment
+- Award-winning color palettes
+
+MANDATORY QUALITY STANDARDS:
+- Your CSS must be EXTENSIVE (minimum 300+ lines of custom styles)
+- Every section must have unique, eye-catching design
+- Use advanced CSS properties: backdrop-filter, clip-path, mix-blend-mode, filter
+- Implement smooth, professional animations throughout
+- Create depth with layered shadows and gradients
+- Design must look like it cost $50,000 to create
+
+CRITICAL REQUIREMENTS:
+
+1. **PURE HTML/CSS/JAVASCRIPT ONLY**
+   - NO frameworks (no React, Vue, etc.)
+   - NO build tools required
+   - Use vanilla JavaScript for interactions
+   - Use CSS Grid and Flexbox for layouts
+   - Include Tailwind CSS via CDN for rapid styling
+
+2. **DESIGN THINKING**
+   - Think like a senior designer, not just a coder
+   - Create visual hierarchy with typography scale
+   - Use whitespace strategically
+   - Apply color psychology based on business type
+   - Design for emotion and conversion
+   - Add micro-interactions and smooth animations
+
+3. **STRUCTURE** (in order):
+   - Hero section: Compelling headline, subheadline, primary CTA, hero image/illustration
+   - Social proof bar: Trust indicators, stats, or logos
+   - Features/Benefits: 3-4 key value propositions with icons
+   - How it works: 3-step process (if applicable)
+   - Testimonials: 2-3 real-looking testimonials with photos
+   - Final CTA: Email capture form or booking section
+   - Footer: Links, contact, social media
+
+4. **VISUAL DESIGN**
+   - Use STUNNING modern gradients (linear-gradient, radial-gradient)
+   - Add dramatic box-shadows and text-shadows for depth
+   - Implement smooth animations (fade-in, slide-up, scale on scroll)
+   - Use REAL high-quality images from Unsplash with specific search terms
+   - Create beautiful SVG icons inline or use Unicode symbols
+   - Apply consistent spacing (8px grid system)
+   - Add glassmorphism effects (backdrop-filter: blur)
+   - Use CSS Grid and Flexbox for perfect layouts
+   - Implement smooth transitions on all interactive elements
+   - Add parallax effects on hero sections
+
+5. **COPY & CONTENT**
+   - Write compelling, benefit-focused headlines
+   - Use power words and emotional triggers
+   - Keep paragraphs short (2-3 lines max)
+   - Include specific numbers and results
+   - Create urgency without being pushy
+   - Match tone to business type (professional, friendly, bold, etc.)
+
+6. **TECHNICAL EXCELLENCE**
+   - Semantic HTML5 elements
+   - Mobile-first responsive design
+   - Fast loading (optimize images, inline critical CSS)
+   - SEO meta tags (title, description, OG tags)
+   - Accessibility (ARIA labels, alt text, keyboard navigation)
+   - Cross-browser compatibility
+
+7. **EXTRACT FROM PROMPT**
+   - Business name and industry
+   - Target audience
+   - Location (city, country)
+   - Brand colors (or choose based on psychology)
+   - Specific CTA text
+   - Unique selling propositions
+   - Any special requirements
+
+8. **COLOR PSYCHOLOGY**
+   - Blue: Trust, professionalism (finance, healthcare)
+   - Green: Growth, health (wellness, eco-friendly)
+   - Orange: Energy, enthusiasm (food, fitness)
+   - Purple: Luxury, creativity (beauty, premium services)
+   - Red: Urgency, passion (sales, restaurants)
+   - Black/Gold: Premium, exclusive (luxury brands)
+
+9. **UNSPLASH IMAGES** (CRITICAL - Use real images, not placeholders!)
+   - Hero image: Use https://images.unsplash.com/photo-[id]?w=1920&q=80
+   - Search terms based on business:
+     * Coffee shop: "coffee-shop-interior", "barista", "latte-art"
+     * Restaurant: "restaurant-interior", "fine-dining", "food-plating"
+     * Gym: "gym-equipment", "fitness-training", "workout"
+     * Spa: "spa-treatment", "massage-therapy", "wellness"
+     * Salon: "hair-salon", "beauty-salon", "hairstyling"
+   - Feature images: Use relevant icons or small images (400x400)
+   - Testimonial photos: Use professional headshots from Unsplash
+   - NEVER use via.placeholder.com or placeholder.com
+   - Use actual Unsplash photo IDs for realistic images
+
+9. **ANIMATIONS** (use CSS and vanilla JS)
+   - Fade-in on scroll for sections
+   - Smooth scroll to anchors
+   - Hover effects on buttons and cards
+   - Parallax effects (subtle)
+   - Loading animations for forms
+
+10. **CONVERSION OPTIMIZATION**
+    - Above-the-fold CTA (visible without scrolling)
+    - Multiple CTAs throughout page
+    - Social proof near CTAs
+    - Reduce friction in forms (minimal fields)
+    - Use contrasting colors for CTAs
+    - Add trust badges and guarantees
+
+11. **MANDATORY CSS REQUIREMENTS** (CRITICAL - Your design will be REJECTED if these are missing!)
+
+YOU MUST INCLUDE ALL OF THESE IN YOUR <style> TAG:
+
+A. **CSS Variables** (minimum 10 variables):
+```css
+:root {
+  --primary: #your-color;
+  --secondary: #your-color;
+  --accent: #your-color;
+  --gradient-1: linear-gradient(135deg, color1 0%, color2 100%);
+  --gradient-2: linear-gradient(to right, color1, color2, color3);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.15);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.3);
+  --blur-glass: blur(10px);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+```
+
+B. **Multiple Animations** (minimum 5 different @keyframes):
+```css
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+```
+
+C. **Hero Section** (MUST be visually stunning):
+```css
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+```
+
+D. **Cards with Glassmorphism** (REQUIRED):
+```css
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+```
+
+E. **Buttons with Advanced Effects** (REQUIRED):
+```css
+.btn-primary {
+  position: relative;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+}
+```
+
+F. **Responsive Design** (MANDATORY):
+```css
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .card { padding: 1.5rem; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 80vh; }
+  .btn-primary { padding: 0.875rem 2rem; font-size: 1rem; }
+}
+```
+
+12. **JAVASCRIPT ANIMATIONS** (REQUIRED - Add scroll animations):
+```javascript
+// Intersection Observer for scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.card, .feature, .testimonial').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'all 0.6s ease-out';
+  observer.observe(el);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+```
+
+OUTPUT FORMAT:
+Return ONLY complete, valid HTML code. No markdown, no explanations, no code blocks.
+
+CRITICAL QUALITY CHECKLIST (Your output MUST have ALL of these):
+✓ Minimum 300 lines of custom CSS in <style> tag
+✓ At least 5 different @keyframes animations
+✓ CSS variables for colors and effects
+✓ Glassmorphism effects with backdrop-filter
+✓ Multiple layered gradients
+✓ Advanced box-shadows (minimum 3 different levels)
+✓ Smooth transitions on ALL interactive elements
+✓ JavaScript for scroll animations
+✓ Responsive design with media queries
+✓ Professional typography with clamp() for fluid sizing
+✓ Hero section with gradient background and animations
+✓ Cards with hover effects and transforms
+✓ Buttons with shimmer/shine effects
+✓ Real Unsplash images (no placeholders)
+
+The final design MUST look like it was created by an elite agency and cost $50,000.
+If the design looks simple or basic, it will be REJECTED.
+Every section must be unique and visually impressive."""
+
+        user_message = f"""Create an ELITE, VISUALLY STUNNING landing page for: {prompt}
+
+REQUIREMENTS:
+- Make it look like a $50,000 professional design
+- Use complex gradients, glassmorphism, and advanced CSS
+- Include smooth animations and micro-interactions
+- Every section must be unique and eye-catching
+- Minimum 300 lines of custom CSS
+- Professional, modern, and conversion-optimized
+
+Generate the complete HTML with extensive CSS and JavaScript."""
+
+        try:
+            if self.provider == "openai":
+                response = self.client.chat.completions.create(
+                    model="gpt-4-turbo-preview",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7,
+                    max_tokens=4000
+                )
+                html_content = response.choices[0].message.content
+                
+            elif self.provider == "perplexity":
+                # Perplexity's best model for code generation
+                response = self.client.chat.completions.create(
+                    model="llama-3.1-sonar-large-128k-online",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7,
+                    max_tokens=4000
+                )
+                html_content = response.choices[0].message.content
+                
+            elif self.provider == "grok":
+                # Grok's latest model
+                response = self.client.chat.completions.create(
+                    model="grok-beta",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7,
+                    max_tokens=4000
+                )
+                html_content = response.choices[0].message.content
+                
+            else:  # anthropic
+                response = self.client.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=4000,
+                    system=system_prompt,
+                    messages=[
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7
+                )
+                html_content = response.content[0].text
+            
+            # Clean up the response (remove reasoning text, markdown, etc.)
+            html_content = extract_clean_html(html_content)
+            
+            # Generate React/Next.js code version
+            react_code = self._convert_to_react(html_content, prompt)
+            
+            return {
+                "success": True,
+                "html": html_content,
+                "react_code": react_code,
+                "provider": self.provider
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def _clean_html(self, content: str) -> str:
+        """Remove markdown code blocks if present"""
+        content = content.strip()
+        
+        # Remove markdown code blocks
+        if content.startswith("```html"):
+            content = content[7:]
+        elif content.startswith("```"):
+            content = content[3:]
+        
+        if content.endswith("```"):
+            content = content[:-3]
+        
+        return content.strip()
+    
+    def _convert_to_react(self, html: str, prompt: str) -> str:
+        """Convert HTML to React/Next.js component"""
+        
+        # Extract business name for component
+        business_name = "LandingPage"
+        if "for" in prompt.lower():
+            parts = prompt.lower().split("for")
+            if len(parts) > 1:
+                name_part = parts[1].split(",")[0].split(".")[0].strip()
+                business_name = "".join([word.capitalize() for word in name_part.split()[:3]])
+        
+        # Basic conversion (this is simplified - in production you'd use a proper parser)
+        react_code = f"""'use client';
+
+export default function {business_name}() {{
+  return (
+    <>
+      {html.replace('<html', '<div').replace('</html>', '</div>').replace('<body', '<div').replace('</body>', '</div>').replace('<head>', '').replace('</head>', '')}
+    </>
+  );
+}}"""
+        
+        return react_code
+    
+    def extract_business_info(self, prompt: str) -> dict:
+        """Extract business information from the prompt for image generation"""
+        import re
+        
+        info = {
+            'business_name': 'Business',
+            'business_type': 'service',
+            'style': 'modern and professional',
+            'colors': 'vibrant'
+        }
+        
+        # Extract business name (usually first mentioned)
+        words = prompt.split()
+        if 'for' in prompt.lower():
+            for_index = prompt.lower().find('for')
+            after_for = prompt[for_index+4:for_index+100]
+            name_match = re.search(r'(?:a |an |the )?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)', after_for)
+            if name_match:
+                info['business_name'] = name_match.group(1)
+        
+        # Extract business type
+        types = ['restaurant', 'cafe', 'coffee shop', 'salon', 'spa', 'gym', 'fitness', 
+                'hotel', 'store', 'shop', 'agency', 'studio', 'clinic', 'bar', 'bakery']
+        for btype in types:
+            if btype in prompt.lower():
+                info['business_type'] = btype
+                break
+        
+        # Extract style
+        styles = ['elegant', 'modern', 'minimalist', 'luxury', 'rustic', 'vintage', 
+                 'professional', 'creative', 'bold', 'clean']
+        for style in styles:
+            if style in prompt.lower():
+                info['style'] = style
+                break
+        
+        # Extract colors
+        colors = ['blue', 'green', 'red', 'purple', 'orange', 'pink', 'black', 'white',
+                 'gold', 'silver', 'rose', 'teal', 'navy']
+        found_colors = [c for c in colors if c in prompt.lower()]
+        if found_colors:
+            info['colors'] = ', '.join(found_colors)
+        
+        return info
+    
+    def generate_landing_page_with_images(self, prompt: str) -> dict:
+        """Generate landing page with AI-generated images using Nano Banana"""
+        
+        if not self.enable_image_generation or not self.image_generator:
+            print("⚠️  Image generation not available, using standard generation")
+            return self.generate_landing_page(prompt)
+        
+        print("🎨 Generating landing page with AI images...")
+        
+        # Extract business info for image generation
+        business_info = self.extract_business_info(prompt)
+        print(f"📋 Business info: {business_info}")
+        
+        # Generate images
+        print("🖼️  Generating images with Nano Banana...")
+        images = self.image_generator.generate_images_for_landing_page(business_info)
+        
+        # Count successful images
+        successful_images = {k: v for k, v in images.items() if v is not None}
+        print(f"✅ Generated {len(successful_images)}/{len(images)} images successfully")
+        
+        # Generate the HTML with standard method
+        result = self.generate_landing_page(prompt)
+        
+        if not result['success']:
+            return result
+        
+        # Replace placeholder images with AI-generated ones
+        html = result['html']
+        
+        # Replace hero image
+        if 'hero' in successful_images:
+            html = html.replace(
+                'https://images.unsplash.com/photo-1',
+                successful_images['hero']
+            ).replace(
+                'https://unsplash.com/photos/',
+                successful_images['hero']
+            )
+        
+        # Replace feature images
+        for i in range(1, 4):
+            key = f'feature_{i}'
+            if key in successful_images:
+                # Replace via.placeholder or other placeholder services
+                html = html.replace(
+                    f'https://via.placeholder.com/{100*i}',
+                    successful_images[key]
+                )
+        
+        # Replace testimonial images
+        for i in range(1, 3):
+            key = f'testimonial_{i}'
+            if key in successful_images:
+                html = html.replace(
+                    f'https://via.placeholder.com/150',
+                    successful_images[key],
+                    1  # Replace only first occurrence
+                )
+        
+        result['html'] = html
+        result['react_code'] = self.convert_to_react(html, business_info['business_name'])
+        result['images_generated'] = len(successful_images)
+        
+        return result
+    
+    def iterate_page(self, current_html: str, user_request: str) -> dict:
+        """
+        Intelligently modify only the requested parts of the page
+        Instead of regenerating everything, make surgical edits
+        """
+        
+        iteration_prompt = f"""CRITICAL INSTRUCTION: Your response must contain ONLY valid HTML code.
+- Start your response with <!DOCTYPE html>
+- End your response with </html>
+- NO explanations before or after the HTML
+- NO markdown code blocks (no ```html)
+- NO reasoning text
+- Just raw, clean, valid HTML from the very first character
+
+You are a SENIOR WEB DESIGNER making SURGICAL EDITS to an existing landing page.
+
+CRITICAL RULES:
+1. Return ONLY valid HTML — no explanations, no markdown
+2. Make ONLY the specific change requested — nothing else
+3. Preserve ALL existing CSS, JavaScript, structure
+4. Preserve ALL existing classes, IDs, animations
+5. If adding a new section, insert it in a logical position
+6. Do NOT change colors unless explicitly asked
+7. Do NOT change fonts unless explicitly asked
+8. Do NOT change layout unless explicitly asked
+
+CURRENT HTML:
+{current_html}
+
+REQUESTED CHANGE:
+{user_request}
+
+Return the complete HTML with ONLY this change applied."""
+
+        try:
+            if self.provider == "openai":
+                response = self.client.chat.completions.create(
+                    model="gpt-4-turbo-preview",
+                    messages=[
+                        {"role": "system", "content": "You are a senior web designer making precise, surgical edits to existing pages."},
+                        {"role": "user", "content": iteration_prompt}
+                    ],
+                    temperature=0.3,  # Lower temperature for more precise edits
+                    max_tokens=4096  # GPT-4 max completion tokens
+                )
+                html = response.choices[0].message.content.strip()
+                
+            elif self.provider == "anthropic":
+                response = self.client.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=16000,
+                    temperature=0.3,
+                    messages=[
+                        {"role": "user", "content": iteration_prompt}
+                    ]
+                )
+                html = response.content[0].text.strip()
+                
+            elif self.provider == "perplexity":
+                response = self.client.chat.completions.create(
+                    model="llama-3.1-sonar-large-128k-online",
+                    messages=[
+                        {"role": "system", "content": "You are a senior web designer making precise edits."},
+                        {"role": "user", "content": iteration_prompt}
+                    ],
+                    temperature=0.3,
+                    max_tokens=8000  # Perplexity safe limit
+                )
+                html = response.choices[0].message.content.strip()
+                
+            elif self.provider == "grok":
+                response = self.client.chat.completions.create(
+                    model="grok-beta",
+                    messages=[
+                        {"role": "system", "content": "You are a senior web designer making precise edits."},
+                        {"role": "user", "content": iteration_prompt}
+                    ],
+                    temperature=0.3,
+                    max_tokens=8000  # Grok safe limit
+                )
+                html = response.choices[0].message.content.strip()
+            
+            # Clean up the HTML (remove reasoning text, markdown, etc.)
+            html = extract_clean_html(html)
+            
+            # Extract business name for React conversion
+            title_match = re.search(r'<title>(.*?)</title>', html)
+            business_name = title_match.group(1) if title_match else "LandingPage"
+            business_name = re.sub(r'[^a-zA-Z0-9]', '', business_name)
+            
+            return {
+                "success": True,
+                "html": html,
+                "react_code": self._convert_to_react(html, business_name),
+                "provider": self.provider,
+                "iteration": True
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e),
+                "provider": self.provider
+            }
+    
+    def generate_with_iterations(self, prompt: str, feedback: str = None, current_html: str = None) -> dict:
+        """Generate with optional feedback for iterations (like V0)"""
+        
+        # If we have current HTML and feedback, use intelligent iteration
+        if current_html and feedback:
+            return self.iterate_page(current_html, feedback)
+        
+        # Otherwise, generate from scratch
+        if feedback:
+            enhanced_prompt = f"{prompt}\n\nUser feedback: {feedback}\n\nPlease update the landing page based on this feedback."
+        else:
+            enhanced_prompt = prompt
+        
+        return self.generate_landing_page_with_images(enhanced_prompt)
+
+
+if __name__ == "__main__":
+    # Test the generator
+    generator = LandingPageGenerator()
+    
+    test_prompt = "Landing page for a hair salon in Heredia, Costa Rica. Elegant style, dark rose colors, CTA: Book appointment online."
+    
+    result = generator.generate_landing_page(test_prompt)
+    
+    if result["success"]:
+        print("✅ Generation successful!")
+        print(f"Provider: {result['provider']}")
+        print(f"HTML length: {len(result['html'])} characters")
+        print(f"React code length: {len(result['react_code'])} characters")
+        
+        # Save to file for testing
+        with open("generated_landing.html", "w") as f:
+            f.write(result["html"])
+        print("Saved to generated_landing.html")
+    else:
+        print(f"❌ Error: {result['error']}")

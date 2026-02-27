@@ -15,18 +15,22 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.05]"
         >
-          We Build Digital
+          Your Website.
           <br />
-          <span className="gradient-text">Engines That Scale</span>
+          Built in Minutes.
+          <br />
+          <span className="gradient-text">Powered by AI.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mt-4 text-base sm:text-xl text-zinc-200 max-w-2xl mx-auto leading-relaxed"
+          className="mt-6 text-base sm:text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed"
         >
-          SaaS Platforms. AI Systems. High-Performance Web Applications.
+          CodeCraftt designs and deploys high-converting web pages for businesses in Costa Rica and beyond.
+          <br className="hidden sm:block" />
+          From idea to live website — fast, affordable, and built to grow.
         </motion.p>
 
         <motion.div
@@ -36,21 +40,20 @@ export default function Hero() {
           className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <a
-            href="#cta"
-            className="group inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-white text-black font-medium text-base hover:bg-zinc-200 transition-all duration-200"
+            href="/signup"
+            className="group inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold text-base hover:shadow-lg hover:shadow-green-500/50 transition-all duration-200"
           >
-            Start Your Build
+            Start Building Free
             <ArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
             />
           </a>
           <a
-            href="#cta"
+            href="#work"
             className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full border border-white/10 text-white font-medium text-base hover:bg-white/5 hover:border-white/20 transition-all duration-200"
           >
-            <Calendar size={18} />
-            Book a Strategy Call
+            See Our Work ↓
           </a>
         </motion.div>
 
