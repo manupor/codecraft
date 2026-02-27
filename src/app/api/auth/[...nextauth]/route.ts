@@ -72,7 +72,7 @@ const handler = NextAuth({
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        token.accessToken = user.token;
+        token.accessToken = (user as any).token;
       }
       
       // For Google OAuth, sync with our backend
@@ -107,8 +107,8 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        session.accessToken = token.accessToken as string;
+        (session.user as any).id = token.id as string;
+        (session as any).accessToken = token.accessToken as string;
       }
       return session;
     },
