@@ -492,13 +492,13 @@ Generate the complete HTML with extensive embedded CSS and JavaScript."""
         try:
             if self.provider == "openai":
                 response = self.client.chat.completions.create(
-                    model="gpt-4o",
+                    model="gpt-4-turbo-preview",
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": user_message}
                     ],
                     temperature=0.7,
-                    max_tokens=16000
+                    max_tokens=4096
                 )
                 html_content = response.choices[0].message.content
                 
