@@ -6,6 +6,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -221,8 +223,13 @@ export default function LandingBuilder() {
   };
 
   const saveLanding = async () => {
-    if (!session || !generatedCode) {
+    if (!generatedCode) {
       alert("Please generate a landing page first");
+      return;
+    }
+
+    if (!session) {
+      alert("Please sign in to save your landing page");
       return;
     }
 
@@ -232,6 +239,12 @@ export default function LandingBuilder() {
       setSaving(true);
       const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
       const token = (session as any)?.accessToken;
+
+      if (!token) {
+        alert("Authentication error. Please sign in again.");
+        setSaving(false);
+        return;
+      }
 
       const response = await fetch(`${AUTH_SERVICE_URL}/api/landings`, {
         method: 'POST',

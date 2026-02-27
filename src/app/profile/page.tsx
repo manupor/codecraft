@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default function Profile() {
   const { data: session, status } = useSession();
   const router = useRouter();
