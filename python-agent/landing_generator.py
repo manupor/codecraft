@@ -682,75 +682,80 @@ export default function {business_name}() {{
         
         print("🎨 Generating landing page with AI images...")
         
-        # Extract business info for image generation
-        business_info = self.extract_business_info(prompt)
-        print(f"📋 Business info: {business_info}")
-        
-        # Generate images
-        print("🖼️  Generating images with Nano Banana...")
-        images = self.image_generator.generate_images_for_landing_page(business_info)
-        
-        # Count successful images
-        successful_images = {k: v for k, v in images.items() if v is not None}
-        print(f"✅ Generated {len(successful_images)}/{len(images)} images successfully")
-        
-        # Generate the HTML with standard method
+        # Step 1: Generate the HTML first
         result = self.generate_landing_page(prompt)
         
         if not result['success']:
             return result
         
-        # Replace placeholder images with AI-generated ones
         html = result['html']
         
-        # Replace hero image
-        if 'hero' in successful_images:
-            html = html.replace(
-                'https://storage.googleapis.com/nano-banana-images/[image-id].jpg',
-                successful_images['hero']
-            ).replace(
-                'https://images.unsplash.com/photo-1',
-                successful_images['hero']
-            ).replace(
-                'https://unsplash.com/photos/',
-                successful_images['hero']
-            )
+        # Step 2: Extract business info for image context
+        business_info = self.extract_business_info(prompt)
+        print(f"📋 Business info: {business_info}")
         
-        # Replace feature images
-        for i in range(1, 4):
-            key = f'feature_{i}'
-            if key in successful_images:
-                # Replace Nano Banana placeholders first
-                html = html.replace(
-                    'https://storage.googleapis.com/nano-banana-images/[image-id].jpg',
-                    successful_images[key],
-                    1  # Replace only first occurrence
-                )
-                # Replace via.placeholder or other placeholder services
-                html = html.replace(
-                    f'https://via.placeholder.com/{100*i}',
-                    successful_images[key]
-                )
-        
-        # Replace testimonial images
-        for i in range(1, 3):
-            key = f'testimonial_{i}'
-            if key in successful_images:
-                # Replace Nano Banana placeholders first
-                html = html.replace(
-                    'https://storage.googleapis.com/nano-banana-images/[image-id].jpg',
-                    successful_images[key],
-                    1  # Replace only first occurrence
-                )
-                html = html.replace(
-                    f'https://via.placeholder.com/150',
-                    successful_images[key],
-                    1  # Replace only first occurrence
-                )
-        
-        result['html'] = html
-        result['react_code'] = self.convert_to_react(html, business_info['business_name'])
-        result['images_generated'] = len(successful_images)
+        # Step 3: Find all <img> tags in the HTML and replace their src with AI images
+        try:
+            print("🖼️  Generating images with Nano Banana...")
+            img_pattern = re.compile(r'<img\s+[^>]*src=["\']([^"\']+)["\'][^>]*>', re.IGNORECASE)
+            img_matches = list(img_pattern.finditer(html))
+            
+            print(f"📸 Found {len(img_matches)} <img> tags in HTML")
+            
+            if len(img_matches) == 0:
+                print("⚠️  No <img> tags found, returning HTML as-is")
+                return result
+            
+            business_name = business_info.get('business_name', 'Business')
+            business_type = business_info.get('business_type', 'service')
+            style = business_info.get('style', 'modern and professional')
+            
+            images_generated = 0
+            max_images = min(len(img_matches), 6)  # Generate max 6 images to avoid timeout
+            
+            for i, match in enumerate(img_matches[:max_images]):
+                original_src = match.group(1)
+                alt_text = ""
+                alt_match = re.search(r'alt=["\']([^"\']*)["\']', match.group(0), re.IGNORECASE)
+                if alt_match:
+                    alt_text = alt_match.group(1)
+                
+                # Determine image type based on position and alt text
+                if i == 0:
+                    img_prompt = f"Professional hero banner image for {business_name}, a {business_type}. {style} style. High quality, photorealistic, no text or logos."
+                    aspect = "16:9"
+                elif "testimonial" in alt_text.lower() or "person" in alt_text.lower() or "avatar" in alt_text.lower() or "profile" in alt_text.lower():
+                    img_prompt = f"Professional headshot photo of a happy person, friendly smile, neutral background, portrait photography."
+                    aspect = "1:1"
+                else:
+                    img_prompt = f"Professional image for {business_type} business, showing {alt_text if alt_text else 'quality service'}. {style} style, high quality, photorealistic, no text."
+                    aspect = "4:3"
+                
+                print(f"  🎨 Generating image {i+1}/{max_images}: {img_prompt[:60]}...")
+                
+                try:
+                    image_data = self.image_generator.generate_image(img_prompt, aspect)
+                    if image_data:
+                        html = html.replace(original_src, image_data, 1)
+                        images_generated += 1
+                        print(f"  ✅ Image {i+1} generated successfully")
+                    else:
+                        print(f"  ⚠️  Image {i+1} failed, keeping original src")
+                except Exception as img_err:
+                    print(f"  ❌ Image {i+1} error: {str(img_err)}")
+                    continue
+            
+            print(f"✅ Generated {images_generated}/{max_images} images successfully")
+            
+            result['html'] = html
+            result['images_generated'] = images_generated
+            
+            # Regenerate react code with updated HTML
+            result['react_code'] = self._convert_to_react(html, prompt)
+            
+        except Exception as e:
+            print(f"❌ Image generation process failed: {str(e)}")
+            print("⚠️  Returning HTML without AI images")
         
         return result
     

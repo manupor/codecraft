@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     
     // Add timeout to prevent hanging
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 300000); // 300 second timeout for image generation
     
     const response = await fetch(`${pythonAgentUrl}/generate`, {
       method: "POST",

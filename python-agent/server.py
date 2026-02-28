@@ -51,17 +51,29 @@ def generate():
         return jsonify({'error': 'Prompt is too short'}), 400
     
     logger.info(f"Generating landing for prompt: {prompt[:100]}...")
+    logger.info(f"Image generation enabled: {enable_images}")
+    logger.info(f"Global generator image_generator: {generator.image_generator is not None}")
     
     try:
-        generator = LandingPageGenerator(
-            preferred_provider=preferred_provider,
-            enable_image_generation=enable_images
-        )
+        result = None
         
-        # Use image generation if enabled
-        if enable_images:
-            result = generator.generate_landing_page_with_images(prompt)
-        else:
+        # Try with images first if enabled and image_generator is available
+        if enable_images and generator.image_generator is not None:
+            try:
+                logger.info("Attempting generation WITH images (Nano Banana)...")
+                result = generator.generate_landing_page_with_images(prompt)
+                if result and result.get('success'):
+                    logger.info(f"✅ Generated with {result.get('images_generated', 0)} AI images")
+                else:
+                    logger.warning(f"Image generation returned unsuccessful, falling back...")
+                    result = None
+            except Exception as img_err:
+                logger.warning(f"⚠️ Image generation failed: {str(img_err)}, falling back to standard...")
+                result = None
+        
+        # Fall back to standard generation (no images)
+        if result is None:
+            logger.info("Generating WITHOUT images (standard mode)...")
             result = generator.generate_landing_page(prompt)
         
         if result.get("success"):
@@ -73,7 +85,7 @@ def generate():
                 html = extract_clean_html(html)
                 result['html'] = html
             
-            logger.info(f"Generated {len(html)} chars of HTML")
+            logger.info(f"✅ Generated {len(html)} chars of HTML")
         else:
             logger.error(f"Generation failed: {result.get('error', 'Unknown error')}")
         
