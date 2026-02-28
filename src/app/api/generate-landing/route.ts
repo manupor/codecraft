@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { prompt } = body;
+  const { prompt, images } = body;
 
   if (!prompt || typeof prompt !== "string") {
     return NextResponse.json(
@@ -12,6 +12,9 @@ export async function POST(req: NextRequest) {
   }
 
   console.log("Generating landing page for prompt:", prompt.substring(0, 50) + "...");
+  if (images && images.length > 0) {
+    console.log(`Including ${images.length} reference images for cloning`);
+  }
   
   // Try Python AI Agent first (OpenAI/Anthropic/Perplexity/Grok)
   const pythonAgentUrl = process.env.PYTHON_AGENT_URL || "http://127.0.0.1:5000";
@@ -28,7 +31,10 @@ export async function POST(req: NextRequest) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ 
+        prompt,
+        images: images || [] // Send images array for vision analysis
+      }),
       signal: controller.signal,
     });
 

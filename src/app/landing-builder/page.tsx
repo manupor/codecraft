@@ -166,17 +166,21 @@ export default function LandingBuilder() {
       } else {
         // Generate new page from scratch
         let finalPrompt = input;
+        let imagesToSend: string[] = [];
         
-        // If in clone mode with uploaded images, add them to the prompt
+        // If in clone mode with uploaded images, prepare them for vision analysis
         if (isCloneMode && uploadedImages.length > 0) {
-          const imageUrls = uploadedImages.map(img => img.url).join('\n');
-          finalPrompt = `CLONE MODE: Create a landing page based on these reference images:\n\n${imageUrls}\n\nUser requirements:\n${input}\n\nIMPORTANT: Analyze the design, layout, colors, and style from the reference images and recreate a similar landing page with the user's requirements. Use the same visual style, color scheme, and layout structure as shown in the images.`;
+          imagesToSend = uploadedImages.map(img => img.url);
+          finalPrompt = `CLONE MODE: Analyze the provided reference images and create a landing page that matches their design, layout, colors, and style.\n\nUser requirements: ${input}\n\nIMPORTANT: Study the visual design from the reference images carefully and recreate a similar landing page with the user's requirements. Use the same visual style, color scheme, typography, and layout structure as shown in the images.`;
         }
         
         res = await fetch("/api/generate-landing", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: finalPrompt }),
+          body: JSON.stringify({ 
+            prompt: finalPrompt,
+            images: imagesToSend
+          }),
         });
       }
 

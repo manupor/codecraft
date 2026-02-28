@@ -64,17 +64,23 @@ def generate():
     prompt = data.get('prompt', '').strip()
     preferred_provider = data.get('provider', None)
     enable_images = data.get('enable_images', True)  # Enabled by default for production
+    reference_images = data.get('images', [])  # Reference images for cloning
     
     if not prompt or len(prompt) < 5:
         return jsonify({'error': 'Prompt is too short'}), 400
     
     logger.info(f"Generating landing for prompt: {prompt[:100]}...")
     logger.info(f"Image generation enabled: {enable_images}")
+    logger.info(f"Reference images for cloning: {len(reference_images)}")
     logger.info(f"Global generator image_generator: {generator.image_generator is not None}")
     
     try:
+        # If reference images provided, use vision analysis for cloning
+        if reference_images and len(reference_images) > 0:
+            logger.info(f"Using vision analysis with {len(reference_images)} reference images...")
+            result = generator.generate_landing_page_with_vision(prompt, reference_images)
         # Generate landing page with DALL-E 3 original images if enabled
-        if enable_images and generator.image_generator is not None:
+        elif enable_images and generator.image_generator is not None:
             try:
                 logger.info("Generating landing page with DALL-E 3 original images...")
                 result = generator.generate_landing_page_with_images(prompt)

@@ -888,6 +888,93 @@ Return the complete HTML with ONLY this change applied."""
         
         return self.generate_landing_page_with_images(enhanced_prompt)
 
+    def generate_landing_page_with_vision(self, prompt: str, reference_images: list) -> dict:
+        """
+        Generate landing page using GPT-4 Vision to analyze reference images for cloning.
+        Only works with OpenAI provider (GPT-4 Vision).
+        """
+        try:
+            # Force OpenAI provider for vision analysis
+            if not self.openai_key:
+                return {
+                    "success": False,
+                    "error": "Vision analysis requires OpenAI API key (GPT-4 Vision)"
+                }
+            
+            # Initialize OpenAI client
+            client = OpenAI(api_key=self.openai_key)
+            
+            # Build messages with vision content
+            messages = [
+                {
+                    "role": "system",
+                    "content": self.system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"""{prompt}
+
+CRITICAL INSTRUCTIONS FOR CLONING:
+1. Carefully analyze ALL the reference images provided
+2. Study the exact layout, spacing, and structure
+3. Match the color scheme, fonts, and visual style
+4. Replicate the design patterns and UI elements
+5. Keep the same sections and content organization
+6. Use similar imagery style and positioning
+7. Maintain the same visual hierarchy and flow
+8. Copy the button styles, forms, and interactive elements
+
+Your goal is to create a landing page that looks nearly identical to the reference images but with the user's specific content and requirements.
+
+Remember: ALL CSS must be embedded in <style> tags. Use real Unsplash images. Make it look professional and polished."""
+                        }
+                    ] + [
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": img_url,
+                                "detail": "high"
+                            }
+                        }
+                        for img_url in reference_images
+                    ]
+                }
+            ]
+            
+            # Call GPT-4 Vision
+            response = client.chat.completions.create(
+                model="gpt-4o",  # GPT-4 with vision
+                messages=messages,
+                max_tokens=4096,
+                temperature=0.7
+            )
+            
+            html_content = response.choices[0].message.content
+            
+            # Clean up the response
+            html_content = extract_clean_html(html_content)
+            
+            # Generate React version
+            react_code = self._convert_to_react(html_content, prompt)
+            
+            return {
+                "success": True,
+                "html": html_content,
+                "react_code": react_code,
+                "provider": "openai-vision",
+                "images_analyzed": len(reference_images)
+            }
+            
+        except Exception as e:
+            print(f"Vision analysis error: {str(e)}")
+            return {
+                "success": False,
+                "error": f"Vision analysis failed: {str(e)}"
+            }
+
 
 if __name__ == "__main__":
     # Test the generator
