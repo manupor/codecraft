@@ -212,18 +212,33 @@ CRITICAL REQUIREMENTS:
    - Red: Urgency, passion (sales, restaurants)
    - Black/Gold: Premium, exclusive (luxury brands)
 
-9. **UNSPLASH IMAGES** (CRITICAL - Use real images, not placeholders!)
-   - Hero image: Use https://images.unsplash.com/photo-[id]?w=1920&q=80
-   - Search terms based on business:
-     * Coffee shop: "coffee-shop-interior", "barista", "latte-art"
-     * Restaurant: "restaurant-interior", "fine-dining", "food-plating"
-     * Gym: "gym-equipment", "fitness-training", "workout"
-     * Spa: "spa-treatment", "massage-therapy", "wellness"
-     * Salon: "hair-salon", "beauty-salon", "hairstyling"
-   - Feature images: Use relevant icons or small images (400x400)
-   - Testimonial photos: Use professional headshots from Unsplash
-   - NEVER use via.placeholder.com or placeholder.com
-   - Use actual Unsplash photo IDs for realistic images
+9. **UNSPLASH IMAGES** (MANDATORY - Your HTML will be REJECTED without images!)
+   
+   YOU MUST INCLUDE AT LEAST 3 IMAGES IN EVERY LANDING PAGE:
+   
+   - **Hero Background Image** (REQUIRED):
+     Use: <img src="https://source.unsplash.com/1920x1080/?[business-type]" alt="Hero">
+     Example: https://source.unsplash.com/1920x1080/?coffee,cafe
+   
+   - **Feature/Section Images** (REQUIRED - minimum 2):
+     Use: <img src="https://source.unsplash.com/800x600/?[relevant-term]" alt="Feature">
+     Example: https://source.unsplash.com/800x600/?barista,coffee
+   
+   - **Testimonial Photos** (REQUIRED - if testimonials section exists):
+     Use: <img src="https://source.unsplash.com/200x200/?portrait,professional" alt="Person">
+   
+   SEARCH TERMS BY BUSINESS TYPE:
+   * Coffee shop: coffee,cafe,barista,latte
+   * Restaurant: restaurant,dining,food,chef
+   * Gym: fitness,gym,workout,training
+   * Spa: spa,wellness,massage,relaxation
+   * Salon: salon,hair,beauty,styling
+   * Tech: technology,computer,office,workspace
+   * Real Estate: house,home,property,architecture
+   
+   CRITICAL: NEVER use placeholder.com, via.placeholder.com, or [image] text
+   CRITICAL: ALWAYS use https://source.unsplash.com/ for ALL images
+   CRITICAL: Every <img> tag MUST have a real Unsplash URL
 
 9. **ANIMATIONS** (use CSS and vanilla JS)
    - Fade-in on scroll for sections
@@ -474,6 +489,13 @@ CRITICAL REQUIREMENTS:
 - Professional, modern, and conversion-optimized
 - DO NOT use external CSS files or links (except Tailwind CDN)
 
+MANDATORY IMAGES (Your HTML will be REJECTED without these):
+- Hero section: MUST include <img src="https://source.unsplash.com/1920x1080/?[business-type]">
+- Features section: MUST include at least 2 images using https://source.unsplash.com/800x600/?[relevant-term]
+- Testimonials: MUST include profile photos using https://source.unsplash.com/200x200/?portrait,professional
+- NEVER use placeholder.com or text like [image] or [photo]
+- ALL images MUST use real Unsplash URLs
+
 STRUCTURE REQUIRED:
 <!DOCTYPE html>
 <html>
@@ -483,11 +505,18 @@ STRUCTURE REQUIRED:
   </style>
 </head>
 <body>
-  <!-- Your HTML content here -->
+  <!-- Hero with background image -->
+  <img src="https://source.unsplash.com/1920x1080/?[business-type]" alt="Hero">
+  
+  <!-- Features with images -->
+  <img src="https://source.unsplash.com/800x600/?[relevant]" alt="Feature">
+  
+  <!-- Testimonials with photos -->
+  <img src="https://source.unsplash.com/200x200/?portrait" alt="Person">
 </body>
 </html>
 
-Generate the complete HTML with extensive embedded CSS and JavaScript."""
+Generate the complete HTML with extensive embedded CSS, JavaScript, and REAL Unsplash images."""
 
         try:
             if self.provider == "openai":
