@@ -72,25 +72,64 @@ export default function LandingBuilder() {
   const [isDemo, setIsDemo] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
 
-  // Load history from localStorage on mount
+  // ── RESTORE full session from localStorage on mount ──
   useEffect(() => {
-    const savedHistory = localStorage.getItem('landing-builder-history');
-    if (savedHistory) {
-      try {
-        const parsed = JSON.parse(savedHistory);
-        setHistory(parsed);
-      } catch (e) {
-        console.error('Failed to load history:', e);
+    // Demo flow takes priority — handled in the next useEffect
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('demo') === 'true') return;
+
+    try {
+      const savedHistory = localStorage.getItem('lb-history');
+      const savedMessages = localStorage.getItem('lb-messages');
+      const savedIndex = localStorage.getItem('lb-history-index');
+
+      if (savedHistory) {
+        const parsedHistory: HistoryEntry[] = JSON.parse(savedHistory);
+        if (parsedHistory.length > 0) {
+          setHistory(parsedHistory);
+          const idx = savedIndex ? parseInt(savedIndex, 10) : parsedHistory.length - 1;
+          const safeIdx = Math.min(Math.max(idx, 0), parsedHistory.length - 1);
+          setCurrentHistoryIndex(safeIdx);
+          setPreviewHtml(parsedHistory[safeIdx].html);
+          setGeneratedCode(parsedHistory[safeIdx].html);
+          setActiveTab("preview");
+        }
       }
+
+      if (savedMessages) {
+        const parsedMessages: Message[] = JSON.parse(savedMessages);
+        if (parsedMessages.length > 0) setMessages(parsedMessages);
+      }
+    } catch (e) {
+      console.error('Failed to restore session:', e);
     }
   }, []);
 
-  // Save history to localStorage whenever it changes
+  // ── PERSIST history whenever it changes ──
   useEffect(() => {
     if (history.length > 0) {
-      localStorage.setItem('landing-builder-history', JSON.stringify(history));
+      localStorage.setItem('lb-history', JSON.stringify(history));
     }
   }, [history]);
+
+  // ── PERSIST current history index ──
+  useEffect(() => {
+    localStorage.setItem('lb-history-index', String(currentHistoryIndex));
+  }, [currentHistoryIndex]);
+
+  // ── PERSIST messages (skip the default empty array) ──
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('lb-messages', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  // ── PERSIST previewHtml so iframe survives refresh ──
+  useEffect(() => {
+    if (previewHtml) {
+      localStorage.setItem('lb-preview-html', previewHtml);
+    }
+  }, [previewHtml]);
 
   // Load demo HTML from sessionStorage if coming from homepage demo
   useEffect(() => {
