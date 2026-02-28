@@ -23,8 +23,26 @@ def health():
     return jsonify({
         "status": "healthy", 
         "current_provider": generator.provider,
-        "available_providers": generator.available_providers
+        "available_providers": generator.available_providers,
+        "image_generation_enabled": generator.enable_image_generation,
+        "image_generator_available": generator.image_generator is not None,
+        "google_api_key_set": bool(os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY'))
     })
+
+@app.route('/test-image', methods=['GET'])
+def test_image():
+    """Test if Gemini image generation works"""
+    try:
+        if not generator.image_generator:
+            return jsonify({"error": "image_generator is None", "enable_image_generation": generator.enable_image_generation}), 500
+        
+        result = generator.image_generator.generate_image("A simple red circle on white background", "1:1")
+        if result:
+            return jsonify({"success": True, "image_data_length": len(result), "starts_with": result[:50]})
+        else:
+            return jsonify({"success": False, "error": "generate_image returned None"}), 500
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route('/providers', methods=['GET'])
 def list_providers():
