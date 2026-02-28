@@ -26,19 +26,19 @@ def health():
         "available_providers": generator.available_providers,
         "image_generation_enabled": generator.enable_image_generation,
         "image_generator_available": generator.image_generator is not None,
-        "google_api_key_set": bool(os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY'))
+        "openai_api_key_set": bool(os.getenv('OPENAI_API_KEY'))
     })
 
 @app.route('/test-image', methods=['GET'])
 def test_image():
-    """Test if Gemini image generation works"""
+    """Test if DALL-E 3 image generation works"""
     try:
         if not generator.image_generator:
             return jsonify({"error": "image_generator is None", "enable_image_generation": generator.enable_image_generation}), 500
         
         result = generator.image_generator.generate_image("A simple red circle on white background", "1:1")
         if result:
-            return jsonify({"success": True, "image_data_length": len(result), "starts_with": result[:50]})
+            return jsonify({"success": True, "image_url_length": len(result), "url_preview": result[:120]})
         else:
             return jsonify({"success": False, "error": "generate_image returned None"}), 500
     except Exception as e:
@@ -73,9 +73,18 @@ def generate():
     logger.info(f"Global generator image_generator: {generator.image_generator is not None}")
     
     try:
-        # Generate landing page - Unsplash images are embedded directly by the AI
-        logger.info("Generating landing page with Unsplash images...")
-        result = generator.generate_landing_page(prompt)
+        # Generate landing page with DALL-E 3 original images if enabled
+        if enable_images and generator.image_generator is not None:
+            try:
+                logger.info("Generating landing page with DALL-E 3 original images...")
+                result = generator.generate_landing_page_with_images(prompt)
+                logger.info(f"✅ Generated with {result.get('images_generated', 0)} DALL-E images")
+            except Exception as img_err:
+                logger.warning(f"⚠️ DALL-E image generation failed: {str(img_err)}, falling back...")
+                result = generator.generate_landing_page(prompt)
+        else:
+            logger.info("Generating landing page with Unsplash images (no DALL-E)...")
+            result = generator.generate_landing_page(prompt)
         
         if result.get("success"):
             html = result.get('html', '')

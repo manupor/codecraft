@@ -51,7 +51,7 @@ class LandingPageGenerator:
         if enable_image_generation:
             try:
                 self.image_generator = ImageGenerator()
-                print("✅ Nano Banana image generation enabled")
+                print("✅ DALL-E 3 image generation enabled")
             except Exception as e:
                 print(f"⚠️  Image generation disabled: {str(e)}")
                 self.enable_image_generation = False
@@ -687,15 +687,15 @@ export default function {business_name}() {{
         return info
     
     def generate_landing_page_with_images(self, prompt: str) -> dict:
-        """Generate landing page with AI-generated images using Nano Banana"""
+        """Generate landing page with original AI-generated images using DALL-E 3"""
         
         if not self.enable_image_generation or not self.image_generator:
             print("⚠️  Image generation not available, using standard generation")
             return self.generate_landing_page(prompt)
         
-        print("🎨 Generating landing page with AI images...")
+        print("🎨 Generating landing page with DALL-E 3 images...")
         
-        # Step 1: Generate the HTML first
+        # Step 1: Generate the HTML first (with Unsplash placeholders)
         result = self.generate_landing_page(prompt)
         
         if not result['success']:
@@ -707,9 +707,9 @@ export default function {business_name}() {{
         business_info = self.extract_business_info(prompt)
         print(f"📋 Business info: {business_info}")
         
-        # Step 3: Find all <img> tags in the HTML and replace their src with AI images
+        # Step 3: Find all <img> tags and replace their src with DALL-E generated images
         try:
-            print("🖼️  Generating images with Nano Banana...")
+            print("🖼️  Generating original images with DALL-E 3...")
             img_pattern = re.compile(r'<img\s+[^>]*src=["\']([^"\']+)["\'][^>]*>', re.IGNORECASE)
             img_matches = list(img_pattern.finditer(html))
             
@@ -724,7 +724,8 @@ export default function {business_name}() {{
             style = business_info.get('style', 'modern and professional')
             
             images_generated = 0
-            max_images = min(len(img_matches), 6)  # Generate max 6 images to avoid timeout
+            # Limit to 3 DALL-E images (hero + 2 features) to control costs (~$0.12 total)
+            max_images = min(len(img_matches), 3)
             
             for i, match in enumerate(img_matches[:max_images]):
                 original_src = match.group(1)
@@ -735,40 +736,35 @@ export default function {business_name}() {{
                 
                 # Determine image type based on position and alt text
                 if i == 0:
-                    img_prompt = f"Professional hero banner image for {business_name}, a {business_type}. {style} style. High quality, photorealistic, no text or logos."
+                    img_prompt = f"Professional hero banner photograph for {business_name}, a {business_type}. {style} style. High quality, cinematic lighting, editorial quality, photorealistic. No text, no logos, no watermarks."
                     aspect = "16:9"
-                elif "testimonial" in alt_text.lower() or "person" in alt_text.lower() or "avatar" in alt_text.lower() or "profile" in alt_text.lower():
-                    img_prompt = f"Professional headshot photo of a happy person, friendly smile, neutral background, portrait photography."
-                    aspect = "1:1"
                 else:
-                    img_prompt = f"Professional image for {business_type} business, showing {alt_text if alt_text else 'quality service'}. {style} style, high quality, photorealistic, no text."
+                    context = alt_text if alt_text and alt_text.lower() not in ['feature', 'image', 'photo'] else 'quality service'
+                    img_prompt = f"Professional photograph for a {business_type} business representing {context}. {style} style, clean composition, high quality, photorealistic. No text, no logos, no watermarks."
                     aspect = "4:3"
                 
-                print(f"  🎨 Generating image {i+1}/{max_images}: {img_prompt[:60]}...")
+                print(f"  🎨 Generating image {i+1}/{max_images}: {img_prompt[:70]}...")
                 
                 try:
-                    image_data = self.image_generator.generate_image(img_prompt, aspect)
-                    if image_data:
-                        html = html.replace(original_src, image_data, 1)
+                    image_url = self.image_generator.generate_image(img_prompt, aspect)
+                    if image_url:
+                        html = html.replace(original_src, image_url, 1)
                         images_generated += 1
                         print(f"  ✅ Image {i+1} generated successfully")
                     else:
-                        print(f"  ⚠️  Image {i+1} failed, keeping original src")
+                        print(f"  ⚠️  Image {i+1} failed, keeping Unsplash fallback")
                 except Exception as img_err:
                     print(f"  ❌ Image {i+1} error: {str(img_err)}")
                     continue
             
-            print(f"✅ Generated {images_generated}/{max_images} images successfully")
+            print(f"✅ Generated {images_generated}/{max_images} original DALL-E images")
             
             result['html'] = html
             result['images_generated'] = images_generated
             
-            # Regenerate react code with updated HTML
-            result['react_code'] = self._convert_to_react(html, prompt)
-            
         except Exception as e:
-            print(f"❌ Image generation process failed: {str(e)}")
-            print("⚠️  Returning HTML without AI images")
+            print(f"❌ DALL-E image generation failed: {str(e)}")
+            print("⚠️  Returning HTML with Unsplash fallback images")
         
         return result
     
