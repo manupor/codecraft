@@ -143,6 +143,20 @@ MANDATORY QUALITY STANDARDS:
 
 CRITICAL REQUIREMENTS:
 
+0. **MOBILE-FIRST DESIGN (MANDATORY - WILL BE REJECTED IF MISSING)**
+   - ALWAYS start with mobile styles, then use min-width media queries to expand
+   - The page MUST look perfect on screens as small as 320px wide
+   - MANDATORY viewport meta tag: <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   - All font sizes must use clamp() or be readable on mobile (min 14px body, min 18px headings)
+   - All buttons and touch targets MUST be at least 44x44px (iOS/Android requirement)
+   - No horizontal overflow or scrollbar on mobile (overflow-x: hidden on body)
+   - Images MUST have max-width: 100% and height: auto
+   - Navigation MUST have a hamburger menu on mobile (JS-powered)
+   - All grid/flex layouts MUST stack vertically on mobile, then go side-by-side on desktop
+   - Padding on sections: 60px 20px on mobile, 100px 40px on desktop minimum
+   - MANDATORY media queries: @media (min-width: 640px) and @media (min-width: 1024px)
+   - Test mentally: Can a user read, tap, and navigate this page on an iPhone SE (375px wide)?
+
 1. **PURE HTML/CSS/JAVASCRIPT ONLY**
    - NO frameworks (no React, Vue, etc.)
    - NO build tools required
@@ -485,12 +499,19 @@ CRITICAL QUALITY CHECKLIST (Your output MUST have ALL of these):
 ✓ Cards with hover effects and transforms
 ✓ Buttons with shimmer/shine effects
 ✓ Real Unsplash images (no placeholders)
+✓ MOBILE-FIRST: viewport meta tag present
+✓ MOBILE-FIRST: hamburger nav menu with JS toggle
+✓ MOBILE-FIRST: single-column layout on mobile (max 480px)
+✓ MOBILE-FIRST: all buttons/taps min 44px height
+✓ MOBILE-FIRST: overflow-x: hidden on body
+✓ MOBILE-FIRST: @media (min-width: 640px) breakpoint
+✓ MOBILE-FIRST: @media (min-width: 1024px) breakpoint
 
 The final design MUST look like it was created by an elite agency and cost $50,000.
 If the design looks simple or basic, it will be REJECTED.
 Every section must be unique and visually impressive."""
 
-        user_message = f"""Create an ELITE, VISUALLY STUNNING landing page for: {prompt}
+        user_message = f"""Create an ELITE, VISUALLY STUNNING, MOBILE-FIRST landing page for: {prompt}
 
 CRITICAL REQUIREMENTS:
 - Make it look like a $50,000 professional design
@@ -501,6 +522,19 @@ CRITICAL REQUIREMENTS:
 - Every section must be unique and eye-catching
 - Professional, modern, and conversion-optimized
 - DO NOT use external CSS files or links (except Tailwind CDN)
+
+MANDATORY MOBILE-FIRST CSS (Your HTML WILL BE REJECTED without this):
+- Include <meta name="viewport" content="width=device-width, initial-scale=1.0">
+- Write ALL styles mobile-first (no min-width = mobile base styles)
+- Add @media (min-width: 640px) and @media (min-width: 1024px) breakpoints
+- body {{ overflow-x: hidden; }}
+- All images: max-width: 100%; height: auto;
+- All grid/flex: single column on mobile, multi-column on desktop
+- All buttons: min-height: 44px; min-width: 44px; (touch targets)
+- Font sizes: use clamp(), e.g. clamp(1rem, 4vw, 1.25rem)
+- Navigation: hamburger menu on mobile (JS toggle)
+- Hero heading: clamp(2rem, 8vw, 5rem)
+- Section padding: 60px 20px on mobile → 100px 60px on desktop
 
 MANDATORY REAL IMAGES FROM UNSPLASH (Your HTML will be REJECTED without these):
 - Hero section: MUST include a full-width image from Unsplash (pick the most relevant one for the business)

@@ -68,6 +68,7 @@ export default function LandingBuilder() {
   const [uploadedImages, setUploadedImages] = useState<UploadedFile[]>([]);
   const [isCloneMode, setIsCloneMode] = useState(false);
   const [showImageUpload, setShowImageUpload] = useState(false);
+  const [mobileTab, setMobileTab] = useState<"chat" | "preview" | "code">("chat");
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -552,418 +553,362 @@ export default function LandingBuilder() {
     }
   };
 
-  return (
-    <div className="flex h-screen bg-black text-white overflow-hidden">
-      {/* Left Panel - Chat Interface */}
-      <div className="w-full lg:w-2/5 flex flex-col border-r border-gray-800">
-        {/* Header */}
-        <div className="p-4 border-b border-gray-800 flex items-center gap-2">
-          <span className="font-bold text-green-400">codecraftt</span>
-          <span className="text-gray-400">/ Landing Builder</span>
-        </div>
-
-        {/* Payment Banner */}
-        <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/20 to-gray-900 rounded-lg border border-green-700/30">
-          <p className="text-sm text-gray-300 mb-1 flex items-center gap-2">
-            <CreditCard size={16} className="text-green-400" />
-            One-time: <span className="text-green-400 font-bold">$50 USD</span>
-          </p>
-          <p className="text-xs text-gray-500 mb-3">
-            Includes: AI generation + hosted URL + source code
-          </p>
-          {!paid && (
-            <button
-              onClick={() => setPaid(true)} // TODO: connect PayPal button_id here
-              className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2.5 rounded-lg text-sm transition shadow-lg shadow-green-500/20"
-            >
-              Pay with PayPal →
-            </button>
-          )}
-          {paid && (
-            <div className="text-sm text-green-400 font-medium flex items-center gap-2">
-              <Check size={18} /> Payment confirmed
-            </div>
-          )}
-        </div>
-
-        {/* Clone Mode Toggle */}
+  // Shared chat panel content
+  const ChatPanel = () => (
+    <div className="flex flex-col h-full">
+      {/* Payment Banner */}
+      <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/20 to-gray-900 rounded-lg border border-green-700/30">
+        <p className="text-sm text-gray-300 mb-1 flex items-center gap-2">
+          <CreditCard size={16} className="text-green-400" />
+          One-time: <span className="text-green-400 font-bold">$50 USD</span>
+        </p>
+        <p className="text-xs text-gray-500 mb-3">
+          Includes: AI generation + hosted URL + source code
+        </p>
+        {!paid && (
+          <button
+            onClick={() => setPaid(true)}
+            className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3 rounded-lg text-sm transition shadow-lg shadow-green-500/20"
+          >
+            Pay with PayPal →
+          </button>
+        )}
         {paid && (
-          <div className="mx-4 mt-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Copy size={16} className="text-cyan-400" />
-                <span className="text-sm font-medium text-gray-300">Clone Mode</span>
-              </div>
-              <button
-                onClick={() => setIsCloneMode(!isCloneMode)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  isCloneMode ? 'bg-cyan-600' : 'bg-gray-600'
-                }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                    isCloneMode ? 'translate-x-6' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-            </div>
-            {isCloneMode && (
-              <p className="text-xs text-gray-500 mb-3">
-                Upload screenshots of a website you want to clone
-              </p>
-            )}
+          <div className="text-sm text-green-400 font-medium flex items-center gap-2">
+            <Check size={18} /> Payment confirmed
           </div>
         )}
-
-        {/* Image Upload Section */}
-        {isCloneMode && (
-          <div className="mx-4 mt-2">
-            <button
-              onClick={() => setShowImageUpload(!showImageUpload)}
-              className="w-full px-4 py-2 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-600/30 rounded-lg text-cyan-400 text-sm font-medium transition flex items-center justify-center gap-2"
-            >
-              <Upload size={16} />
-              {showImageUpload ? 'Hide Images' : `Upload Images (${uploadedImages.length})`}
-            </button>
-            
-            {showImageUpload && (
-              <div className="mt-3">
-                <ImageUpload
-                  onImagesUploaded={setUploadedImages}
-                  maxImages={5}
-                  maxSize={5}
-                  className="mt-2"
-                />
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Messages Chat */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex ${
-                msg.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
-                  msg.role === "user"
-                    ? "bg-gray-700 text-white rounded-br-sm"
-                    : "bg-gray-900 text-gray-200 rounded-bl-sm border border-gray-700"
-                }`}
-              >
-                {msg.content}
-              </div>
-            </div>
-          ))}
-          {loading && (
-            <div className="flex justify-start">
-              <div className="bg-gray-900 border border-gray-700 px-4 py-2 rounded-2xl rounded-bl-sm">
-                <div className="flex gap-1">
-                  <span
-                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "0ms" }}
-                  />
-                  <span
-                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "150ms" }}
-                  />
-                  <span
-                    className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "300ms" }}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Input Bar */}
-        <div className="p-4 border-t border-gray-800">
-          <div className="flex gap-2 bg-gray-900 border border-gray-700 rounded-xl p-2">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={isCloneMode 
-                ? "Describe what you want to change or add to the cloned design..." 
-                : "e.g. 'Landing page for a hair salon in Heredia, Costa Rica. Elegant style, dark rose colors, CTA: Book appointment online.'"
-              }
-              rows={2}
-              disabled={!paid}
-              className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
-            />
-            <button
-              onClick={handleGenerate}
-              disabled={loading || !paid || !input.trim()}
-              className="self-end bg-green-500 hover:bg-green-400 disabled:opacity-30 disabled:cursor-not-allowed text-black p-2 rounded-lg transition"
-            >
-              ➤
-            </button>
-          </div>
-          <p className="text-xs text-gray-600 mt-1 text-center">
-            Shift+Enter for new line · Enter to send
-          </p>
-        </div>
       </div>
 
-      {/* Right Panel - Preview + Code Tabs */}
-      <div className="flex-1 flex flex-col">
-        {/* Tabs */}
-        <div className="flex border-b border-gray-800 px-4">
-          {(["preview", "code"] as const).map((tab) => (
+      {/* Clone Mode Toggle */}
+      {paid && (
+        <div className="mx-4 mt-4">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Copy size={16} className="text-cyan-400" />
+              <span className="text-sm font-medium text-gray-300">Clone Mode</span>
+            </div>
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-3 text-sm capitalize transition ${
-                activeTab === tab
-                  ? "text-white border-b-2 border-green-400"
-                  : "text-gray-500 hover:text-gray-300"
+              onClick={() => setIsCloneMode(!isCloneMode)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                isCloneMode ? 'bg-cyan-600' : 'bg-gray-600'
               }`}
             >
-              {tab}
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  isCloneMode ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
             </button>
-          ))}
-          {previewHtml && (
-            <div className="ml-auto flex items-center gap-2">
-              {session && (
-                <>
-                  <button
-                    onClick={saveLanding}
-                    disabled={saving}
-                    className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
-                    title="Save to dashboard"
-                  >
-                    <Save size={14} />
-                    <span>{saving ? "Saving..." : currentLandingId ? "Saved" : "Save"}</span>
-                  </button>
-                  <button
-                    onClick={publishLanding}
-                    disabled={publishing}
-                    className="text-xs text-cyan-400 hover:text-cyan-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
-                    title="Publish to custom URL"
-                  >
-                    <Globe size={14} />
-                    <span>{publishing ? "Publishing..." : publishedUrl ? "Published ✓" : "Publish"}</span>
-                  </button>
-                </>
-              )}
-              <button
-                onClick={handleOpenInNewTab}
-                className="text-xs text-blue-400 hover:text-blue-300 py-3 flex items-center gap-1.5 transition"
-                title="Open in new tab"
-              >
-                <ExternalLink size={14} />
-                <span>Open</span>
-              </button>
-              <button
-                onClick={handleDownloadHTML}
-                className="text-xs text-green-400 hover:text-green-300 py-3 flex items-center gap-1.5 transition"
-                title="Download HTML file"
-              >
-                <Download size={14} />
-                <span>Download</span>
-              </button>
+          </div>
+          {isCloneMode && (
+            <p className="text-xs text-gray-500 mb-3">
+              Upload screenshots of a website you want to clone
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Image Upload Section */}
+      {isCloneMode && (
+        <div className="mx-4 mt-2">
+          <button
+            onClick={() => setShowImageUpload(!showImageUpload)}
+            className="w-full px-4 py-2.5 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-600/30 rounded-lg text-cyan-400 text-sm font-medium transition flex items-center justify-center gap-2"
+          >
+            <Upload size={16} />
+            {showImageUpload ? 'Hide Images' : `Upload Images (${uploadedImages.length})`}
+          </button>
+          {showImageUpload && (
+            <div className="mt-3">
+              <ImageUpload
+                onImagesUploaded={setUploadedImages}
+                maxImages={5}
+                maxSize={5}
+                className="mt-2"
+              />
             </div>
           )}
         </div>
+      )}
 
-        {/* Visual Editing Toolbar */}
-        {previewHtml && activeTab === "preview" && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-gray-900 border-b border-gray-800">
-            <button
-              onClick={toggleEditMode}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-                editMode
-                  ? "bg-green-500 text-black"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+      {/* Messages Chat */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`max-w-[85%] sm:max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                msg.role === "user"
+                  ? "bg-gray-700 text-white rounded-br-sm"
+                  : "bg-gray-900 text-gray-200 rounded-bl-sm border border-gray-700"
               }`}
             >
-              <MousePointer2 size={14} />
-              {editMode ? "Edit Mode ON" : "Edit Mode"}
-            </button>
+              {msg.content}
+            </div>
+          </div>
+        ))}
+        {loading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-900 border border-gray-700 px-4 py-3 rounded-2xl rounded-bl-sm">
+              <div className="flex gap-1 items-center">
+                <span className="text-xs text-gray-400 mr-2">Generating...</span>
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
+      {/* Input Bar */}
+      <div className="p-4 border-t border-gray-800">
+        <div className="flex gap-2 bg-gray-900 border border-gray-700 rounded-xl p-2">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder={isCloneMode
+              ? "Describe what you want to change or add..."
+              : "e.g. 'Landing page for a coffee shop in San José, Costa Rica...'"
+            }
+            rows={2}
+            disabled={!paid}
+            className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
+          />
+          <button
+            onClick={() => {
+              handleGenerate();
+              setMobileTab("preview");
+            }}
+            disabled={loading || !paid || !input.trim()}
+            className="self-end bg-green-500 hover:bg-green-400 disabled:opacity-30 disabled:cursor-not-allowed text-black p-3 rounded-lg transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+          >
+            ➤
+          </button>
+        </div>
+        <p className="text-xs text-gray-600 mt-1 text-center hidden sm:block">
+          Shift+Enter for new line · Enter to send
+        </p>
+      </div>
+    </div>
+  );
+
+  // Shared preview panel content
+  const PreviewPanel = () => (
+    <div className="flex flex-col h-full">
+      {/* Toolbar */}
+      <div className="flex items-center gap-2 px-3 py-2 bg-gray-900 border-b border-gray-800 flex-wrap">
+        {previewHtml && (
+          <>
+            <button
+              onClick={toggleEditMode}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition min-h-[36px] ${
+                editMode ? "bg-green-500 text-black" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
+            >
+              <MousePointer2 size={13} />
+              {editMode ? "Edit ON" : "Edit"}
+            </button>
             {selectedElement && (
               <>
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingImage}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition disabled:opacity-50"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition disabled:opacity-50 min-h-[36px]"
                 >
-                  <Upload size={14} />
-                  {uploadingImage ? "Uploading..." : "Upload Image"}
+                  <Upload size={13} />
+                  {uploadingImage ? "..." : "Img"}
                 </button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
+                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
               </>
             )}
-
             <div className="flex items-center gap-1 ml-auto">
-              <button
-                onClick={handleUndo}
-                disabled={currentHistoryIndex <= 0}
-                className="p-1.5 rounded hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
-                title="Undo"
-              >
-                <Undo size={14} />
+              <button onClick={handleUndo} disabled={currentHistoryIndex <= 0} className="p-2 rounded hover:bg-gray-800 disabled:opacity-30 transition min-h-[36px] min-w-[36px] flex items-center justify-center" title="Undo">
+                <Undo size={13} />
               </button>
-              <button
-                onClick={handleRedo}
-                disabled={currentHistoryIndex >= history.length - 1}
-                className="p-1.5 rounded hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition"
-                title="Redo"
-              >
-                <Redo size={14} />
+              <button onClick={handleRedo} disabled={currentHistoryIndex >= history.length - 1} className="p-2 rounded hover:bg-gray-800 disabled:opacity-30 transition min-h-[36px] min-w-[36px] flex items-center justify-center" title="Redo">
+                <Redo size={13} />
               </button>
-              <button
-                onClick={() => setShowHistory(!showHistory)}
-                className="flex items-center gap-1 px-2 py-1.5 rounded hover:bg-gray-800 transition text-xs"
-                title="History"
-              >
-                <History size={14} />
+              {session && (
+                <button onClick={saveLanding} disabled={saving} className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
+                  <Save size={13} />
+                  <span className="hidden sm:inline">{saving ? "..." : currentLandingId ? "Saved" : "Save"}</span>
+                </button>
+              )}
+              {session && (
+                <button onClick={publishLanding} disabled={publishing} className="text-xs text-cyan-400 hover:text-cyan-300 disabled:opacity-50 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
+                  <Globe size={13} />
+                  <span className="hidden sm:inline">{publishing ? "..." : publishedUrl ? "✓" : "Publish"}</span>
+                </button>
+              )}
+              <button onClick={handleOpenInNewTab} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
+                <ExternalLink size={13} />
+              </button>
+              <button onClick={handleDownloadHTML} className="text-xs text-green-400 hover:text-green-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
+                <Download size={13} />
+              </button>
+              <button onClick={() => setShowHistory(!showHistory)} className="flex items-center gap-1 px-2 py-2 rounded hover:bg-gray-800 transition text-xs min-h-[36px]">
+                <History size={13} />
                 <span className="text-gray-400">{history.length}</span>
               </button>
             </div>
-          </div>
+          </>
         )}
-
-        {/* History Panel */}
-        {showHistory && history.length > 0 && (
-          <div className="absolute right-4 top-20 w-80 max-h-96 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 overflow-hidden">
-            <div className="p-3 border-b border-gray-700 flex items-center justify-between">
-              <h3 className="text-sm font-semibold flex items-center gap-2">
-                <History size={16} className="text-green-400" />
-                Generation History
-              </h3>
-              <button
-                onClick={() => setShowHistory(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="overflow-y-auto max-h-80">
-              {history.map((entry, index) => (
-                <button
-                  key={entry.id}
-                  onClick={() => loadHistoryEntry(entry)}
-                  className={`w-full text-left p-3 border-b border-gray-800 hover:bg-gray-800 transition ${
-                    index === currentHistoryIndex ? "bg-gray-800" : ""
-                  }`}
-                >
-                  <p className="text-xs text-gray-400 mb-1">
-                    {new Date(entry.timestamp).toLocaleString()}
-                  </p>
-                  <p className="text-sm text-white line-clamp-2">
-                    {entry.prompt}
-                  </p>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Content Tab */}
-        <div className="flex-1 overflow-hidden relative">
-          {activeTab === "preview" ? (
-            previewHtml ? (
-              <div 
-                className="w-full h-full relative"
-                onClick={handleIframeClick}
-                style={{ cursor: editMode ? 'crosshair' : 'default' }}
-              >
-                <iframe
-                  ref={iframeRef}
-                  srcDoc={previewHtml}
-                  className="w-full h-full border-0"
-                  title="Landing preview"
-                  style={{ pointerEvents: editMode ? 'none' : 'auto' }}
-                  key={previewHtml.substring(0, 50)}
-                  sandbox="allow-scripts allow-same-origin allow-forms"
-                />
-                {editMode && (
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-lg z-10">
-                    👆 Click any element to select it
-                  </div>
-                )}
-                {selectedElement && (
-                  <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg text-xs shadow-lg z-10">
-                    Selected: <strong>{selectedElement.selector}</strong>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-gray-600">
-                <Monitor size={64} className="mb-4 text-gray-700" />
-                <p>Your landing page preview will appear here</p>
-              </div>
-            )
-          ) : (
-            <div className="h-full overflow-auto p-4 bg-gray-950">
-              {generatedCode ? (
-                <SyntaxHighlighter
-                  language="tsx"
-                  style={vscDarkPlus}
-                  customStyle={{
-                    margin: 0,
-                    background: "transparent",
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  {generatedCode}
-                </SyntaxHighlighter>
-              ) : (
-                <span className="text-gray-600">Generated code will appear here...</span>
-              )}
-            </div>
-          )}
-        </div>
+        {!previewHtml && <span className="text-xs text-gray-500">Preview will appear here after generation</span>}
       </div>
 
-      {/* Mobile: Show preview below chat */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 h-1/3 bg-gray-950 border-t border-gray-800">
-        <div className="flex border-b border-gray-800 px-4">
-          {(["preview", "code"] as const).map((tab) => (
+      {/* History Panel */}
+      {showHistory && history.length > 0 && (
+        <div className="absolute right-4 top-16 w-72 max-h-80 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 overflow-hidden">
+          <div className="p-3 border-b border-gray-700 flex items-center justify-between">
+            <h3 className="text-sm font-semibold flex items-center gap-2">
+              <History size={16} className="text-green-400" /> History
+            </h3>
+            <button onClick={() => setShowHistory(false)} className="text-gray-400 hover:text-white p-1">✕</button>
+          </div>
+          <div className="overflow-y-auto max-h-64">
+            {history.map((entry, index) => (
+              <button key={entry.id} onClick={() => loadHistoryEntry(entry)}
+                className={`w-full text-left p-3 border-b border-gray-800 hover:bg-gray-800 transition ${index === currentHistoryIndex ? "bg-gray-800" : ""}`}>
+                <p className="text-xs text-gray-400 mb-1">{new Date(entry.timestamp).toLocaleString()}</p>
+                <p className="text-sm text-white line-clamp-2">{entry.prompt}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Preview iframe */}
+      <div className="flex-1 overflow-hidden relative">
+        {previewHtml ? (
+          <div className="w-full h-full relative" onClick={handleIframeClick} style={{ cursor: editMode ? 'crosshair' : 'default' }}>
+            <iframe
+              ref={iframeRef}
+              srcDoc={previewHtml}
+              className="w-full h-full border-0"
+              title="Landing preview"
+              style={{ pointerEvents: editMode ? 'none' : 'auto' }}
+              key={previewHtml.substring(0, 50)}
+              sandbox="allow-scripts allow-same-origin allow-forms"
+            />
+            {editMode && (
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-black px-4 py-2 rounded-lg text-sm font-medium shadow-lg z-10">
+                👆 Click any element to select it
+              </div>
+            )}
+            {selectedElement && (
+              <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs shadow-lg z-10">
+                Selected: <strong>{selectedElement.selector}</strong>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full text-gray-600 gap-3 px-6 text-center">
+            <Monitor size={48} className="text-gray-700" />
+            <p className="text-sm">Your landing page will appear here</p>
+            <p className="text-xs text-gray-700">Go to Chat → describe your page → send</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  // Shared code panel content
+  const CodePanel = () => (
+    <div className="h-full overflow-auto p-4 bg-gray-950">
+      {generatedCode ? (
+        <SyntaxHighlighter language="tsx" style={vscDarkPlus} customStyle={{ margin: 0, background: "transparent", fontSize: "0.8rem" }}>
+          {generatedCode}
+        </SyntaxHighlighter>
+      ) : (
+        <span className="text-gray-600 text-sm">Generated code will appear here...</span>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col h-[100dvh] bg-black text-white overflow-hidden">
+
+      {/* ── HEADER ── */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800 shrink-0">
+        <span className="font-bold text-green-400 text-sm">codecraftt</span>
+        <span className="text-gray-500 text-sm">/ Landing Builder</span>
+
+        {/* Mobile tab switcher */}
+        <div className="ml-auto flex lg:hidden bg-gray-900 rounded-lg p-0.5 gap-0.5">
+          {([
+            { key: "chat", label: "Chat" },
+            { key: "preview", label: "Preview" },
+            { key: "code", label: "Code" },
+          ] as const).map(({ key, label }) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 text-xs capitalize transition ${
-                activeTab === tab
-                  ? "text-white border-b-2 border-green-400"
-                  : "text-gray-500"
+              key={key}
+              onClick={() => setMobileTab(key)}
+              className={`px-3 py-1.5 text-xs rounded-md font-medium transition ${
+                mobileTab === key
+                  ? "bg-green-500 text-black"
+                  : "text-gray-400 hover:text-gray-200"
               }`}
             >
-              {tab}
+              {label}
+              {key === "preview" && previewHtml && (
+                <span className="ml-1 w-1.5 h-1.5 bg-green-400 rounded-full inline-block" />
+              )}
             </button>
           ))}
         </div>
-        <div className="h-full overflow-hidden">
-          {activeTab === "preview" ? (
-            previewHtml ? (
-              <iframe
-                srcDoc={previewHtml}
-                className="w-full h-full border-0"
-                title="Landing preview"
-                sandbox="allow-scripts allow-same-origin allow-forms"
-              />
-            ) : (
-              <div className="flex items-center justify-center h-full text-gray-600 text-sm">
-                <p>Preview will appear here</p>
-              </div>
-            )
-          ) : (
-            <div className="h-full overflow-auto bg-gray-950 p-2 text-xs">
-              {generatedCode || (
-                <span className="text-gray-600">Code will appear here...</span>
-              )}
+      </div>
+
+      {/* ── BODY ── */}
+      <div className="flex flex-1 overflow-hidden">
+
+        {/* ── DESKTOP: left panel chat ── */}
+        <div className="hidden lg:flex lg:w-2/5 flex-col border-r border-gray-800 overflow-hidden">
+          <ChatPanel />
+        </div>
+
+        {/* ── DESKTOP: right panel preview/code ── */}
+        <div className="hidden lg:flex flex-1 flex-col overflow-hidden relative">
+          {/* Desktop Preview/Code tabs */}
+          <div className="flex border-b border-gray-800 px-4 shrink-0">
+            {(["preview", "code"] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-3 text-sm capitalize transition ${
+                  activeTab === tab
+                    ? "text-white border-b-2 border-green-400"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <div className="flex-1 overflow-hidden relative">
+            {activeTab === "preview" ? <PreviewPanel /> : <CodePanel />}
+          </div>
+        </div>
+
+        {/* ── MOBILE: full-screen panels ── */}
+        <div className="flex lg:hidden flex-1 overflow-hidden">
+          {mobileTab === "chat" && (
+            <div className="flex-1 overflow-hidden">
+              <ChatPanel />
+            </div>
+          )}
+          {mobileTab === "preview" && (
+            <div className="flex-1 overflow-hidden relative">
+              <PreviewPanel />
+            </div>
+          )}
+          {mobileTab === "code" && (
+            <div className="flex-1 overflow-hidden">
+              <CodePanel />
             </div>
           )}
         </div>
