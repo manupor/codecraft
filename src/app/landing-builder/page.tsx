@@ -69,6 +69,7 @@ export default function LandingBuilder() {
   const [isCloneMode, setIsCloneMode] = useState(false);
   const [showImageUpload, setShowImageUpload] = useState(false);
   const [mobileTab, setMobileTab] = useState<"chat" | "preview" | "code">("chat");
+  const [isDemo, setIsDemo] = useState(false);
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -93,26 +94,27 @@ export default function LandingBuilder() {
   // Load demo HTML from sessionStorage if coming from homepage demo
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const isDemo = urlParams.get('demo');
+    const isDemoParam = urlParams.get('demo');
     
-    if (isDemo === 'true') {
+    if (isDemoParam === 'true') {
       const demoHtml = sessionStorage.getItem('demo_generated_html');
       const demoPrompt = sessionStorage.getItem('demo_generated_prompt');
       
       if (demoHtml && demoPrompt) {
-        // Set the generated HTML
         setPreviewHtml(demoHtml);
         setGeneratedCode(demoHtml);
-        setPaid(true); // Auto-enable for demo users
+        setIsDemo(true);
+        // Switch to preview tab on mobile automatically
+        setMobileTab("preview");
+        setActiveTab("preview");
         
         // Add to messages
         setMessages((prev) => [
           ...prev,
           { role: "user", content: demoPrompt, timestamp: Date.now() },
-          { role: "assistant", content: "✨ Your landing page has been generated! You can now edit it, save it (requires sign in), or publish it.", timestamp: Date.now() }
+          { role: "assistant", content: "✨ Your landing page preview is ready!\n\nTo download, edit, save, or publish this page, you need to create a free account.", timestamp: Date.now() }
         ]);
         
-        // Add to history
         const newEntry: HistoryEntry = {
           id: `demo-${Date.now()}`,
           prompt: demoPrompt,
@@ -122,11 +124,8 @@ export default function LandingBuilder() {
         setHistory([newEntry]);
         setCurrentHistoryIndex(0);
         
-        // Clear sessionStorage
         sessionStorage.removeItem('demo_generated_html');
         sessionStorage.removeItem('demo_generated_prompt');
-        
-        // Remove demo parameter from URL
         window.history.replaceState({}, '', '/landing-builder');
       }
     }
@@ -556,32 +555,52 @@ export default function LandingBuilder() {
   // Shared chat panel content
   const ChatPanel = () => (
     <div className="flex flex-col h-full">
-      {/* Payment Banner */}
-      <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/20 to-gray-900 rounded-lg border border-green-700/30">
-        <p className="text-sm text-gray-300 mb-1 flex items-center gap-2">
-          <CreditCard size={16} className="text-green-400" />
-          One-time: <span className="text-green-400 font-bold">$50 USD</span>
-        </p>
-        <p className="text-xs text-gray-500 mb-3">
-          Includes: AI generation + hosted URL + source code
-        </p>
-        {!paid && (
-          <button
-            onClick={() => setPaid(true)}
-            className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3 rounded-lg text-sm transition shadow-lg shadow-green-500/20"
+      {/* Banner: demo sign-in CTA OR payment OR confirmed */}
+      {isDemo && !session ? (
+        /* Demo users without account: show sign-in CTA */
+        <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/30 to-gray-900 rounded-xl border border-green-500/40">
+          <p className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
+            <Sparkles size={16} className="text-green-400" /> Your preview is ready! 🎉
+          </p>
+          <p className="text-xs text-gray-400 mb-3">
+            Create a free account to download, edit, save, and publish your landing page.
+          </p>
+          <a
+            href="/api/auth/signin"
+            className="w-full block text-center bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg hover:shadow-green-500/40 text-black font-bold py-3 rounded-lg text-sm transition"
           >
-            Pay with PayPal →
-          </button>
-        )}
-        {paid && (
-          <div className="text-sm text-green-400 font-medium flex items-center gap-2">
-            <Check size={18} /> Payment confirmed
-          </div>
-        )}
-      </div>
+            Create Free Account →
+          </a>
+          <p className="text-xs text-gray-600 mt-2 text-center">Free forever. No credit card required.</p>
+        </div>
+      ) : (
+        /* Authenticated users or non-demo: show payment banner */
+        <div className="mx-4 mt-4 p-4 bg-gradient-to-br from-green-900/20 to-gray-900 rounded-lg border border-green-700/30">
+          <p className="text-sm text-gray-300 mb-1 flex items-center gap-2">
+            <CreditCard size={16} className="text-green-400" />
+            One-time: <span className="text-green-400 font-bold">$50 USD</span>
+          </p>
+          <p className="text-xs text-gray-500 mb-3">
+            Includes: AI generation + hosted URL + source code
+          </p>
+          {!paid && (
+            <button
+              onClick={() => setPaid(true)}
+              className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3 rounded-lg text-sm transition shadow-lg shadow-green-500/20"
+            >
+              Pay with PayPal →
+            </button>
+          )}
+          {paid && (
+            <div className="text-sm text-green-400 font-medium flex items-center gap-2">
+              <Check size={18} /> Payment confirmed
+            </div>
+          )}
+        </div>
+      )}
 
-      {/* Clone Mode Toggle */}
-      {paid && (
+      {/* Clone Mode Toggle — only for paid non-demo users */}
+      {paid && !isDemo && (
         <div className="mx-4 mt-4">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
@@ -610,7 +629,7 @@ export default function LandingBuilder() {
       )}
 
       {/* Image Upload Section */}
-      {isCloneMode && (
+      {isCloneMode && !isDemo && (
         <div className="mx-4 mt-2">
           <button
             onClick={() => setShowImageUpload(!showImageUpload)}
@@ -640,7 +659,7 @@ export default function LandingBuilder() {
             className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[85%] sm:max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+              className={`max-w-[85%] sm:max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                 msg.role === "user"
                   ? "bg-gray-700 text-white rounded-br-sm"
                   : "bg-gray-900 text-gray-200 rounded-bl-sm border border-gray-700"
@@ -664,35 +683,47 @@ export default function LandingBuilder() {
         )}
       </div>
 
-      {/* Input Bar */}
+      {/* Input Bar — locked for demo users without session */}
       <div className="p-4 border-t border-gray-800">
-        <div className="flex gap-2 bg-gray-900 border border-gray-700 rounded-xl p-2">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={isCloneMode
-              ? "Describe what you want to change or add..."
-              : "e.g. 'Landing page for a coffee shop in San José, Costa Rica...'"
-            }
-            rows={2}
-            disabled={!paid}
-            className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
-          />
-          <button
-            onClick={() => {
-              handleGenerate();
-              setMobileTab("preview");
-            }}
-            disabled={loading || !paid || !input.trim()}
-            className="self-end bg-green-500 hover:bg-green-400 disabled:opacity-30 disabled:cursor-not-allowed text-black p-3 rounded-lg transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+        {isDemo && !session ? (
+          <a
+            href="/api/auth/signin"
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold py-3.5 rounded-xl text-sm transition hover:shadow-lg hover:shadow-green-500/30"
           >
-            ➤
-          </button>
-        </div>
-        <p className="text-xs text-gray-600 mt-1 text-center hidden sm:block">
-          Shift+Enter for new line · Enter to send
-        </p>
+            <Sparkles size={16} />
+            Sign in to edit & iterate →
+          </a>
+        ) : (
+          <>
+            <div className="flex gap-2 bg-gray-900 border border-gray-700 rounded-xl p-2">
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={isCloneMode
+                  ? "Describe what you want to change or add..."
+                  : "e.g. 'Landing page for a coffee shop in San José, Costa Rica...'"
+                }
+                rows={2}
+                disabled={!paid}
+                className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
+              />
+              <button
+                onClick={() => {
+                  handleGenerate();
+                  setMobileTab("preview");
+                }}
+                disabled={loading || !paid || !input.trim()}
+                className="self-end bg-green-500 hover:bg-green-400 disabled:opacity-30 disabled:cursor-not-allowed text-black p-3 rounded-lg transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+              >
+                ➤
+              </button>
+            </div>
+            <p className="text-xs text-gray-600 mt-1 text-center hidden sm:block">
+              Shift+Enter for new line · Enter to send
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
@@ -700,20 +731,39 @@ export default function LandingBuilder() {
   // Shared preview panel content
   const PreviewPanel = () => (
     <div className="flex flex-col h-full">
+      {/* Demo sign-in banner over preview */}
+      {isDemo && !session && previewHtml && (
+        <div className="mx-3 mt-2 px-3 py-2 bg-black/60 border border-green-500/30 rounded-lg flex items-center justify-between gap-2 shrink-0">
+          <p className="text-xs text-gray-300">🔒 Sign in to edit, save & download</p>
+          <a href="/api/auth/signin" className="text-xs font-bold text-green-400 hover:text-green-300 whitespace-nowrap">
+            Create Account →
+          </a>
+        </div>
+      )}
+
       {/* Toolbar */}
       <div className="flex items-center gap-2 px-3 py-2 bg-gray-900 border-b border-gray-800 flex-wrap">
         {previewHtml && (
           <>
-            <button
-              onClick={toggleEditMode}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition min-h-[36px] ${
-                editMode ? "bg-green-500 text-black" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-              }`}
-            >
-              <MousePointer2 size={13} />
-              {editMode ? "Edit ON" : "Edit"}
-            </button>
-            {selectedElement && (
+            {/* Edit Mode — locked for demo without session */}
+            {session ? (
+              <button
+                onClick={toggleEditMode}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition min-h-[36px] ${
+                  editMode ? "bg-green-500 text-black" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                }`}
+              >
+                <MousePointer2 size={13} />
+                {editMode ? "Edit ON" : "Edit"}
+              </button>
+            ) : (
+              <a href="/api/auth/signin" className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-gray-800 text-gray-500 hover:text-gray-300 transition min-h-[36px]" title="Sign in to use edit mode">
+                <MousePointer2 size={13} />
+                Edit 🔒
+              </a>
+            )}
+
+            {selectedElement && session && (
               <>
                 <button
                   onClick={() => fileInputRef.current?.click()}
@@ -745,12 +795,20 @@ export default function LandingBuilder() {
                   <span className="hidden sm:inline">{publishing ? "..." : publishedUrl ? "✓" : "Publish"}</span>
                 </button>
               )}
-              <button onClick={handleOpenInNewTab} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
+              <button onClick={handleOpenInNewTab} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]" title="Open in new tab">
                 <ExternalLink size={13} />
               </button>
-              <button onClick={handleDownloadHTML} className="text-xs text-green-400 hover:text-green-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]">
-                <Download size={13} />
-              </button>
+              {/* Download — locked for demo without session */}
+              {session ? (
+                <button onClick={handleDownloadHTML} className="text-xs text-green-400 hover:text-green-300 flex items-center gap-1 px-2 py-2 transition min-h-[36px]" title="Download HTML">
+                  <Download size={13} />
+                </button>
+              ) : (
+                <a href="/api/auth/signin" className="text-xs text-gray-600 hover:text-gray-400 flex items-center gap-1 px-2 py-2 transition min-h-[36px]" title="Sign in to download">
+                  <Download size={13} />
+                  <span className="text-[10px]">🔒</span>
+                </a>
+              )}
               <button onClick={() => setShowHistory(!showHistory)} className="flex items-center gap-1 px-2 py-2 rounded hover:bg-gray-800 transition text-xs min-h-[36px]">
                 <History size={13} />
                 <span className="text-gray-400">{history.length}</span>

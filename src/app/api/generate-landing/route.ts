@@ -65,6 +65,7 @@ export async function POST(req: NextRequest) {
         const demoUrl = `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
         
         return NextResponse.json({
+          html,
           demoUrl,
           files: [
             {
@@ -95,13 +96,19 @@ export async function POST(req: NextRequest) {
 
   // Use enhanced mock data
   console.log("Using enhanced mock data for generation");
+  const mockHtml = generateMockHTML(prompt);
   return NextResponse.json({
-    demoUrl: generateMockDemoUrl(prompt),
+    html: mockHtml,
+    demoUrl: `data:text/html;charset=utf-8,${encodeURIComponent(mockHtml)}`,
     files: [
       {
         path: "page.tsx",
         content: generateMockCode(prompt),
       },
+      {
+        path: "index.html",
+        content: mockHtml,
+      }
     ],
     chatId: `mock-${Date.now()}`,
   });
