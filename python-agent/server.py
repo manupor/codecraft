@@ -45,7 +45,7 @@ def generate():
     data = request.json
     prompt = data.get('prompt', '').strip()
     preferred_provider = data.get('provider', None)
-    enable_images = data.get('enable_images', False)  # Disabled by default due to quota limits
+    enable_images = data.get('enable_images', True)  # Enabled by default for production
     
     if not prompt or len(prompt) < 5:
         return jsonify({'error': 'Prompt is too short'}), 400
