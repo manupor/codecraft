@@ -37,6 +37,17 @@ const landingSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  slug: {
+    type: String,
+    unique: true,
+    sparse: true,
+    lowercase: true,
+    trim: true
+  },
+  customDomain: {
+    type: String,
+    default: ''
+  },
   isPublished: {
     type: Boolean,
     default: false
@@ -67,6 +78,7 @@ landingSchema.pre('save', function(next) {
 
 // Index for faster queries
 landingSchema.index({ userId: 1, createdAt: -1 });
+landingSchema.index({ slug: 1 }, { unique: true, sparse: true });
 
 const Landing = mongoose.model('Landing', landingSchema);
 

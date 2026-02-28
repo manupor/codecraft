@@ -14,6 +14,8 @@ interface Landing {
   updatedAt: string;
   html: string;
   thumbnail?: string;
+  isPublished?: boolean;
+  publishedUrl?: string;
 }
 
 export default function Dashboard() {
@@ -21,6 +23,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [landings, setLandings] = useState<Landing[]>([]);
   const [loading, setLoading] = useState(true);
+  const [publishingId, setPublishingId] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -64,6 +67,40 @@ export default function Dashboard() {
       setLandings([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePublishLanding = async (landingId: string) => {
+    const customSlug = window.prompt("Enter a custom URL slug (e.g. 'my-coffee-shop'):");
+    if (!customSlug) return;
+
+    try {
+      setPublishingId(landingId);
+      const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+      const token = (session as any)?.accessToken;
+
+      const res = await fetch(`${AUTH_SERVICE_URL}/api/landings/${landingId}/publish`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ slug: customSlug }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setLandings(prev => prev.map(l => l.id === landingId
+          ? { ...l, isPublished: true, publishedUrl: data.landing.publishedUrl }
+          : l
+        ));
+        window.open(data.landing.publishedUrl, '_blank');
+      } else {
+        const err = await res.json();
+        alert(err.message || "Failed to publish");
+      }
+    } catch (error) {
+      console.error("Error publishing:", error);
+      alert("Error publishing landing page");
+    } finally {
+      setPublishingId(null);
     }
   };
 
@@ -263,6 +300,17 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-400 mb-4">
                       Updated {new Date(landing.updatedAt).toLocaleDateString()}
                     </p>
+                    {landing.isPublished && landing.publishedUrl && (
+                      <a
+                        href={landing.publishedUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-cyan-400 hover:text-cyan-300 mb-2 flex items-center gap-1 truncate"
+                      >
+                        <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        {landing.publishedUrl.replace('https://', '')}
+                      </a>
+                    )}
                     <div className="flex gap-2">
                       <Link
                         href={`/landing-builder?id=${landing.id}`}
@@ -270,6 +318,18 @@ export default function Dashboard() {
                       >
                         Edit
                       </Link>
+                      <button
+                        onClick={() => handlePublishLanding(landing.id)}
+                        disabled={publishingId === landing.id}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                          landing.isPublished
+                            ? 'bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400'
+                            : 'bg-green-600/20 hover:bg-green-600/30 text-green-400'
+                        } disabled:opacity-50`}
+                        title={landing.isPublished ? "Republish" : "Publish to web"}
+                      >
+                        {publishingId === landing.id ? '...' : landing.isPublished ? '🌐' : '🚀'}
+                      </button>
                       <button
                         onClick={() => handleDeleteLanding(landing.id)}
                         className="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg text-sm font-medium transition"

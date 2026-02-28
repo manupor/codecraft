@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save } from "lucide-react";
+import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save, Globe } from "lucide-react";
 
 export const dynamic = 'force-dynamic';
 
@@ -54,6 +54,8 @@ export default function LandingBuilder() {
   const [currentLandingId, setCurrentLandingId] = useState<string | null>(null);
   const [landingName, setLandingName] = useState("");
   const [saving, setSaving] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishedUrl, setPublishedUrl] = useState<string | null>(null);
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -273,6 +275,79 @@ export default function LandingBuilder() {
       alert("Error saving landing page");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const publishLanding = async () => {
+    if (!generatedCode) {
+      alert("Please generate a landing page first");
+      return;
+    }
+
+    if (!session) {
+      alert("Please sign in to publish your landing page");
+      return;
+    }
+
+    // Save first if not saved yet
+    let landingId = currentLandingId;
+    if (!landingId) {
+      const name = landingName || prompt("Enter a name for this landing page:") || "Untitled Landing";
+      try {
+        setSaving(true);
+        const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+        const token = (session as any)?.accessToken;
+        if (!token) { alert("Auth error"); setSaving(false); return; }
+
+        const saveRes = await fetch(`${AUTH_SERVICE_URL}/api/landings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ name, html: generatedCode, prompt: history[0]?.prompt || input, provider: 'openai' }),
+        });
+        if (saveRes.ok) {
+          const data = await saveRes.json();
+          landingId = data.landing.id;
+          setCurrentLandingId(landingId);
+          setLandingName(name);
+        } else {
+          alert("Failed to save before publishing"); setSaving(false); return;
+        }
+      } catch { alert("Error saving"); setSaving(false); return; }
+      finally { setSaving(false); }
+    }
+
+    // Now publish
+    const customSlug = prompt("Enter a custom URL slug (e.g. 'my-coffee-shop'):");
+    if (!customSlug) return;
+
+    try {
+      setPublishing(true);
+      const AUTH_SERVICE_URL = process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || "http://localhost:4000";
+      const token = (session as any)?.accessToken;
+
+      const res = await fetch(`${AUTH_SERVICE_URL}/api/landings/${landingId}/publish`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ slug: customSlug }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setPublishedUrl(data.landing.publishedUrl);
+        setMessages(prev => [...prev, {
+          role: "assistant",
+          content: `🚀 Your landing page is live!\n\n🔗 ${data.landing.publishedUrl}\n\nShare this URL with anyone — it's publicly accessible!`,
+          timestamp: Date.now(),
+        }]);
+      } else {
+        const err = await res.json();
+        alert(err.message || "Failed to publish");
+      }
+    } catch (error) {
+      console.error("Error publishing:", error);
+      alert("Error publishing landing page");
+    } finally {
+      setPublishing(false);
     }
   };
 
@@ -533,15 +608,26 @@ export default function LandingBuilder() {
           {previewHtml && (
             <div className="ml-auto flex items-center gap-2">
               {session && (
-                <button
-                  onClick={saveLanding}
-                  disabled={saving}
-                  className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
-                  title="Save to dashboard"
-                >
-                  <Save size={14} />
-                  <span>{saving ? "Saving..." : currentLandingId ? "Saved" : "Save"}</span>
-                </button>
+                <>
+                  <button
+                    onClick={saveLanding}
+                    disabled={saving}
+                    className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
+                    title="Save to dashboard"
+                  >
+                    <Save size={14} />
+                    <span>{saving ? "Saving..." : currentLandingId ? "Saved" : "Save"}</span>
+                  </button>
+                  <button
+                    onClick={publishLanding}
+                    disabled={publishing}
+                    className="text-xs text-cyan-400 hover:text-cyan-300 disabled:opacity-50 py-3 flex items-center gap-1.5 transition"
+                    title="Publish to custom URL"
+                  >
+                    <Globe size={14} />
+                    <span>{publishing ? "Publishing..." : publishedUrl ? "Published ✓" : "Publish"}</span>
+                  </button>
+                </>
               )}
               <button
                 onClick={handleOpenInNewTab}
