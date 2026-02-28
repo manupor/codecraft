@@ -73,26 +73,9 @@ def generate():
     logger.info(f"Global generator image_generator: {generator.image_generator is not None}")
     
     try:
-        result = None
-        
-        # Try with images first if enabled and image_generator is available
-        if enable_images and generator.image_generator is not None:
-            try:
-                logger.info("Attempting generation WITH images (Nano Banana)...")
-                result = generator.generate_landing_page_with_images(prompt)
-                if result and result.get('success'):
-                    logger.info(f"✅ Generated with {result.get('images_generated', 0)} AI images")
-                else:
-                    logger.warning(f"Image generation returned unsuccessful, falling back...")
-                    result = None
-            except Exception as img_err:
-                logger.warning(f"⚠️ Image generation failed: {str(img_err)}, falling back to standard...")
-                result = None
-        
-        # Fall back to standard generation (no images)
-        if result is None:
-            logger.info("Generating WITHOUT images (standard mode)...")
-            result = generator.generate_landing_page(prompt)
+        # Generate landing page - Unsplash images are embedded directly by the AI
+        logger.info("Generating landing page with Unsplash images...")
+        result = generator.generate_landing_page(prompt)
         
         if result.get("success"):
             html = result.get('html', '')
