@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import GlobalBackground from "@/components/GlobalBackground";
 
 export const dynamic = 'force-dynamic';
 
@@ -134,8 +135,11 @@ export default function Dashboard() {
 
   if (status === "loading" || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="relative min-h-screen bg-black">
+        <GlobalBackground />
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <div className="text-white text-xl">Loading...</div>
+        </div>
       </div>
     );
   }
@@ -145,20 +149,22 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-sm">
+    <div className="relative min-h-screen bg-black">
+      <GlobalBackground />
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="border-b border-white/10 bg-black/20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Link href="/" className="text-2xl font-bold text-white">
-                CodeCraft
+                CodeCraftt
               </Link>
               <nav className="hidden md:flex gap-6">
-                <Link href="/dashboard" className="text-white hover:text-purple-400 transition">
+                <Link href="/dashboard" className="text-white hover:text-green-400 transition">
                   Dashboard
                 </Link>
-                <Link href="/landing-builder" className="text-white hover:text-purple-400 transition">
+                <Link href="/landing-builder" className="text-white hover:text-green-400 transition">
                   Create New
                 </Link>
               </nav>
@@ -166,9 +172,9 @@ export default function Dashboard() {
             <div className="flex items-center gap-4">
               <Link
                 href="/profile"
-                className="text-white hover:text-purple-400 transition flex items-center gap-2"
+                className="text-white hover:text-green-400 transition flex items-center gap-2"
               >
-                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
                   {session.user?.name?.[0]?.toUpperCase() || session.user?.email?.[0]?.toUpperCase()}
                 </div>
                 <span className="hidden md:inline">{session.user?.name || session.user?.email}</span>
@@ -191,31 +197,31 @@ export default function Dashboard() {
           <h1 className="text-4xl font-bold text-white mb-2">
             Welcome back, {session.user?.name?.split(" ")[0] || "User"}!
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-zinc-400 text-lg">
             Manage your landing pages and create new ones
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+          <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Total Landings</p>
+                <p className="text-zinc-400 text-sm">Total Landings</p>
                 <p className="text-3xl font-bold text-white mt-1">{landings.length}</p>
               </div>
-              <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+          <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Plan</p>
+                <p className="text-zinc-400 text-sm">Plan</p>
                 <p className="text-3xl font-bold text-white mt-1">Free</p>
               </div>
               <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center">
@@ -226,10 +232,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+          <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Account Status</p>
+                <p className="text-zinc-400 text-sm">Account Status</p>
                 <p className="text-3xl font-bold text-white mt-1">Active</p>
               </div>
               <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center">
@@ -247,7 +253,7 @@ export default function Dashboard() {
             <h2 className="text-2xl font-bold text-white">Your Landing Pages</h2>
             <Link
               href="/landing-builder"
-              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-semibold transition flex items-center gap-2"
+              className="px-6 py-3 bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg hover:shadow-green-500/50 text-black rounded-full font-bold transition flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -257,19 +263,19 @@ export default function Dashboard() {
           </div>
 
           {landings.length === 0 ? (
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-12 text-center">
-              <div className="w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-12 text-center">
+              <div className="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">No landing pages yet</h3>
-              <p className="text-gray-400 mb-6">
+              <p className="text-zinc-400 mb-6">
                 Create your first landing page with AI assistance
               </p>
               <Link
                 href="/landing-builder"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-semibold transition"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg hover:shadow-green-500/50 text-black rounded-full font-bold transition"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -282,9 +288,9 @@ export default function Dashboard() {
               {landings.map((landing) => (
                 <div
                   key={landing.id}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-purple-500/50 transition group"
+                  className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-green-500/50 transition group"
                 >
-                  <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 relative">
+                  <div className="aspect-video bg-gradient-to-br from-green-900/30 to-black/50 relative">
                     {landing.thumbnail ? (
                       <img src={landing.thumbnail} alt={landing.name} className="w-full h-full object-cover" />
                     ) : (
@@ -297,7 +303,7 @@ export default function Dashboard() {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold text-white mb-1">{landing.name}</h3>
-                    <p className="text-sm text-gray-400 mb-4">
+                    <p className="text-sm text-zinc-400 mb-4">
                       Updated {new Date(landing.updatedAt).toLocaleDateString()}
                     </p>
                     {landing.isPublished && landing.publishedUrl && (
@@ -314,7 +320,7 @@ export default function Dashboard() {
                     <div className="flex gap-2">
                       <Link
                         href={`/landing-builder?id=${landing.id}`}
-                        className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition text-center"
+                        className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition text-center"
                       >
                         Edit
                       </Link>
@@ -347,6 +353,7 @@ export default function Dashboard() {
           )}
         </div>
       </main>
+      </div>
     </div>
   );
 }
