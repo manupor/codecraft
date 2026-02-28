@@ -70,6 +70,7 @@ export default function LandingBuilder() {
   const [showImageUpload, setShowImageUpload] = useState(false);
   const [mobileTab, setMobileTab] = useState<"chat" | "preview" | "code">("chat");
   const [isDemo, setIsDemo] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false);
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -757,10 +758,10 @@ export default function LandingBuilder() {
                 {editMode ? "Edit ON" : "Edit"}
               </button>
             ) : (
-              <a href="/api/auth/signin" className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-gray-800 text-gray-500 hover:text-gray-300 transition min-h-[36px]" title="Sign in to use edit mode">
+              <button onClick={() => setShowSignInModal(true)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-gray-800 text-gray-500 hover:text-gray-300 transition min-h-[36px]">
                 <MousePointer2 size={13} />
                 Edit 🔒
-              </a>
+              </button>
             )}
 
             {selectedElement && session && (
@@ -804,10 +805,10 @@ export default function LandingBuilder() {
                   <Download size={13} />
                 </button>
               ) : (
-                <a href="/api/auth/signin" className="text-xs text-gray-600 hover:text-gray-400 flex items-center gap-1 px-2 py-2 transition min-h-[36px]" title="Sign in to download">
+                <button onClick={() => setShowSignInModal(true)} className="text-xs text-gray-600 hover:text-gray-400 flex items-center gap-1 px-2 py-2 transition min-h-[36px]" title="Sign in to download">
                   <Download size={13} />
                   <span className="text-[10px]">🔒</span>
-                </a>
+                </button>
               )}
               <button onClick={() => setShowHistory(!showHistory)} className="flex items-center gap-1 px-2 py-2 rounded hover:bg-gray-800 transition text-xs min-h-[36px]">
                 <History size={13} />
@@ -890,6 +891,56 @@ export default function LandingBuilder() {
 
   return (
     <div className="flex flex-col h-[100dvh] bg-black text-white overflow-hidden">
+
+      {/* ── SIGN IN MODAL ── */}
+      {showSignInModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowSignInModal(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+          {/* Modal */}
+          <div
+            className="relative w-full max-w-sm bg-gray-900 border border-gray-700 rounded-2xl p-6 shadow-2xl shadow-black/60"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setShowSignInModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-200 transition text-lg leading-none"
+            >
+              ✕
+            </button>
+
+            {/* Icon */}
+            <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-4">
+              <MousePointer2 size={22} className="text-green-400" />
+            </div>
+
+            <h2 className="text-lg font-bold text-white mb-1">Sign in to edit your website</h2>
+            <p className="text-sm text-gray-400 mb-5">
+              Create a free account to unlock editing, downloading, saving, and publishing your landing page.
+            </p>
+
+            <a
+              href="/api/auth/signin"
+              className="w-full block text-center bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg hover:shadow-green-500/30 text-black font-bold py-3 rounded-xl text-sm transition mb-3"
+            >
+              Create Free Account →
+            </a>
+            <a
+              href="/api/auth/signin"
+              className="w-full block text-center text-gray-400 hover:text-gray-200 text-sm transition py-1"
+            >
+              Already have an account? Sign in
+            </a>
+
+            <p className="text-xs text-gray-600 text-center mt-3">Free forever · No credit card required</p>
+          </div>
+        </div>
+      )}
 
       {/* ── HEADER ── */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800 shrink-0">
