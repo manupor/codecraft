@@ -169,7 +169,7 @@ export default function LandingBuilder() {
         
         // If in clone mode with uploaded images, add them to the prompt
         if (isCloneMode && uploadedImages.length > 0) {
-          const imageUrls = uploadedImages.map(img => `https://codecraftt.com${img.url}`).join('\n');
+          const imageUrls = uploadedImages.map(img => img.url).join('\n');
           finalPrompt = `CLONE MODE: Create a landing page based on these reference images:\n\n${imageUrls}\n\nUser requirements:\n${input}\n\nIMPORTANT: Analyze the design, layout, colors, and style from the reference images and recreate a similar landing page with the user's requirements. Use the same visual style, color scheme, and layout structure as shown in the images.`;
         }
         

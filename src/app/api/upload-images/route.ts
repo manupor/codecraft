@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,12 +26,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
     const uploadedFiles = [];
 
     for (const file of files) {
@@ -54,26 +45,24 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Generate unique filename
+      // Convert to base64 data URL
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const base64 = buffer.toString('base64');
+      const dataUrl = `data:${file.type};base64,${base64}`;
+      
+      // Generate unique filename for reference
       const timestamp = Date.now();
       const random = Math.random().toString(36).substring(2, 8);
       const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg';
       const filename = `${timestamp}-${random}.${extension}`;
-      
-      // Save file
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      const filepath = join(uploadsDir, filename);
-      await writeFile(filepath, buffer);
 
-      // Return public URL
-      const publicUrl = `/uploads/${filename}`;
       uploadedFiles.push({
         filename,
         originalName: file.name,
         size: file.size,
         type: file.type,
-        url: publicUrl
+        url: dataUrl // Return base64 data URL instead of file path
       });
     }
 
