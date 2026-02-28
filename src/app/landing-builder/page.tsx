@@ -89,6 +89,48 @@ export default function LandingBuilder() {
     }
   }, [history]);
 
+  // Load demo HTML from sessionStorage if coming from homepage demo
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isDemo = urlParams.get('demo');
+    
+    if (isDemo === 'true') {
+      const demoHtml = sessionStorage.getItem('demo_generated_html');
+      const demoPrompt = sessionStorage.getItem('demo_generated_prompt');
+      
+      if (demoHtml && demoPrompt) {
+        // Set the generated HTML
+        setPreviewHtml(demoHtml);
+        setGeneratedCode(demoHtml);
+        setPaid(true); // Auto-enable for demo users
+        
+        // Add to messages
+        setMessages((prev) => [
+          ...prev,
+          { role: "user", content: demoPrompt, timestamp: Date.now() },
+          { role: "assistant", content: "✨ Your landing page has been generated! You can now edit it, save it (requires sign in), or publish it.", timestamp: Date.now() }
+        ]);
+        
+        // Add to history
+        const newEntry: HistoryEntry = {
+          id: `demo-${Date.now()}`,
+          prompt: demoPrompt,
+          html: demoHtml,
+          timestamp: Date.now(),
+        };
+        setHistory([newEntry]);
+        setCurrentHistoryIndex(0);
+        
+        // Clear sessionStorage
+        sessionStorage.removeItem('demo_generated_html');
+        sessionStorage.removeItem('demo_generated_prompt');
+        
+        // Remove demo parameter from URL
+        window.history.replaceState({}, '', '/landing-builder');
+      }
+    }
+  }, []);
+
   const handleGenerate = async () => {
     if (!input.trim()) return;
 

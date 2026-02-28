@@ -27,8 +27,6 @@ export default function Home() {
   const { data: session } = useSession();
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
-  const [previewHtml, setPreviewHtml] = useState("");
-  const [showPreview, setShowPreview] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<UploadedFile[]>([]);
   const [isCloneMode, setIsCloneMode] = useState(false);
   const [showImageUpload, setShowImageUpload] = useState(false);
@@ -56,8 +54,12 @@ export default function Home() {
 
       const data = await response.json();
       if (data.html) {
-        setPreviewHtml(data.html);
-        setShowPreview(true);
+        // Store the generated HTML in sessionStorage
+        sessionStorage.setItem('demo_generated_html', data.html);
+        sessionStorage.setItem('demo_generated_prompt', prompt);
+        
+        // Redirect to landing-builder
+        window.location.href = '/landing-builder?demo=true';
       }
     } catch (error) {
       console.error("Error:", error);
@@ -66,68 +68,6 @@ export default function Home() {
       setLoading(false);
     }
   };
-
-  if (showPreview) {
-    return (
-      <main className="relative min-h-screen bg-black">
-        <GlobalBackground />
-        <div className="relative z-10">
-          <NavMenuWrapper />
-          
-          {/* Preview Section */}
-          <section className="min-h-[70vh] flex items-center justify-center pt-24 sm:pt-28">
-            <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center w-full">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] mb-4">
-                  Your Landing Page
-                  <br />
-                  <span className="gradient-text">Preview</span>
-                </h1>
-                <p className="text-base sm:text-xl text-zinc-400 mb-8">
-                  This is a demo preview. Sign in to save and publish your landing page.
-                </p>
-              </motion.div>
-
-              {/* Landing Preview */}
-              <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
-                <iframe
-                  srcDoc={previewHtml}
-                  className="w-full h-[600px] border-0"
-                  title="Landing Preview"
-                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                />
-              </div>
-
-              {/* Action Buttons */}
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  href="/login"
-                  className="group inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold text-base hover:shadow-lg hover:shadow-green-500/50 transition-all duration-200"
-                >
-                  <Globe size={18} />
-                  Sign In to Save & Publish
-                  <ArrowRight
-                    size={18}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </Link>
-                <button
-                  onClick={() => setShowPreview(false)}
-                  className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full border border-white/10 text-white font-medium text-base hover:bg-white/5 hover:border-white/20 transition-all duration-200"
-                >
-                  Try Another
-                </button>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="relative min-h-screen bg-black">
