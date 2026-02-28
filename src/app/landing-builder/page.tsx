@@ -592,8 +592,8 @@ export default function LandingBuilder() {
     }
   };
 
-  // Shared chat panel content
-  const ChatPanel = () => (
+  // Shared chat panel content (plain JSX — NOT a component, avoids focus loss on re-render)
+  const chatPanelJSX = (
     <div className="flex flex-col h-full">
       {/* Banner: demo sign-in CTA OR payment OR confirmed */}
       {isDemo && !session ? (
@@ -769,7 +769,7 @@ export default function LandingBuilder() {
   );
 
   // Shared preview panel content
-  const PreviewPanel = () => (
+  const previewPanelJSX = (
     <div className="flex flex-col h-full">
       {/* Demo sign-in banner over preview */}
       {isDemo && !session && previewHtml && (
@@ -916,7 +916,7 @@ export default function LandingBuilder() {
   );
 
   // Shared code panel content
-  const CodePanel = () => (
+  const codePanelJSX = (
     <div className="h-full overflow-auto p-4 bg-gray-950">
       {generatedCode ? (
         <SyntaxHighlighter language="tsx" style={vscDarkPlus} customStyle={{ margin: 0, background: "transparent", fontSize: "0.8rem" }}>
@@ -1016,7 +1016,7 @@ export default function LandingBuilder() {
 
         {/* ── DESKTOP: left panel chat ── */}
         <div className="hidden lg:flex lg:w-2/5 flex-col border-r border-gray-800 overflow-hidden">
-          <ChatPanel />
+          {chatPanelJSX}
         </div>
 
         {/* ── DESKTOP: right panel preview/code ── */}
@@ -1038,7 +1038,7 @@ export default function LandingBuilder() {
             ))}
           </div>
           <div className="flex-1 overflow-hidden relative">
-            {activeTab === "preview" ? <PreviewPanel /> : <CodePanel />}
+            {activeTab === "preview" ? previewPanelJSX : codePanelJSX}
           </div>
         </div>
 
@@ -1046,17 +1046,17 @@ export default function LandingBuilder() {
         <div className="flex lg:hidden flex-1 overflow-hidden">
           {mobileTab === "chat" && (
             <div className="flex-1 overflow-hidden">
-              <ChatPanel />
+              {chatPanelJSX}
             </div>
           )}
           {mobileTab === "preview" && (
             <div className="flex-1 overflow-hidden relative">
-              <PreviewPanel />
+              {previewPanelJSX}
             </div>
           )}
           {mobileTab === "code" && (
             <div className="flex-1 overflow-hidden">
-              <CodePanel />
+              {codePanelJSX}
             </div>
           )}
         </div>
