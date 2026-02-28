@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save, Globe } from "lucide-react";
+import { CreditCard, Check, Sparkles, Monitor, MousePointer2, Upload, History, Edit3, Undo, Redo, Download, ExternalLink, Save, Globe, Copy } from "lucide-react";
+import ImageUpload from "@/components/ImageUpload";
 
 export const dynamic = 'force-dynamic';
 
@@ -21,6 +22,14 @@ interface HistoryEntry {
   timestamp: number;
 }
 
+interface UploadedFile {
+  filename: string;
+  originalName: string;
+  size: number;
+  type: string;
+  url: string;
+}
+
 interface SelectedElement {
   selector: string;
   element: HTMLElement;
@@ -30,7 +39,7 @@ interface SelectedElement {
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi! I'm your CodeCraftt Builder.\n\nDescribe the landing page you want — include:\n• Your business name\n• What you sell or offer\n• Your location (city, country)\n• Any colors or style preferences\n• Your main call to action (e.g. 'Book a call', 'Buy now')\n\nI'll generate your live landing page in minutes.",
+    "Hi! I'm your CodeCraftt Builder.\n\n**Create Mode:** Describe the landing page you want — include:\n• Your business name\n• What you sell or offer\n• Your location (city, country)\n• Any colors or style preferences\n• Your main call to action (e.g. 'Book a call', 'Buy now')\n\n**Clone Mode:** Toggle on Clone Mode and upload screenshots of a website you want to replicate. I'll analyze the design and create a similar landing page for your business.\n\nI'll generate your live landing page in minutes.",
 };
 
 export default function LandingBuilder() {
@@ -56,6 +65,9 @@ export default function LandingBuilder() {
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishedUrl, setPublishedUrl] = useState<string | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<UploadedFile[]>([]);
+  const [isCloneMode, setIsCloneMode] = useState(false);
+  const [showImageUpload, setShowImageUpload] = useState(false);
 
   // Load history from localStorage on mount
   useEffect(() => {
@@ -111,10 +123,18 @@ export default function LandingBuilder() {
         });
       } else {
         // Generate new page from scratch
+        let finalPrompt = input;
+        
+        // If in clone mode with uploaded images, add them to the prompt
+        if (isCloneMode && uploadedImages.length > 0) {
+          const imageUrls = uploadedImages.map(img => `https://codecraftt.com${img.url}`).join('\n');
+          finalPrompt = `CLONE MODE: Create a landing page based on these reference images:\n\n${imageUrls}\n\nUser requirements:\n${input}\n\nIMPORTANT: Analyze the design, layout, colors, and style from the reference images and recreate a similar landing page with the user's requirements. Use the same visual style, color scheme, and layout structure as shown in the images.`;
+        }
+        
         res = await fetch("/api/generate-landing", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: input }),
+          body: JSON.stringify({ prompt: finalPrompt }),
         });
       }
 
@@ -520,6 +540,59 @@ export default function LandingBuilder() {
           )}
         </div>
 
+        {/* Clone Mode Toggle */}
+        {paid && (
+          <div className="mx-4 mt-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Copy size={16} className="text-cyan-400" />
+                <span className="text-sm font-medium text-gray-300">Clone Mode</span>
+              </div>
+              <button
+                onClick={() => setIsCloneMode(!isCloneMode)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  isCloneMode ? 'bg-cyan-600' : 'bg-gray-600'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isCloneMode ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            {isCloneMode && (
+              <p className="text-xs text-gray-500 mb-3">
+                Upload screenshots of a website you want to clone
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Image Upload Section */}
+        {isCloneMode && (
+          <div className="mx-4 mt-2">
+            <button
+              onClick={() => setShowImageUpload(!showImageUpload)}
+              className="w-full px-4 py-2 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-600/30 rounded-lg text-cyan-400 text-sm font-medium transition flex items-center justify-center gap-2"
+            >
+              <Upload size={16} />
+              {showImageUpload ? 'Hide Images' : `Upload Images (${uploadedImages.length})`}
+            </button>
+            
+            {showImageUpload && (
+              <div className="mt-3">
+                <ImageUpload
+                  onImagesUploaded={setUploadedImages}
+                  maxImages={5}
+                  maxSize={5}
+                  className="mt-2"
+                />
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Messages Chat */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {messages.map((msg, i) => (
@@ -569,7 +642,10 @@ export default function LandingBuilder() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="e.g. 'Landing page for a hair salon in Heredia, Costa Rica. Elegant style, dark rose colors, CTA: Book appointment online.'"
+              placeholder={isCloneMode 
+                ? "Describe what you want to change or add to the cloned design..." 
+                : "e.g. 'Landing page for a hair salon in Heredia, Costa Rica. Elegant style, dark rose colors, CTA: Book appointment online.'"
+              }
               rows={2}
               disabled={!paid}
               className="flex-1 bg-transparent resize-none text-sm text-white placeholder-gray-500 outline-none"
