@@ -19,7 +19,13 @@ class ImageGenerator:
             raise ValueError("GOOGLE_API_KEY or GEMINI_API_KEY environment variable is required")
         
         self.client = genai.Client(api_key=self.api_key)
-        self.model = "gemini-3.1-flash-image-preview"  # Nano Banana model
+        # Try multiple model names - Gemini image generation models
+        self.models_to_try = [
+            "gemini-2.0-flash-exp",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+        ]
+        self.model = self.models_to_try[0]
     
     def generate_image(self, prompt: str, aspect_ratio: str = "16:9") -> Optional[str]:
         """
@@ -32,33 +38,46 @@ class ImageGenerator:
         Returns:
             Base64 encoded image data or None if failed
         """
-        try:
-            print(f"🎨 Generating image with Nano Banana: {prompt[:50]}...")
-            
-            response = self.client.models.generate_content(
-                model=self.model,
-                contents=[prompt],
-                config=types.GenerateContentConfig(
-                    response_modalities=["image"]
+        for model_name in self.models_to_try:
+            try:
+                print(f"🎨 Trying model {model_name}: {prompt[:50]}...")
+                
+                response = self.client.models.generate_content(
+                    model=model_name,
+                    contents=[f"Generate an image: {prompt}"],
+                    config=types.GenerateContentConfig(
+                        response_modalities=["image", "text"]
+                    )
                 )
-            )
-            
-            # Extract image from response
-            for part in response.parts:
-                if part.inline_data is not None:
-                    # Get base64 image data
-                    image_data = base64.b64encode(part.inline_data.data).decode('utf-8')
-                    mime_type = part.inline_data.mime_type
-                    
-                    print(f"✅ Image generated successfully ({mime_type})")
-                    return f"data:{mime_type};base64,{image_data}"
-            
-            print("❌ No image data in response")
-            return None
-            
-        except Exception as e:
-            print(f"❌ Error generating image: {str(e)}")
-            return None
+                
+                if not response or not response.candidates:
+                    print(f"  ⚠️ No candidates in response from {model_name}")
+                    continue
+                
+                # Extract image from response
+                for part in response.candidates[0].content.parts:
+                    if part.inline_data is not None:
+                        # Get base64 image data
+                        image_data = base64.b64encode(part.inline_data.data).decode('utf-8')
+                        mime_type = part.inline_data.mime_type
+                        
+                        print(f"✅ Image generated successfully with {model_name} ({mime_type})")
+                        self.model = model_name  # Remember working model
+                        return f"data:{mime_type};base64,{image_data}"
+                
+                # Check if response has text (model might not support image gen)
+                for part in response.candidates[0].content.parts:
+                    if part.text:
+                        print(f"  ⚠️ Model {model_name} returned text instead of image: {part.text[:100]}")
+                
+                print(f"  ❌ No image data from {model_name}")
+                
+            except Exception as e:
+                print(f"  ❌ Error with {model_name}: {str(e)}")
+                continue
+        
+        print("❌ All models failed to generate image")
+        return None
     
     def generate_images_for_landing_page(self, business_info: Dict) -> Dict[str, str]:
         """
