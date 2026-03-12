@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+
+# Generated files
+generated_landing.html
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
