@@ -41,7 +41,7 @@ export default function ContactForm() {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Error sending message. Please try again or email us directly at manu@manuportuguez.com");
+      alert("Error sending message. Please try again or email us directly at hello@codecraftt.com");
     } finally {
       setIsSubmitting(false);
     }
@@ -80,7 +80,7 @@ export default function ContactForm() {
         >
           {isSubmitted ? (
             <div className="text-center py-12">
-              <CheckCircle size={64} className="text-green-500 mx-auto mb-4" />
+              <CheckCircle size={64} className="text-violet-500 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
               <p className="text-zinc-400">
                 We'll get back to you within 24 hours at the email you provided.
@@ -100,7 +100,7 @@ export default function ContactForm() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 transition"
+                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition"
                     placeholder="Your name"
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function ContactForm() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 transition"
+                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -133,7 +133,7 @@ export default function ContactForm() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 transition"
+                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
@@ -148,7 +148,7 @@ export default function ContactForm() {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 transition"
+                    className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition"
                     placeholder="Your company"
                   />
                 </div>
@@ -164,7 +164,7 @@ export default function ContactForm() {
                   required
                   value={formData.projectType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white focus:outline-none focus:border-green-500 transition"
+                  className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white focus:outline-none focus:border-violet-500 transition"
                 >
                   <option value="">Select a project type</option>
                   <option value="mobile-app">Mobile App Development</option>
@@ -186,7 +186,7 @@ export default function ContactForm() {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-green-500 transition resize-none"
+                  className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 transition resize-none"
                   placeholder="Tell us about your project, timeline, and budget..."
                 />
               </div>
@@ -194,7 +194,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold rounded-full hover:shadow-lg hover:shadow-green-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-bold rounded-full hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -211,8 +211,8 @@ export default function ContactForm() {
 
               <p className="text-xs text-zinc-500 text-center">
                 Or email us directly at{" "}
-                <a href="mailto:manu@manuportuguez.com" className="text-green-400 hover:text-green-300">
-                  manu@manuportuguez.com
+                <a href="mailto:hello@codecraftt.com" className="text-violet-400 hover:text-violet-300">
+                  hello@codecraftt.com
                 </a>
               </p>
             </form>

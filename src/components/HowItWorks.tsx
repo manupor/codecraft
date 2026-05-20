@@ -1,69 +1,84 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageSquare, Zap, Rocket } from "lucide-react";
+
+const steps = [
+  {
+    num: "01",
+    title: "Discovery Call",
+    description:
+      "We spend 30–60 minutes understanding your business, goals, and technical requirements. No templates — every conversation is tailored to your context.",
+  },
+  {
+    num: "02",
+    title: "Strategy & Scope",
+    description:
+      "We define architecture, tech stack, MVP scope, and timeline. You get a clear proposal with milestones, costs, and deliverables — before we write a line of code.",
+  },
+  {
+    num: "03",
+    title: "Design & Prototype",
+    description:
+      "Wireframes, UI components, and an interactive prototype you can test. We validate UX decisions early so development is fast and on-target.",
+  },
+  {
+    num: "04",
+    title: "Development",
+    description:
+      "Sprints of 1–2 weeks with continuous delivery. You see real progress in Vercel previews every week — not just reports. Code reviews and documentation included.",
+  },
+  {
+    num: "05",
+    title: "QA & Testing",
+    description:
+      "Automated tests, cross-browser QA, performance audits, and accessibility checks. We don't ship until it's production-ready — and we put that in writing.",
+  },
+  {
+    num: "06",
+    title: "Launch & Scale",
+    description:
+      "Deployment to your cloud environment, monitoring setup, and a 30-day post-launch support window. After that, we offer retainer plans for continuous growth.",
+  },
+];
 
 export default function HowItWorks() {
-  const steps = [
-    {
-      icon: MessageSquare,
-      title: "Define the Vision",
-      description: "Tell us about your product idea. We analyze your business model, target audience, product features, and AI opportunities."
-    },
-    {
-      icon: Zap,
-      title: "Build the Product",
-      description: "Our team develops your solution using modern frameworks and cloud technologies. Fast, scalable, and secure."
-    },
-    {
-      icon: Rocket,
-      title: "Launch & Scale",
-      description: "We deploy your product to the cloud and support its growth with updates, AI integrations, and performance optimization."
-    }
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-b from-black to-zinc-950">
+    <section id="process" className="relative py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Our Development Process
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400 mb-4">
+            Process
+          </p>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
+            How we go from{" "}
+            <span className="gradient-text">idea to launch.</span>
           </h2>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            From idea to deployment — a streamlined process designed for speed and quality.
+          <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-xl mx-auto">
+            A transparent, predictable process designed to reduce risk and maximize output.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step, index) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {steps.map((step, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
+              key={step.num}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
+              transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-60px" }}
+              className="group relative p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#8B5CF6]/30 hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-[#10B981]/50 transition-all duration-300">
-                <div className="mb-6">
-                  <step.icon size={48} className="text-[#10B981]" />
-                </div>
-                <div className="absolute top-6 right-6 text-6xl font-bold text-white/5">
-                  {index + 1}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
+              <span className="text-5xl font-bold text-white/[0.05] leading-none block mb-4 group-hover:text-[#8B5CF6]/10 transition-colors">
+                {step.num}
+              </span>
+              <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

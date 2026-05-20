@@ -30,7 +30,7 @@ export default function ServicesPreview() {
   ];
 
   return (
-    <section id="work" className="py-20 bg-black">
+    <section id="work" className="py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,18 +54,18 @@ export default function ServicesPreview() {
               viewport={{ once: true }}
             >
               <Link href={service.href}>
-                <div className="group h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-[#10B981]/50 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <div className="group h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-[#8B5CF6]/50 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                   <div className="mb-6">
-                    <service.icon size={48} className="text-[#10B981]" />
+                    <service.icon size={48} className="text-[#8B5CF6]" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#10B981] transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#8B5CF6] transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-zinc-400 leading-relaxed mb-6">
                     {service.description}
                   </p>
-                  <div className="inline-block px-4 py-2 bg-[#10B981]/10 border border-[#10B981]/30 rounded-full">
-                    <span className="text-sm font-semibold text-[#10B981]">{service.tag}</span>
+                  <div className="inline-block px-4 py-2 bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 rounded-full">
+                    <span className="text-sm font-semibold text-[#8B5CF6]">{service.tag}</span>
                   </div>
                 </div>
               </Link>

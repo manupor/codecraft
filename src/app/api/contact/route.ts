@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,8 +16,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create email content
-    const emailContent = `
+    await resend.emails.send({
+      from: "CodeCraftt <hello@codecraftt.com>",
+      to: "hello@codecraftt.com",
+      replyTo: email,
+      subject: `New Project Inquiry: ${projectType} — ${name}`,
+      text: `
 New Quote Request from CodeCraftt Website
 
 Name: ${name}
@@ -28,33 +35,8 @@ ${message}
 
 ---
 Sent from CodeCraftt Contact Form
-    `.trim();
-
-    // In production, you would integrate with an email service like:
-    // - SendGrid
-    // - Resend
-    // - AWS SES
-    // - Nodemailer with SMTP
-    
-    // For now, we'll log it and return success
-    // You'll need to set up actual email sending
-    console.log("Quote Request Received:");
-    console.log(emailContent);
-
-    // Example with fetch to a serverless email service:
-    // const emailResponse = await fetch('https://api.resend.com/emails', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     from: 'CodeCraftt <noreply@codecraftt.com>',
-    //     to: 'manu@manuportuguez.com',
-    //     subject: `New Quote Request from ${name}`,
-    //     text: emailContent,
-    //   }),
-    // });
+      `.trim(),
+    });
 
     return NextResponse.json(
       { 
