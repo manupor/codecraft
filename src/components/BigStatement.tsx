@@ -12,30 +12,11 @@ export default function BigStatement() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Left — image */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="relative rounded-2xl overflow-hidden border border-white/[0.08]"
-          >
-            <Image
-              src="/rayo-img/demo/01_fea-img.webp"
-              alt="CodeCraftt product development — SaaS and AI applications"
-              width={720}
-              height={480}
-              className="w-full h-auto object-cover"
-              priority={false}
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent pointer-events-none" />
-          </motion.div>
-
-          {/* Right — text */}
+          {/* Left — text */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
             viewport={{ once: true, margin: "-80px" }}
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
@@ -55,6 +36,29 @@ export default function BigStatement() {
               Let&apos;s build it
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
+          </motion.div>
+
+          {/* Right — floating image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.0, delay: 0.1, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative flex items-center justify-center lg:justify-end"
+          >
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Image
+                src="/rayo-img/demo/01_fea-img.webp"
+                alt="CodeCraftt — SaaS and AI product development"
+                width={680}
+                height={460}
+                className="w-full max-w-[580px] h-auto object-contain drop-shadow-2xl"
+                priority={false}
+              />
+            </motion.div>
           </motion.div>
 
         </div>
