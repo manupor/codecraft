@@ -13,14 +13,9 @@ const footerServices = [
   { label: "Startup MVP Development",     href: "#services" },
 ];
 
-const technologies = [
-  "React & Next.js", "React Native", "Node.js", "Python",
-  "Flutter", "AWS & GCP", "OpenAI & AI APIs", "TypeScript",
-];
-
 const industries = [
   "SaaS & Software", "AI Startups", "E-commerce", "FinTech",
-  "Healthcare Tech", "Real Estate", "iGaming", "Logistics",
+  "Healthcare Tech", "Real Estate", "EdTech", "Logistics",
 ];
 
 const company = [
@@ -38,10 +33,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Main grid */}
-        <div className="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+        <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
 
           {/* Brand */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+          <div className="col-span-2 md:col-span-1">
             <a href="/" className="text-xl font-bold tracking-tight text-white">
               Code<span className="text-[#8B5CF6]">craftt</span>
             </a>
@@ -79,15 +74,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Technologies */}
+          {/* Industries */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Technologies</h3>
-            <ul className="space-y-2.5">
-              {technologies.map((t) => (
-                <li key={t} className="text-xs text-zinc-400 leading-snug">{t}</li>
-              ))}
-            </ul>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4 mt-7">Industries</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Industries</h3>
             <ul className="space-y-2.5">
               {industries.map((ind) => (
                 <li key={ind} className="text-xs text-zinc-400 leading-snug">{ind}</li>

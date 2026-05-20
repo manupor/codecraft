@@ -1,6 +1,7 @@
 import NavMenuWrapper from "@/components/NavMenuWrapper";
 import GlobalBackground from "@/components/GlobalBackground";
 import Hero from "@/components/Hero";
+import TechMarquee from "@/components/TechMarquee";
 import Services from "@/components/Services";
 import BigStatement from "@/components/BigStatement";
 import WhyUs from "@/components/WhyUs";
@@ -16,6 +17,7 @@ export default function Home() {
       <div className="relative z-10">
         <NavMenuWrapper />
         <Hero />
+        <TechMarquee />
         <Services />
         <BigStatement />
         <WhyUs />
