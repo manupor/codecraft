@@ -1,53 +1,57 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, BrainCircuit, Rocket, Users, BarChart3, GitBranch } from "lucide-react";
+import { ShieldCheck, Zap, Rocket, Clock, Target, Code2 } from "lucide-react";
 
 const reasons = [
   {
     icon: ShieldCheck,
-    title: "Senior-Level Team",
+    stat: "5+ yrs",
+    title: "Senior Engineers Only",
     description:
-      "No juniors, no outsourcing. Every project is built by senior engineers and designers with 5+ years of real-world product experience.",
+      "No juniors, no outsourcing chains. Every project is led by senior engineers with production experience across SaaS, AI, and mobile.",
   },
   {
-    icon: BrainCircuit,
-    title: "AI-Native Builders",
+    icon: Zap,
+    stat: "3× faster",
+    title: "AI-Native Workflows",
     description:
-      "We don't add AI as a feature — we architect systems where intelligence is the core. From GPT integrations to custom ML pipelines.",
+      "We use AI across the full dev cycle — architecture, testing, deployment — so you get to market significantly faster than traditional shops.",
   },
   {
     icon: Rocket,
-    title: "Startup Speed",
+    stat: "4–8 weeks",
+    title: "Startup Execution Speed",
     description:
-      "We ship fast without cutting corners. Most MVPs go from kickoff to production in under 6 weeks. Your idea can't afford to wait.",
+      "We move like a startup. MVPs in 4–8 weeks, features shipped weekly, no bureaucracy. You get velocity without sacrificing quality.",
   },
   {
-    icon: Users,
-    title: "Founder-Friendly",
+    icon: Clock,
+    stat: "US TZ",
+    title: "Same Timezone. No Gaps.",
     description:
-      "We think like founders. We challenge assumptions, flag bad ideas early, and always optimize for business outcomes — not just code.",
+      "Based in Costa Rica, fully aligned with US timezones. Real-time collaboration, fast feedback loops, and no overnight delays.",
   },
   {
-    icon: BarChart3,
-    title: "Conversion-Focused",
+    icon: Target,
+    stat: "Revenue-first",
+    title: "Business Outcomes First",
     description:
-      "Every interface we design is built to convert. UX decisions are backed by data, heatmaps, and proven conversion frameworks.",
+      "We measure success by your metrics — signups, conversion, MRR — not by code quality alone. Every decision ties back to business impact.",
   },
   {
-    icon: GitBranch,
-    title: "Full Ownership",
+    icon: Code2,
+    stat: "100% yours",
+    title: "Full IP Ownership",
     description:
-      "You own everything: source code, infrastructure, and IP. We hand over clean, documented, production-ready work — no lock-in.",
+      "You own 100% of the source code from day one. No lock-in, no dependency on us to keep things running. Your product, your IP.",
   },
 ];
 
 export default function WhyUs() {
   return (
     <section id="about" className="relative py-24">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.03] to-transparent" />
-      </div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.025] to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
@@ -61,11 +65,11 @@ export default function WhyUs() {
             Why CodeCraftt
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
-            Built different.{" "}
-            <span className="gradient-text">Engineered to win.</span>
+            Why teams choose{" "}
+            <span className="gradient-text">CodeCraftt.</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto">
-            We're not a generic agency. We're a focused product studio that ships software that actually grows your business.
+            We're not a body-shop or an outsourcing firm. We're a focused product studio that ships software engineered to grow your business.
           </p>
         </motion.div>
 
@@ -79,10 +83,13 @@ export default function WhyUs() {
               viewport={{ once: true, margin: "-60px" }}
               className="group relative p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="w-11 h-11 rounded-xl bg-violet-500/10 flex items-center justify-center mb-5 group-hover:bg-violet-500/20 transition-colors">
-                <r.icon size={22} className="text-violet-400" />
+              <div className="flex items-start justify-between mb-5">
+                <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center group-hover:bg-violet-500/20 transition-colors">
+                  <r.icon size={20} className="text-violet-400" />
+                </div>
+                <span className="text-[11px] font-bold text-violet-400/80 bg-violet-500/10 px-2 py-1 rounded-lg">{r.stat}</span>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">{r.title}</h3>
+              <h3 className="text-base font-semibold text-white mb-2">{r.title}</h3>
               <p className="text-sm text-zinc-400 leading-relaxed">{r.description}</p>
             </motion.div>
           ))}
