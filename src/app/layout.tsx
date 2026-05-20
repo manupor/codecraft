@@ -67,6 +67,9 @@ export const metadata: Metadata = {
     creator: "@codecraftt",
   },
   alternates: { canonical: "https://www.codecraftt.com" },
+  verification: {
+    google: "b610eca2b0be5da0",
+  },
   icons: {
     icon: "/codecraftt-logo.png",
     shortcut: "/codecraftt-logo.png",
