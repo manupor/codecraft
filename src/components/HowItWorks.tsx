@@ -59,7 +59,7 @@ export default function HowItWorks() {
             How we go from{" "}
             <span className="gradient-text">idea to launch.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-zinc-300 max-w-xl mx-auto">
             A transparent, predictable process designed to reduce risk and maximize output.
           </p>
         </motion.div>
@@ -72,13 +72,13 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
               viewport={{ once: true, margin: "-60px" }}
-              className="group relative p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#8B5CF6]/30 hover:bg-white/[0.04] transition-all duration-300"
+              className="group relative p-7 rounded-2xl bg-white/[0.03] border border-white/[0.1] hover:border-[#8B5CF6]/40 hover:bg-white/[0.06] transition-all duration-300"
             >
-              <span className="text-5xl font-bold text-white/[0.05] leading-none block mb-4 group-hover:text-[#8B5CF6]/10 transition-colors">
+              <span className="text-5xl font-bold text-white/[0.12] leading-none block mb-4 group-hover:text-violet-500/20 transition-colors">
                 {step.num}
               </span>
               <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">{step.description}</p>
+              <p className="text-sm text-zinc-300 leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

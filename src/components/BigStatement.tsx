@@ -22,7 +22,7 @@ export default function BigStatement() {
           </h2>
 
           <div className="mt-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 max-w-4xl">
-            <p className="text-xl text-zinc-400 max-w-md leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-md leading-relaxed">
               We handle architecture, design, engineering, and launch — so you focus on growth.
             </p>
             <a

@@ -81,7 +81,7 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.04, ease: "easeOut" }}
               viewport={{ once: true, margin: "-40px" }}
-              className="rounded-xl border border-white/[0.07] bg-white/[0.02] overflow-hidden"
+              className="rounded-xl border border-white/[0.1] bg-white/[0.03] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
@@ -89,7 +89,7 @@ export default function FAQ() {
                 aria-expanded={open === i}
               >
                 <span className="text-sm sm:text-base font-medium text-white">{faq.q}</span>
-                <span className="shrink-0 text-zinc-400">
+                <span className="shrink-0 text-zinc-300">
                   {open === i ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
@@ -101,7 +101,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                   >
-                    <p className="px-6 pb-5 text-sm text-zinc-400 leading-relaxed">{faq.a}</p>
+                    <p className="px-6 pb-5 text-sm text-zinc-300 leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

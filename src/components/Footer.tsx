@@ -45,7 +45,7 @@ export default function Footer() {
             <a href="/" className="text-xl font-bold tracking-tight text-white">
               Code<span className="text-[#8B5CF6]">craftt</span>
             </a>
-            <p className="mt-3 text-sm text-zinc-500 leading-relaxed max-w-xs">
+            <p className="mt-3 text-sm text-zinc-400 leading-relaxed max-w-xs">
               AI-native software studio in Costa Rica. We build SaaS platforms, AI systems, and high-converting digital products for startups and businesses across the USA and Latin America.
             </p>
             <div className="mt-5 flex items-center gap-2.5">
@@ -67,11 +67,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500 mb-4">Services</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Services</h3>
             <ul className="space-y-2.5">
               {footerServices.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href} className="text-xs text-zinc-500 hover:text-zinc-200 transition-colors leading-snug block">
+                  <a href={s.href} className="text-xs text-zinc-400 hover:text-white transition-colors leading-snug block">
                     {s.label}
                   </a>
                 </li>
@@ -81,27 +81,27 @@ export default function Footer() {
 
           {/* Technologies */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500 mb-4">Technologies</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Technologies</h3>
             <ul className="space-y-2.5">
               {technologies.map((t) => (
-                <li key={t} className="text-xs text-zinc-500 leading-snug">{t}</li>
+                <li key={t} className="text-xs text-zinc-400 leading-snug">{t}</li>
               ))}
             </ul>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500 mb-4 mt-7">Industries</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4 mt-7">Industries</h3>
             <ul className="space-y-2.5">
               {industries.map((ind) => (
-                <li key={ind} className="text-xs text-zinc-500 leading-snug">{ind}</li>
+                <li key={ind} className="text-xs text-zinc-400 leading-snug">{ind}</li>
               ))}
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500 mb-4">Company</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Company</h3>
             <ul className="space-y-2.5 mb-7">
               {company.map(({ label, href }) => (
                 <li key={label}>
-                  <a href={href} className="text-xs text-zinc-500 hover:text-zinc-200 transition-colors block">
+                  <a href={href} className="text-xs text-zinc-400 hover:text-white transition-colors block">
                     {label}
                   </a>
                 </li>
@@ -111,19 +111,19 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500 mb-4">Contact</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Contact</h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="mailto:hello@codecraftt.com" className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-200 transition-colors">
+                <a href="mailto:hello@codecraftt.com" className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white transition-colors">
                   <Mail size={11} className="shrink-0" /> hello@codecraftt.com
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/50683442522" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-zinc-200 transition-colors">
+                <a href="https://wa.me/50683442522" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-400 hover:text-white transition-colors">
                   +506 8344 2522
                 </a>
               </li>
-              <li className="text-xs text-zinc-600 leading-relaxed pt-1">
+              <li className="text-xs text-zinc-400 leading-relaxed pt-1">
                 San José, Curridabat<br />Costa Rica
               </li>
             </ul>
@@ -132,10 +132,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-zinc-700">
+          <p className="text-xs text-zinc-500">
             &copy; {new Date().getFullYear()} CodeCraftt. All rights reserved.
           </p>
-          <p className="text-xs text-zinc-800">
+          <p className="text-xs text-zinc-600">
             SaaS Development · AI Systems · Mobile Apps · Nearshore Costa Rica
           </p>
         </div>

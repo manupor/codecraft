@@ -37,7 +37,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="pt-14 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-600"
+          className="pt-14 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500"
         >
           AI-Native Product Studio — Costa Rica
         </motion.p>
@@ -61,7 +61,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-              className="mt-7 text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-md"
+              className="mt-7 text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-md"
             >
               SaaS platforms, AI systems, mobile apps, and high-converting websites for startups across the <strong className="text-zinc-300 font-medium">USA and Latin America</strong>.
             </motion.p>
@@ -160,7 +160,7 @@ export default function Hero() {
                 transition={{ duration: 0.4, delay: 0.9 + i * 0.07 }}
               >
                 <p className="text-3xl sm:text-4xl font-bold text-white">{s.value}</p>
-                <p className="text-xs text-zinc-600 mt-1.5">{s.label}</p>
+                <p className="text-xs text-zinc-500 mt-1.5">{s.label}</p>
               </motion.div>
             ))}
           </div>

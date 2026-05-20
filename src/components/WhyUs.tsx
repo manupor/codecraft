@@ -57,7 +57,7 @@ export default function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
               viewport={{ once: true, margin: "-60px" }}
-              className="group relative p-9 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300"
+              className="group relative p-9 rounded-2xl bg-white/[0.03] border border-white/[0.1] hover:border-violet-500/40 hover:bg-white/[0.06] transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-5">
                 <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center group-hover:bg-violet-500/20 transition-colors">
@@ -66,7 +66,7 @@ export default function WhyUs() {
                 <span className="text-[11px] font-bold text-violet-400/80 bg-violet-500/10 px-2 py-1 rounded-lg">{r.stat}</span>
               </div>
               <h3 className="text-base font-semibold text-white mb-2">{r.title}</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">{r.description}</p>
+              <p className="text-sm text-zinc-300 leading-relaxed">{r.description}</p>
             </motion.div>
           ))}
         </div>

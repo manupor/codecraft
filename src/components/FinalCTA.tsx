@@ -25,7 +25,7 @@ export default function FinalCTA() {
             Let&apos;s build your<br />
             <span className="gradient-text">next product.</span>
           </h2>
-          <p className="mt-7 text-lg text-zinc-400 max-w-sm mx-auto leading-relaxed">
+          <p className="mt-7 text-lg text-zinc-300 max-w-sm mx-auto leading-relaxed">
             Tell us about your idea. We respond within 24 hours with a clear plan.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -45,7 +45,7 @@ export default function FinalCTA() {
               Chat on WhatsApp
             </a>
           </div>
-          <p className="mt-6 text-xs text-zinc-700">
+          <p className="mt-6 text-xs text-zinc-500">
             Trusted by startups and businesses in USA &amp; Latin America
           </p>
         </motion.div>
