@@ -67,6 +67,11 @@ export const metadata: Metadata = {
     creator: "@codecraftt",
   },
   alternates: { canonical: "https://www.codecraftt.com" },
+  icons: {
+    icon: "/codecraftt-logo.png",
+    shortcut: "/codecraftt-logo.png",
+    apple: "/codecraftt-logo.png",
+  },
 };
 
 const orgSchema = {
