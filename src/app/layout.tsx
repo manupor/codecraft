@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "https://www.codecraftt.com" },
   verification: {
-    google: "b610eca2b0be5da0",
+    google: "kIP48Fe7zzAh9a8Fn71-wRp333vS6HQoH2ALXvh0oGk",
   },
   icons: {
     icon: "/codecraftt-logo.png",
