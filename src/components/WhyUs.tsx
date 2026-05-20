@@ -1,56 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Rocket, Clock, Target, Code2 } from "lucide-react";
+import { ShieldCheck, Zap, Code2 } from "lucide-react";
 
 const reasons = [
   {
     icon: ShieldCheck,
-    stat: "5+ yrs",
-    title: "Senior Engineers Only",
+    stat: "Senior-only",
+    title: "No juniors. No outsourcing.",
     description:
-      "No juniors, no outsourcing chains. Every project is led by senior engineers with production experience across SaaS, AI, and mobile.",
+      "Every project is led by senior engineers with real production experience. You get the A-team from day one — not a bait-and-switch.",
   },
   {
     icon: Zap,
     stat: "3× faster",
-    title: "AI-Native Workflows",
+    title: "AI-native. Ship in weeks.",
     description:
-      "We use AI across the full dev cycle — architecture, testing, deployment — so you get to market significantly faster than traditional shops.",
-  },
-  {
-    icon: Rocket,
-    stat: "4–8 weeks",
-    title: "Startup Execution Speed",
-    description:
-      "We move like a startup. MVPs in 4–8 weeks, features shipped weekly, no bureaucracy. You get velocity without sacrificing quality.",
-  },
-  {
-    icon: Clock,
-    stat: "US TZ",
-    title: "Same Timezone. No Gaps.",
-    description:
-      "Based in Costa Rica, fully aligned with US timezones. Real-time collaboration, fast feedback loops, and no overnight delays.",
-  },
-  {
-    icon: Target,
-    stat: "Revenue-first",
-    title: "Business Outcomes First",
-    description:
-      "We measure success by your metrics — signups, conversion, MRR — not by code quality alone. Every decision ties back to business impact.",
+      "We use AI across the full cycle — architecture, testing, deployment. MVPs in 4–8 weeks with zero bureaucracy and weekly releases.",
   },
   {
     icon: Code2,
     stat: "100% yours",
-    title: "Full IP Ownership",
+    title: "You own everything.",
     description:
-      "You own 100% of the source code from day one. No lock-in, no dependency on us to keep things running. Your product, your IP.",
+      "Full source code ownership from day one. No lock-in, no dependency on us to keep things running. Your product, your IP, always.",
   },
 ];
 
 export default function WhyUs() {
   return (
-    <section id="about" className="relative py-24">
+    <section id="about" className="relative py-28">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.025] to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -68,12 +47,9 @@ export default function WhyUs() {
             Why teams choose{" "}
             <span className="gradient-text">CodeCraftt.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto">
-            We're not a body-shop or an outsourcing firm. We're a focused product studio that ships software engineered to grow your business.
-          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-6 mt-12">
           {reasons.map((r, i) => (
             <motion.div
               key={r.title}
@@ -81,7 +57,7 @@ export default function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
               viewport={{ once: true, margin: "-60px" }}
-              className="group relative p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300"
+              className="group relative p-9 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-5">
                 <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center group-hover:bg-violet-500/20 transition-colors">

@@ -2,11 +2,11 @@ import NavMenuWrapper from "@/components/NavMenuWrapper";
 import GlobalBackground from "@/components/GlobalBackground";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import BigStatement from "@/components/BigStatement";
 import WhyUs from "@/components/WhyUs";
-import Industries from "@/components/Industries";
 import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
-import ContactForm from "@/components/ContactForm";
+import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -17,11 +17,11 @@ export default function Home() {
         <NavMenuWrapper />
         <Hero />
         <Services />
+        <BigStatement />
         <WhyUs />
-        <Industries />
         <HowItWorks />
         <FAQ />
-        <ContactForm />
+        <FinalCTA />
         <Footer />
       </div>
     </main>

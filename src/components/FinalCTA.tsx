@@ -5,44 +5,49 @@ import { ArrowRight } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative py-32 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-600/[0.04] to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-violet-600/[0.06] blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#10B981]/20 via-[#059669]/10 to-black border border-[#10B981]/30 p-12 md:p-16 text-center"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_50%)]" />
-          
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Ready to build your next digital product?
-            </h2>
-            <p className="text-lg md:text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
-              Start with a landing page or develop a full platform.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#10B981] text-black font-bold text-base hover:bg-[#059669] transition-all duration-200 shadow-lg shadow-[#10B981]/20"
-              >
-                Start Your Project
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </a>
-              <a
-                href="mailto:hola@codecraftt.com"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-medium text-base hover:bg-white/5 hover:border-white/30 transition-all duration-200"
-              >
-                Book a Call
-              </a>
-            </div>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-600 mb-7">
+            Ready to build?
+          </p>
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
+            Let&apos;s build your<br />
+            <span className="gradient-text">next product.</span>
+          </h2>
+          <p className="mt-7 text-lg text-zinc-400 max-w-sm mx-auto leading-relaxed">
+            Tell us about your idea. We respond within 24 hours with a clear plan.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-bold hover:shadow-2xl hover:shadow-violet-500/30 transition-all duration-200"
+            >
+              Book a Discovery Call
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="https://wa.me/50683442522"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/[0.1] text-zinc-300 font-medium hover:bg-white/[0.04] hover:border-white/20 transition-all duration-200"
+            >
+              Chat on WhatsApp
+            </a>
           </div>
+          <p className="mt-6 text-xs text-zinc-700">
+            Trusted by startups and businesses in USA &amp; Latin America
+          </p>
         </motion.div>
       </div>
     </section>
