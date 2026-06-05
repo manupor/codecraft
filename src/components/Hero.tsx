@@ -20,7 +20,7 @@ export default function Hero() {
     <section
       id="home"
       aria-label="CodeCraftt — Web Design & Branding Studio"
-      className="relative min-h-screen flex flex-col overflow-hidden pt-24"
+      className="relative min-h-[100svh] flex flex-col overflow-hidden pt-24"
     >
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.15]" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">

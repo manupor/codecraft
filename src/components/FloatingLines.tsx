@@ -319,7 +319,7 @@ export default function FloatingLines({
       setWebglFailed(true);
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     container.appendChild(renderer.domElement);
@@ -445,6 +445,10 @@ export default function FloatingLines({
 
     let raf = 0;
     const renderLoop = () => {
+      if (typeof document !== 'undefined' && document.hidden) {
+        raf = requestAnimationFrame(renderLoop);
+        return;
+      }
       uniforms.iTime.value = clock.getElapsedTime();
 
       if (interactive) {
