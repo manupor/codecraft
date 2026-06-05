@@ -1,33 +1,13 @@
 "use client";
 
 import { Github, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
-
-const footerServices = [
-  { label: "Web Design & Development",   href: "#services" },
-  { label: "Brand Identity & Logo Design", href: "#services" },
-  { label: "Landing Pages & Conversion", href: "#services" },
-  { label: "E-commerce & Online Stores", href: "#services" },
-  { label: "Website Redesigns & Rebrands", href: "#services" },
-  { label: "UX/UI Design",               href: "#services" },
-  { label: "SEO & Performance",          href: "#services" },
-  { label: "Art Direction",             href: "#services" },
-];
-
-const industries = [
-  "Startups", "E-commerce", "Restaurants", "Real Estate",
-  "Professional Services", "Creators & Personal Brands", "Hospitality", "Local Business",
-];
-
-const company = [
-  { label: "About Us",       href: "#about" },
-  { label: "Our Process",    href: "#process" },
-  { label: "Services",       href: "#services" },
-  { label: "Industries",     href: "#industries" },
-  { label: "FAQ",            href: "#faq" },
-  { label: "Contact",        href: "#contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const footerServices = t.footer.services;
+  const industries = t.footer.industries;
+  const company = t.footer.company;
   return (
     <footer className="relative border-t border-white/[0.06] bg-[#020204]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -41,7 +21,7 @@ export default function Footer() {
               Code<span className="text-[#8B5CF6]">craftt</span>
             </a>
             <p className="mt-3 text-sm text-zinc-400 leading-relaxed max-w-xs">
-              Web design and branding studio in Costa Rica. We craft brands and build high-converting websites for startups and businesses across the USA and Latin America.
+              {t.footer.tagline}
             </p>
             <div className="mt-5 flex items-center gap-2.5">
               {[
@@ -56,18 +36,18 @@ export default function Footer() {
               ))}
             </div>
             <a href="#contact" className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white text-xs font-semibold hover:shadow-lg hover:shadow-violet-500/20 transition-all">
-              Start Your Project <ArrowRight size={11} />
+              {t.footer.cta} <ArrowRight size={11} />
             </a>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Services</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">{t.footer.servicesTitle}</h3>
             <ul className="space-y-2.5">
-              {footerServices.map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} className="text-xs text-zinc-400 hover:text-white transition-colors leading-snug block">
-                    {s.label}
+              {footerServices.map((label) => (
+                <li key={label}>
+                  <a href="#services" className="text-xs text-zinc-400 hover:text-white transition-colors leading-snug block">
+                    {label}
                   </a>
                 </li>
               ))}
@@ -76,7 +56,7 @@ export default function Footer() {
 
           {/* Industries */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Industries</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">{t.footer.industriesTitle}</h3>
             <ul className="space-y-2.5">
               {industries.map((ind) => (
                 <li key={ind} className="text-xs text-zinc-400 leading-snug">{ind}</li>
@@ -86,7 +66,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Company</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">{t.footer.companyTitle}</h3>
             <ul className="space-y-2.5 mb-7">
               {company.map(({ label, href }) => (
                 <li key={label}>
@@ -100,7 +80,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">Contact</h3>
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 mb-4">{t.footer.contactTitle}</h3>
             <ul className="space-y-2.5">
               <li>
                 <a href="mailto:hello@codecraftt.com" className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white transition-colors">
@@ -122,10 +102,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-zinc-500">
-            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CodeCraftt. All rights reserved.
+            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CodeCraftt. {t.footer.rights}
           </p>
           <p className="text-xs text-zinc-600">
-            Web Design · Branding · Logo Design · Costa Rica
+            {t.footer.bottomTagline}
           </p>
         </div>
       </div>

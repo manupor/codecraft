@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const techs = [
   {
@@ -88,13 +89,14 @@ const techs = [
 const duplicated = [...techs, ...techs];
 
 export default function TechMarquee() {
+  const { t } = useLanguage();
   return (
     <section aria-label="Technologies we work with" className="relative py-16 overflow-hidden border-y border-white/[0.05]">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
 
       <div className="mb-10 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
-          Technologies we work with
+          {t.techMarquee.title}
         </p>
       </div>
 

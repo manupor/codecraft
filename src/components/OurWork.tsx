@@ -51,7 +51,7 @@ const projects: Project[] = [
 ];
 
 export default function OurWork() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
   return (
     <section id="work" className="py-20 bg-gradient-to-b from-black to-zinc-950">
@@ -64,10 +64,10 @@ export default function OurWork() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            {t('work.title')}
+            {language === 'es' ? 'Nuestros Clientes' : 'Our Clients'}
           </h2>
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            {t('work.subtitle')}
+            {language === 'es' ? 'Confianza de empresas alrededor del mundo' : 'Trusted by companies around the world'}
           </p>
         </motion.div>
 
@@ -101,7 +101,7 @@ export default function OurWork() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-2xl">
                   <div className="bg-[#10B981] text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
                     <ExternalLink size={16} />
-                    {t('work.visit')}
+                    {language === 'es' ? 'Visitar Sitio' : 'Visit Site'}
                   </div>
                 </div>
               </div>

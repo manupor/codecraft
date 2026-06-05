@@ -2,32 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Palette, Zap, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const reasons = [
-  {
-    icon: Palette,
-    stat: "Design-led",
-    title: "Design that turns heads.",
-    description:
-      "Every project is led by senior designers. We craft brands and websites that look premium, feel intentional, and set you apart from the competition.",
-  },
-  {
-    icon: Zap,
-    stat: "2–4 weeks",
-    title: "Launch fast. Look polished.",
-    description:
-      "No endless revisions or agency bureaucracy. We move quickly with a clear process and ship a website you're proud of in weeks, not months.",
-  },
-  {
-    icon: TrendingUp,
-    stat: "Built to convert",
-    title: "Beautiful and built to sell.",
-    description:
-      "Pretty isn't enough. Every page is engineered for speed, SEO, and conversion — so your website doesn't just impress, it drives real results.",
-  },
-];
+const icons = [Palette, Zap, TrendingUp];
 
 export default function WhyUs() {
+  const { t } = useLanguage();
+  const reasons = t.whyUs.items.map((item, i) => ({ ...item, icon: icons[i] }));
   return (
     <section id="about" className="relative py-28">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.025] to-transparent" />
@@ -41,11 +22,11 @@ export default function WhyUs() {
           className="text-center mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400 mb-4">
-            Why CodeCraftt
+            {t.whyUs.eyebrow}
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
-            Why teams choose{" "}
-            <span className="gradient-text">CodeCraftt.</span>
+            {t.whyUs.headline}{" "}
+            <span className="gradient-text">{t.whyUs.headlineAccent}</span>
           </h2>
         </motion.div>
 

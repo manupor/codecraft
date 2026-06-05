@@ -2,20 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const stats = [
-  { value: "150+", label: "Sites & Brands Shipped" },
-  { value: "7+",   label: "Years Designing" },
-  { value: "2–4wk", label: "Average Launch Time" },
-  { value: "100%", label: "Custom, Never Templates" },
-];
-
-const marquee = [
-  "Web Design", "Brand Identity", "Logo Design", "Landing Pages",
-  "E-commerce", "Webflow & Next.js", "Art Direction", "UX/UI Design",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+  const stats = t.hero.stats;
+  const marquee = t.hero.marquee;
   return (
     <section
       id="home"
@@ -38,7 +30,7 @@ export default function Hero() {
             transition={{ duration: 0.7 }}
             className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500"
           >
-            Web Design & Branding Studio — Costa Rica
+            {t.hero.label}
           </motion.p>
 
           <motion.h1
@@ -47,8 +39,8 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.08, ease: "easeOut" }}
             className="mt-8 text-[clamp(3rem,7vw,6rem)] font-bold tracking-tight leading-[1.0]"
           >
-            Brands & websites<br />
-            <span className="gradient-text">that sell.</span>
+            {t.hero.headline}<br />
+            <span className="gradient-text">{t.hero.headlineAccent}</span>
           </motion.h1>
 
           <motion.p
@@ -57,7 +49,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="mt-7 text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-2xl"
           >
-We design brands and build high-converting websites that make ambitious companies look unforgettable — for clients across the <strong className="text-zinc-300 font-medium">USA and Latin America</strong>.
+{t.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -70,14 +62,14 @@ We design brands and build high-converting websites that make ambitious companie
               href="#contact"
               className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-200"
             >
-              Start Your Project
+              {t.hero.cta1}
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#services"
               className="inline-flex items-center px-8 py-4 rounded-full border border-white/[0.1] text-zinc-300 font-medium hover:bg-white/[0.04] hover:border-white/20 transition-all duration-200"
             >
-              See What We Do
+              {t.hero.cta2}
             </a>
           </motion.div>
         </div>

@@ -2,17 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import StaggeredMenu from './StaggeredMenu';
-
-const menuItems = [
-  { label: 'Home', ariaLabel: 'Go to home', link: '#' },
-  { label: 'About', ariaLabel: 'Learn about us', link: '#about' },
-  { label: 'Services', ariaLabel: 'View our services', link: '#services' },
-  { label: 'Authority', ariaLabel: 'See our track record', link: '#authority' },
-  { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' },
-];
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function NavMenuWrapper() {
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
+
+  const menuItems = [
+    { label: t.nav.home, ariaLabel: t.nav.home, link: '#home' },
+    { label: t.nav.about, ariaLabel: t.nav.about, link: '#about' },
+    { label: t.nav.services, ariaLabel: t.nav.services, link: '#services' },
+    { label: t.nav.process, ariaLabel: t.nav.process, link: '#process' },
+    { label: t.nav.contact, ariaLabel: t.nav.contact, link: '#contact' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -22,6 +25,7 @@ export default function NavMenuWrapper() {
 
   return (
     <>
+      <LanguageToggle />
       <div 
         className="fixed top-0 left-0 right-0 h-24 bg-black/80 backdrop-blur-xl border-b border-white/5 z-30 transition-opacity duration-300"
         style={{ opacity: scrolled ? 1 : 0 }}

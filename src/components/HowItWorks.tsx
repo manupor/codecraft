@@ -1,47 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const steps = [
-  {
-    num: "01",
-    title: "Discovery Call",
-    description:
-      "We spend 30–60 minutes understanding your business, your audience, and your goals. No templates — every brand and website starts with your story.",
-  },
-  {
-    num: "02",
-    title: "Brand & Strategy",
-    description:
-      "We define your positioning, visual direction, and content strategy. You get a clear creative direction and proposal before any design begins.",
-  },
-  {
-    num: "03",
-    title: "Design & Identity",
-    description:
-      "Logo, color, typography, and full website mockups. We craft a cohesive brand and an interactive design you can review and refine with us.",
-  },
-  {
-    num: "04",
-    title: "Build & Develop",
-    description:
-      "We bring the design to life — pixel-perfect, responsive, and fast. You see live previews every few days, not just reports.",
-  },
-  {
-    num: "05",
-    title: "Polish & QA",
-    description:
-      "Cross-device testing, performance audits, SEO setup, and accessibility checks. We don't launch until every detail is right.",
-  },
-  {
-    num: "06",
-    title: "Launch & Support",
-    description:
-      "We deploy your site, hand over everything, and include a 30-day support window. Need ongoing updates? We offer care plans to keep you growing.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HowItWorks() {
+  const { t } = useLanguage();
+  const steps = t.howItWorks.steps;
   return (
     <section id="process" className="relative py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -53,14 +17,14 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400 mb-4">
-            Process
+            {t.howItWorks.eyebrow}
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
-            From first call to{" "}
-            <span className="gradient-text">launch day.</span>
+            {t.howItWorks.headline}{" "}
+            <span className="gradient-text">{t.howItWorks.headlineAccent}</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-300 max-w-xl mx-auto">
-            A clear, collaborative process that takes the stress out of building your brand and website.
+            {t.howItWorks.subtitle}
           </p>
         </motion.div>
 

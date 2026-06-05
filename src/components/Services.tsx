@@ -2,35 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Globe, Sparkles, Zap, ShoppingBag } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const services = [
-  {
-    icon: Globe,
-    title: "Web Design & Development",
-    description: "Custom websites designed to impress and engineered to perform — fast, responsive, and built to make your brand look world-class.",
-    tag: "Most Requested",
-  },
-  {
-    icon: Sparkles,
-    title: "Brand Identity & Logo Design",
-    description: "Logos, color systems, typography, and brand guidelines that give your company a distinct, memorable, and premium presence.",
-    tag: "Branding",
-  },
-  {
-    icon: Zap,
-    title: "Landing Pages & Conversion",
-    description: "High-converting, SEO-ready pages with Core Web Vitals 90+. Designed to turn visitors into leads and customers.",
-    tag: "High-Converting",
-  },
-  {
-    icon: ShoppingBag,
-    title: "E-commerce & Online Stores",
-    description: "Beautiful, conversion-focused online stores on Shopify or custom builds — ready to sell from day one.",
-    tag: "Sell More",
-  },
-];
+const icons = [Globe, Sparkles, Zap, ShoppingBag];
 
 export default function Services() {
+  const { t } = useLanguage();
+  const services = t.services.items.map((item, i) => ({ ...item, icon: icons[i] }));
   return (
     <section id="services" aria-label="Web Design and Branding Services" className="relative py-28 bg-[#04060E]/50">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/[0.015] to-transparent pointer-events-none" />
@@ -44,11 +22,11 @@ export default function Services() {
           className="mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-indigo-400 mb-5">
-            What we build
+            {t.services.eyebrow}
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight max-w-xl">
-            Design, brand, and<br />
-            <span className="gradient-text">launch.</span>
+            {t.services.headline}<br />
+            <span className="gradient-text">{t.services.headlineAccent}</span>
           </h2>
         </motion.div>
 
@@ -84,9 +62,9 @@ export default function Services() {
           className="mt-10 flex items-center gap-4"
         >
           <a href="#contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-semibold text-sm hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-200">
-            Start Your Project →
+            {t.services.cta}
           </a>
-          <span className="text-xs text-zinc-400">Also: rebrands, web apps, social media kits</span>
+          <span className="text-xs text-zinc-400">{t.services.also}</span>
         </motion.div>
       </div>
     </section>

@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BigStatement() {
+  const { t } = useLanguage();
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/[0.025] to-transparent" />
@@ -20,20 +22,20 @@ export default function BigStatement() {
             viewport={{ once: true, margin: "-80px" }}
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
-              From blank page<br />
-              <span className="gradient-text">to a brand</span><br />
-              that sells.
+              {t.bigStatement.headline1}<br />
+              <span className="gradient-text">{t.bigStatement.headlineAccent}</span><br />
+              {t.bigStatement.headline2}
             </h2>
 
             <p className="mt-7 text-xl text-zinc-300 leading-relaxed max-w-md">
-              We handle strategy, design, copy, and development — so your brand looks premium and your website converts.
+              {t.bigStatement.paragraph}
             </p>
 
             <a
               href="#contact"
               className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/[0.12] text-zinc-300 font-medium text-sm hover:bg-white/[0.05] hover:border-white/25 transition-all duration-200"
             >
-              Let&apos;s build your brand
+              {t.bigStatement.cta}
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>
