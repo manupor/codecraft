@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-zinc-500">
-            &copy; {new Date().getFullYear()} CodeCraftt. All rights reserved.
+            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CodeCraftt. All rights reserved.
           </p>
           <p className="text-xs text-zinc-600">
             SaaS Development · AI Systems · Mobile Apps · Nearshore Costa Rica
