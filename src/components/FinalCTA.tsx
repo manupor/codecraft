@@ -19,21 +19,21 @@ export default function FinalCTA() {
           viewport={{ once: true, margin: "-80px" }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-600 mb-7">
-            Ready to build?
+            Ready to stand out?
           </p>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
-            Let&apos;s build your<br />
-            <span className="gradient-text">next product.</span>
+            Let&apos;s build a brand<br />
+            <span className="gradient-text">people remember.</span>
           </h2>
           <p className="mt-7 text-lg text-zinc-300 max-w-sm mx-auto leading-relaxed">
-            Tell us about your idea. We respond within 24 hours with a clear plan.
+            Tell us about your project. We respond within 24 hours with a clear plan and quote.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="#contact"
               className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-bold hover:shadow-2xl hover:shadow-violet-500/30 transition-all duration-200"
             >
-              Book a Discovery Call
+              Start Your Project
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
@@ -46,7 +46,7 @@ export default function FinalCTA() {
             </a>
           </div>
           <p className="mt-6 text-xs text-zinc-500">
-            Trusted by startups and businesses in USA &amp; Latin America
+            Trusted by founders and businesses across the USA &amp; Latin America
           </p>
         </motion.div>
       </div>

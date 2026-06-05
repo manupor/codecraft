@@ -20,20 +20,20 @@ export default function BigStatement() {
             viewport={{ once: true, margin: "-80px" }}
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
-              From idea to<br />
-              <span className="gradient-text">live product.</span><br />
-              In weeks.
+              From blank page<br />
+              <span className="gradient-text">to a brand</span><br />
+              that sells.
             </h2>
 
             <p className="mt-7 text-xl text-zinc-300 leading-relaxed max-w-md">
-              We handle architecture, design, engineering, and launch — so you focus on growth.
+              We handle strategy, design, copy, and development — so your brand looks premium and your website converts.
             </p>
 
             <a
               href="#contact"
               className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/[0.12] text-zinc-300 font-medium text-sm hover:bg-white/[0.05] hover:border-white/25 transition-all duration-200"
             >
-              Let&apos;s build it
+              Let&apos;s build your brand
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>

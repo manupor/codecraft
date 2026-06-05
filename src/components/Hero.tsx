@@ -4,22 +4,22 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const stats = [
-  { value: "120+", label: "Products Delivered" },
-  { value: "5+",   label: "Years Engineering" },
-  { value: "4–8wk", label: "Time to Launch" },
-  { value: "3",    label: "Countries" },
+  { value: "150+", label: "Sites & Brands Shipped" },
+  { value: "7+",   label: "Years Designing" },
+  { value: "2–4wk", label: "Average Launch Time" },
+  { value: "100%", label: "Custom, Never Templates" },
 ];
 
 const marquee = [
-  "SaaS Platforms", "AI Systems", "Mobile Apps", "Web Applications",
-  "Landing Pages", "API Integrations", "Cloud Infrastructure", "UX/UI Design",
+  "Web Design", "Brand Identity", "Logo Design", "Landing Pages",
+  "E-commerce", "Webflow & Next.js", "Art Direction", "UX/UI Design",
 ];
 
 export default function Hero() {
   return (
     <section
       id="home"
-      aria-label="CodeCraftt — AI-Native Software Studio"
+      aria-label="CodeCraftt — Web Design & Branding Studio"
       className="relative min-h-screen flex flex-col overflow-hidden pt-24"
     >
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.15]" />
@@ -38,7 +38,7 @@ export default function Hero() {
             transition={{ duration: 0.7 }}
             className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500"
           >
-            AI-Native Product Studio — Costa Rica
+            Web Design & Branding Studio — Costa Rica
           </motion.p>
 
           <motion.h1
@@ -47,8 +47,8 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.08, ease: "easeOut" }}
             className="mt-8 text-[clamp(3rem,7vw,6rem)] font-bold tracking-tight leading-[1.0]"
           >
-            We build software<br />
-            <span className="gradient-text">that scales.</span>
+            Brands & websites<br />
+            <span className="gradient-text">that sell.</span>
           </motion.h1>
 
           <motion.p
@@ -57,7 +57,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="mt-7 text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-2xl"
           >
-            SaaS platforms, AI systems, mobile apps, and high-converting websites for startups across the <strong className="text-zinc-300 font-medium">USA and Latin America</strong>.
+We design brands and build high-converting websites that make ambitious companies look unforgettable — for clients across the <strong className="text-zinc-300 font-medium">USA and Latin America</strong>.
           </motion.p>
 
           <motion.div
@@ -70,14 +70,14 @@ export default function Hero() {
               href="#contact"
               className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#10B981] to-[#059669] text-black font-bold hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-200"
             >
-              Book a Discovery Call
+              Start Your Project
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#services"
               className="inline-flex items-center px-8 py-4 rounded-full border border-white/[0.1] text-zinc-300 font-medium hover:bg-white/[0.04] hover:border-white/20 transition-all duration-200"
             >
-              Our Services
+              See What We Do
             </a>
           </motion.div>
         </div>

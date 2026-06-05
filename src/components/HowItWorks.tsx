@@ -7,37 +7,37 @@ const steps = [
     num: "01",
     title: "Discovery Call",
     description:
-      "We spend 30–60 minutes understanding your business, goals, and technical requirements. No templates — every conversation is tailored to your context.",
+      "We spend 30–60 minutes understanding your business, your audience, and your goals. No templates — every brand and website starts with your story.",
   },
   {
     num: "02",
-    title: "Strategy & Scope",
+    title: "Brand & Strategy",
     description:
-      "We define architecture, tech stack, MVP scope, and timeline. You get a clear proposal with milestones, costs, and deliverables — before we write a line of code.",
+      "We define your positioning, visual direction, and content strategy. You get a clear creative direction and proposal before any design begins.",
   },
   {
     num: "03",
-    title: "Design & Prototype",
+    title: "Design & Identity",
     description:
-      "Wireframes, UI components, and an interactive prototype you can test. We validate UX decisions early so development is fast and on-target.",
+      "Logo, color, typography, and full website mockups. We craft a cohesive brand and an interactive design you can review and refine with us.",
   },
   {
     num: "04",
-    title: "Development",
+    title: "Build & Develop",
     description:
-      "Sprints of 1–2 weeks with continuous delivery. You see real progress in Vercel previews every week — not just reports. Code reviews and documentation included.",
+      "We bring the design to life — pixel-perfect, responsive, and fast. You see live previews every few days, not just reports.",
   },
   {
     num: "05",
-    title: "QA & Testing",
+    title: "Polish & QA",
     description:
-      "Automated tests, cross-browser QA, performance audits, and accessibility checks. We don't ship until it's production-ready — and we put that in writing.",
+      "Cross-device testing, performance audits, SEO setup, and accessibility checks. We don't launch until every detail is right.",
   },
   {
     num: "06",
-    title: "Launch & Scale",
+    title: "Launch & Support",
     description:
-      "Deployment to your cloud environment, monitoring setup, and a 30-day post-launch support window. After that, we offer retainer plans for continuous growth.",
+      "We deploy your site, hand over everything, and include a 30-day support window. Need ongoing updates? We offer care plans to keep you growing.",
   },
 ];
 
@@ -56,11 +56,11 @@ export default function HowItWorks() {
             Process
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
-            How we go from{" "}
-            <span className="gradient-text">idea to launch.</span>
+            From first call to{" "}
+            <span className="gradient-text">launch day.</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-zinc-300 max-w-xl mx-auto">
-            A transparent, predictable process designed to reduce risk and maximize output.
+            A clear, collaborative process that takes the stress out of building your brand and website.
           </p>
         </motion.div>
 

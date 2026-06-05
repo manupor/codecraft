@@ -1,29 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Code2 } from "lucide-react";
+import { Palette, Zap, TrendingUp } from "lucide-react";
 
 const reasons = [
   {
-    icon: ShieldCheck,
-    stat: "Senior-only",
-    title: "No juniors. No outsourcing.",
+    icon: Palette,
+    stat: "Design-led",
+    title: "Design that turns heads.",
     description:
-      "Every project is led by senior engineers with real production experience. You get the A-team from day one — not a bait-and-switch.",
+      "Every project is led by senior designers. We craft brands and websites that look premium, feel intentional, and set you apart from the competition.",
   },
   {
     icon: Zap,
-    stat: "3× faster",
-    title: "AI-native. Ship in weeks.",
+    stat: "2–4 weeks",
+    title: "Launch fast. Look polished.",
     description:
-      "We use AI across the full cycle — architecture, testing, deployment. MVPs in 4–8 weeks with zero bureaucracy and weekly releases.",
+      "No endless revisions or agency bureaucracy. We move quickly with a clear process and ship a website you're proud of in weeks, not months.",
   },
   {
-    icon: Code2,
-    stat: "100% yours",
-    title: "You own everything.",
+    icon: TrendingUp,
+    stat: "Built to convert",
+    title: "Beautiful and built to sell.",
     description:
-      "Full source code ownership from day one. No lock-in, no dependency on us to keep things running. Your product, your IP, always.",
+      "Pretty isn't enough. Every page is engineered for speed, SEO, and conversion — so your website doesn't just impress, it drives real results.",
   },
 ];
 

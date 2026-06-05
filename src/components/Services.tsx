@@ -1,38 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Brain, Zap, Rocket } from "lucide-react";
+import { Globe, Sparkles, Zap, ShoppingBag } from "lucide-react";
 
 const services = [
   {
     icon: Globe,
-    title: "SaaS Platform Development",
-    description: "Full-stack SaaS products — auth, billing, dashboards, and multi-tenant architecture built to scale.",
+    title: "Web Design & Development",
+    description: "Custom websites designed to impress and engineered to perform — fast, responsive, and built to make your brand look world-class.",
     tag: "Most Requested",
   },
   {
-    icon: Brain,
-    title: "AI Systems & Automation",
-    description: "LLM integrations, AI pipelines, and intelligent workflows that make your product dramatically smarter.",
-    tag: "AI-Native",
+    icon: Sparkles,
+    title: "Brand Identity & Logo Design",
+    description: "Logos, color systems, typography, and brand guidelines that give your company a distinct, memorable, and premium presence.",
+    tag: "Branding",
   },
   {
     icon: Zap,
-    title: "Landing Pages & Websites",
-    description: "Conversion-optimized, SEO-ready, Core Web Vitals 90+. Pages that rank and turn visitors into revenue.",
+    title: "Landing Pages & Conversion",
+    description: "High-converting, SEO-ready pages with Core Web Vitals 90+. Designed to turn visitors into leads and customers.",
     tag: "High-Converting",
   },
   {
-    icon: Rocket,
-    title: "Startup MVP Development",
-    description: "From idea to live product in 4–8 weeks. Lean, focused, and investor-ready from day one.",
-    tag: "Ship Fast",
+    icon: ShoppingBag,
+    title: "E-commerce & Online Stores",
+    description: "Beautiful, conversion-focused online stores on Shopify or custom builds — ready to sell from day one.",
+    tag: "Sell More",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" aria-label="Software Development Services" className="relative py-28 bg-[#04060E]/50">
+    <section id="services" aria-label="Web Design and Branding Services" className="relative py-28 bg-[#04060E]/50">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/[0.015] to-transparent pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -47,8 +47,8 @@ export default function Services() {
             What we build
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight max-w-xl">
-            The full stack,<br />
-            <span className="gradient-text">end to end.</span>
+            Design, brand, and<br />
+            <span className="gradient-text">launch.</span>
           </h2>
         </motion.div>
 
@@ -84,9 +84,9 @@ export default function Services() {
           className="mt-10 flex items-center gap-4"
         >
           <a href="#contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white font-semibold text-sm hover:shadow-xl hover:shadow-violet-500/20 transition-all duration-200">
-            Book a Discovery Call →
+            Start Your Project →
           </a>
-          <span className="text-xs text-zinc-400">Also: Mobile apps, custom APIs, UX/UI design</span>
+          <span className="text-xs text-zinc-400">Also: rebrands, web apps, social media kits</span>
         </motion.div>
       </div>
     </section>

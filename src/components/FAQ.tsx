@@ -6,36 +6,36 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "Where is CodeCraftt located?",
-    a: "We're based in San José, Curridabat, Costa Rica. We operate fully remotely and serve clients across the United States, Mexico, and Latin America. Our team works in EST/CST-compatible time zones, making collaboration seamless for North American companies.",
+    q: "What does CodeCraftt actually do?",
+    a: "We're a web design and branding studio. We create brand identities — logos, color systems, typography — and design and build custom websites that look premium and convert visitors into customers. From a brand refresh to a full website launch, we cover it end to end.",
+  },
+  {
+    q: "Do you only design, or do you build the website too?",
+    a: "Both. We're a full-service studio — we handle the strategy, brand identity, copywriting, design, and development. You get a finished, live website without needing to hire a separate developer or agency.",
+  },
+  {
+    q: "How long does a website or branding project take?",
+    a: "Most websites launch in 2–4 weeks. A standalone logo or brand identity takes about 1–2 weeks. Larger projects with e-commerce or custom features take a bit longer. We always give you a clear timeline before we start.",
   },
   {
     q: "Do you work with companies in the United States?",
-    a: "Yes — most of our clients are US-based startups and companies looking for high-quality nearshore development. We communicate in English, follow US business standards, and deliver at a cost-effective rate without sacrificing quality.",
+    a: "Yes — many of our clients are US-based. We communicate in English, work in US-compatible time zones from Costa Rica, and deliver world-class design at a more cost-effective rate than US agencies.",
   },
   {
-    q: "What is nearshore software development?",
-    a: "Nearshore development means hiring a development team in a neighboring country with overlapping time zones, similar culture, and lower rates than onshore teams. For US companies, Costa Rica is a top nearshore destination — close, English-fluent, and technically excellent.",
+    q: "Will my website be easy for me to update?",
+    a: "Absolutely. We build on platforms like Webflow, Shopify, or modern CMS setups so you can edit content yourself. We also include a handover walkthrough and offer care plans if you'd rather we handle updates for you.",
   },
   {
-    q: "How long does it take to build a SaaS platform?",
-    a: "Most MVPs take 6–12 weeks depending on complexity. A simple SaaS with auth, dashboard, and billing can launch in 6 weeks. More complex platforms with AI features, integrations, and custom infrastructure take 10–16 weeks. We always provide a clear timeline before starting.",
-  },
-  {
-    q: "What technologies does CodeCraftt use?",
-    a: "We primarily build with Next.js, React, Node.js, TypeScript, and PostgreSQL. For mobile, we use React Native and Flutter. For AI, we integrate OpenAI, Anthropic, and custom ML models. Infrastructure runs on AWS, Vercel, and GCP. We choose tools based on your product needs, not trends.",
-  },
-  {
-    q: "Can you integrate AI features into my existing product?",
-    a: "Absolutely. We can add AI chat interfaces, intelligent automation, document analysis, recommendation engines, and GPT-powered workflows to your existing app. We start with an audit of your current stack and propose the highest-ROI AI integrations.",
+    q: "Can you redesign my existing website or brand?",
+    a: "Yes. Rebrands and website redesigns are some of our most requested projects. We audit your current presence, identify what's holding you back, and rebuild it into something modern, cohesive, and high-converting.",
   },
   {
     q: "Do you offer fixed-price projects?",
-    a: "Yes. For well-defined scopes, we offer fixed-price contracts with clear milestones and deliverables. For evolving products or startups who need flexibility, we also work on a monthly retainer. We'll recommend the right model after our discovery call.",
+    a: "Yes. For well-defined scopes — like a website or brand package — we offer fixed prices with clear deliverables. For ongoing needs we also offer monthly care plans. We'll recommend the right fit after our discovery call.",
   },
   {
-    q: "What is your minimum project budget?",
-    a: "Our landing page and website projects start at $1,500 USD. SaaS platforms and mobile apps typically start at $8,000 USD. AI integrations vary by scope. We're transparent about pricing from day one — no surprises.",
+    q: "What does a project cost?",
+    a: "Logo and brand identity projects start around $800 USD. Custom websites typically start at $1,500 USD, and full brand + website packages scale from there. We're transparent about pricing from day one — no surprises.",
   },
 ];
 

@@ -3,19 +3,19 @@
 import { Github, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
 
 const footerServices = [
-  { label: "SaaS Platform Development",  href: "#services" },
-  { label: "AI Systems & Integrations",   href: "#services" },
-  { label: "Mobile App Development",      href: "#services" },
-  { label: "Landing Pages & Websites",    href: "#services" },
-  { label: "Custom Web Applications",     href: "#services" },
-  { label: "Backend & API Development",   href: "#services" },
+  { label: "Web Design & Development",   href: "#services" },
+  { label: "Brand Identity & Logo Design", href: "#services" },
+  { label: "Landing Pages & Conversion", href: "#services" },
+  { label: "E-commerce & Online Stores", href: "#services" },
+  { label: "Website Redesigns & Rebrands", href: "#services" },
   { label: "UX/UI Design",               href: "#services" },
-  { label: "Startup MVP Development",     href: "#services" },
+  { label: "SEO & Performance",          href: "#services" },
+  { label: "Art Direction",             href: "#services" },
 ];
 
 const industries = [
-  "SaaS & Software", "AI Startups", "E-commerce", "FinTech",
-  "Healthcare Tech", "Real Estate", "EdTech", "Logistics",
+  "Startups", "E-commerce", "Restaurants", "Real Estate",
+  "Professional Services", "Creators & Personal Brands", "Hospitality", "Local Business",
 ];
 
 const company = [
@@ -41,7 +41,7 @@ export default function Footer() {
               Code<span className="text-[#8B5CF6]">craftt</span>
             </a>
             <p className="mt-3 text-sm text-zinc-400 leading-relaxed max-w-xs">
-              AI-native software studio in Costa Rica. We build SaaS platforms, AI systems, and high-converting digital products for startups and businesses across the USA and Latin America.
+              Web design and branding studio in Costa Rica. We craft brands and build high-converting websites for startups and businesses across the USA and Latin America.
             </p>
             <div className="mt-5 flex items-center gap-2.5">
               {[
@@ -56,7 +56,7 @@ export default function Footer() {
               ))}
             </div>
             <a href="#contact" className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white text-xs font-semibold hover:shadow-lg hover:shadow-violet-500/20 transition-all">
-              Book a Discovery Call <ArrowRight size={11} />
+              Start Your Project <ArrowRight size={11} />
             </a>
           </div>
 
@@ -125,7 +125,7 @@ export default function Footer() {
             &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> CodeCraftt. All rights reserved.
           </p>
           <p className="text-xs text-zinc-600">
-            SaaS Development · AI Systems · Mobile Apps · Nearshore Costa Rica
+            Web Design · Branding · Logo Design · Costa Rica
           </p>
         </div>
       </div>
