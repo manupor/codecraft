@@ -15,7 +15,7 @@ const Service = () => {
     <Wrapper>
       <div className="boxed_wrapper">
         <HeaderFive />
-        <Breacrumb title="Digital Agency Services" subtitle="Our Services" />
+        <Breacrumb title="Nuestros Servicios" subtitle="Servicios" />
         <ServiceHomeFour />
         <ProcessHomeFour />
         <TestimonialHomeFour />

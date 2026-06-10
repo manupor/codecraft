@@ -8,36 +8,36 @@ const ProcessHomeFour = () => {
         <div className="pattern-2" style={{ backgroundImage: `url(/assets/images/shape/shape-10.png)` }}></div>
         <div className="container">
           <div className="main-title">
-            <h3>Brand Process</h3>
-            <h2>We Find a Unique Easy Steps To Get <br />Your <span className="gradient-color">Solution Our Solution</span></h2>
+            <h3>Nuestro Proceso</h3>
+            <h2>Pasos simples para llevar <br />tu idea a una <span className="gradient-color">marca exitosa</span></h2>
           </div>
           <div className="row">
             <div className="col-lg-3 col-md-6 col-sm-12 block-column">
               <div className="process-block-one">
                 <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-8.png)` }}></div>
                 <div className="icon-box"><i className="icon-7"></i></div>
-                <h3>Comprehensive Marketing Campaigns.</h3>
+                <h3>Descubrimiento y Estrategia</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 block-column">
               <div className="process-block-one">
                 <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-8.png)` }}></div>
                 <div className="icon-box"><i className="icon-8"></i></div>
-                <h3>Innovative Strategies & Solution</h3>
+                <h3>Diseño y Desarrollo</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 block-column">
               <div className="process-block-one">
                 <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-8.png)` }}></div>
                 <div className="icon-box"><i className="icon-9"></i></div>
-                <h3>Dara-Driven Decision Making.</h3>
+                <h3>Revisión y Ajustes</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 block-column">
               <div className="process-block-one">
                 <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-8.png)` }}></div>
                 <div className="icon-box"><i className="icon-10"></i></div>
-                <h3>Targeted audience Engagement</h3>
+                <h3>Lanzamiento y Soporte</h3>
               </div>
             </div>
           </div>

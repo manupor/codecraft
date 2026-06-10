@@ -3,7 +3,29 @@ import "swiper/css/bundle";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
- 
+const testimonials = [
+  {
+    quote: "Manu y su equipo transformaron completamente la imagen de nuestra empresa. El sitio web que crearon es increíblemente rápido y nuestra tasa de conversión aumentó un 40% en el primer mes.",
+    name: "Carlos Jiménez",
+    role: "CEO, TechStart CR",
+  },
+  {
+    quote: "Trabajar con CodeCraftt fue una experiencia excepcional. Entendieron nuestra visión desde el primer día y la llevaron a otro nivel. Nuestra marca ahora se siente profesional y auténtica.",
+    name: "Andrea Mora",
+    role: "Fundadora, Studio Bloom",
+  },
+  {
+    quote: "El nivel de detalle y dedicación que Manu pone en cada proyecto es impresionante. Logramos lanzar nuestra plataforma en tiempo récord y con una calidad que superó nuestras expectativas.",
+    name: "Diego Solano",
+    role: "Co-founder, Nuvelo App",
+  },
+  {
+    quote: "No solo construyeron nuestro sitio web, sino que nos ayudaron a definir toda nuestra estrategia de marca. El retorno de inversión ha sido extraordinario desde el lanzamiento.",
+    name: "Valentina Herrera",
+    role: "Directora de Marketing, Innova Group",
+  },
+];
+
 const TestimonialHomeFour = () => {
   return (
     <>
@@ -13,10 +35,10 @@ const TestimonialHomeFour = () => {
         <div className="container">
           <div className="title-box">
             <div className="main-title">
-              <h3>Our Client Feedback</h3>
-              <h2>Our Testimonial <br /><span className="gradient-color">Project</span></h2>
+              <h3>Lo Que Dicen Nuestros Clientes</h3>
+              <h2>Testimonios <br /><span className="gradient-color">Reales</span></h2>
             </div>
-            <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio possimus.</p>
+            <p>Cada proyecto es una historia de éxito. Estas son las palabras de quienes confiaron en CodeCraftt para transformar su marca y negocio.</p>
           </div>
           <div className="inner-container">
             <Swiper
@@ -35,88 +57,45 @@ const TestimonialHomeFour = () => {
               }}
               modules={[Autoplay, Navigation]}
               breakpoints={{
-                1920: {
-                  slidesPerView: 2,
-                  spaceBetween: 30
-                },
-                1400: {
-                  slidesPerView: 2,
-                  spaceBetween: 30
-                },
-                900: {
-                  slidesPerView: 2,
-                  spaceBetween: 30
-                },
-                700: {
-                  slidesPerView: 1,
-                  spaceBetween: 30
-                },
-                0: {
-                  slidesPerView: 1,
-                  spaceBetween: 30
-                }
+                1920: { slidesPerView: 2, spaceBetween: 30 },
+                1400: { slidesPerView: 2, spaceBetween: 30 },
+                900:  { slidesPerView: 2, spaceBetween: 30 },
+                700:  { slidesPerView: 1, spaceBetween: 30 },
+                0:    { slidesPerView: 1, spaceBetween: 30 },
               }}
               className="testimonial-block-slide">
-              <SwiperSlide className="swiper-slide">
-                <div className="testimonial-block-one">
-                  <div className="block-shape" style={{ backgroundImage: `url(/assets/images/shape/shape-12.png)` }}></div>
-                  <div className="block-shape-overlay" style={{ backgroundImage: `url(/assets/images/shape/shape-13.png)` }}></div>
-                  <div className="clients-image"><img src="assets/images/resource/clients-4.png" alt="" /></div>
-                  <p>"I can't say enough about it. Thanks for the great service. It's the perfect solution for our business. You've saved our business!"</p>
-                  <div className="clients-box">
-                    <figure className="image-box"><img src="assets/images/resource/clients-6.png" alt="" /></figure>
-                    <div className="inner">
-                      <h5>Sam Milia</h5>
-                      <span className="designation">Founder & CEO</span>
+              {testimonials.map((t, i) => (
+                <SwiperSlide key={i} className="swiper-slide">
+                  <div className="testimonial-block-one">
+                    <div className="block-shape" style={{ backgroundImage: `url(/assets/images/shape/shape-12.png)` }}></div>
+                    <div className="block-shape-overlay" style={{ backgroundImage: `url(/assets/images/shape/shape-13.png)` }}></div>
+                    <p>"{t.quote}"</p>
+                    <div className="clients-box">
+                      <div
+                        style={{
+                          width: '50px',
+                          height: '50px',
+                          borderRadius: '50%',
+                          background: 'linear-gradient(135deg, #6c63ff, #e040fb)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '20px',
+                          fontWeight: 700,
+                          color: '#fff',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {t.name.charAt(0)}
+                      </div>
+                      <div className="inner">
+                        <h5>{t.name}</h5>
+                        <span className="designation">{t.role}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="testimonial-block-one">
-                  <div className="block-shape" style={{ backgroundImage: `url(/assets/images/shape/shape-12.png)` }}></div>
-                  <div className="block-shape-overlay" style={{ backgroundImage: `url(/assets/images/shape/shape-13.png)` }}></div>
-                  <div className="clients-image"><img src="assets/images/resource/clients-5.png" alt="" /></div>
-                  <p>"I can't say enough about it. Thanks for the great service. It's the perfect solution for our business. You've saved our business!"</p>
-                  <div className="clients-box">
-                    <figure className="image-box"><img src="assets/images/resource/clients-7.png" alt="" /></figure>
-                    <div className="inner">
-                      <h5>Olivia Mia</h5>
-                      <span className="designation">Founder & CEO</span>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="testimonial-block-one">
-                  <div className="block-shape" style={{ backgroundImage: `url(/assets/images/shape/shape-12.png)` }}></div>
-                  <div className="block-shape-overlay" style={{ backgroundImage: `url(/assets/images/shape/shape-13.png)` }}></div>
-                  <div className="clients-image"><img src="assets/images/resource/clients-4.png" alt="" /></div>
-                  <p>"I can't say enough about it. Thanks for the great service. It's the perfect solution for our business. You've saved our business!"</p>
-                  <div className="clients-box">
-                    <figure className="image-box"><img src="assets/images/resource/clients-6.png" alt="" /></figure>
-                    <div className="inner">
-                      <h5>Sam Milia</h5>
-                      <span className="designation">Founder & CEO</span>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="testimonial-block-one">
-                  <div className="block-shape" style={{ backgroundImage: `url(/assets/images/shape/shape-12.png)` }}></div>
-                  <div className="block-shape-overlay" style={{ backgroundImage: `url(/assets/images/shape/shape-13.png)` }}></div>
-                  <div className="clients-image"><img src="assets/images/resource/clients-5.png" alt="" /></div>
-                  <p>"I can't say enough about it. Thanks for the great service. It's the perfect solution for our business. You've saved our business!"</p>
-                  <div className="clients-box">
-                    <figure className="image-box"><img src="assets/images/resource/clients-7.png" alt="" /></figure>
-                    <div className="inner">
-                      <h5>Olivia Mia</h5>
-                      <span className="designation">Founder & CEO</span>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
