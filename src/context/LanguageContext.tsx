@@ -20,6 +20,8 @@ const translations: Record<Lang, Record<string, string>> = {
     // Hero
     "hero.subtitle": "Estudio de Diseño Web y Branding — Costa Rica",
     "hero.title": "Marcas y sitios web\nque venden.",
+    "hero.title.line1": "Marcas y sitios web",
+    "hero.title.line2": "que venden.",
     "hero.start": "Inicia\nTu Proyecto",
     "hero.desc": "Diseñamos marcas y construimos sitios web de alta conversión que hacen que las empresas ambiciosas luzcan inolvidables — para clientes en EE. UU. y Latinoamérica.",
     "hero.cta": "Inicia Tu Proyecto",
@@ -99,6 +101,8 @@ const translations: Record<Lang, Record<string, string>> = {
     // Hero
     "hero.subtitle": "Web Design & Branding Studio — Costa Rica",
     "hero.title": "Brands and websites\nthat sell.",
+    "hero.title.line1": "Brands and websites",
+    "hero.title.line2": "that sell.",
     "hero.start": "Start\nYour Project",
     "hero.desc": "We design brands and build high-conversion websites that make ambitious businesses look unforgettable — for clients in the U.S. and Latin America.",
     "hero.cta": "Start Your Project",

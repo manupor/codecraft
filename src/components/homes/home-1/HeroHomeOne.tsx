@@ -10,7 +10,7 @@ const HeroHomeOne = () => {
         <div className="outer-box">
           <div className="upper-box">
             <div className="title-box">
-              <h2><span>{t("hero.subtitle")}</span><br />Marcas y sitios web<br />que venden.</h2>
+              <h2><span>{t("hero.subtitle")}</span><br />{t("hero.title.line1")}<br />{t("hero.title.line2")}</h2>
             </div>
             <div className="clients-box">
               <ul className="clients-list">
