@@ -48,9 +48,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "hero.scrolltext": "Diseño Web · Branding · Diseño de Logo · Costa Rica",
 
     // About section (home)
-    "about.tag": "(¿Quien Soy?)",
-    "about.box1.title": "Diseño Primero",
-    "about.box1.desc": "Cada proyecto es liderado por mi directamente. Diseño marcas y sitios web que lucen premium, se sienten intencionales y te diferencian de la competencia.",
+    "about.tag": "(¿Quiénes Somos?)",
+    "about.box1.title": "Diseñamos Primero",
+    "about.box1.desc": "Nos tomamos el tiempo para entender tu negocio, tu audiencia y tus objetivos. A partir de ahí, diseñamos juntos una marca y un sitio web que realmente te represente.",
     "about.box2.title": "Hecho para Vender",
     "about.box2.desc": "Lo bonito no basta. Cada pagina esta optimizada para velocidad, SEO y conversion — para que tu sitio no solo impresione, sino que genere resultados reales.",
     "about.heading": "De una página en blanco a una marca que vende.",
@@ -263,8 +263,8 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // About section (home)
     "about.tag": "(Who We Are)",
-    "about.box1.title": "Design First",
-    "about.box1.desc": "Every project is personally led by our team. We design brands and websites that look premium, feel intentional, and set you apart from the competition.",
+    "about.box1.title": "We Design First",
+    "about.box1.desc": "We take the time to understand your business, your audience, and your goals. From there, we design together a brand and website that truly represents you.",
     "about.box2.title": "Built to Convert",
     "about.box2.desc": "Looking good isn't enough. Every page is optimized for speed, SEO, and conversion — so your site doesn't just impress, it drives real results.",
     "about.heading": "From a blank page to a brand that sells.",
