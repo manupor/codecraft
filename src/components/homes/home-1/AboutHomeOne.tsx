@@ -34,7 +34,7 @@ const AboutHomeOne = () => {
             </div>
             <div className="col-lg-6 col-md-12 col-sm-12 block-column">
               <div className="right-content">
-                <h2>De una página en blanco <img src="assets/images/icons/icon-31.png" alt="" /> a una marca <img src="assets/images/icons/icon-32.png" alt="" /> que vende. <img src="assets/images/icons/icon-33.png" alt="" /></h2>
+                <h2>{t("about.h2.1")} <img src="assets/images/icons/icon-31.png" alt="" /> {t("about.h2.2")} <img src="assets/images/icons/icon-32.png" alt="" /> {t("about.h2.3")} <img src="assets/images/icons/icon-33.png" alt="" /></h2>
                 <p>{t("about.desc")}</p>
                 <Link to="/nosotros">{t("about.cta")}</Link>
               </div>

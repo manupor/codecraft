@@ -1,9 +1,10 @@
- 
 import { useState } from "react";
 import menu_data from "../../data/menu-data";
 import { Link } from "react-router-dom";
+import { useLang } from "../../context/LanguageContext";
 
 const MobileMenu = ({ isOpen, setIsOpen }: any) => {
+  const { t } = useLang();
 
     const [navTitle, setNavTitle] = useState("");
   //openMobileMenu
@@ -41,7 +42,7 @@ const MobileMenu = ({ isOpen, setIsOpen }: any) => {
 										key={i}
 										className={`${item.has_dropdown && "current dropdown"}`}
 									>
-										<Link to={item.link}>{item.title}</Link>
+										<Link to={item.link}>{t(`nav.${item.id}`)}</Link>
 										{item.has_dropdown && (
 											<ul style={{
                       display: navTitle === item.title ? "block" : "none",

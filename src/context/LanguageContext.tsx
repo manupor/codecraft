@@ -16,6 +16,25 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.services": "Servicios",
     "nav.blog": "Blog",
     "nav.contact": "Contacto",
+    "nav.1": "Inicio",
+    "nav.2": "Nosotros",
+    "nav.3": "Servicios",
+    "nav.4": "Blog",
+    "nav.5": "Contacto",
+
+    // Process section
+    "process.tag": "Nuestro Proceso",
+    "process.title": "Pasos simples para llevar tu idea a una",
+    "process.title.highlight": "marca exitosa",
+    "process.s1": "Descubrimiento y Estrategia",
+    "process.s2": "Diseño y Desarrollo",
+    "process.s3": "Revisión y Ajustes",
+    "process.s4": "Lanzamiento y Soporte",
+
+    // About h2
+    "about.h2.1": "De una página en blanco",
+    "about.h2.2": "a una marca",
+    "about.h2.3": "que vende.",
 
     // Hero
     "hero.subtitle": "Estudio de Diseño Web y Branding — Costa Rica",
@@ -211,6 +230,25 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.services": "Services",
     "nav.blog": "Blog",
     "nav.contact": "Contact",
+    "nav.1": "Home",
+    "nav.2": "About",
+    "nav.3": "Services",
+    "nav.4": "Blog",
+    "nav.5": "Contact",
+
+    // Process section
+    "process.tag": "Our Process",
+    "process.title": "Simple steps to take your idea to a",
+    "process.title.highlight": "successful brand",
+    "process.s1": "Discovery & Strategy",
+    "process.s2": "Design & Development",
+    "process.s3": "Review & Adjustments",
+    "process.s4": "Launch & Support",
+
+    // About h2
+    "about.h2.1": "From a blank page",
+    "about.h2.2": "to a brand",
+    "about.h2.3": "that sells.",
 
     // Hero
     "hero.subtitle": "Web Design & Branding Studio — Costa Rica",
