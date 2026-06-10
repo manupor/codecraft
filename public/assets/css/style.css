@@ -8611,7 +8611,7 @@ div#mCSB_1_container{
   }
   .parallax-image .background-image {
     background-attachment: scroll !important;
-    background-size: cover !important;
+    background-size: contain !important;
     background-position: left center !important;
   }
 }
