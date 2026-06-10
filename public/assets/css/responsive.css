@@ -173,6 +173,10 @@
   .fixed-header .sticky-header{
     display: block;
   }
+  .fixed-header .sticky-header .menu-right,
+  .fixed-header .sticky-header .mobile-nav-toggler{
+    display: flex !important;
+  }
 
   .menu-area .mobile-nav-toggler {
     display: block;
