@@ -8606,13 +8606,13 @@ div#mCSB_1_container{
 
 @media (max-width: 767px) {
   .parallax-image {
-    height: 60vw !important;
-    min-height: 220px;
+    height: 80vw !important;
+    min-height: 280px;
   }
   .parallax-image .background-image {
     background-attachment: scroll !important;
-    background-size: 160% auto !important;
-    background-position: -30% center !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
   }
 }
 
