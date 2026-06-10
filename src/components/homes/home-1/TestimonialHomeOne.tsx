@@ -65,7 +65,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>Trabajé con Manu en Amazon en el área de entretenimiento y recomiendo ampliamente sus servicios de diseño gráfico. Se tomó el tiempo para comprender los resultados que buscábamos en distintos wikis, presentaciones y más, entregando productos que beneficiaron a nuestra comunidad y stakeholders.</p>
+                <p>{t("testimonials.t1")}</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Zac Sims</h5>
@@ -77,7 +77,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>Trabajé con Manu cuando era creador de contenido digital en la Oficina del CFO de AWS. Colaboró con liderazgo senior en AWS FGBS para producir contenido en video, siendo un socio confiable para mi equipo. Tenía un gran ojo para el diseño y agregaba efectos visuales únicos. Manu exige altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.</p>
+                <p>{t("testimonials.t2")}</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Sanjay Singh</h5>
@@ -89,7 +89,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>Trabajé con Manu en AWS y recomiendo ampliamente sus servicios de diseño gráfico. Manu ayudó a llevar nuestra visión de un programa de capacitación al siguiente nivel con visuales y gráficos de vanguardia. Tomó presentaciones complejas y las transformó, logrando aumentar la participación de nuestra comunidad de usuarios.</p>
+                <p>{t("testimonials.t3")}</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>John Winkler</h5>
@@ -101,7 +101,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>Manu es un diseñador gráfico talentoso, profesional y trabajador, con una actitud positiva y colaborativa excepcional. Trabajamos juntos en AWS durante 2022-2023, y fue clave para completar una serie de productos de comunicación interna y externa de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.</p>
+                <p>{t("testimonials.t4")}</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Michael Rettig</h5>

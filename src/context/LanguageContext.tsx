@@ -93,6 +93,10 @@ const translations: Record<Lang, Record<string, string>> = {
     // Testimonials
     "testimonials.tag": "(Recomendaciones de colegas en Amazon & AWS)",
     "testimonials.title": "Testimonios",
+    "testimonials.t1": "Trabajé con Manu en Amazon en el área de entretenimiento y recomiendo ampliamente sus servicios de diseño gráfico. Se tomó el tiempo para comprender los resultados que buscábamos en distintos wikis, presentaciones y más, entregando productos que beneficiaron a nuestra comunidad y stakeholders.",
+    "testimonials.t2": "Trabajé con Manu cuando era creador de contenido digital en la Oficina del CFO de AWS. Colaboró con liderazgo senior en AWS FGBS para producir contenido en video, siendo un socio confiable para mi equipo. Tenía un gran ojo para el diseño y agregaba efectos visuales únicos. Manu exige altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.",
+    "testimonials.t3": "Trabajé con Manu en AWS y recomiendo ampliamente sus servicios de diseño gráfico. Manu ayudó a llevar nuestra visión de un programa de capacitación al siguiente nivel con visuales y gráficos de vanguardia. Tomó presentaciones complejas y las transformó, logrando aumentar la participación de nuestra comunidad de usuarios.",
+    "testimonials.t4": "Manu es un diseñador gráfico talentoso, profesional y trabajador, con una actitud positiva y colaborativa excepcional. Trabajamos juntos en AWS durante 2022-2023, y fue clave para completar una serie de productos de comunicación interna y externa de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.",
 
     // CTA
     "cta.tag": "¿Listo para Transformar tu Negocio?",
@@ -307,6 +311,10 @@ const translations: Record<Lang, Record<string, string>> = {
     // Testimonials
     "testimonials.tag": "(Recommendations from Amazon & AWS colleagues)",
     "testimonials.title": "Testimonials",
+    "testimonials.t1": "I worked with Manu at Amazon in the entertainment division and I highly recommend his graphic design services. He took the time to understand the results we were looking for across wikis, presentations, and more, delivering work that benefited our community and stakeholders.",
+    "testimonials.t2": "I worked with Manu when he was a digital content creator in the AWS CFO Office. He collaborated with senior leadership at AWS FGBS to produce video content, serving as a reliable partner for my team. He had a great eye for design and added unique visual effects. Manu holds himself to high standards and has the skills to create executive-quality content.",
+    "testimonials.t3": "I worked with Manu at AWS and highly recommend his graphic design services. Manu helped take our vision for a training program to the next level with cutting-edge visuals and graphics. He took complex presentations and transformed them, increasing engagement within our user community.",
+    "testimonials.t4": "Manu is a talented, professional, and hardworking graphic designer with an exceptional positive and collaborative attitude. We worked together at AWS during 2022-2023, and he was key to completing a series of high-quality internal and external communication products. I recommend him without reservation for freelance or full-time work.",
 
     // CTA
     "cta.tag": "Ready to Transform Your Business?",
