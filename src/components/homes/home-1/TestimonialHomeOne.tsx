@@ -64,7 +64,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>I worked with Manu at Amazon in the Entertainment space and would recommend his graphic design services. He takes the time to understand the end results we were looking for with different wikis, powerpoints, etc. and delivered products that benefited our community and stakeholders.</p>
+                <p>Trabajé con Manu en Amazon en el área de entretenimiento y recomiendo ampliamente sus servicios de diseño gráfico. Se tomó el tiempo para comprender los resultados que buscábamos en distintos wikis, presentaciones y más, entregando productos que beneficiaron a nuestra comunidad y stakeholders.</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Zac Sims</h5>
@@ -76,7 +76,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>I worked with Manu when he was a digital content creator in the AWS CFO Office – he occasionally worked with senior leadership across AWS FGBS to produce video content, and was a reliable partner to members of my team. He had a good eye for design and added some unique visual effects to take the video to the next level. Manu insists on high standards and has the editing and communication skills to create high-quality, executive-level content.</p>
+                <p>Trabajé con Manu cuando era creador de contenido digital en la Oficina del CFO de AWS. Colaboró con liderazgo senior en AWS FGBS para producir contenido en video, siendo un socio confiable para mi equipo. Tenía un gran ojo para el diseño y agregaba efectos visuales únicos. Manu exige altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Sanjay Singh</h5>
@@ -88,7 +88,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>I worked with Manu at AWS and would highly recommend his graphic design services. Manu helped to bring our vision of a training program to the next level with cutting edge visuals and graphics. He was able to take dull PowerPoints covering complex topics and bring them to life, ultimately increasing participation from our user community.</p>
+                <p>Trabajé con Manu en AWS y recomiendo ampliamente sus servicios de diseño gráfico. Manu ayudó a llevar nuestra visión de un programa de capacitación al siguiente nivel con visuales y gráficos de vanguardia. Tomó presentaciones complejas y las transformó, logrando aumentar la participación de nuestra comunidad de usuarios.</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>John Winkler</h5>
@@ -100,7 +100,7 @@ const TestimonialHomeOne = () => {
             <SwiperSlide className="swiper-slide">
               <div className="testimonial-block">
                 <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>Manu is a talented, professional, and hard-working graphic designer with a great, positive, collaborative attitude. We worked together from 2022-2023 at AWS, and he was key to completing a number of high-quality internal and external communications products. I unreservedly recommend him for freelance or full-time work.</p>
+                <p>Manu es un diseñador gráfico talentoso, profesional y trabajador, con una actitud positiva y colaborativa excepcional. Trabajamos juntos en AWS durante 2022-2023, y fue clave para completar una serie de productos de comunicación interna y externa de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.</p>
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Michael Rettig</h5>
