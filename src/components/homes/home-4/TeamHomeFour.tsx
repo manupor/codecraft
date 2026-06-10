@@ -10,7 +10,7 @@ const TeamHomeFour = ({style_2} : any) => {
         <div className="container">
           {style_2 ? 
           <div className="main-title text-center">
-            <h3>Sobre Mí</h3>
+            <h3>Sobre CodeCraftt</h3>
             <h2>Manu Portuguez <br /><span className="gradient-color">CEO & Sr Full Stack Developer</span></h2>
           </div>
           :

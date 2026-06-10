@@ -35,7 +35,7 @@ const AboutHomeOne = () => {
               <div className="right-content">
                 <h2>De una página en blanco <img src="assets/images/icons/icon-31.png" alt="" /> a una marca <img src="assets/images/icons/icon-32.png" alt="" /> que vende. <img src="assets/images/icons/icon-33.png" alt="" /></h2>
                 <p>Me encargo de la estrategia, el diseno, el copy y el desarrollo - para que tu marca luzca premium y tu sitio web convierta. Construyamos tu marca juntos.</p>
-                <Link to="/about">Sobre Mi</Link>
+                <Link to="/nosotros">Sobre CodeCraftt</Link>
               </div>
             </div>
           </div>
