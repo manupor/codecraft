@@ -164,9 +164,14 @@
 }
 
 @media only screen and (max-width: 991px){
-  .main-menu,
+  .main-menu{
+    display: none;
+  }
   .sticky-header{
     display: none;
+  }
+  .fixed-header .sticky-header{
+    display: block;
   }
 
   .menu-area .mobile-nav-toggler {
