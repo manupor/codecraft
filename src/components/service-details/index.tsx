@@ -14,7 +14,7 @@ const ServiceDetails = () => {
     <Wrapper>
       <div className="boxed_wrapper"> 
         <HeaderFive />
-        <Breacrumb title="Digital Branding Agency" subtitle="Services Details" />
+        <Breacrumb title="Detalles del Servicio" subtitle="Servicios" />
         <ServiceDetailsArea />
         <FaqHomeFour />
         <CtaHomeFour />

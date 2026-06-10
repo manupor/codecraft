@@ -4,19 +4,19 @@ import { useState } from "react";
  
 export const faq_data = [
   {
-    question: "1. What Services do Creative agencies offer?",
+    question: "1. ¿Qué servicios ofrece CodeCraftt?",
     answer:
-      "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
+      "Ofrecemos estrategia de marca, diseño de identidad visual (logo, colores, tipografía), desarrollo web a medida, y marketing digital. Cada proyecto es único — trabajamos directamente contigo desde la estrategia hasta el lanzamiento.",
   },
   {
-    question: "2. How can working with a creative benefit my brand?",
+    question: "2. ¿Cuánto tiempo toma completar un proyecto?",
     answer:
-      "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
+      "Depende del alcance. Un sitio web completo con identidad de marca toma entre 3 y 6 semanas. Proyectos de solo diseño o solo desarrollo pueden estar listos en 1 a 3 semanas. Siempre te damos un cronograma claro desde el inicio.",
   },
   {
-    question: "3. Do you provide both digital marketing services?",
+    question: "3. ¿Ofrecen soporte después del lanzamiento?",
     answer:
-      "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
+      "Sí. Ofrecemos soporte post-lanzamiento para asegurarnos de que todo funcione perfectamente. También podemos encargarnos del mantenimiento mensual, actualizaciones de contenido y mejoras continuas según tus necesidades.",
   },
 ];
 
@@ -39,8 +39,8 @@ const FaqHomeFour = () => {
             <div className="col-lg-6 col-md-12 col-sm-12 left-column">
               <div className="accordion-content">
                 <div className="main-title">
-                  <h3>Some Question</h3>
-                  <h2>Design That Where Ideas <br /><span className="gradient-color">Take The Flight</span></h2>
+                  <h3>Preguntas Frecuentes</h3>
+                  <h2>Todo lo que Necesitas <br /><span className="gradient-color">Saber</span></h2>
                 </div>
                 <ul className="accordion-box">
                   {faq_data.map((item, i) => (
