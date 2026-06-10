@@ -35,10 +35,7 @@ const TeamHomeFour = ({style_2} : any) => {
                   <div className="team-social" style={{justifyContent: 'center', display: 'flex', marginTop: '15px'}}>
                     <div className="icon-box"><i className="icon-14"></i></div>
                     <ul className="social-links">
-                      <li><Link to="/"><i className="icon-15"></i></Link></li>
-                      <li><Link to="/"><i className="icon-16"></i></Link></li>
-                      <li><Link to="/"><i className="icon-17"></i></Link></li>
-                      <li><Link to="/"><i className="icon-18"></i></Link></li>
+                      <li><a href="https://www.linkedin.com/in/manu-portuguez-023849128/" target="_blank" rel="noopener noreferrer"><i className="icon-17"></i></a></li>
                     </ul>
                   </div>
                 </div>
