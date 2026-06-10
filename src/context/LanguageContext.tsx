@@ -43,6 +43,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "counter.2": "Años Diseñando",
     "counter.3": "Tiempo Promedio de Lanzamiento",
     "counter.4": "A Medida, Nunca Plantillas",
+    "counter.5": "Clientes Satisfechos",
 
     // Clients
     "clients.title": "Confían en CodeCraftt",
@@ -194,6 +195,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "counter.2": "Years Designing",
     "counter.3": "Average Launch Time",
     "counter.4": "Custom, Never Templates",
+    "counter.5": "Happy Clients",
 
     // Clients
     "clients.title": "Trusted by CodeCraftt",
