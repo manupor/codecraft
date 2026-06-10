@@ -13,7 +13,7 @@ const Contact = () => {
     <Wrapper>
       <div className="boxed_wrapper">
         <HeaderFive />
-        <Breacrumb title="Contact Us" subtitle="Contact Us" />
+        <Breacrumb title="Contacto" subtitle="Contacto" />
         <ContactArea />
         <ClientsHomeTwo />
         <CtaHomeFour />
