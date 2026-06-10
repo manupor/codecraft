@@ -5,7 +5,7 @@ const ParallaxImgHomeOne = () => {
 				<div
 					className="background-image"
 					style={{
-						backgroundImage: `url(/assets/images/resource/parallax-1.jpg)`,
+						backgroundImage: `url(/manudev.jpg)`,
 					}}
 				></div>
 			</div>
