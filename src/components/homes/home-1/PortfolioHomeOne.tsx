@@ -20,12 +20,12 @@ const PortfolioHomeOne = () => {
           <div className="main-content-box">
             <div className="portfolio-block-four">
               <div className="text-box">
-                <h3><Link to="/service-details">Diseño y Desarrollo Web</Link></h3>
-                <span style={{color: "#ff6b35", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>Más Solicitado</span>
+                <h3><Link to="/service-details">{t("portfolio.item1.title")}</Link></h3>
+                <span style={{color: "#ff6b35", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item1.badge")}</span>
                 <ul className="category-list">
-                  <li><Link to="/service-details">Sitios Web a Medida</Link></li>
-                  <li><Link to="/service-details">Webflow & Next.js</Link></li>
-                  <li><Link to="/service-details">Diseño Responsivo</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item1.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item1.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item1.li3")}</Link></li>
                 </ul>
               </div>
               <div className="link-box">
@@ -34,12 +34,12 @@ const PortfolioHomeOne = () => {
             </div>
             <div className="portfolio-block-four">
               <div className="text-box">
-                <h3><Link to="/service-details">Identidad de Marca y Logo</Link></h3>
-                <span style={{color: "#4ecdc4", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>Branding</span>
+                <h3><Link to="/service-details">{t("portfolio.item2.title")}</Link></h3>
+                <span style={{color: "#4ecdc4", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item2.badge")}</span>
                 <ul className="category-list">
-                  <li><Link to="/service-details">Diseño de Logo</Link></li>
-                  <li><Link to="/service-details">Sistemas de Color</Link></li>
-                  <li><Link to="/service-details">Guías de Marca</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item2.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item2.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item2.li3")}</Link></li>
                 </ul>
               </div>
               <div className="link-box">
@@ -48,12 +48,12 @@ const PortfolioHomeOne = () => {
             </div>
             <div className="portfolio-block-four">
               <div className="text-box">
-                <h3><Link to="/service-details">Landing Pages y Conversión</Link></h3>
-                <span style={{color: "#ffd93d", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>Alta Conversión</span>
+                <h3><Link to="/service-details">{t("portfolio.item3.title")}</Link></h3>
+                <span style={{color: "#ffd93d", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item3.badge")}</span>
                 <ul className="category-list">
-                  <li><Link to="/service-details">SEO Optimizado</Link></li>
-                  <li><Link to="/service-details">Core Web Vitals 90+</Link></li>
-                  <li><Link to="/service-details">Listo para Convertir</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item3.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item3.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item3.li3")}</Link></li>
                 </ul>
               </div>
               <div className="link-box">
@@ -62,12 +62,12 @@ const PortfolioHomeOne = () => {
             </div>
             <div className="portfolio-block-four">
               <div className="text-box">
-                <h3><Link to="/service-details">E-commerce y Tiendas Online</Link></h3>
-                <span style={{color: "#6bcf7f", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>Vende Más</span>
+                <h3><Link to="/service-details">{t("portfolio.item4.title")}</Link></h3>
+                <span style={{color: "#6bcf7f", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item4.badge")}</span>
                 <ul className="category-list">
-                  <li><Link to="/service-details">Shopify</Link></li>
-                  <li><Link to="/service-details">Desarrollo a Medida</Link></li>
-                  <li><Link to="/service-details">Listo para Vender</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item4.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item4.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item4.li3")}</Link></li>
                 </ul>
               </div>
               <div className="link-box">
@@ -75,7 +75,7 @@ const PortfolioHomeOne = () => {
               </div>
             </div>
           </div>
-          <div className="lower-link-box text-center"><Link to="/contact">Inicia Tu Proyecto →</Link></div>
+          <div className="lower-link-box text-center"><Link to="/contacto">{t("portfolio.cta")}</Link></div>
         </div>
       </section>
     </>

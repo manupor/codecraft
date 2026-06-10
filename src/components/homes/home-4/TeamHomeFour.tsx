@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLang } from "../../../context/LanguageContext";
 
 const TeamHomeFour = ({style_2} : any) => {
+  const { t } = useLang();
   return (
     <>
       <section className="team-section">
@@ -10,13 +12,13 @@ const TeamHomeFour = ({style_2} : any) => {
         <div className="container">
           {style_2 ? 
           <div className="main-title text-center">
-            <h3>Sobre CodeCraftt</h3>
-            <h2>Manu Portuguez <br /><span className="gradient-color">CEO & Sr Full Stack Developer</span></h2>
+            <h3>{t("team.tag")}</h3>
+            <h2>{t("team.title")} <br /><span className="gradient-color">{t("team.role")}</span></h2>
           </div>
           :
           <div className="main-title text-center">
-            <h3>El Fundador</h3>
-            <h2>Conoce a <br /><span className="gradient-color">Manu Portuguez</span></h2>
+            <h3>{t("team.founder.tag")}</h3>
+            <h2>{t("team.founder.title")} <br /><span className="gradient-color">{t("team.title")}</span></h2>
           </div>
           }
           {/* Layout: Foto izquierda - Descripcion derecha */}
@@ -46,18 +48,18 @@ const TeamHomeFour = ({style_2} : any) => {
             <div className="col-lg-7 col-md-6 col-sm-12 block-column">
               <div className="founder-description" style={{padding: '20px 30px'}}>
                 <p style={{fontSize: '18px', lineHeight: '1.9', color: '#ffffff', textAlign: 'left', marginBottom: '20px'}}>
-                  Como fundador principal de CodeCraftt, trabajo directamente en cada proyecto, asegurando calidad premium en cada detalle.
+                  {t("team.p1")}
                 </p>
                 <p style={{fontSize: '18px', lineHeight: '1.9', color: '#ffffff', textAlign: 'left', marginBottom: '20px'}}>
-                  Cuando un proyecto requiere escalar o especializarse, colaboro con una red seleccionada de desarrolladores senior, diseñadores UX/UI, especialistas en marketing digital y arquitectos cloud.
+                  {t("team.p2")}
                 </p>
                 <p style={{fontSize: '18px', lineHeight: '1.9', color: '#ffffff', textAlign: 'left'}}>
-                  Todos con experiencia comprobada en empresas como Amazon AWS, startups de Silicon Valley y agencias internacionales. Esta estructura flexible me permite ofrecerte el mejor talento sin la burocracia ni los costos de una agencia tradicional.
+                  {t("team.p3")}
                 </p>
                 
                 <div style={{marginTop: '30px', textAlign: 'left'}}>
-                  <Link to="/contact" className="primary-btn one gradient-bg white-color">
-                    <span>Trabajemos Juntos</span>
+                  <Link to="/contacto" className="primary-btn one gradient-bg white-color">
+                    <span>{t("team.cta")}</span>
                     <i className="icon-1 gradient-color"></i>
                   </Link>
                 </div>

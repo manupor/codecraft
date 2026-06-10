@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import "swiper/css/bundle";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useLang } from "../../../context/LanguageContext";
 
 
 const ServiceHomeFour = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="service-section">
@@ -14,10 +16,10 @@ const ServiceHomeFour = () => {
         <div className="container">
           <div className="title-box">
             <div className="main-title">
-              <h3>Lo Que Hacemos</h3>
-              <h2><span className="gradient-color color-one">Creamos Marcas y</span> <br /><span className="gradient-color color-two">Negocios</span> que Destacan <br />en la Era Digital</h2>
+              <h3>{t("services.tag")}</h3>
+              <h2><span className="gradient-color color-one">{t("services.title.1")}</span> <br /><span className="gradient-color color-two">{t("services.title.2")}</span> {t("services.title.3")}</h2>
             </div>
-            <div className="btn-box"><Link to="/service" className="primary-btn one gradient-bg white-color border-btn"><span>Ver Todos los Servicios</span><i className="icon-1 gradient-color"></i></Link></div>
+            <div className="btn-box"><Link to="/servicios" className="primary-btn one gradient-bg white-color border-btn"><span>{t("services.viewall")}</span><i className="icon-1 gradient-color"></i></Link></div>
           </div>
           <div className="main-content">
             <Swiper
@@ -61,36 +63,36 @@ const ServiceHomeFour = () => {
                 <div className="service-block-one">
                   <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-6.png)` }}></div>
                   <div className="icon-box"><i className="icon-2"></i></div>
-                  <h3><Link to="/service-details">Estrategia de Marca</Link></h3>
-                  <p>Definimos la identidad, valores y posicionamiento de tu marca para que conecte con tu audiencia ideal.</p>
-                  <div className="link-box"><Link to="/service-details"><span>Ver Detalles</span><i className="icon-6"></i></Link></div>
+                  <h3><Link to="/service-details">{t("services.s1.title")}</Link></h3>
+                  <p>{t("services.s1.desc")}</p>
+                  <div className="link-box"><Link to="/service-details"><span>{t("services.viewdetails")}</span><i className="icon-6"></i></Link></div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
                 <div className="service-block-one">
                   <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-6.png)` }}></div>
                   <div className="icon-box"><i className="icon-3"></i></div>
-                  <h3><Link to="/service-details">Diseño & Branding</Link></h3>
-                  <p>Creamos logotipos, paletas de color y sistemas visuales únicos que reflejan la esencia de tu negocio.</p>
-                  <div className="link-box"><Link to="/service-details"><span>Ver Detalles</span><i className="icon-6"></i></Link></div>
+                  <h3><Link to="/service-details">{t("services.s2.title")}</Link></h3>
+                  <p>{t("services.s2.desc")}</p>
+                  <div className="link-box"><Link to="/service-details"><span>{t("services.viewdetails")}</span><i className="icon-6"></i></Link></div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
                 <div className="service-block-one">
                   <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-6.png)` }}></div>
                   <div className="icon-box"><i className="icon-4"></i></div>
-                  <h3><Link to="/service-details">Desarrollo Web</Link></h3>
-                  <p>Diseñamos y desarrollamos sitios web rápidos, modernos y optimizados para convertir visitantes en clientes.</p>
-                  <div className="link-box"><Link to="/service-details"><span>Ver Detalles</span><i className="icon-6"></i></Link></div>
+                  <h3><Link to="/service-details">{t("services.s3.title")}</Link></h3>
+                  <p>{t("services.s3.desc")}</p>
+                  <div className="link-box"><Link to="/service-details"><span>{t("services.viewdetails")}</span><i className="icon-6"></i></Link></div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
                 <div className="service-block-one">
                   <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-6.png)` }}></div>
                   <div className="icon-box"><i className="icon-5"></i></div>
-                  <h3><Link to="/service-details">Marketing Digital</Link></h3>
-                  <p>Estrategias de contenido, SEO y redes sociales que aumentan tu visibilidad y generan resultados reales.</p>
-                  <div className="link-box"><Link to="/service-details"><span>Ver Detalles</span><i className="icon-6"></i></Link></div>
+                  <h3><Link to="/service-details">{t("services.s4.title")}</Link></h3>
+                  <p>{t("services.s4.desc")}</p>
+                  <div className="link-box"><Link to="/service-details"><span>{t("services.viewdetails")}</span><i className="icon-6"></i></Link></div>
                 </div>
               </SwiperSlide>
             </Swiper>
