@@ -30,8 +30,8 @@ const menu_data: MenuItem[] = [
   },
   {
     id: 4,
-    title: "Proceso",
-    link: "/#proceso",
+    title: "Blog",
+    link: "/blog",
     has_dropdown: false,     
   },
   {
