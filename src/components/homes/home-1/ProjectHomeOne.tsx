@@ -1,20 +1,18 @@
- 
 import { Link } from "react-router-dom";
 import "swiper/css/bundle";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
- 
-
+import { useLang } from "../../../context/LanguageContext";
 
 const ProjectHomeOne = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="portfolio-section-five">
         <div className="outer-box">
           <div className="main-title text-center">
-            <h2>Por que elegir CodeCraftt</h2>
-            <p>Por que me eligen para crear marcas y sitios web que venden.</p>
+            <h2>{t("project.title")}</h2>
+            <p>{t("project.desc")}</p>
           </div>
           <div className="main-content-box">
             <Swiper
@@ -61,9 +59,9 @@ const ProjectHomeOne = () => {
                 <div className="portfolio-block-five">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-23.jpg" alt="Diseno primero" /></figure>
                   <div className="text-box">
-                    <Link to="/service" className="link">Ver mas</Link>
-                    <h3><Link to="/service">Diseno primero</Link></h3>
-                    <p>Cada proyecto es liderado por disenadores senior. Creamos marcas y sitios web que lucen premium.</p>
+                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
+                    <h3><Link to="/servicios">{t("project.s1.title")}</Link></h3>
+                    <p>{t("project.s1.desc")}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -71,9 +69,9 @@ const ProjectHomeOne = () => {
                 <div className="portfolio-block-five">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-24.jpg" alt="Lanza rapido" /></figure>
                   <div className="text-box">
-                    <Link to="/service" className="link">Ver mas</Link>
-                    <h3><Link to="/service">2-4 semanas</Link></h3>
-                    <p>Lanza rapido. Luce impecable. Sin revisiones interminables ni burocracia de agencia.</p>
+                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
+                    <h3><Link to="/servicios">{t("project.s2.title")}</Link></h3>
+                    <p>{t("project.s2.desc")}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -81,9 +79,9 @@ const ProjectHomeOne = () => {
                 <div className="portfolio-block-five">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-25.jpg" alt="Hecho para vender" /></figure>
                   <div className="text-box">
-                    <Link to="/service" className="link">Ver mas</Link>
-                    <h3><Link to="/service">Hecho para vender</Link></h3>
-                    <p>Hermoso y hecho para vender. Optimizado para velocidad, SEO y conversion.</p>
+                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
+                    <h3><Link to="/servicios">{t("project.s3.title")}</Link></h3>
+                    <p>{t("project.s3.desc")}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -91,9 +89,9 @@ const ProjectHomeOne = () => {
                 <div className="portfolio-block-five">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-26.jpg" alt="Tecnologias modernas" /></figure>
                   <div className="text-box">
-                    <Link to="/service" className="link">Ver mas</Link>
-                    <h3><Link to="/service">Tecnologias Modernas</Link></h3>
-                    <p>React, Next.js, TypeScript, Node.js, Python, AWS, OpenAI, Flutter.</p>
+                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
+                    <h3><Link to="/servicios">{t("project.s4.title")}</Link></h3>
+                    <p>{t("project.s4.desc")}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -101,9 +99,9 @@ const ProjectHomeOne = () => {
                 <div className="portfolio-block-five">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-24.jpg" alt="Costa Rica" /></figure>
                   <div className="text-box">
-                    <Link to="/contact" className="link">Ver mas</Link>
-                    <h3><Link to="/contact">EE.UU. y Latinoamerica</Link></h3>
-                    <p>Trabajamos con clientes en Estados Unidos y toda Latinoamerica.</p>
+                    <Link to="/contacto" className="link">{t("project.viewmore")}</Link>
+                    <h3><Link to="/contacto">{t("project.s5.title")}</Link></h3>
+                    <p>{t("project.s5.desc")}</p>
                   </div>
                 </div>
               </SwiperSlide>
