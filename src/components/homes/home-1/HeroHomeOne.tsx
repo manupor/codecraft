@@ -10,7 +10,11 @@ const HeroHomeOne = () => {
         <div className="outer-box">
           <div className="upper-box">
             <div className="title-box">
-              <h2><span>{t("hero.subtitle")}</span><br />{t("hero.title.line1")}<br />{t("hero.title.line2")}</h2>
+              <h2>
+                <span style={{display: "block", fontWeight: "normal"}}>{t("hero.subtitle")}</span>
+                <span style={{display: "block"}}>{t("hero.title.line1")}</span>
+                <span style={{display: "block"}}>{t("hero.title.line2")}</span>
+              </h2>
             </div>
             <div className="clients-box">
               <ul className="clients-list">
