@@ -10,8 +10,8 @@ const PortfolioHomeOne = () => {
         <div className="pattern-box" style={{ backgroundImage: `url(/assets/images/shape/shape-66.png)` }}></div>
         <div className="outer-box">
           <div className="title-box text-center">
-            <h2>Lo que hago<br />Diseno, marco y lanzo.</h2>
-            <p>Diseño marcas y construyo sitios web de alta conversion para startups y empresas ambiciosas.</p>
+            <h2>Lo que hacemos<br />Diseñamos, marcamos y lanzamos.</h2>
+            <p>Diseñamos marcas y construimos sitios web de alta conversión para startups y empresas ambiciosas.</p>
           </div>
           <div className="main-content-box">
             <div className="portfolio-block-four">
