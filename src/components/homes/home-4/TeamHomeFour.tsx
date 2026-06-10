@@ -35,7 +35,7 @@ const TeamHomeFour = ({style_2} : any) => {
                   <div className="team-social" style={{justifyContent: 'center', display: 'flex', marginTop: '15px'}}>
                     <div className="icon-box"><i className="icon-14"></i></div>
                     <ul className="social-links">
-                      <li><a href="https://www.linkedin.com/in/manu-portuguez-023849128/" target="_blank" rel="noopener noreferrer"><i className="icon-17"></i></a></li>
+                      <li><a href="https://www.linkedin.com/in/manu-portuguez-023849128/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a></li>
                     </ul>
                   </div>
                 </div>
