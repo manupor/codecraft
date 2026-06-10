@@ -23,7 +23,7 @@ const HeroHomeOne = () => {
             </div>
           </div>
           <div className="lower-box">
-            <figure className="image"><img src="assets/images/resource/banner-1.png" alt="" /></figure>
+            <figure className="image"><img src="/manudev.jpg" alt="CodeCraftt Team" style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top'}} /></figure>
             <div className="content-box">
               <div className="shape-box">
                 <div className="shape-1" style={{ backgroundImage: `url(/assets/images/shape/shape-63.png)` }}></div>
