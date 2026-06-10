@@ -8604,6 +8604,18 @@ div#mCSB_1_container{
   background-attachment: fixed;
 }
 
+@media (max-width: 767px) {
+  .parallax-image {
+    height: 60vw !important;
+    min-height: 220px;
+  }
+  .parallax-image .background-image {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
 
 /** portfolio-section-four **/
 

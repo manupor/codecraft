@@ -26,11 +26,13 @@ const router = createBrowserRouter([
 	{ path: "/home-3", element: <HomeThree /> }, 
 	{ path: "/home-4", element: <HomeFour /> }, 
 	{ path: "/about", element: <About /> }, 
+	{ path: "/nosotros", element: <About /> }, 
 	{ path: "/team", element: <Team /> }, 
 	{ path: "/team-details", element: <TeamDetails /> }, 
 	{ path: "/pricing", element: <Pricing /> }, 
 	{ path: "/faq", element: <Faq /> }, 
 	{ path: "/service", element: <Service /> }, 
+	{ path: "/servicios", element: <Service /> }, 
 	{ path: "/service-details", element: <ServiceDetails /> }, 
 	{ path: "/portfolio", element: <Portfolio /> }, 
 	{ path: "/portfolio-details", element: <PortfolioDetails /> }, 
@@ -39,6 +41,7 @@ const router = createBrowserRouter([
 	{ path: "/blog-details", element: <BlogDetails /> },
 	{ path: "/blog/:slug", element: <BlogArticle /> }, 
 	{ path: "/contact", element: <Contact /> }, 
+	{ path: "/contacto", element: <Contact /> }, 
  
 
 
