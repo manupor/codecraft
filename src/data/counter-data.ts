@@ -13,25 +13,25 @@ const counter_data: counterDataType[] = [
 		id: 1,
 		count: 150,
     symbol: "+",
-		title: "Sitios y Marcas Entregados",
+		title: "Proyectos Entregados",
 	},
 	{
 		id: 2,
-		count: 7,
+		count: 10,
     symbol: "+",
-		title: "Años Diseñando",
+		title: "Años de Experiencia",
 	}, 
 	{
 		id: 3,
-		count: 2,
-    symbol: "-4sem",
-		title: "Tiempo Promedio de Lanzamiento",
+		count: 5,
+    symbol: "+",
+		title: "Países con Clientes Activos",
 	},
 	{
 		id: 4,
 		count: 100,
     symbol: "%",
-		title: "A Medida, Nunca Plantillas",
+		title: "Código Propio, Sin Plantillas",
 	},
 ];
 
