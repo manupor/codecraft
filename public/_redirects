@@ -1,1 +1,15 @@
-/* /index.html 200
+# Block common bot probes — return 404 instead of serving the SPA
+/wp-admin/*       /index.html  404
+/wp-login.php     /index.html  404
+/.env             /index.html  404
+/.git/*           /index.html  404
+/admin/*          /index.html  404
+/phpmyadmin/*     /index.html  404
+/xmlrpc.php       /index.html  404
+/config/*         /index.html  404
+/backup/*         /index.html  404
+/shell/*          /index.html  404
+/cgi-bin/*        /index.html  404
+
+# Valid SPA routes — serve the app
+/*  /index.html  200
