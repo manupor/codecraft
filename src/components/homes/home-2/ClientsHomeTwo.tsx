@@ -17,6 +17,7 @@ const ClientsHomeTwo = ({style_2} : any) => {
             <li><a href="#"><img src="assets/images/clients/Logo%20Hihub.png" alt="Hihub" /></a></li>
             <li><a href="#"><img src="assets/images/clients/Logo_CG_.png" alt="Chamo Gourmet" /></a></li>
             <li><a href="#"><img src="assets/images/clients/logho med white.png" alt="Med" /></a></li>
+            <li><a href="#"><img src="assets/images/clients/mibarra-web.png" alt="Marianela Ibarra" /></a></li>
           </ul>
         </div>
       </section>
