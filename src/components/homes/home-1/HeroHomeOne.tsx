@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
- 
+import { useLang } from "../../../context/LanguageContext";
 
 const HeroHomeOne = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="hero-section-four">
@@ -10,7 +10,7 @@ const HeroHomeOne = () => {
         <div className="outer-box">
           <div className="upper-box">
             <div className="title-box">
-              <h2><span>Estudio de Diseño Web y Branding — Costa Rica</span><br />Marcas y sitios web<br />que venden.</h2>
+              <h2><span>{t("hero.subtitle")}</span><br />Marcas y sitios web<br />que venden.</h2>
             </div>
             <div className="clients-box">
               <ul className="clients-list">
@@ -18,7 +18,7 @@ const HeroHomeOne = () => {
                 <li><div className="customer-image"><img src="assets/images/resource/customer-2.png" alt="" /></div></li>
                 <li><div className="customer-image"><img src="assets/images/resource/customer-3.png" alt="" /></div></li>
                 <li><div className="customer-image"><img src="assets/images/resource/customer-4.png" alt="" /></div></li>
-                <li><h5>Inicia<br />Tu Proyecto</h5></li>
+                <li><h5>{t("hero.start").split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h5></li>
               </ul>
             </div>
           </div>
@@ -29,16 +29,12 @@ const HeroHomeOne = () => {
                 <div className="shape-1" style={{ backgroundImage: `url(/assets/images/shape/shape-63.png)` }}></div>
                 <div className="shape-2" style={{ backgroundImage: `url(/assets/images/shape/shape-64.png)` }}></div>
               </div>
-              <p>Diseñamos marcas y construimos sitios web de alta conversión que hacen que las empresas ambiciosas luzcan inolvidables — para clientes en EE. UU. y Latinoamérica.</p>
-              <div className="link-text"><Link to="/contact">Inicia Tu Proyecto</Link></div>
+              <p>{t("hero.desc")}</p>
+              <div className="link-text"><Link to="/contacto">{t("hero.cta")}</Link></div>
               <ul className="scroll-text">
-                <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>
-                <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>
-                <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>
-                <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>
-                <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>
+                {[1,2,3,4,5].map(i => <li key={i}>{t("hero.scrolltext")}</li>)}
               </ul>
-              <div className="scroll-down"><a href="#footer">Ver Más</a></div>
+              <div className="scroll-down"><a href="#footer">{t("hero.scroll")}</a></div>
             </div>
           </div>
         </div>

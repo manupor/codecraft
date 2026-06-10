@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { useLang } from "../../../context/LanguageContext";
 
- 
 
 
 const PortfolioHomeOne = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="portfolio-section-four">
@@ -11,10 +12,10 @@ const PortfolioHomeOne = () => {
         <div className="outer-box">
           <div className="title-box text-center">
             <h2>
-              <span style={{display: 'block'}}>Lo que hacemos</span>
-              <span style={{display: 'block', fontWeight: 400, fontSize: '0.85em'}}>Diseñamos, marcamos y lanzamos.</span>
+              <span style={{display: 'block'}}>{t("portfolio.tag")}</span>
+              <span style={{display: 'block', fontWeight: 400, fontSize: '0.85em'}}>{t("portfolio.subtitle")}</span>
             </h2>
-            <p>Diseñamos marcas y construimos sitios web de alta conversión para startups y empresas ambiciosas.</p>
+            <p>{t("portfolio.desc")}</p>
           </div>
           <div className="main-content-box">
             <div className="portfolio-block-four">

@@ -1,14 +1,16 @@
+import { useLang } from "../../../context/LanguageContext";
 
 const ClientsHomeTwo = ({style_2} : any) => {
+  const { t } = useLang();
   return (
     <>
       <section className={`clients-section text-center ${style_2 ? 'about-clients' : ''}`}>
         <div className="container">
           <div className="main-title">
-            <h2>Confían en CodeCraftt <span className="gradient-color">Empresas Innovadoras</span></h2>
+            <h2>{t("clients.title")} <span className="gradient-color">{t("clients.subtitle")}</span></h2>
           </div>
           <p style={{maxWidth: '600px', margin: '0 auto 40px', color: '#666'}}>
-            Desde startups tecnológicas hasta empresas consolidadas, hemos tenido el privilegio de colaborar con organizaciones que buscan excelencia digital.
+            {t("clients.desc")}
           </p>
           <ul className="clients-logo-list">
             <li><a href="#"><img src="assets/images/clients/Book-IQ-Logo_long_WHITE.png" alt="Book IQ" /></a></li>

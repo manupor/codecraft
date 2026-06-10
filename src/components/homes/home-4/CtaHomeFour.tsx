@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLang } from "../../../context/LanguageContext";
 
 const CtaHomeFour = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="cta-section">
@@ -8,11 +10,11 @@ const CtaHomeFour = () => {
         <div className="container">
           <div className="cta-content">
             <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-22.png)` }}></div>
-                        <h3>¿Listo para Transformar tu Negocio?</h3>
-            <h2>Hablemos de Tu Proyecto.</h2>
-            <p>Agenda una llamada estratégica gratuita. En 30 minutos analizaremos tus objetivos,<br />identificaremos oportunidades y te presentaremos un plan de acción claro.</p>
+                        <h3>{t("cta.tag")}</h3>
+            <h2>{t("cta.title")}</h2>
+            <p>{t("cta.desc")}</p>
             <div className="btn-box">
-              <Link to="/contact" className="primary-btn one gradient-bg white-color"><span>Agendar Llamada</span><i className="icon-1 gradient-color"></i></Link>
+              <Link to="/contacto" className="primary-btn one gradient-bg white-color"><span>{t("cta.btn")}</span><i className="icon-1 gradient-color"></i></Link>
             </div>
           </div>
         </div>

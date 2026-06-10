@@ -1,4 +1,4 @@
- 
+import { useLang } from "../../../context/LanguageContext";
 import "swiper/css/bundle";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,14 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
  
 
 const TestimonialHomeOne = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="testimonial-section-three">
         <div className="pattern-box" style={{ backgroundImage: `url(/assets/images/shape/shape-66.png)` }}></div>
         <div className="outer-box">
           <div className="main-title-two text-center">
-            <span className="sub-title">(Recomendaciones de colegas en Amazon & AWS)</span>
-            <h2>Testimonios</h2>
+            <span className="sub-title">{t("testimonials.tag")}</span>
+            <h2>{t("testimonials.title")}</h2>
           </div>
           <div className="image-layer">
             <figure className="image-1"><img src="assets/images/resource/testimonial-2.png" alt="" /></figure>
