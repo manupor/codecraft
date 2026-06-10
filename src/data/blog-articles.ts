@@ -36,7 +36,7 @@ export const blogArticles: BlogArticle[] = [
 <p>Desde 2021, Google incluye estas métricas como factores de ranking. Un sitio con buenos Core Web Vitals tiene ventaja competitiva en los resultados de búsqueda. No es solo técnico—es estratégico.</p>
 
 <h2>Cómo mejorar tus métricas</h2>
-<p>He optimizado más de 150 sitios y estos son los cambios que más impacto tienen:</p>
+<p>Hemos optimizado más de 150 sitios y estos son los cambios que más impacto tienen:</p>
 
 <ul>
   <li>Optimizar imágenes con formatos modernos (WebP, AVIF)</li>
@@ -116,7 +116,7 @@ export const blogArticles: BlogArticle[] = [
     title: "Next.js vs Webflow: Cuál elegir para tu proyecto",
     excerpt: "Análisis comparativo de dos de las plataformas más populares para desarrollo web: descubre cuál se adapta mejor a tus necesidades.",
     content: `
-<p>Como desarrollador con experiencia en ambas plataformas, a menudo me preguntan: <strong>"¿Debería usar Next.js o Webflow?"</strong> La respuesta depende de tus objetivos, presupuesto y requerimientos técnicos.</p>
+<p>Como equipo con experiencia en ambas plataformas, a menudo nos preguntan: <strong>"¿Debería usar Next.js o Webflow?"</strong> La respuesta depende de tus objetivos, presupuesto y requerimientos técnicos.</p>
 
 <h2>Webflow: El poder del no-code</h2>
 <p>Webflow es excelente cuando:</p>
@@ -167,7 +167,7 @@ export const blogArticles: BlogArticle[] = [
   </tr>
 </table>
 
-<h2>Mi recomendación</h2>
+<h2>Nuestra recomendación</h2>
 <p>Para startups validando su mercado: <strong>Webflow</strong>. Para empresas establecidas que necesitan escalabilidad: <strong>Next.js</strong>.</p>
 
 <h2>Conclusión</h2>
@@ -188,7 +188,7 @@ export const blogArticles: BlogArticle[] = [
     title: "5 elementos que toda landing page necesita",
     excerpt: "Descubre los componentes esenciales que transforman visitantes en leads y clientes potenciales en tu página de destino.",
     content: `
-<p>He diseñado y desarrollado más de 100 landing pages. Las que convierten tienen elementos específicos que guían al visitante hacia la acción deseada. Aquí están los 5 imprescindibles:</p>
+<p>Hemos diseñado y desarrollado más de 100 landing pages. Las que convierten tienen elementos específicos que guían al visitante hacia la acción deseada. Aquí están los 5 imprescindibles:</p>
 
 <h2>1. Headline que resuena</h2>
 <p>Tu headline debe:</p>

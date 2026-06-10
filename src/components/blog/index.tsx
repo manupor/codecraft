@@ -11,7 +11,7 @@ const Blog = () => {
     <Wrapper>
       <div className='boxed_wrapper'>
         <HeaderFive />
-        <Breacrumb title="Our Blog" subtitle="Our Blog" />
+        <Breacrumb title="Nuestro Blog" subtitle="Blog" />
         <BlogArea />
         <CtaHomeFour />
         <FooterFour />
