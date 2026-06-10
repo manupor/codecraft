@@ -19,7 +19,7 @@ const FooterOne = () => {
               <div className="col-lg-3 col-md-6 col-sm-12 footer-column">
                 <div className="footer-widget logo-widget">
                   <figure className="footer-logo"><Link to="/"><img src="codecraftt-logo.png" alt="CodeCraftt" style={{maxHeight: '45px', width: 'auto'}} /></Link></figure>
-                  <p>Estudio de diseno web y branding en Costa Rica. Diseno marcas y construyo sitios web de alta conversion para startups y empresas en EE. UU. y Latinoamerica. Soy Manu Portuguez, CEO / Sr Developer.</p>
+                  <p>Estudio de diseño web y branding en Costa Rica. Diseñamos marcas y construimos sitios web de alta conversión para startups y empresas en EE. UU. y Latinoamérica.</p>
                 </div>
               </div>
               <div className="col-lg-2 col-md-6 col-sm-12 footer-column">

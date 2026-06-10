@@ -50,7 +50,7 @@ const AboutArea = () => {
                   <h2>Transformando ideas en <span className="gradient-color color-two">marcas que venden</span></h2>
                 </div>
                 <div className="about-text">
-                  <p>Soy Manu Portuguez, CEO y Sr Developer de CodeCraftt. Durante mas de 7 anos he ayudado a startups y empresas en EE.UU. y Latinoamerica a crear marcas memorables y sitios web de alta conversion. No uso plantillas: cada proyecto es unico, disenado a medida para tu negocio. Desde la estrategia inicial hasta el lanzamiento, trabajo directamente contigo para garantizar resultados excepcionales.</p>
+                  <p>Detrás de CodeCraftt está Manu Portuguez, CEO y Sr Developer. Durante más de 7 años hemos ayudado a startups y empresas en EE.UU. y Latinoamérica a crear marcas memorables y sitios web de alta conversión. No usamos plantillas: cada proyecto es único, diseñado a medida para tu negocio. Desde la estrategia inicial hasta el lanzamiento, trabajamos directamente contigo para garantizar resultados excepcionales.</p>
                 </div>
                 <div className="btn-box">
                   <Link to="/contact" className="primary-btn one gradient-bg white-color border-btn"><span>Inicia Tu Proyecto</span><i className="icon-1 gradient-color"></i></Link>

@@ -27,9 +27,6 @@ const PortfolioHomeOne = () => {
               <div className="link-box">
                 <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
               </div>
-              <div className="image-content">
-                <figure className="image"><img src="assets/images/portfolio/portfolio-1.png" alt="" /></figure>
-              </div>
             </div>
             <div className="portfolio-block-four">
               <div className="text-box">
@@ -43,9 +40,6 @@ const PortfolioHomeOne = () => {
               </div>
               <div className="link-box">
                 <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
-              </div>
-              <div className="image-content">
-                <figure className="image"><img src="assets/images/portfolio/portfolio-1.png" alt="" /></figure>
               </div>
             </div>
             <div className="portfolio-block-four">
@@ -61,9 +55,6 @@ const PortfolioHomeOne = () => {
               <div className="link-box">
                 <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
               </div>
-              <div className="image-content">
-                <figure className="image"><img src="assets/images/portfolio/portfolio-1.png" alt="" /></figure>
-              </div>
             </div>
             <div className="portfolio-block-four">
               <div className="text-box">
@@ -77,9 +68,6 @@ const PortfolioHomeOne = () => {
               </div>
               <div className="link-box">
                 <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
-              </div>
-              <div className="image-content">
-                <figure className="image"><img src="assets/images/portfolio/portfolio-1.png" alt="" /></figure>
               </div>
             </div>
           </div>

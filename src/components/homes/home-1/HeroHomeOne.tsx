@@ -29,7 +29,7 @@ const HeroHomeOne = () => {
                 <div className="shape-1" style={{ backgroundImage: `url(/assets/images/shape/shape-63.png)` }}></div>
                 <div className="shape-2" style={{ backgroundImage: `url(/assets/images/shape/shape-64.png)` }}></div>
               </div>
-              <p>Diseño marcas y construyo sitios web de alta conversion que hacen que las empresas ambiciosas luzcan inolvidables — para clientes en EE. UU. y Latinoamerica. Soy Manu Portuguez, CEO / Sr Developer.</p>
+              <p>Diseñamos marcas y construimos sitios web de alta conversión que hacen que las empresas ambiciosas luzcan inolvidables — para clientes en EE. UU. y Latinoamérica.</p>
               <div className="link-text"><Link to="/contact">Inicia Tu Proyecto</Link></div>
               <ul className="scroll-text">
                 <li>Diseño Web · Branding · Diseño de Logo · Costa Rica</li>

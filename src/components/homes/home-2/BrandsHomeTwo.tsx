@@ -30,9 +30,9 @@ const BrandsHomeTwo = ({style_2} : any) => {
           </div>
           <div className="brands-content">
             <div className="text-box">
-              <p>En CodeCraftt no creo en soluciones genéricas. Combino más de 10 años de experiencia en diseño UX/UI, desarrollo full-stack y arquitectura cloud para crear productos digitales que realmente impulsan tu negocio.</p>
-              <p>Desde startups en Silicon Valley hasta empresas consolidadas en Latinoamérica, cada proyecto recibe atención directa del fundador, garantizando calidad premium y resultados medibles en conversión, velocidad y experiencia de usuario.</p>
-              <div className="btn-box"><a href="/contact" className="primary-btn one gradient-bg white-color border-btn">Conoce Mi Proceso</a></div>
+              <p>En CodeCraftt no creemos en soluciones genéricas. Combinamos más de 10 años de experiencia en diseño UX/UI, desarrollo full-stack y arquitectura cloud para crear productos digitales que realmente impulsan tu negocio.</p>
+              <p>Desde startups en Silicon Valley hasta empresas consolidadas en Latinoamérica, cada proyecto recibe atención directa, garantizando calidad premium y resultados medibles en conversión, velocidad y experiencia de usuario.</p>
+              <div className="btn-box"><a href="/contact" className="primary-btn one gradient-bg white-color border-btn">Conoce Nuestro Proceso</a></div>
             </div>
             <div className="fact-content">
               {counter_data.map((item, i) => (
