@@ -8605,8 +8605,15 @@ div#mCSB_1_container{
 }
 
 @media (max-width: 767px) {
+  .parallax-image {
+    height: 56vw !important;
+  }
   .parallax-image .background-image {
     background-attachment: scroll !important;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #f0e8de !important;
   }
 }
 
