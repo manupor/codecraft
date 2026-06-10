@@ -62,7 +62,7 @@ const FooterOne = () => {
                   <div className="widget-content">
                     <ul className="links-list">
                       <li><Link to="/about">Nosotros</Link></li>
-                      <li><Link to="/#proceso">Proceso</Link></li>
+                      <li><Link to="/blog">Blog</Link></li>
                       <li><Link to="/service">Servicios</Link></li>
                       <li><Link to="/faq">Preguntas Frecuentes</Link></li>
                       <li><Link to="/contact">Contacto</Link></li>
@@ -91,9 +91,8 @@ const FooterOne = () => {
                   </div>
                   <div className="widget-content">
                     <ul className="social-list">
-                      <li><Link to="/"><i className="fab fa-facebook-f"></i></Link></li>
-                      <li><Link to="/"><i className="fab fa-instagram"></i></Link></li>
-                      <li><Link to="/"><i className="fab fa-linkedin-in"></i></Link></li>
+                      <li><a href="https://www.instagram.com/codecraftt_cr/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a></li>
+                      <li><a href="https://www.linkedin.com/company/codecraftt/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a></li>
                     </ul>
                   </div>
                 </div>
