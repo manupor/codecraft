@@ -13,12 +13,10 @@ const FooterFour = () => {
                   <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-26.png)` }}></div>
                   <figure className="footer-logo"><Link to="/"><img src="codecraftt-logo.png" alt="CodeCraftt" style={{maxHeight: '45px', width: 'auto'}} /></Link></figure>
                   <p>Estudio digital especializado en branding, desarrollo web premium y soluciones tecnológicas para empresas modernas. Más de 10 años transformando negocios en Estados Unidos y Latinoamérica con diseño a medida, sin plantillas genéricas.</p>
-                  <h6>Sígueme:</h6>
+                  <h6>Síguenos:</h6>
                   <ul className="social-links">
-                    <li><a href="#"><i className="icon-15"></i></a></li>
-                    <li><a href="#"><i className="icon-18"></i></a></li>
-                    <li><a href="#"><i className="icon-16"></i></a></li>
-                    <li><a href="#"><i className="icon-17"></i></a></li>
+                    <li><a href="https://www.instagram.com/codecraftt_cr/" target="_blank" rel="noopener noreferrer"><i className="icon-18"></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/codecraftt/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -34,7 +32,7 @@ const FooterFour = () => {
                         <div className="widget-content">
                           <ul className="links-list clearfix">
                             <li><Link to="/">Inicio</Link></li>
-                            <li><Link to="/about">Sobre Mi</Link></li>
+                            <li><Link to="/about">Sobre Nosotros</Link></li>
                             <li><Link to="/service">Servicios</Link></li>
                             <li><Link to="/portfolio">Proyectos</Link></li>
                             <li><Link to="/contact">Contacto</Link></li>
