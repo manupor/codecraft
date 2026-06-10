@@ -5,24 +5,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const testimonials = [
   {
-    quote: "Manu y su equipo transformaron completamente la imagen de nuestra empresa. El sitio web que crearon es increíblemente rápido y nuestra tasa de conversión aumentó un 40% en el primer mes.",
-    name: "Carlos Jiménez",
-    role: "CEO, TechStart CR",
+    quote: "Trabajé con Manu en Amazon en el área de entretenimiento y recomendaría sus servicios de diseño gráfico. Se toma el tiempo para entender los resultados que buscamos y entregó productos que beneficiaron a nuestra comunidad y stakeholders.",
+    name: "Zac Sims",
+    role: "Head of FP&A and Design Finance — Amazon Music",
   },
   {
-    quote: "Trabajar con CodeCraftt fue una experiencia excepcional. Entendieron nuestra visión desde el primer día y la llevaron a otro nivel. Nuestra marca ahora se siente profesional y auténtica.",
-    name: "Andrea Mora",
-    role: "Fundadora, Studio Bloom",
+    quote: "Trabajé con Manu cuando era creador de contenido digital en la oficina del CFO de AWS. Tenía muy buen ojo para el diseño y añadió efectos visuales únicos para llevar el video al siguiente nivel. Manu insiste en altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.",
+    name: "Sanjay Singh",
+    role: "Head of AWS Fintech — Amazon Web Services",
   },
   {
-    quote: "El nivel de detalle y dedicación que Manu pone en cada proyecto es impresionante. Logramos lanzar nuestra plataforma en tiempo récord y con una calidad que superó nuestras expectativas.",
-    name: "Diego Solano",
-    role: "Co-founder, Nuvelo App",
+    quote: "Trabajé con Manu en AWS y recomendaría ampliamente sus servicios de diseño. Manu ayudó a llevar nuestra visión al siguiente nivel con gráficos de vanguardia. Tomó presentaciones aburridas sobre temas complejos y les dio vida, aumentando la participación de nuestra comunidad.",
+    name: "John Winkler",
+    role: "Sustainability Controls — Amazon",
   },
   {
-    quote: "No solo construyeron nuestro sitio web, sino que nos ayudaron a definir toda nuestra estrategia de marca. El retorno de inversión ha sido extraordinario desde el lanzamiento.",
-    name: "Valentina Herrera",
-    role: "Directora de Marketing, Innova Group",
+    quote: "Manu es un diseñador gráfico talentoso, profesional y dedicado, con una actitud positiva y colaborativa. Fue clave para completar una serie de productos de comunicación internos y externos de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.",
+    name: "Michael Rettig",
+    role: "Strategy & Communications — IBM | Brookings, Carnegie, Edelman alum",
   },
 ];
 
