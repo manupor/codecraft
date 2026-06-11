@@ -74,6 +74,34 @@ const PortfolioHomeOne = () => {
                 <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
               </div>
             </div>
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item5.title")}</Link></h3>
+                <span style={{color: "#e89230", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item5.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item5.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item5.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item5.li3")}</Link></li>
+                </ul>
+              </div>
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item6.title")}</Link></h3>
+                <span style={{color: "#3b82f6", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item6.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item6.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item6.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item6.li3")}</Link></li>
+                </ul>
+              </div>
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
           </div>
           <div className="lower-link-box text-center"><Link to="/contacto">{t("portfolio.cta")}</Link></div>
         </div>

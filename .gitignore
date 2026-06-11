@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Next.js legacy artifacts
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo
+src/_nextjs-archive/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
