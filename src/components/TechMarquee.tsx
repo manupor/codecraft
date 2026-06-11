@@ -94,10 +94,10 @@ export default function TechMarquee() {
   const { t } = useLanguage();
   return (
     <section aria-label="Technologies we work with" className="relative py-16 overflow-hidden border-y border-white/[0.05]">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#090a0c] via-transparent to-[#090a0c] z-10" />
 
       <div className="mb-10 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5c5f66]">
           {t.techMarquee.title}
         </p>
       </div>
@@ -113,10 +113,10 @@ export default function TechMarquee() {
               key={i}
               className="flex flex-col items-center gap-3 px-6 shrink-0"
             >
-              <div className="text-zinc-500 hover:text-zinc-200 transition-colors duration-300">
+              <div className="text-[#5c5f66] hover:text-[#b8b5ae] transition-colors duration-300">
                 {tech.icon}
               </div>
-              <span className="text-[11px] font-medium text-zinc-600 uppercase tracking-wider">
+              <span className="text-[11px] font-medium text-[#3e4149] uppercase tracking-wider">
                 {tech.name}
               </span>
             </div>

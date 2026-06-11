@@ -9,7 +9,7 @@ export default function BigStatement() {
   const { t } = useLanguage();
   return (
     <section className="relative py-24 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/[0.025] to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.025] to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -27,13 +27,13 @@ export default function BigStatement() {
               {t.bigStatement.headline2}
             </h2>
 
-            <p className="mt-7 text-xl text-zinc-300 leading-relaxed max-w-md">
+            <p className="mt-7 text-xl text-[#b8b5ae] leading-relaxed max-w-md">
               {t.bigStatement.paragraph}
             </p>
 
             <a
               href="#contact"
-              className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/[0.12] text-zinc-300 font-medium text-sm hover:bg-white/[0.05] hover:border-white/25 transition-all duration-200"
+              className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-sm border border-[#efece7]/[0.12] text-[#b8b5ae] font-medium text-sm hover:bg-white/[0.05] hover:border-[#efece7]/25 transition-all duration-200"
             >
               {t.bigStatement.cta}
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

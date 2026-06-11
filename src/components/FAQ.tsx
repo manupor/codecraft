@@ -35,7 +35,7 @@ export default function FAQ() {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400 mb-4">{t.faq.eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e89230] mb-4">{t.faq.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
             {t.faq.headline} <span className="gradient-text">{t.faq.headlineAccent}</span>
           </h2>
@@ -56,8 +56,8 @@ export default function FAQ() {
                 className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                 aria-expanded={open === i}
               >
-                <span className="text-sm sm:text-base font-medium text-white">{faq.q}</span>
-                <span className="shrink-0 text-zinc-300">
+                <span className="text-sm sm:text-base font-medium text-[#efece7]">{faq.q}</span>
+                <span className="shrink-0 text-[#b8b5ae]">
                   {open === i ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
@@ -69,7 +69,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                   >
-                    <p className="px-6 pb-5 text-sm text-zinc-300 leading-relaxed">{faq.a}</p>
+                    <p className="px-6 pb-5 text-sm text-[#b8b5ae] leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

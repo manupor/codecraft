@@ -27,7 +27,7 @@ export default function NavMenuWrapper() {
     <>
       <LanguageToggle />
       <div 
-        className="fixed top-0 left-0 right-0 h-24 bg-black/80 backdrop-blur-xl border-b border-white/5 z-30 transition-opacity duration-300"
+        className="fixed top-0 left-0 right-0 h-24 bg-[#090a0c]/80 backdrop-blur-xl border-b border-white/5 z-30 transition-opacity duration-300"
         style={{ opacity: scrolled ? 1 : 0 }}
       />
       <StaggeredMenu
@@ -35,12 +35,12 @@ export default function NavMenuWrapper() {
         items={menuItems}
         displaySocials={false}
         displayItemNumbering={false}
-        menuButtonColor="#ffffff"
-        openMenuButtonColor="#fff"
+        menuButtonColor="#efece7"
+        openMenuButtonColor="#efece7"
         changeMenuColorOnOpen={true}
         colors={['transparent', 'transparent']}
         logoUrl="/codecraftt-logo.png"
-        accentColor="#5227FF"
+        accentColor="#e89230"
         isFixed={true}
       />
     </>

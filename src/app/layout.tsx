@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -117,7 +114,16 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}>
+      <body className={`${spaceGrotesk.variable} antialiased bg-[#090a0c] text-[#efece7]`}>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18229958933" strategy="afterInteractive" />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18229958933');
+          `}
+        </Script>
         <LanguageProvider>
           <SessionProvider>{children}</SessionProvider>
           <WhatsAppButton />
