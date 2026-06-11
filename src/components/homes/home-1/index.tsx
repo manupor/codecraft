@@ -16,20 +16,18 @@ import FooterOne from "../../../layouts/footers/FooterOne";
 const HomeOne = () => {
 	return (
 		<Wrapper>
-			<div className="boxed_wrapper main-home">
-				<HeaderOne />
-				<HeroHomeOne />
-				<CounterHomeOne />
-				<AboutHomeOne />
-				<ParallaxImgHomeOne />
-				<PortfolioHomeOne />
-				<WorkingHomeOne />
-				<ProjectHomeOne />
-				<TestimonialHomeOne />
-				<BlogHomeOne />
-				<CtaHomeOne />
-				<FooterOne />
-			</div>
+			<HeaderOne />
+			<HeroHomeOne />
+			<CounterHomeOne />
+			<AboutHomeOne />
+			<ParallaxImgHomeOne />
+			<PortfolioHomeOne />
+			<WorkingHomeOne />
+			<ProjectHomeOne />
+			<TestimonialHomeOne />
+			<BlogHomeOne />
+			<CtaHomeOne />
+			<FooterOne />
 		</Wrapper>
 	);
 };

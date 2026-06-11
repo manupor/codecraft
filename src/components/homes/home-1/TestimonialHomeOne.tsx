@@ -1,120 +1,35 @@
 import { useLang } from "../../../context/LanguageContext";
-import "swiper/css/bundle";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
- 
 
 const TestimonialHomeOne = () => {
   const { t } = useLang();
   return (
     <>
-      <section className="testimonial-section-three">
-        <div className="pattern-box" style={{ backgroundImage: `url(/assets/images/shape/shape-66.png)` }}></div>
-        <div className="outer-box">
-          <div className="main-title-two text-center">
-            <span className="sub-title">{t("testimonials.tag")}</span>
-            <h2>{t("testimonials.title")}</h2>
+      <section className="testimonial-section fix section-bg section-padding">
+        <div className="container">
+          <div className="section-title text-center mb-5">
+            <h6 className="wow fadeInUp">{t("testimonials.tag")}</h6>
+            <h2 className="wow fadeInUp" data-wow-delay=".3s">{t("testimonials.title")}</h2>
           </div>
-          <div className="image-layer">
-            <figure className="image-1"><img src="assets/images/resource/testimonial-2.png" alt="" /></figure>
-            <figure className="image-2"><img src="assets/images/resource/testimonial-3.png" alt="" /></figure>
+          <div className="row g-4">
+            {[
+              { text: t("testimonials.t1"), name: "Zac Sims", role: "Head of FP&A and Design Finance — Amazon Music", delay: ".2s" },
+              { text: t("testimonials.t2"), name: "Sanjay Singh", role: "Head of AWS Fintech — Amazon Web Services", delay: ".4s" },
+              { text: t("testimonials.t3"), name: "John Winkler", role: "Sustainability Controls — Amazon", delay: ".6s" },
+              { text: t("testimonials.t4"), name: "Michael Rettig", role: "Strategy & Communications — IBM", delay: ".8s" },
+            ].map((item, i) => (
+              <div key={i} className="col-lg-6 wow fadeInUp" data-wow-delay={item.delay}>
+                <div className="testimonial-box-items" style={{ padding: "30px" }}>
+                  <p style={{ fontSize: "15px", lineHeight: "1.7", marginBottom: "20px", color: "var(--text)" }}>{item.text}</p>
+                  <div className="client-info" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <div className="content">
+                      <h5 style={{ marginBottom: "2px", fontSize: "16px" }}>{item.name}</h5>
+                      <span style={{ fontSize: "13px", color: "var(--text)" }}>{item.role}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={24}
-            mousewheel={false}
-            speed={1400}
-            watchSlidesProgress={true}
-            loop={true}
-            autoplay={{
-              delay: 5000
-            }}
-            modules={[Pagination, Autoplay, Navigation]}
-            pagination={{
-              el: '.testimonial-pagination',
-              clickable: true
-            }}
-            navigation={{
-              nextEl: '.testimonial-next-btn',
-              prevEl: '.testimonial-prev-btn',
-            }}
-            breakpoints={{
-              1920: {
-                slidesPerView: 1,
-                spaceBetween: 30
-              },
-              1400: {
-                slidesPerView: 1,
-                spaceBetween: 30
-              },
-              900: {
-                slidesPerView: 1,
-                spaceBetween: 30
-              },
-              700: {
-                slidesPerView: 1,
-                spaceBetween: 30
-              },
-              0: {
-                slidesPerView: 1,
-                spaceBetween: 30
-              }
-            }}
-            className="testimonial-block-slide-two">
-            <SwiperSlide className="swiper-slide">
-              <div className="testimonial-block">
-                <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>{t("testimonials.t1")}</p>
-                <div className="author-box" style={{justifyContent: 'center'}}>
-                  <div className="author-text">
-                    <h5>Zac Sims</h5>
-                    <span className="designation">Head of FP&A and Design Finance<br />Amazon Music</span>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="swiper-slide">
-              <div className="testimonial-block">
-                <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>{t("testimonials.t2")}</p>
-                <div className="author-box" style={{justifyContent: 'center'}}>
-                  <div className="author-text">
-                    <h5>Sanjay Singh</h5>
-                    <span className="designation">Head of AWS Fintech<br />Amazon Web Services</span>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="swiper-slide">
-              <div className="testimonial-block">
-                <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>{t("testimonials.t3")}</p>
-                <div className="author-box" style={{justifyContent: 'center'}}>
-                  <div className="author-text">
-                    <h5>John Winkler</h5>
-                    <span className="designation">Sustainability Controls<br />Amazon</span>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="swiper-slide">
-              <div className="testimonial-block">
-                <div className="quote-icon"><img src="assets/images/icons/icon-35.png" alt="" /></div>
-                <p>{t("testimonials.t4")}</p>
-                <div className="author-box" style={{justifyContent: 'center'}}>
-                  <div className="author-text">
-                    <h5>Michael Rettig</h5>
-                    <span className="designation">Strategy & Communications<br />IBM | Brookings, Carnegie, Edelman alum</span>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <div className="swiper-nav">
-              <div className="testimonial-prev-btn nav-btn"><img style={{cursor: "pointer"}} src="assets/images/icons/icon-36.png" alt="" /></div>
-              <div className="testimonial-next-btn nav-btn"><img style={{cursor: "pointer"}} src="assets/images/icons/icon-37.png" alt="" /></div>
-            </div>
-          </Swiper>
         </div>
       </section>
     </>

@@ -5,25 +5,14 @@ const CtaHomeOne = () => {
   const { t } = useLang();
   return (
     <>
-      <section className="cta-section-two">
-        <div className="pattern-box" style={{ backgroundImage: `url(/assets/images/shape/shape-68.png)` }}></div>
-        <div className="outer-box">
-          <div className="main-content-box">
-            <h2>{t("ctahome.title1")}<br />{t("ctahome.title2")}<br />{t("ctahome.title3")}</h2>
-            <div className="text-box">
-              <p>{t("ctahome.desc")}</p>
-              <Link to="/contacto">{t("ctahome.cta")}</Link>
-            </div>
-            <div className="inner-box">
-              <div className="shape" style={{ backgroundImage: `url(/assets/images/shape/shape-69.png)` }}></div>
-              <h5>{t("ctahome.write")}</h5>
-              <a href="https://wa.me/50683442522" target="_blank" rel="noopener noreferrer">WhatsApp +506 8344 2522</a>
-              <div className="icon-box"><img src="assets/images/icons/icon-38.png" alt="" /></div>
-              <ul className="clients-list">
-                <li><img src="assets/images/resource/clients-8.png" alt="" /></li>
-                <li><img src="assets/images/resource/clients-9.png" alt="" /></li>
-                <li><span><img src="assets/images/icons/icon-39.png" alt="" /></span></li>
-              </ul>
+      <section className="lets-talk-section fix section-padding section-bg pb-0">
+        <div className="container">
+          <div className="lets-talk-wrapper text-center">
+            <h2 className="wow fadeInUp" data-wow-delay=".3s">{t("ctahome.title1")} {t("ctahome.title2")} <br /> {t("ctahome.title3")}</h2>
+            <p className="wow fadeInUp" data-wow-delay=".4s" style={{ maxWidth: "600px", margin: "1.5rem auto", color: "var(--text)" }}>{t("ctahome.desc")}</p>
+            <div className="hero-ctas wow fadeInUp" data-wow-delay=".5s" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
+              <Link to="/contacto" className="theme-btn">{t("ctahome.cta")}</Link>
+              <a href="https://wa.me/50683442522" target="_blank" rel="noopener noreferrer" className="theme-btn-2">WhatsApp +506 8344 2522</a>
             </div>
           </div>
         </div>

@@ -1,112 +1,34 @@
-import { Link } from "react-router-dom";
-import "swiper/css/bundle";
-import { Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useLang } from "../../../context/LanguageContext";
 
 const ProjectHomeOne = () => {
   const { t } = useLang();
   return (
     <>
-      <section className="portfolio-section-five">
-        <div className="outer-box">
-          <div className="main-title text-center">
-            <h2>{t("project.title")}</h2>
-            <p>{t("project.desc")}</p>
+      <section className="portfolio-section fix section-bg section-padding">
+        <div className="container">
+          <div className="section-title-area">
+            <div className="section-title">
+              <h6 className="wow fadeInUp">{t("project.title")}</h6>
+              <h2 className="wow fadeInUp" data-wow-delay=".3s">{t("project.desc")}</h2>
+            </div>
           </div>
-          <div className="main-content-box">
-            <Swiper
-              slidesPerView={4}
-              spaceBetween={24}
-              mousewheel={false}
-              speed={1400} 
-              watchSlidesProgress={true}
-              loop={true}
-              autoplay={{
-                delay: 5000
-              }}
-              pagination={{
-                el: '.portfolio-pagination',
-                clickable: true
-              }}
-              modules={[Pagination]}
-              breakpoints={
-                {
-                  1920: {
-                    slidesPerView: 4,
-                    spaceBetween: 30
-                  },
-                  1400: {
-                    slidesPerView: 4,
-                    spaceBetween: 30
-                  },
-                  900: {
-                    slidesPerView: 3,
-                    spaceBetween: 30
-                  },
-                  700: {
-                    slidesPerView: 2,
-                    spaceBetween: 30
-                  },
-                  0: {
-                    slidesPerView: 1,
-                    spaceBetween: 30
-                  }
-                }
-              }
-              className="portfolio-block-slide">
-              <SwiperSlide className="swiper-slide">
-                <div className="portfolio-block-five">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-23.jpg" alt="Diseno primero" /></figure>
-                  <div className="text-box">
-                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
-                    <h3><Link to="/servicios">{t("project.s1.title")}</Link></h3>
-                    <p>{t("project.s1.desc")}</p>
+          <div className="row g-4">
+            {[
+              { title: t("project.s1.title"), desc: t("project.s1.desc"), delay: ".2s" },
+              { title: t("project.s2.title"), desc: t("project.s2.desc"), delay: ".4s" },
+              { title: t("project.s3.title"), desc: t("project.s3.desc"), delay: ".6s" },
+              { title: t("project.s4.title"), desc: t("project.s4.desc"), delay: ".8s" },
+              { title: t("project.s5.title"), desc: t("project.s5.desc"), delay: "1s" },
+            ].map((item, i) => (
+              <div key={i} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={item.delay}>
+                <div className="service-box-items" style={{ padding: "30px" }}>
+                  <div className="content">
+                    <h3>{item.title}</h3>
+                    <p>{item.desc}</p>
                   </div>
                 </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="portfolio-block-five">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-24.jpg" alt="Lanza rapido" /></figure>
-                  <div className="text-box">
-                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
-                    <h3><Link to="/servicios">{t("project.s2.title")}</Link></h3>
-                    <p>{t("project.s2.desc")}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="portfolio-block-five">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-25.jpg" alt="Hecho para vender" /></figure>
-                  <div className="text-box">
-                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
-                    <h3><Link to="/servicios">{t("project.s3.title")}</Link></h3>
-                    <p>{t("project.s3.desc")}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="portfolio-block-five">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-26.jpg" alt="Tecnologias modernas" /></figure>
-                  <div className="text-box">
-                    <Link to="/servicios" className="link">{t("project.viewmore")}</Link>
-                    <h3><Link to="/servicios">{t("project.s4.title")}</Link></h3>
-                    <p>{t("project.s4.desc")}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="swiper-slide">
-                <div className="portfolio-block-five">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-24.jpg" alt="Costa Rica" /></figure>
-                  <div className="text-box">
-                    <Link to="/contacto" className="link">{t("project.viewmore")}</Link>
-                    <h3><Link to="/contacto">{t("project.s5.title")}</Link></h3>
-                    <p>{t("project.s5.desc")}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <div className="portfolio-pagination"></div>
-            </Swiper>
+              </div>
+            ))}
           </div>
         </div>
       </section>

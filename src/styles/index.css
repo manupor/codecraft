@@ -1,21 +1,15 @@
+/* @import "react-modal-video/css/modal-video.css"; */
 
+/* Agznko Template Styles */
+@import "/agznko/assets/css/bootstrap.min.css";
+@import "/agznko/assets/css/all.min.css";
+@import "/agznko/assets/css/animate.css";
+@import "/agznko/assets/css/magnific-popup.css";
+@import "/agznko/assets/css/meanmenu.css";
+@import "/agznko/assets/css/swiper-bundle.min.css";
+@import "/agznko/assets/css/nice-select.css";
+@import "/agznko/assets/css/color.css";
+@import "/agznko/assets/css/main.css";
 
-
-
-/* @import "react-modal-video/css/modal-video.css";   */
-
-
-@import "/assets/css/bootstrap.css";
-/* @import "/assets/css/swiper.min.css"; */
-/* @import "/assets/css/jquery.fancybox.min.css"; */
-@import "/assets/css/font-awesome-all.css";
-@import "/assets/css/flaticon.css";
-@import "/assets/css/animate.css";
-@import "/assets/css/ambit-font.css";
-@import "/assets/css/odometer.css";
-@import "/assets/css/style.css";
-@import "/assets/css/responsive.css";
-
-
+/* Legacy styles kept for transition components */
 /* @import "/assets/css/style.css"; */
-/* @import "../../public/assets/css/style.css"; */
