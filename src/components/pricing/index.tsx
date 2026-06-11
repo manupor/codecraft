@@ -1,17 +1,21 @@
  
 import Breacrumb from "../../common/Breacrumb";
-import FooterOne from "../../layouts/footers/FooterOne";
-import HeaderOne from "../../layouts/headers/HeaderOne";
+import FooterFour from "../../layouts/footers/FooterFour";
+import HeaderFive from "../../layouts/headers/HeaderFive";
 import Wrapper from "../../layouts/Wrapper";
-import PricingHomeFour from "../homes/home-4/PricingHomeFour";
+import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
+import PricingHomeFour from "../homes/home-4/PricingHomeFour"; 
 
 const Pricing = () => {
 	return (
 		<Wrapper>
-      <HeaderOne />
-			<Breacrumb title="Pricing Plan" subtitle="Pricing Plan" />
-      <PricingHomeFour style_2={true} />
-			<FooterOne />
+			<div className="boxed_wrapper">
+        <HeaderFive />
+				<Breacrumb title="Pricing Plan" subtitle="Pricing Plan" />
+        <PricingHomeFour style_2={true} />
+				<CtaHomeFour />
+				<FooterFour />
+			</div>
 		</Wrapper>
 	);
 };

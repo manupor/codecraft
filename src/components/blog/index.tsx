@@ -1,17 +1,21 @@
  
 import Breacrumb from '../../common/Breacrumb';
-import FooterOne from '../../layouts/footers/FooterOne';
-import HeaderOne from '../../layouts/headers/HeaderOne';
+import FooterFour from '../../layouts/footers/FooterFour';
+import HeaderFive from '../../layouts/headers/HeaderFive';
 import Wrapper from '../../layouts/Wrapper';
+import CtaHomeFour from '../homes/home-4/CtaHomeFour'; 
 import BlogArea from './BlogArea';
 
 const Blog = () => {
   return (
     <Wrapper>
-      <HeaderOne />
-      <Breacrumb title="Nuestro Blog" subtitle="Blog" />
-      <BlogArea />
-      <FooterOne />
+      <div className='boxed_wrapper'>
+        <HeaderFive />
+        <Breacrumb title="Nuestro Blog" subtitle="Blog" />
+        <BlogArea />
+        <CtaHomeFour />
+        <FooterFour />
+      </div>      
     </Wrapper>
   );
 };

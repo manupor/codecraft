@@ -1,19 +1,22 @@
  
 import Breacrumb from "../../common/Breacrumb";
-import FooterOne from "../../layouts/footers/FooterOne";
-import HeaderOne from "../../layouts/headers/HeaderOne";
+import FooterFour from "../../layouts/footers/FooterFour";
+import HeaderFive from "../../layouts/headers/HeaderFive";
 import Wrapper from "../../layouts/Wrapper";
- 
+import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
 import PortfolioDetailsArea from "./PortfolioDetailsArea";
 
  
 const PortfolioDetails = () => {
   return (
     <Wrapper>
-      <HeaderOne />
-      <Breacrumb title="Portfolio" subtitle="Portfolio Details" />
-      <PortfolioDetailsArea />
-      <FooterOne />
+      <div className="boxed_wrapper">
+        <HeaderFive />
+        <Breacrumb title="Digital Agency Portfolio" subtitle="Portfolio Details" />
+        <PortfolioDetailsArea />
+        <CtaHomeFour />
+        <FooterFour />
+      </div>      
     </Wrapper>
   );
 };

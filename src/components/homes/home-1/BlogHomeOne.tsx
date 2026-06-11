@@ -3,38 +3,74 @@ import { useLang } from "../../../context/LanguageContext";
 
 const BlogHomeOne = () => {
   const { t } = useLang();
-  const posts = [
-    { date: t("blog.post1.date"), cat: t("blog.post1.cat"), title: t("blog.post1.title"), slug: "core-web-vitals-importancia" },
-    { date: t("blog.post2.date"), cat: t("blog.post2.cat"), title: t("blog.post2.title"), slug: "crear-marca-memorable" },
-    { date: t("blog.post3.date"), cat: t("blog.post3.cat"), title: t("blog.post3.title"), slug: "nextjs-vs-webflow" },
-  ];
   return (
     <>
-      <section className="news-section fix section-padding">
-        <div className="container">
-          <div className="section-title-area">
-            <div className="section-title">
-              <h6 className="wow fadeInUp">{t("blog.tag")}</h6>
-              <h2 className="wow fadeInUp" data-wow-delay=".3s">{t("blog.title1")} {t("blog.title2")}</h2>
+      <section className="news-section-four">
+        <div className="outer-box">
+          <div className="title-box">
+            <div className="main-title-two">
+              <span className="sub-title">{t("blog.tag")}</span>
+              <h2>{t("blog.title1")}<br />{t("blog.title2")}</h2>
             </div>
-            <Link to="/blog" className="theme-btn wow fadeInUp" data-wow-delay=".5s">{t("blog.viewall")}</Link>
+            <div className="text-box">
+              <p>{t("blog.desc")}</p>
+            </div>
           </div>
-          <div className="row g-4">
-            {posts.map((post, i) => (
-              <div key={i} className={`col-xl-4 col-lg-6 col-md-6 wow fadeInUp`} data-wow-delay={`.${2 + i * 2}s`}>
-                <div className="news-box-items">
-                  <div className="news-content">
-                    <p>{post.date}</p>
-                    <h3><Link to={`/blog/${post.slug}`}>{post.title}</Link></h3>
-                    <div className="news-btn">
-                      <Link to={`/blog/${post.slug}`} className="link-btn">{t("blog.readmore")}</Link>
-                      <Link to={`/blog/${post.slug}`} className="arrow-icon"><i className="fa-sharp fa-solid fa-arrow-right"></i></Link>
-                    </div>
-                  </div>
+          <div className="row">
+            <div className="col-lg-3 col-md-6 col-sm-12 block-column">
+              <div className="news-block-six">
+                <figure className="image"><Link to="/"><img src="assets/images/news/news-17.jpg" alt="SEO" /></Link></figure>
+                <div className="text-box">
+                  <ul className="post-info">
+                    <li>{t("blog.post1.date")}</li>
+                    <li>{t("blog.post1.cat")}</li>
+                  </ul>
+                  <h3><Link to="/blog/core-web-vitals-importancia">{t("blog.post1.title")}</Link></h3>
+                  <div className="link"><Link to="/blog/core-web-vitals-importancia">{t("blog.readmore")}</Link></div>
                 </div>
               </div>
-            ))}
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 block-column">
+              <div className="news-block-six">
+                <figure className="image"><Link to="/"><img src="assets/images/news/news-18.jpg" alt="Branding" /></Link></figure>
+                <div className="text-box">
+                  <ul className="post-info">
+                    <li>{t("blog.post2.date")}</li>
+                    <li>{t("blog.post2.cat")}</li>
+                  </ul>
+                  <h3><Link to="/blog/crear-marca-memorable">{t("blog.post2.title")}</Link></h3>
+                  <div className="link"><Link to="/blog/crear-marca-memorable">{t("blog.readmore")}</Link></div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 block-column">
+              <div className="news-block-six">
+                <figure className="image"><Link to="/"><img src="assets/images/news/news-19.jpg" alt="Next.js" /></Link></figure>
+                <div className="text-box">
+                  <ul className="post-info">
+                    <li>{t("blog.post3.date")}</li>
+                    <li>{t("blog.post3.cat")}</li>
+                  </ul>
+                  <h3><Link to="/blog/nextjs-vs-webflow">{t("blog.post3.title")}</Link></h3>
+                  <div className="link"><Link to="/blog/nextjs-vs-webflow">{t("blog.readmore")}</Link></div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 block-column">
+              <div className="news-block-six">
+                <figure className="image"><Link to="/"><img src="assets/images/news/news-20.jpg" alt="Conversion" /></Link></figure>
+                <div className="text-box">
+                  <ul className="post-info">
+                    <li>{t("blog.post4.date")}</li>
+                    <li>{t("blog.post4.cat")}</li>
+                  </ul>
+                  <h3><Link to="/blog/elementos-landing-page">{t("blog.post4.title")}</Link></h3>
+                  <div className="link"><Link to="/blog/elementos-landing-page">{t("blog.readmore")}</Link></div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div className="lower-link-box text-center"><Link to="/blog">{t("blog.viewall")}</Link></div>
         </div>
       </section>
     </>

@@ -7,41 +7,75 @@ const PortfolioHomeOne = () => {
   const { t } = useLang();
   return (
     <>
-      <section className="service-section fix section-padding">
-        <div className="container">
-          <div className="section-title-area">
-            <div className="section-title">
-              <h6 className="wow fadeInUp">{t("portfolio.tag")}</h6>
-              <h2 className="wow fadeInUp" data-wow-delay=".3s">{t("portfolio.subtitle")}</h2>
-            </div>
-            <Link to="/contacto" className="theme-btn wow fadeInUp" data-wow-delay=".5s">{t("portfolio.cta")}</Link>
+      <section className="portfolio-section-four">
+        <div className="pattern-box" style={{ backgroundImage: `url(/assets/images/shape/shape-66.png)` }}></div>
+        <div className="outer-box">
+          <div className="title-box text-center">
+            <h2>
+              <span style={{display: 'block'}}>{t("portfolio.tag")}</span>
+              <span style={{display: 'block', fontWeight: 400, fontSize: '0.85em'}}>{t("portfolio.subtitle")}</span>
+            </h2>
+            <p>{t("portfolio.desc")}</p>
           </div>
-          <div className="row g-0">
-            {[
-              { key: "1", delay: ".2s" },
-              { key: "2", delay: ".4s" },
-              { key: "3", delay: ".6s" },
-              { key: "4", delay: ".8s" },
-              { key: "5", delay: "1s" },
-              { key: "6", delay: "1.2s" },
-            ].map((item, i) => (
-              <div key={i} className={`col-xl-3 col-lg-4 col-md-6 wow fadeInUp`} data-wow-delay={item.delay}>
-                <div className={`service-box-items ${i === 3 ? 'border-none' : ''}`}>
-                  <div className="icon" style={{ color: "var(--theme)", fontSize: "32px" }}>
-                    <i className="fa-solid fa-layer-group"></i>
-                  </div>
-                  <div className="content">
-                    <h3><Link to="/service-details">{t(`portfolio.item${item.key}.title`)}</Link></h3>
-                    <p>{t(`portfolio.item${item.key}.li1`)}, {t(`portfolio.item${item.key}.li2`)}, {t(`portfolio.item${item.key}.li3`)}</p>
-                    <div className="service-btn">
-                      <Link to="/service-details" className="arrow-icon"><i className="fa-sharp fa-solid fa-arrow-right"></i></Link>
-                      <Link to="/service-details" className="link-btn">{t("project.viewmore")}</Link>
-                    </div>
-                  </div>
-                </div>
+          <div className="main-content-box">
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item1.title")}</Link></h3>
+                <span style={{color: "#ff6b35", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item1.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item1.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item1.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item1.li3")}</Link></li>
+                </ul>
               </div>
-            ))}
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item2.title")}</Link></h3>
+                <span style={{color: "#4ecdc4", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item2.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item2.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item2.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item2.li3")}</Link></li>
+                </ul>
+              </div>
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item3.title")}</Link></h3>
+                <span style={{color: "#ffd93d", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item3.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item3.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item3.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item3.li3")}</Link></li>
+                </ul>
+              </div>
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
+            <div className="portfolio-block-four">
+              <div className="text-box">
+                <h3><Link to="/service-details">{t("portfolio.item4.title")}</Link></h3>
+                <span style={{color: "#6bcf7f", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px"}}>{t("portfolio.item4.badge")}</span>
+                <ul className="category-list">
+                  <li><Link to="/service-details">{t("portfolio.item4.li1")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item4.li2")}</Link></li>
+                  <li><Link to="/service-details">{t("portfolio.item4.li3")}</Link></li>
+                </ul>
+              </div>
+              <div className="link-box">
+                <Link to="/service-details"><img src="assets/images/icons/icon-34.png" alt="" /></Link>
+              </div>
+            </div>
           </div>
+          <div className="lower-link-box text-center"><Link to="/contacto">{t("portfolio.cta")}</Link></div>
         </div>
       </section>
     </>
