@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 
 const MobileMenu = ({ isOpen, setIsOpen }: any) => {
-  const { t } = useLang();
+  const { t, lang, toggleLang } = useLang();
 
     const [navTitle, setNavTitle] = useState("");
   //openMobileMenu
@@ -26,10 +26,11 @@ const MobileMenu = ({ isOpen, setIsOpen }: any) => {
 					<i className="fas fa-times"></i>
 				</div>
 				<nav className="menu-box">
-					<div className="nav-logo">
+					<div className="nav-logo" style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
 						<Link to="/">
 							<img src="codecraftt-logo.png" alt="CodeCraftt" style={{maxHeight: '35px', width: 'auto'}} />
 						</Link>
+						<button onClick={toggleLang} style={{background:'none',border:'1px solid rgba(255,255,255,0.3)',color:'#fff',padding:'4px 12px',borderRadius:'4px',cursor:'pointer',fontSize:'12px',fontWeight:600,letterSpacing:'1px'}}>{lang === 'es' ? 'EN' : 'ES'}</button>
 					</div>
 					<div className="menu-outer">
 						<div

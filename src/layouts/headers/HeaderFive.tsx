@@ -1,15 +1,15 @@
- 
- 
 import NavMenu from "./NavMenu"; 
 import { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import useSticky from "../../hooks/use-sticky";
 import { Link } from "react-router-dom";
+import { useLang } from "../../context/LanguageContext";
 
 
 const HeaderFive = () => {
   const { sticky } = useSticky()
   const [isOpen, setIsOpen] = useState(false);
+  const { lang, toggleLang } = useLang();
 
   useEffect(() => {
     // Add or remove the class on body depending on isOpen
@@ -45,6 +45,7 @@ const HeaderFive = () => {
             </nav>
           </div>
           <div className="menu-right">
+            <button onClick={toggleLang} style={{background:'none',border:'1px solid rgba(255,255,255,0.3)',color:'#fff',padding:'4px 10px',borderRadius:'4px',cursor:'pointer',fontSize:'12px',fontWeight:600,letterSpacing:'1px',marginRight:'10px'}}>{lang === 'es' ? 'EN' : 'ES'}</button>
             <div className="mobile-nav-toggler visible" onClick={() => setIsOpen(true)}><img src="assets/images/icons/icon-28.png" alt="" /></div>
           </div>
         </div>
@@ -62,6 +63,7 @@ const HeaderFive = () => {
               </nav>
             </div>
             <div className="menu-right">
+              <button onClick={toggleLang} style={{background:'none',border:'1px solid rgba(255,255,255,0.3)',color:'#fff',padding:'4px 10px',borderRadius:'4px',cursor:'pointer',fontSize:'12px',fontWeight:600,letterSpacing:'1px',marginRight:'10px'}}>{lang === 'es' ? 'EN' : 'ES'}</button>
               <div className="mobile-nav-toggler visible" onClick={() => setIsOpen(true)}><img src="assets/images/icons/icon-28.png" alt="" /></div>
             </div>
           </div>
