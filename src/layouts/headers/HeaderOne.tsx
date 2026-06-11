@@ -76,21 +76,44 @@ const HeaderOne = () => {
       </header>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu-wrapper d-xl-none ${mobileOpen ? "open" : ""}`}>
-        <div className="mean-container">
-          <div className="mean-bar">
-            <nav className="mean-nav">
-              <ul style={{ display: mobileOpen ? "block" : "none" }}>
-                <li><Link to="/" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Inicio" : "Home"}</Link></li>
-                <li><Link to="/nosotros" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Nosotros" : "About"}</Link></li>
-                <li><Link to="/servicios" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Servicios" : "Services"}</Link></li>
-                <li><Link to="/blog" onClick={() => setMobileOpen(false)}>Blog</Link></li>
-                <li><Link to="/contacto" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Contacto" : "Contact"}</Link></li>
-              </ul>
-            </nav>
+      {mobileOpen && (
+        <div className="mobile-menu-wrapper d-xl-none open" onClick={() => setMobileOpen(false)}>
+          <div className="mean-container" onClick={(e) => e.stopPropagation()}>
+            <div className="mean-bar">
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#fff",
+                  fontSize: "22px",
+                  float: "right",
+                  cursor: "pointer",
+                  marginBottom: "1rem",
+                  padding: "4px",
+                }}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+              <nav className="mean-nav">
+                <ul>
+                  <li><Link to="/" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Inicio" : "Home"}</Link></li>
+                  <li><Link to="/nosotros" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Nosotros" : "About"}</Link></li>
+                  <li><Link to="/servicios" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Servicios" : "Services"}</Link></li>
+                  <li><Link to="/blog" onClick={() => setMobileOpen(false)}>Blog</Link></li>
+                  <li><Link to="/contacto" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Contacto" : "Contact"}</Link></li>
+                </ul>
+                <div style={{ marginTop: "2rem" }}>
+                  <Link to="/contacto" className="theme-btn" style={{ display: "block", textAlign: "center" }} onClick={() => setMobileOpen(false)}>
+                    {lang === "es" ? "Agenda una Consulta" : "Book a Call"}
+                  </Link>
+                </div>
+              </nav>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

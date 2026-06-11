@@ -11,5 +11,8 @@
 @import "/agznko/assets/css/color.css";
 @import "/agznko/assets/css/main.css";
 
+/* Mobile optimizations */
+@import "./mobile.css";
+
 /* Legacy styles kept for transition components */
 /* @import "/assets/css/style.css"; */
