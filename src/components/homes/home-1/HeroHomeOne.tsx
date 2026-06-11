@@ -42,8 +42,8 @@ const HeroHomeOne = () => {
                 ))}
               </ul>
               <div className="hero-ctas" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem', marginBottom: '1rem' }}>
-                <Link to="/contacto" className="theme-btn" style={{ background: '#ff6b35', color: '#fff', padding: '14px 28px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', display: 'inline-block', transition: 'all 0.3s ease' }}>{t("hero.cta")}</Link>
-                <Link to="/portfolio" className="theme-btn-outline" style={{ border: '1px solid rgba(255,255,255,0.35)', color: '#fff', padding: '14px 28px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', display: 'inline-block', transition: 'all 0.3s ease' }}>{t("hero.cta2")}</Link>
+                <Link to="/contacto" className="theme-btn" style={{ position: 'relative', zIndex: 2, background: '#ff6b35', color: '#fff', padding: '14px 28px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', display: 'inline-block', transition: 'all 0.3s ease' }}>{t("hero.cta")}</Link>
+                <Link to="/portfolio" className="theme-btn-outline" style={{ position: 'relative', zIndex: 2, border: '1px solid rgba(255,255,255,0.35)', color: '#fff', padding: '14px 28px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, fontSize: '14px', display: 'inline-block', transition: 'all 0.3s ease' }}>{t("hero.cta2")}</Link>
               </div>
               <ul className="scroll-text">
                 {[1,2,3,4,5].map(i => <li key={i}>{t("hero.scrolltext")}</li>)}
