@@ -37,7 +37,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "about.h2.3": "después.",
 
     // Hero
-    "hero.subtitle": "Diseño Web, Branding y Desarrollo Digital",
+    "hero.subtitle": "Diseño Web y Branding",
     "hero.title": "para Empresas que\nQuieren Crecer.",
     "hero.title.line1": "para Empresas que",
     "hero.title.line2": "Quieren Crecer.",
@@ -254,7 +254,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "about.h2.3": "after.",
 
     // Hero
-    "hero.subtitle": "Web Design, Branding & Digital Development",
+    "hero.subtitle": "Web Design & Branding",
     "hero.title": "for Companies that\nWant to Grow.",
     "hero.title.line1": "for Companies that",
     "hero.title.line2": "Want to Grow.",
