@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { blogArticles } from "../../data/blog-articles";
+import { useLang } from "../../context/LanguageContext";
 
 const BlogArea = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="news-section blog-page-one">
@@ -28,12 +30,12 @@ const BlogArea = () => {
                     <div className="news-content">
                       <ul className="category">
                         <li><Link to={`/blog/${article.slug}`}>{article.category}</Link></li>
-                        <li><Link to={`/blog/${article.slug}`}>{article.readTime} lectura</Link></li>
+                        <li><Link to={`/blog/${article.slug}`}>{article.readTime} {t("blogarticle.readtime")}</Link></li>
                       </ul>
                       <h3><Link to={`/blog/${article.slug}`}>{article.title}</Link></h3>
                       <div className="btn-box">
                         <Link to={`/blog/${article.slug}`} className="primary-btn one gradient-bg white-color border-btn">
-                          <span>Leer Más</span><i className="icon-1 gradient-color"></i>
+                          <span>{t("blog.readmore")}</span><i className="icon-1 gradient-color"></i>
                         </Link>
                       </div>
                     </div>

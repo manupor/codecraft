@@ -1,4 +1,4 @@
- 
+import { useLang } from "../../context/LanguageContext";
 import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
 import ServiceHomeFour from "../homes/home-4/ServiceHomeFour";
 import ProcessHomeFour from "../homes/home-1/ProcessHomeFour";
@@ -11,11 +11,12 @@ import FooterFour from "../../layouts/footers/FooterFour";
  
 
 const Service = () => {
+  const { t } = useLang();
   return (
     <Wrapper>
       <div className="boxed_wrapper">
         <HeaderFive />
-        <Breacrumb title="Nuestros Servicios" subtitle="Servicios" />
+        <Breacrumb title={t("breadcrumb.service.title")} subtitle={t("breadcrumb.service.sub")} />
         <ServiceHomeFour />
         <ProcessHomeFour />
         <TestimonialHomeFour />

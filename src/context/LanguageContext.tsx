@@ -225,6 +225,114 @@ const translations: Record<Lang, Record<string, string>> = {
     "footer.copyright": "Todos los derechos reservados.",
     "footer.terms": "Términos de Servicio",
     "footer.privacy": "Política de Privacidad",
+
+    // Contact page
+    "contact.tag": "Contacto",
+    "contact.title1": "Hablemos de tu",
+    "contact.title2": "Proyecto.",
+    "contact.email": "Correo Electrónico",
+    "contact.location": "Ubicación",
+    "contact.location.text": "San José, Curridabat",
+    "contact.location.country": "Costa Rica",
+    "contact.form.name": "Nombre*",
+    "contact.form.email": "Email*",
+    "contact.form.message": "Mensaje*",
+    "contact.form.placeholder": "Cuéntanos sobre tu proyecto...",
+    "contact.form.send": "Enviar Mensaje",
+
+    // About page
+    "aboutpage.tag": "Sobre CodeCraftt",
+    "aboutpage.title1": "Transformando ideas en",
+    "aboutpage.highlight": "marcas que venden",
+    "aboutpage.text": "Detrás de CodeCraftt está Manu Portuguez, CEO y Sr Developer. Durante más de 7 años hemos ayudado a startups y empresas en EE.UU. y Latinoamérica a crear marcas memorables y sitios web de alta conversión. No usamos plantillas: cada proyecto es único, diseñado a medida para tu negocio. Desde la estrategia inicial hasta el lanzamiento, trabajamos directamente contigo para garantizar resultados excepcionales.",
+    "aboutpage.cta": "Inicia Tu Proyecto",
+
+    // FAQ page
+    "faqpage.tag": "Preguntas Frecuentes",
+    "faqpage.title1": "Resolvemos tus dudas",
+    "faqpage.highlight": "antes de empezar",
+    "faqpage.q1": "¿Qué servicios ofrece CodeCraftt?",
+    "faqpage.a1": "Ofrecemos diseño web profesional, branding e identidad visual, UX/UI para SaaS y aplicaciones, desarrollo full-stack, e-commerce y soluciones impulsadas por IA. Cubrimos todo el ciclo digital de tu empresa.",
+    "faqpage.q2": "¿Cuánto tarda un proyecto?",
+    "faqpage.a2": "La mayoría de los sitios web se entregan en 2 a 4 semanas. Proyectos más complejos como plataformas SaaS o e-commerce pueden tomar de 6 a 12 semanas según el alcance.",
+    "faqpage.q3": "¿Trabajan con clientes fuera de Costa Rica?",
+    "faqpage.a3": "Sí. Trabajamos con clientes en Estados Unidos, México, Colombia, Argentina y toda Latinoamérica. Todo el proceso es remoto, con comunicación directa y transparente.",
+    "faqpage.q4": "¿Cuánto cuesta un sitio web?",
+    "faqpage.a4": "Cada proyecto se cotiza a medida según tus necesidades. Agenda una consulta gratuita y te damos una propuesta clara, sin compromiso y sin costos ocultos.",
+    "faqpage.q5": "¿Incluyen soporte después del lanzamiento?",
+    "faqpage.a5": "Sí. Todos los proyectos incluyen 30 días de soporte post-lanzamiento. También ofrecemos planes de mantenimiento mensuales para seguir optimizando tu sitio.",
+    "faqpage.q6": "¿Usan plantillas prefabricadas?",
+    "faqpage.a6": "No. Cada proyecto se diseña y desarrolla 100% a medida para tu negocio. Esto garantiza un sitio único, rápido y alineado con tus objetivos.",
+
+    // Testimonial roles
+    "testimonials.r1": "Head of FP&A y Design Finance — Amazon Music",
+    "testimonials.r2": "Head of AWS Fintech — Amazon Web Services",
+    "testimonials.r3": "Sustainability Controls — Amazon",
+    "testimonials.r4": "Estrategia y Comunicaciones — IBM",
+
+    // Team home
+    "teamhome.tag": "(El Creador)",
+    "teamhome.title": "Conoce al Fundador",
+    "teamhome.role": "CEO / Sr Developer",
+
+    // WhatsApp
+    "whatsapp.label": "Escríbenos por WhatsApp",
+
+    // Blog article
+    "blogarticle.notfound": "Artículo no encontrado",
+    "blogarticle.notfound.desc": "El artículo que buscas no existe o ha sido movido.",
+    "blogarticle.viewall": "Ver todos los artículos",
+    "blogarticle.readtime": "de lectura",
+    "blogarticle.share": "Compartir:",
+    "blogarticle.author": "Autor",
+    "blogarticle.author.bio": "Especialista en desarrollo web, branding y estrategias digitales para empresas ambiciosas.",
+    "blogarticle.categories": "Categorías",
+    "blogarticle.cat.dev": "Desarrollo",
+    "blogarticle.cat.conversion": "Conversión",
+
+    // Portfolio page
+    "portfoliopage.viewdetails": "Ver Detalles",
+
+    // FooterFour
+    "footer4.desc": "Estudio digital especializado en branding, desarrollo web premium y soluciones tecnológicas para empresas modernas. Más de 10 años transformando negocios en Estados Unidos y Latinoamérica con diseño a medida, sin plantillas genéricas.",
+    "footer4.company.title": "Empresa",
+    "footer4.company.home": "Inicio",
+    "footer4.company.about": "Sobre Nosotros",
+    "footer4.company.services": "Servicios",
+    "footer4.company.portfolio": "Proyectos",
+    "footer4.company.contact": "Contacto",
+    "footer4.services.title": "Servicios",
+    "footer4.services.li1": "Desarrollo Web",
+    "footer4.services.li2": "UX/UI Design",
+    "footer4.services.li3": "Branding",
+    "footer4.services.li4": "Automatización IA",
+    "footer4.services.li5": "Cloud AWS",
+    "footer4.contact.title": "Contacto",
+    "footer4.copyright": "Todos los derechos reservados.",
+    "footer4.terms": "Términos de Servicio",
+    "footer4.privacy": "Política de Privacidad",
+
+    // Breadcrumb page titles
+    "breadcrumb.home": "Inicio",
+    "breadcrumb.about.title": "Sobre CodeCraftt",
+    "breadcrumb.about.sub": "Conoce al Fundador",
+    "breadcrumb.contact.title": "Contacto",
+    "breadcrumb.contact.sub": "Contacto",
+    "breadcrumb.faq.title": "Preguntas Frecuentes",
+    "breadcrumb.faq.sub": "FAQ",
+    "breadcrumb.service.title": "Nuestros Servicios",
+    "breadcrumb.service.sub": "Servicios",
+    "breadcrumb.blog.title": "Blog",
+    "breadcrumb.blog.sub": "Blog",
+    "breadcrumb.portfolio.title": "Portafolio",
+    "breadcrumb.portfolio.sub": "Portafolio",
+
+    // PortfolioSlider
+    "portfolioslider.more": "Más proyectos:",
+
+    // Error page
+    "error.title": "Oops! Página no encontrada.",
+    "error.back": "Volver al Inicio",
   },
   en: {
     // Nav
@@ -442,6 +550,114 @@ const translations: Record<Lang, Record<string, string>> = {
     "footer.copyright": "All rights reserved.",
     "footer.terms": "Terms of Service",
     "footer.privacy": "Privacy Policy",
+
+    // Contact page
+    "contact.tag": "Contact",
+    "contact.title1": "Let's talk about your",
+    "contact.title2": "Project.",
+    "contact.email": "Email",
+    "contact.location": "Location",
+    "contact.location.text": "San José, Curridabat",
+    "contact.location.country": "Costa Rica",
+    "contact.form.name": "Name*",
+    "contact.form.email": "Email*",
+    "contact.form.message": "Message*",
+    "contact.form.placeholder": "Tell us about your project...",
+    "contact.form.send": "Send Message",
+
+    // About page
+    "aboutpage.tag": "About CodeCraftt",
+    "aboutpage.title1": "Turning ideas into",
+    "aboutpage.highlight": "brands that sell",
+    "aboutpage.text": "Behind CodeCraftt is Manu Portuguez, CEO and Sr Developer. For over 7 years we've helped startups and companies in the U.S. and Latin America build memorable brands and high-converting websites. We don't use templates: every project is unique, custom-designed for your business. From initial strategy to launch, we work directly with you to guarantee exceptional results.",
+    "aboutpage.cta": "Start Your Project",
+
+    // FAQ page
+    "faqpage.tag": "Frequently Asked Questions",
+    "faqpage.title1": "We answer your questions",
+    "faqpage.highlight": "before we start",
+    "faqpage.q1": "What services does CodeCraftt offer?",
+    "faqpage.a1": "We offer professional web design, branding and visual identity, UX/UI for SaaS and applications, full-stack development, e-commerce, and AI-powered solutions. We cover your company's entire digital cycle.",
+    "faqpage.q2": "How long does a project take?",
+    "faqpage.a2": "Most websites are delivered in 2 to 4 weeks. More complex projects like SaaS platforms or e-commerce can take 6 to 12 weeks depending on scope.",
+    "faqpage.q3": "Do you work with clients outside Costa Rica?",
+    "faqpage.a3": "Yes. We work with clients in the United States, Mexico, Colombia, Argentina, and across Latin America. The entire process is remote, with direct and transparent communication.",
+    "faqpage.q4": "How much does a website cost?",
+    "faqpage.a4": "Every project is quoted individually based on your needs. Book a free consultation and we'll give you a clear proposal — no commitment, no hidden costs.",
+    "faqpage.q5": "Do you include post-launch support?",
+    "faqpage.a5": "Yes. All projects include 30 days of post-launch support. We also offer monthly maintenance plans to keep optimizing your site.",
+    "faqpage.q6": "Do you use pre-made templates?",
+    "faqpage.a6": "No. Every project is designed and developed 100% custom for your business. This guarantees a unique, fast site aligned with your goals.",
+
+    // Testimonial roles
+    "testimonials.r1": "Head of FP&A and Design Finance — Amazon Music",
+    "testimonials.r2": "Head of AWS Fintech — Amazon Web Services",
+    "testimonials.r3": "Sustainability Controls — Amazon",
+    "testimonials.r4": "Strategy & Communications — IBM",
+
+    // Team home
+    "teamhome.tag": "(The Creator)",
+    "teamhome.title": "Meet the Founder",
+    "teamhome.role": "CEO / Sr Developer",
+
+    // WhatsApp
+    "whatsapp.label": "Message us on WhatsApp",
+
+    // Blog article
+    "blogarticle.notfound": "Article not found",
+    "blogarticle.notfound.desc": "The article you're looking for doesn't exist or has been moved.",
+    "blogarticle.viewall": "View all articles",
+    "blogarticle.readtime": "read",
+    "blogarticle.share": "Share:",
+    "blogarticle.author": "Author",
+    "blogarticle.author.bio": "Specialist in web development, branding, and digital strategies for ambitious companies.",
+    "blogarticle.categories": "Categories",
+    "blogarticle.cat.dev": "Development",
+    "blogarticle.cat.conversion": "Conversion",
+
+    // Portfolio page
+    "portfoliopage.viewdetails": "View Details",
+
+    // FooterFour
+    "footer4.desc": "Digital studio specialized in branding, premium web development, and tech solutions for modern companies. 10+ years transforming businesses in the U.S. and Latin America with custom design — no generic templates.",
+    "footer4.company.title": "Company",
+    "footer4.company.home": "Home",
+    "footer4.company.about": "About Us",
+    "footer4.company.services": "Services",
+    "footer4.company.portfolio": "Projects",
+    "footer4.company.contact": "Contact",
+    "footer4.services.title": "Services",
+    "footer4.services.li1": "Web Development",
+    "footer4.services.li2": "UX/UI Design",
+    "footer4.services.li3": "Branding",
+    "footer4.services.li4": "AI Automation",
+    "footer4.services.li5": "Cloud AWS",
+    "footer4.contact.title": "Contact",
+    "footer4.copyright": "All rights reserved.",
+    "footer4.terms": "Terms of Service",
+    "footer4.privacy": "Privacy Policy",
+
+    // Breadcrumb page titles
+    "breadcrumb.home": "Home",
+    "breadcrumb.about.title": "About CodeCraftt",
+    "breadcrumb.about.sub": "Meet the Founder",
+    "breadcrumb.contact.title": "Contact",
+    "breadcrumb.contact.sub": "Contact",
+    "breadcrumb.faq.title": "Frequently Asked Questions",
+    "breadcrumb.faq.sub": "FAQ",
+    "breadcrumb.service.title": "Our Services",
+    "breadcrumb.service.sub": "Services",
+    "breadcrumb.blog.title": "Blog",
+    "breadcrumb.blog.sub": "Blog",
+    "breadcrumb.portfolio.title": "Portfolio",
+    "breadcrumb.portfolio.sub": "Portfolio",
+
+    // PortfolioSlider
+    "portfolioslider.more": "More projects:",
+
+    // Error page
+    "error.title": "Oops! Page Not Found.",
+    "error.back": "Back Home",
   },
 };
 

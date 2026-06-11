@@ -1,4 +1,5 @@
 import AboutArea from "./AboutArea";
+import { useLang } from "../../context/LanguageContext";
 import VideoAbout from "./VideoAbout"; 
 import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
 import TeamHomeFour from "../homes/home-4/TeamHomeFour";
@@ -12,11 +13,12 @@ import Breacrumb from "../../common/Breacrumb";
 import FooterFour from "../../layouts/footers/FooterFour";
 
 const About = () => {
+	const { t } = useLang();
 	return (
 		<Wrapper>
 			<div className="boxed_wrapper">
 				<HeaderFive />
-				<Breacrumb title="Sobre CodeCraftt" subtitle="Conoce al Fundador" />
+				<Breacrumb title={t("breadcrumb.about.title")} subtitle={t("breadcrumb.about.sub")} />
 				<AboutArea />
 				<IntroHomeFour style_2={true} />
 				<ClientsHomeTwo style_2={true} />

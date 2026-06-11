@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import "swiper/css/bundle";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
- 
+import { useLang } from "../../context/LanguageContext";
 
 
 const PortfolioSlider = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="service-section portfolio-service">
         <div className="container">
-          <div className="small-title">Here are some more Project:</div>
+          <div className="small-title">{t("portfolioslider.more")}</div>
           <div className="main-content">
             <Swiper
               slidesPerView={1}
@@ -56,7 +56,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">Professional Website</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-16.jpg" alt="" /></figure>
@@ -67,7 +67,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">D-Form Business Strategy</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-17.jpg" alt="" /></figure>
@@ -78,7 +78,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">Application Development</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-18.jpg" alt="" /></figure>
@@ -89,7 +89,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">D-Form Business Strategy</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-17.jpg" alt="" /></figure>
@@ -100,7 +100,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">Application Development</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-18.jpg" alt="" /></figure>
@@ -111,7 +111,7 @@ const PortfolioSlider = () => {
                 <div className="portfolio-block-one">
                   <div className="text-box">
                     <h3><Link to="/portfolio-details">D-Form Business Strategy</Link></h3>
-                    <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                    <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                   </div>
                   <div className="image-box">
                     <figure className="image"><img src="assets/images/portfolio/portfolio-17.jpg" alt="" /></figure>

@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { getArticleBySlug } from "../../data/blog-articles";
+import { useLang } from "../../context/LanguageContext";
 
 const BlogArticleArea = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
+  const { t } = useLang();
 
   if (!article) {
     return (
@@ -11,10 +13,10 @@ const BlogArticleArea = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center" style={{ padding: "100px 0" }}>
-              <h2>Artículo no encontrado</h2>
-              <p>El artículo que buscas no existe o ha sido movido.</p>
+              <h2>{t("blogarticle.notfound")}</h2>
+              <p>{t("blogarticle.notfound.desc")}</p>
               <Link to="/blog" className="primary-btn one gradient-bg white-color" style={{ marginTop: "20px" }}>
-                <span>Ver todos los artículos</span>
+                <span>{t("blogarticle.viewall")}</span>
               </Link>
             </div>
           </div>
@@ -43,7 +45,7 @@ const BlogArticleArea = () => {
                       </li>
                       <li>
                         <img src="assets/images/icons/icon-24.png" alt="" />
-                        <span>{article.readTime} de lectura</span>
+                        <span>{article.readTime} {t("blogarticle.readtime")}</span>
                       </li>
                     </ul>
                     <h2>{article.title}</h2>
@@ -63,7 +65,7 @@ const BlogArticleArea = () => {
 
                 <div className="post-share-option clearfix">
                   <div className="text pull-left">
-                    <h3>Compartir:</h3>
+                    <h3>{t("blogarticle.share")}</h3>
                   </div>
                   <ul className="social-links pull-right clearfix">
                     <li><a href="#"><i className="icon-15"></i></a></li>
@@ -81,7 +83,7 @@ const BlogArticleArea = () => {
                 {/* Author Widget */}
                 <div className="sidebar-widget author-widget">
                   <div className="widget-title">
-                    <h3>Autor</h3>
+                    <h3>{t("blogarticle.author")}</h3>
                   </div>
                   <div className="widget-content">
                     <div className="author-box">
@@ -90,7 +92,7 @@ const BlogArticleArea = () => {
                       </figure>
                       <h4>{article.author.name}</h4>
                       <span className="designation">{article.author.role}</span>
-                      <p>Especialista en desarrollo web, branding y estrategias digitales para empresas ambiciosas.</p>
+                      <p>{t("blogarticle.author.bio")}</p>
                     </div>
                   </div>
                 </div>
@@ -98,14 +100,14 @@ const BlogArticleArea = () => {
                 {/* Categories Widget */}
                 <div className="sidebar-widget categories-widget">
                   <div className="widget-title">
-                    <h3>Categorías</h3>
+                    <h3>{t("blogarticle.categories")}</h3>
                   </div>
                   <div className="widget-content">
                     <ul className="categories-list clearfix">
                       <li><Link to="/blog">SEO <span>(1)</span></Link></li>
                       <li><Link to="/blog">Branding <span>(1)</span></Link></li>
-                      <li><Link to="/blog">Desarrollo <span>(1)</span></Link></li>
-                      <li><Link to="/blog">Conversión <span>(1)</span></Link></li>
+                      <li><Link to="/blog">{t("blogarticle.cat.dev")} <span>(1)</span></Link></li>
+                      <li><Link to="/blog">{t("blogarticle.cat.conversion")} <span>(1)</span></Link></li>
                     </ul>
                   </div>
                 </div>

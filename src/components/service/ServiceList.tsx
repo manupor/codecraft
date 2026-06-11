@@ -25,7 +25,7 @@ const ServiceList = () => {
                   <h3><Link to="/service-details">{t(`portfolio.item${s.key}.title`)}</Link></h3>
                   <p>{t(`portfolio.item${s.key}.li1`)}, {t(`portfolio.item${s.key}.li2`)}, {t(`portfolio.item${s.key}.li3`)}</p>
                   <div className="service-btn">
-                    <Link to="/service-details" className="link-btn">Ver Detalles</Link>
+                    <Link to="/service-details" className="link-btn">{t("services.viewdetails")}</Link>
                     <Link to="/service-details" className="arrow-icon"><i className="fa-sharp fa-solid fa-arrow-right"></i></Link>
                   </div>
                 </div>

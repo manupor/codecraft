@@ -1,43 +1,14 @@
 "use client";
 import { useState } from "react";
-
-
-const faq_data = [
-  {
-    id: 1,
-    question: "What Services do Creative agencies offer?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-  {
-    id: 2,
-    question: "How can working with a creative benefit my brand?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-  {
-    id: 3,
-    question: "Do you provide both digital marketing services?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-  {
-    id: 4,
-    question: "What questions belong on an FAQ page?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-  {
-    id: 5,
-    question: "Align with your brand look and feel?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-  {
-    id: 6,
-    question: "How to become an agile project manager?",
-    answer: "If you use this site regularly and would like to help keep the site on the Internet, please consider bandwidth bill.",
-  },
-];
-
-
+import { useLang } from "../../context/LanguageContext";
 
 const FaqArea = () => {
+    const { t } = useLang();
+    const faq_data = [1, 2, 3, 4, 5, 6].map((id) => ({
+      id,
+      question: t(`faqpage.q${id}`),
+      answer: t(`faqpage.a${id}`),
+    }));
 
     const [faq, setFaq] = useState<number | null>(0);
     const toggleFaq = (i: number) => {
@@ -54,8 +25,8 @@ const FaqArea = () => {
             <div className="col-lg-6 col-md-12 col-sm-12 left-column">
               <div className="accordion-content">
                 <div className="main-title">
-                  <h3>Some Question</h3>
-                  <h2>Design That Where Ideas <br /><span className="gradient-color color-two">Take The Flight</span></h2>
+                  <h3>{t("faqpage.tag")}</h3>
+                  <h2>{t("faqpage.title1")} <br /><span className="gradient-color color-two">{t("faqpage.highlight")}</span></h2>
                 </div>
                 <ul className="accordion-box">
                   {faq_data.map((item , i) => (

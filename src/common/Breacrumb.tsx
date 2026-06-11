@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
- 
+import { useLang } from "../context/LanguageContext";
 
 const Breacrumb = ({title, subtitle} : any) => {
+  const { t } = useLang();
   return (
     <>
       <section className="page-title text-center">
@@ -21,7 +21,7 @@ const Breacrumb = ({title, subtitle} : any) => {
           <div className="page-title-content">
             <h1>{title}</h1>
             <ul className="bread-crumb">
-              <li><Link to="/">Home</Link></li>
+              <li><Link to="/">{t("breadcrumb.home")}</Link></li>
               <li><i className="icon-13"></i></li>
               <li>{subtitle}</li>
             </ul>

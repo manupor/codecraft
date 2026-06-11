@@ -1,4 +1,4 @@
- 
+import { useLang } from "../../context/LanguageContext";
 import Breacrumb from "../../common/Breacrumb";
 import FooterFour from "../../layouts/footers/FooterFour";
 import HeaderFive from "../../layouts/headers/HeaderFive";
@@ -9,11 +9,12 @@ import FaqArea from "./FaqArea";
  
 
 const Faq = () => {
+  const { t } = useLang();
   return (
     <Wrapper>
       <div className="boxed_wrapper">
         <HeaderFive />
-        <Breacrumb title="Our FAQ" subtitle="FAQ" />
+        <Breacrumb title={t("breadcrumb.faq.title")} subtitle={t("breadcrumb.faq.sub")} />
         <FaqArea />
         <CtaHomeFour />
         <FooterFour />

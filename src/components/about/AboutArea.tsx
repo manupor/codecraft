@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLang } from "../../context/LanguageContext";
 
 const AboutArea = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="about-section-four">
@@ -46,14 +48,14 @@ const AboutArea = () => {
             <div className="col-lg-10 col-md-12 col-sm-12 content-column">
               <div className="about-content">
                 <div className="main-title">
-                  <h3>Sobre CodeCraftt</h3>
-                  <h2>Transformando ideas en <span className="gradient-color color-two">marcas que venden</span></h2>
+                  <h3>{t("aboutpage.tag")}</h3>
+                  <h2>{t("aboutpage.title1")} <span className="gradient-color color-two">{t("aboutpage.highlight")}</span></h2>
                 </div>
                 <div className="about-text">
-                  <p>Detrás de CodeCraftt está Manu Portuguez, CEO y Sr Developer. Durante más de 7 años hemos ayudado a startups y empresas en EE.UU. y Latinoamérica a crear marcas memorables y sitios web de alta conversión. No usamos plantillas: cada proyecto es único, diseñado a medida para tu negocio. Desde la estrategia inicial hasta el lanzamiento, trabajamos directamente contigo para garantizar resultados excepcionales.</p>
+                  <p>{t("aboutpage.text")}</p>
                 </div>
                 <div className="btn-box">
-                  <Link to="/contact" className="primary-btn one gradient-bg white-color border-btn"><span>Inicia Tu Proyecto</span><i className="icon-1 gradient-color"></i></Link>
+                  <Link to="/contacto" className="primary-btn one gradient-bg white-color border-btn"><span>{t("aboutpage.cta")}</span><i className="icon-1 gradient-color"></i></Link>
                 </div>
               </div>
             </div>

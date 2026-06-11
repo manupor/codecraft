@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
- 
+import { useLang } from "../../context/LanguageContext";
 
 const PortfolioArea = () => {
+  const { t } = useLang();
   return (
     <>
       <section className="portfolio-section">
@@ -11,7 +12,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">D-Form Business Strategy</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-1.jpg" alt="" /></figure>
@@ -22,7 +23,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">Mark Wide Marketing Strategy</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-2.jpg" alt="" /></figure>
@@ -33,7 +34,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">Decorator Hard Carpet.</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-3.jpg" alt="" /></figure>
@@ -44,7 +45,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">White-line Face Beauty</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-4.jpg" alt="" /></figure>
@@ -55,7 +56,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">Website Development</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-14.jpg" alt="" /></figure>
@@ -66,7 +67,7 @@ const PortfolioArea = () => {
               <div className="portfolio-block-one">
                 <div className="text-box">
                   <h3><Link to="/portfolio-details">Search Engine Optimization</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+                  <div className="link"><Link to="/portfolio-details"><span>{t("portfoliopage.viewdetails")}</span><i className="icon-1"></i></Link></div>
                 </div>
                 <div className="image-box">
                   <figure className="image"><img src="assets/images/portfolio/portfolio-15.jpg" alt="" /></figure>

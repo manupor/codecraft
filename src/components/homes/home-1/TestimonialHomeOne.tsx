@@ -69,7 +69,7 @@ const TestimonialHomeOne = () => {
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Zac Sims</h5>
-                    <span className="designation">Head of FP&A and Design Finance<br />Amazon Music</span>
+                    <span className="designation">{t("testimonials.r1")}</span>
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@ const TestimonialHomeOne = () => {
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Sanjay Singh</h5>
-                    <span className="designation">Head of AWS Fintech<br />Amazon Web Services</span>
+                    <span className="designation">{t("testimonials.r2")}</span>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ const TestimonialHomeOne = () => {
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>John Winkler</h5>
-                    <span className="designation">Sustainability Controls<br />Amazon</span>
+                    <span className="designation">{t("testimonials.r3")}</span>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const TestimonialHomeOne = () => {
                 <div className="author-box" style={{justifyContent: 'center'}}>
                   <div className="author-text">
                     <h5>Michael Rettig</h5>
-                    <span className="designation">Strategy & Communications<br />IBM | Brookings, Carnegie, Edelman alum</span>
+                    <span className="designation">{t("testimonials.r4")}</span>
                   </div>
                 </div>
               </div>
