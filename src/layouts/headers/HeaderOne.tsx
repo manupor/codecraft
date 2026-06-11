@@ -1,119 +1,83 @@
+ 
+import NavMenu from "./NavMenu";
 import { useEffect, useState } from "react";
+import MobileMenu from "./MobileMenu";
+import useSticky from "../../hooks/use-sticky";
 import { Link } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 
+
+
+
 const HeaderOne = () => {
-  const [sticky, setSticky] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { sticky } = useSticky();
+  const [isOpen, setIsOpen] = useState(false);
   const { lang, toggleLang } = useLang();
 
+
   useEffect(() => {
-    const onScroll = () => setSticky(window.scrollY > 100);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    // Add or remove the class on body depending on isOpen
+    if (isOpen) {
+      document.body.classList.add("mobile-menu-visible");
+    } else {
+      document.body.classList.remove("mobile-menu-visible");
+    }
+
+    // Optional: Cleanup on component unmount
+    return () => {
+      document.body.classList.remove("mobile-menu-visible");
+    };
+  }, [isOpen]);
+
+
 
   return (
     <>
-      <header id="header-sticky" className={`header-1 ${sticky ? "sticky" : ""}`}>
-        <div className="container">
-          <div className="mega-menu-wrapper">
-            <div className="header-main">
-              <div className="logo">
-                <Link to="/" className="header-logo">
-                  <img src="codecraftt-logo.png" alt="CodeCraftt" style={{ maxHeight: "40px", width: "auto" }} />
-                </Link>
+      <header className={`main-header style-four ${sticky ? 'fixed-header' : ''}`}>
+        <div className="header-nav">
+          <div className="logo-box">
+            <figure className="logo"><Link to="/"><img src="codecraftt-logo.png" alt="CodeCraftt" style={{maxHeight: '40px', width: 'auto'}} /></Link></figure>
+          </div>
+          <div className="menu-area">
+            <div className="mobile-nav-toggler" onClick={() => setIsOpen(true)}>
+              <i className="icon-bar"></i>
+              <i className="icon-bar"></i>
+              <i className="icon-bar"></i>
+            </div>
+            <nav className="main-menu navbar-expand-md navbar-light">
+              <div className="collapse navbar-collapse show" id="navbarSupportedContent">
+                <NavMenu />
               </div>
-              <div className="mean__menu-wrapper d-none d-xl-block">
-                <div className="main-menu">
-                  <nav>
-                    <ul>
-                      <li><Link to="/">{lang === "es" ? "Inicio" : "Home"}</Link></li>
-                      <li><Link to="/nosotros">{lang === "es" ? "Nosotros" : "About"}</Link></li>
-                      <li><Link to="/servicios">{lang === "es" ? "Servicios" : "Services"}</Link></li>
-                      <li><Link to="/blog">Blog</Link></li>
-                      <li><Link to="/contacto">{lang === "es" ? "Contacto" : "Contact"}</Link></li>
-                    </ul>
-                  </nav>
+            </nav>
+          </div>
+          <div className="menu-right">
+            <button onClick={toggleLang} style={{background:'none',border:'1px solid rgba(255,255,255,0.3)',color:'#fff',padding:'4px 10px',borderRadius:'4px',cursor:'pointer',fontSize:'12px',fontWeight:600,letterSpacing:'1px',marginRight:'10px'}}>{lang === 'es' ? 'EN' : 'ES'}</button>
+            <div className="mobile-nav-toggler visible"><img src="assets/images/icons/icon-28.png" alt="" /></div>
+          </div>
+        </div>
+
+        <div className="sticky-header">
+          <div className="header-nav">
+            <div className="logo-box">
+              <figure className="logo"><Link to="/"><img src="codecraftt-logo.png" alt="CodeCraftt" style={{maxHeight: '40px', width: 'auto'}} /></Link></figure>
+            </div>
+            <div className="menu-area">
+              <nav className="main-menu">
+                <div className="collapse navbar-collapse show" id="navbarSupportedContent">
+                  <NavMenu />
                 </div>
-              </div>
-              <div className="header-right d-flex justify-content-end align-items-center">
-                <div className="header-button d-none d-md-block">
-                  <button
-                    onClick={toggleLang}
-                    style={{
-                      background: "none",
-                      border: "1px solid rgba(255,255,255,0.3)",
-                      color: "#fff",
-                      padding: "6px 14px",
-                      borderRadius: "120px",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      letterSpacing: "1px",
-                      marginRight: "10px",
-                      fontFamily: "Kanit, sans-serif",
-                    }}
-                  >
-                    {lang === "es" ? "EN" : "ES"}
-                  </button>
-                  <Link to="/contacto" className="theme-btn">
-                    {lang === "es" ? "Agenda una Consulta" : "Book a Call"}
-                  </Link>
-                </div>
-                <div
-                  className="header__hamburger d-xl-none my-auto"
-                  onClick={() => setMobileOpen(!mobileOpen)}
-                >
-                  <div className="sidebar__toggle">
-                    <i className="fas fa-bars"></i>
-                  </div>
-                </div>
-              </div>
+              </nav>
+            </div>
+            <div className="menu-right">
+              <button onClick={toggleLang} style={{background:'none',border:'1px solid rgba(255,255,255,0.3)',color:'#fff',padding:'4px 10px',borderRadius:'4px',cursor:'pointer',fontSize:'12px',fontWeight:600,letterSpacing:'1px',marginRight:'10px'}}>{lang === 'es' ? 'EN' : 'ES'}</button>
+              <div className="mobile-nav-toggler visible" onClick={() => setIsOpen(true)}><img src="assets/images/icons/icon-28.png" alt="" /></div>
             </div>
           </div>
         </div>
       </header>
+      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="mobile-menu-wrapper d-xl-none open" onClick={() => setMobileOpen(false)}>
-          <div className="mean-container" onClick={(e) => e.stopPropagation()}>
-            <div className="mean-bar">
-              <button
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#fff",
-                  fontSize: "22px",
-                  float: "right",
-                  cursor: "pointer",
-                  marginBottom: "1rem",
-                  padding: "4px",
-                }}
-                aria-label="Close menu"
-              >
-                ✕
-              </button>
-              <nav className="mean-nav">
-                <ul>
-                  <li><Link to="/" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Inicio" : "Home"}</Link></li>
-                  <li><Link to="/nosotros" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Nosotros" : "About"}</Link></li>
-                  <li><Link to="/servicios" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Servicios" : "Services"}</Link></li>
-                  <li><Link to="/blog" onClick={() => setMobileOpen(false)}>Blog</Link></li>
-                  <li><Link to="/contacto" onClick={() => setMobileOpen(false)}>{lang === "es" ? "Contacto" : "Contact"}</Link></li>
-                </ul>
-                <div style={{ marginTop: "2rem" }}>
-                  <Link to="/contacto" className="theme-btn" style={{ display: "block", textAlign: "center" }} onClick={() => setMobileOpen(false)}>
-                    {lang === "es" ? "Agenda una Consulta" : "Book a Call"}
-                  </Link>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

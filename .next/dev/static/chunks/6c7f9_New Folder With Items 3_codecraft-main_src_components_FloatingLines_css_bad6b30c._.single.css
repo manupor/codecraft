@@ -1,0 +1,17 @@
+/* [project]/Downloads/New Folder With Items 3/codecraft-main/src/components/FloatingLines.css [app-client] (css) */
+.floating-lines-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-lines-fallback {
+  background: radial-gradient(120% 80% at 80%, #5227ff2e 0%, #0000 55%), radial-gradient(100% 60% at 10% 40%, #641e781f 0%, #0000 50%), radial-gradient(80% 50% at 50% 90%, #141e5040 0%, #0000 60%), #000;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=6c7f9_New%20Folder%20With%20Items%203_codecraft-main_src_components_FloatingLines_css_bad6b30c._.single.css.map*/

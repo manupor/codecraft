@@ -1,22 +1,33 @@
 import { Link } from "react-router-dom";
 
-const Breacrumb = ({ title, subtitle }: { title: string; subtitle: string }) => {
+ 
+
+const Breacrumb = ({title, subtitle} : any) => {
   return (
     <>
-      <div className="breadcrumb-wrapper section-bg bg-cover" style={{ backgroundImage: "url('/agznko/assets/img/breadcrumb-shape.png')" }}>
+      <section className="page-title text-center">
+        <div className="pattern" style={{ backgroundImage: `url(/assets/images/shape/shape-55.png)` }}></div>
+        <figure className="image"><img src="assets/images/resource/page-title.png" alt="" /></figure>
+        <div className="clients-box">
+          <ul className="clients-image">
+            <li><img src="assets/images/resource/clients-1.png" alt="" /></li>
+            <li><img src="assets/images/resource/clients-2.png" alt="" /></li>
+            <li><img src="assets/images/resource/clients-3.png" alt="" /></li>
+            <li><span className="gradient-bg">10K+</span></li>
+          </ul>
+          <h3>Excellent <span className="gradient-color">40.00+</span> Reviews</h3>
+        </div>
         <div className="container">
-          <div className="page-heading">
-            <div className="breadcrumb-sub-title">
-              <h1 className="wow fadeInUp" data-wow-delay=".3s">{title}</h1>
-            </div>
-            <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+          <div className="page-title-content">
+            <h1>{title}</h1>
+            <ul className="bread-crumb">
               <li><Link to="/">Home</Link></li>
-              <li><i className="fa-regular fa-chevrons-right"></i></li>
+              <li><i className="icon-13"></i></li>
               <li>{subtitle}</li>
             </ul>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

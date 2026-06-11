@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Downloads/codecraft-main/src/components/FloatingLines.css"],"sourcesContent":[".floating-lines-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  overflow: hidden;\n}\n"],"names":[],"mappings":"AAAA"}}]
+}

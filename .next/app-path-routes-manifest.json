@@ -1,0 +1,23 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/contact/route": "/api/contact",
+  "/api/generate-landing/route": "/api/generate-landing",
+  "/api/iterate-landing/route": "/api/iterate-landing",
+  "/api/upload-images/route": "/api/upload-images",
+  "/dashboard/page": "/dashboard",
+  "/favicon.ico/route": "/favicon.ico",
+  "/icon.png/route": "/icon.png",
+  "/landing-builder/page": "/landing-builder",
+  "/login/page": "/login",
+  "/page": "/",
+  "/pricing/page": "/pricing",
+  "/profile/page": "/profile",
+  "/robots.txt/route": "/robots.txt",
+  "/services/page": "/services",
+  "/signup/page": "/signup",
+  "/site/[slug]/page": "/site/[slug]",
+  "/sitemap.xml/route": "/sitemap.xml"
+}
