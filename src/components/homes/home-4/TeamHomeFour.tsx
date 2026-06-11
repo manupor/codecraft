@@ -33,7 +33,7 @@ const TeamHomeFour = ({style_2} : any) => {
                 </div>
                 <div className="team-content" style={{textAlign: 'center', marginTop: '20px'}}>
                   <h3><Link to="/">Manu Portuguez</Link></h3>
-                  <span className="designation">CEO / Sr Full Stack Developer</span>
+                  <span className="designation">{t("team.role")}</span>
                   <div className="team-social" style={{justifyContent: 'center', display: 'flex', marginTop: '15px'}}>
                     <div className="icon-box"><i className="icon-14"></i></div>
                     <ul className="social-links">

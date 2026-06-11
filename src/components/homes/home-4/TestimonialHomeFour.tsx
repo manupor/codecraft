@@ -2,31 +2,18 @@
 import "swiper/css/bundle";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-const testimonials = [
-  {
-    quote: "Trabajé con Manu en Amazon en el área de entretenimiento y recomendaría sus servicios de diseño gráfico. Se toma el tiempo para entender los resultados que buscamos y entregó productos que beneficiaron a nuestra comunidad y stakeholders.",
-    name: "Zac Sims",
-    role: "Head of FP&A and Design Finance — Amazon Music",
-  },
-  {
-    quote: "Trabajé con Manu cuando era creador de contenido digital en la oficina del CFO de AWS. Tenía muy buen ojo para el diseño y añadió efectos visuales únicos para llevar el video al siguiente nivel. Manu insiste en altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.",
-    name: "Sanjay Singh",
-    role: "Head of AWS Fintech — Amazon Web Services",
-  },
-  {
-    quote: "Trabajé con Manu en AWS y recomendaría ampliamente sus servicios de diseño. Manu ayudó a llevar nuestra visión al siguiente nivel con gráficos de vanguardia. Tomó presentaciones aburridas sobre temas complejos y les dio vida, aumentando la participación de nuestra comunidad.",
-    name: "John Winkler",
-    role: "Sustainability Controls — Amazon",
-  },
-  {
-    quote: "Manu es un diseñador gráfico talentoso, profesional y dedicado, con una actitud positiva y colaborativa. Fue clave para completar una serie de productos de comunicación internos y externos de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.",
-    name: "Michael Rettig",
-    role: "Strategy & Communications — IBM | Brookings, Carnegie, Edelman alum",
-  },
-];
+import { useLang } from "../../../context/LanguageContext";
 
 const TestimonialHomeFour = () => {
+  const { t } = useLang();
+
+  const testimonials = [
+    { quote: t("testimonials4.q1"), name: "Zac Sims", role: t("testimonials.r1") },
+    { quote: t("testimonials4.q2"), name: "Sanjay Singh", role: t("testimonials.r2") },
+    { quote: t("testimonials4.q3"), name: "John Winkler", role: t("testimonials.r3") },
+    { quote: t("testimonials4.q4"), name: "Michael Rettig", role: t("testimonials4.r4") },
+  ];
+
   return (
     <>
       <section className="testimonial-section">
@@ -35,10 +22,10 @@ const TestimonialHomeFour = () => {
         <div className="container">
           <div className="title-box">
             <div className="main-title">
-              <h3>Lo Que Dicen Nuestros Clientes</h3>
-              <h2>Testimonios <br /><span className="gradient-color">Reales</span></h2>
+              <h3>{t("testimonials4.tag")}</h3>
+              <h2>{t("testimonials4.title")} <br /><span className="gradient-color">{t("testimonials4.highlight")}</span></h2>
             </div>
-            <p>Cada proyecto es una historia de éxito. Estas son las palabras de quienes confiaron en CodeCraftt para transformar su marca y negocio.</p>
+            <p>{t("testimonials4.desc")}</p>
           </div>
           <div className="inner-container">
             <Swiper

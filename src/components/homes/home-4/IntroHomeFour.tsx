@@ -1,6 +1,7 @@
-
+import { useLang } from "../../../context/LanguageContext";
 
 const IntroHomeFour = ({style_2} : any) => {
+  const { t } = useLang();
   return (
     <>
       <section className={`intro-section ${style_2 ? 'about-intro' : ''}`}>
@@ -9,22 +10,22 @@ const IntroHomeFour = ({style_2} : any) => {
             <div className="col-lg-4 col-md-6 col-sm-12 intro-block">
               <div className="intro-block-one">
                 <div className="decore"></div>
-                <h3><a href="#">10+ Años de Experiencia Transformando Negocios Digitales</a></h3>
-                <p>Más de una década diseñando y desarrollando soluciones tecnológicas para startups, empresas y organizaciones globales en Estados Unidos y Latinoamérica.</p>
+                <h3><a href="#">{t("intro.s1.title")}</a></h3>
+                <p>{t("intro.s1.desc")}</p>
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-sm-12 intro-block">
               <div className="intro-block-one">
                 <div className="decore"></div>
-                <h3><a href="#">150+ Proyectos Exitosos <br />Entregados a Tiempo.</a></h3>
-                <p>Cada proyecto es único. Desde landing pages hasta aplicaciones SaaS complejas, entrego resultados medibles que impulsan el crecimiento de tu negocio.</p>
+                <h3><a href="#">{t("intro.s2.title")}</a></h3>
+                <p>{t("intro.s2.desc")}</p>
               </div>
             </div>
             <div className="col-lg-4 col-md-6 col-sm-12 intro-block">
               <div className="intro-block-one">
                 <div className="decore"></div>
-                <h3><a href="#">Presencia Global en <br />5+ Países.</a></h3>
-                <p>Clientes en Estados Unidos, Costa Rica, México, Colombia y proyectos internacionales. Experiencia trabajando con equipos remotos y empresas globales.</p>
+                <h3><a href="#">{t("intro.s3.title")}</a></h3>
+                <p>{t("intro.s3.desc")}</p>
               </div>
             </div>
           </div>

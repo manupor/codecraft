@@ -333,6 +333,49 @@ const translations: Record<Lang, Record<string, string>> = {
     // Error page
     "error.title": "Oops! Página no encontrada.",
     "error.back": "Volver al Inicio",
+
+    // IntroHomeFour
+    "intro.s1.title": "10+ Años de Experiencia Transformando Negocios Digitales",
+    "intro.s1.desc": "Más de una década diseñando y desarrollando soluciones tecnológicas para startups, empresas y organizaciones globales en Estados Unidos y Latinoamérica.",
+    "intro.s2.title": "150+ Proyectos Exitosos Entregados a Tiempo.",
+    "intro.s2.desc": "Cada proyecto es único. Desde landing pages hasta aplicaciones SaaS complejas, entrego resultados medibles que impulsan el crecimiento de tu negocio.",
+    "intro.s3.title": "Presencia Global en 5+ Países.",
+    "intro.s3.desc": "Clientes en Estados Unidos, Costa Rica, México, Colombia y proyectos internacionales. Experiencia trabajando con equipos remotos y empresas globales.",
+
+    // ChoooseusHomeTwo
+    "chooseus.tag": "Por Qué Elegir CodeCraftt",
+    "chooseus.title": "Estrategia, Diseño y",
+    "chooseus.highlight": "Tecnología a Tu Medida",
+    "chooseus.desc": "No uso plantillas genéricas. Cada proyecto se diseña y desarrolla desde cero, alineado a tus objetivos de negocio, audiencia y presupuesto. Resultados medibles, no promesas vacías.",
+    "chooseus.s1.title": "Desarrollo Web Premium",
+    "chooseus.s1.desc": "Sitios web, aplicaciones SaaS y e-commerce desarrollados con React, Next.js y arquitecturas cloud escalables. Código limpio, optimizado y listo para crecer.",
+    "chooseus.s2.title": "UX/UI Estratégico",
+    "chooseus.s2.desc": "Diseño de interfaces centradas en el usuario. Investigación, prototipado y testing para crear experiencias que convierten visitantes en clientes.",
+    "chooseus.s3.title": "Automatización e IA",
+    "chooseus.s3.desc": "Integración de inteligencia artificial y automatización para optimizar procesos. Desde chatbots hasta flujos de trabajo inteligentes que ahorran tiempo y recursos.",
+    "chooseus.s4.title": "Escalabilidad Cloud",
+    "chooseus.s4.desc": "Arquitectura AWS y soluciones cloud enterprise. Experiencia en infraestructura que crece con tu negocio, segura y optimizada para alto rendimiento.",
+
+    // TestimonialHomeFour
+    "testimonials4.tag": "Lo Que Dicen Nuestros Clientes",
+    "testimonials4.title": "Testimonios",
+    "testimonials4.highlight": "Reales",
+    "testimonials4.desc": "Cada proyecto es una historia de éxito. Estas son las palabras de quienes confiaron en CodeCraftt para transformar su marca y negocio.",
+    "testimonials4.q1": "Trabajé con Manu en Amazon en el área de entretenimiento y recomendaría sus servicios de diseño gráfico. Se toma el tiempo para entender los resultados que buscamos y entregó productos que beneficiaron a nuestra comunidad y stakeholders.",
+    "testimonials4.q2": "Trabajé con Manu cuando era creador de contenido digital en la oficina del CFO de AWS. Tenía muy buen ojo para el diseño y añadió efectos visuales únicos para llevar el video al siguiente nivel. Manu insiste en altos estándares y tiene las habilidades para crear contenido de calidad ejecutiva.",
+    "testimonials4.q3": "Trabajé con Manu en AWS y recomendaría ampliamente sus servicios de diseño. Manu ayudó a llevar nuestra visión al siguiente nivel con gráficos de vanguardia. Tomó presentaciones aburridas sobre temas complejos y les dio vida, aumentando la participación de nuestra comunidad.",
+    "testimonials4.q4": "Manu es un diseñador gráfico talentoso, profesional y dedicado, con una actitud positiva y colaborativa. Fue clave para completar una serie de productos de comunicación internos y externos de alta calidad. Lo recomiendo sin reservas para trabajo freelance o de tiempo completo.",
+    "testimonials4.r4": "Strategy & Communications — IBM | Brookings, Carnegie, Edelman alum",
+
+    // BrandsHomeTwo
+    "brands.title": "Transformando Marcas",
+    "brands.highlight": "con Estrategia y Creatividad",
+    "brands.p1": "En CodeCraftt no creemos en soluciones genéricas. Combinamos más de 10 años de experiencia en diseño UX/UI, desarrollo full-stack y arquitectura cloud para crear productos digitales que realmente impulsan tu negocio.",
+    "brands.p2": "Desde startups en Silicon Valley hasta empresas consolidadas en Latinoamérica, cada proyecto recibe atención directa, garantizando calidad premium y resultados medibles en conversión, velocidad y experiencia de usuario.",
+    "brands.cta": "Conoce Nuestro Proceso",
+    "brands.counter1.title": "Años de Experiencia",
+    "brands.counter2.title": "Proyectos Globales",
+    "brands.counter3.title": "Clientes Satisfechos",
   },
   en: {
     // Nav
@@ -658,6 +701,49 @@ const translations: Record<Lang, Record<string, string>> = {
     // Error page
     "error.title": "Oops! Page Not Found.",
     "error.back": "Back Home",
+
+    // IntroHomeFour
+    "intro.s1.title": "10+ Years of Experience Transforming Digital Businesses",
+    "intro.s1.desc": "Over a decade designing and developing tech solutions for startups, companies, and global organizations in the U.S. and Latin America.",
+    "intro.s2.title": "150+ Successful Projects Delivered on Time.",
+    "intro.s2.desc": "Every project is unique. From landing pages to complex SaaS apps, I deliver measurable results that drive your business growth.",
+    "intro.s3.title": "Global Presence in 5+ Countries.",
+    "intro.s3.desc": "Clients in the United States, Costa Rica, Mexico, Colombia, and international projects. Experience working with remote teams and global companies.",
+
+    // ChoooseusHomeTwo
+    "chooseus.tag": "Why Choose CodeCraftt",
+    "chooseus.title": "Strategy, Design &",
+    "chooseus.highlight": "Technology Tailored to You",
+    "chooseus.desc": "No generic templates. Every project is designed and built from scratch, aligned to your business goals, audience, and budget. Measurable results, not empty promises.",
+    "chooseus.s1.title": "Premium Web Development",
+    "chooseus.s1.desc": "Websites, SaaS apps, and e-commerce built with React, Next.js, and scalable cloud architectures. Clean, optimized code ready to grow.",
+    "chooseus.s2.title": "Strategic UX/UI",
+    "chooseus.s2.desc": "User-centered interface design. Research, prototyping, and testing to create experiences that convert visitors into customers.",
+    "chooseus.s3.title": "AI & Automation",
+    "chooseus.s3.desc": "AI and automation integration to optimize processes. From chatbots to intelligent workflows that save time and resources.",
+    "chooseus.s4.title": "Cloud Scalability",
+    "chooseus.s4.desc": "AWS architecture and enterprise cloud solutions. Infrastructure experience that grows with your business, secure and optimized for high performance.",
+
+    // TestimonialHomeFour
+    "testimonials4.tag": "What Our Clients Say",
+    "testimonials4.title": "Real",
+    "testimonials4.highlight": "Testimonials",
+    "testimonials4.desc": "Every project is a success story. These are the words of those who trusted CodeCraftt to transform their brand and business.",
+    "testimonials4.q1": "I worked with Manu at Amazon in the entertainment division and would recommend his graphic design services. He takes the time to understand the results we're looking for and delivered work that benefited our community and stakeholders.",
+    "testimonials4.q2": "I worked with Manu when he was a digital content creator in the AWS CFO office. He had a great eye for design and added unique visual effects to take the video to the next level. Manu insists on high standards and has the skills to create executive-quality content.",
+    "testimonials4.q3": "I worked with Manu at AWS and would highly recommend his design services. Manu helped take our vision to the next level with cutting-edge graphics. He took boring presentations on complex topics and brought them to life, increasing engagement in our community.",
+    "testimonials4.q4": "Manu is a talented, professional, and dedicated graphic designer with a positive and collaborative attitude. He was key to completing a series of high-quality internal and external communication products. I recommend him without reservation for freelance or full-time work.",
+    "testimonials4.r4": "Strategy & Communications — IBM | Brookings, Carnegie, Edelman alum",
+
+    // BrandsHomeTwo
+    "brands.title": "Transforming Brands",
+    "brands.highlight": "with Strategy and Creativity",
+    "brands.p1": "At CodeCraftt we don't believe in generic solutions. We combine 10+ years of UX/UI design, full-stack development, and cloud architecture to create digital products that truly drive your business.",
+    "brands.p2": "From Silicon Valley startups to established companies in Latin America, every project receives direct attention, ensuring premium quality and measurable results in conversion, speed, and user experience.",
+    "brands.cta": "Discover Our Process",
+    "brands.counter1.title": "Years of Experience",
+    "brands.counter2.title": "Global Projects",
+    "brands.counter3.title": "Satisfied Clients",
   },
 };
 
