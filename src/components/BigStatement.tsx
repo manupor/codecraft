@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function BigStatement() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.025] to-transparent" />

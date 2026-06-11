@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function HowItWorks() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   const steps = t.howItWorks.steps;
   return (
     <section id="process" className="relative py-24">

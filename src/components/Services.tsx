@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Globe, Sparkles, Zap, ShoppingBag } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 const icons = [Globe, Sparkles, Zap, ShoppingBag];
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   const services = t.services.items.map((item, i) => ({ ...item, icon: icons[i] }));
   return (
     <section id="services" aria-label="Web Design and Branding Services" className="relative py-28 bg-[#0d0f11]/50">

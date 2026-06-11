@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   const stats = t.hero.stats;
   const marquee = t.hero.marquee;
   return (

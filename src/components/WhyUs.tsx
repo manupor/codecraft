@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Palette, Zap, TrendingUp } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 const icons = [Palette, Zap, TrendingUp];
 
 export default function WhyUs() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   const reasons = t.whyUs.items.map((item, i) => ({ ...item, icon: icons[i] }));
   return (
     <section id="about" className="relative py-28">

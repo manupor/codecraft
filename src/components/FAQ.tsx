@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
-  const { t } = useLanguage();
+  const { t } = useLang();
   const faqs = t.faq.items;
 
   const faqSchema = {

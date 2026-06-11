@@ -1,10 +1,10 @@
 "use client";
 
 import { Github, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   const footerServices = t.footer.services;
   const industries = t.footer.industries;
   const company = t.footer.company;

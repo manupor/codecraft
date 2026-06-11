@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export default function FinalCTA() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   return (
     <section className="relative py-32 overflow-hidden">
       <div className="pointer-events-none absolute inset-0">

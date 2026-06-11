@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import StaggeredMenu from './StaggeredMenu';
 import LanguageToggle from './LanguageToggle';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLang } from '../context/LanguageContext';
 
 export default function NavMenuWrapper() {
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useLanguage();
+  const { t } = useLang();
 
   const menuItems = [
     { label: t.nav.home, ariaLabel: t.nav.home, link: '#home' },

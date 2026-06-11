@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 const techs = [
   {
@@ -91,7 +91,7 @@ const techs = [
 const duplicated = [...techs, ...techs];
 
 export default function TechMarquee() {
-  const { t } = useLanguage();
+  const { t } = useLang();
   return (
     <section aria-label="Technologies we work with" className="relative py-16 overflow-hidden border-y border-white/[0.05]">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#090a0c] via-transparent to-[#090a0c] z-10" />
