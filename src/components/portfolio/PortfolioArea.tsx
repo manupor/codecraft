@@ -1,82 +1,39 @@
 import { Link } from "react-router-dom";
- 
+
+const items = [
+  { title: "D-Form Business Strategy", img: "assets/images/portfolio/portfolio-1.jpg", tags: "Branding, Web" },
+  { title: "Mark Wide Marketing Strategy", img: "assets/images/portfolio/portfolio-2.jpg", tags: "Marketing, UI/UX" },
+  { title: "Decorator Hard Carpet", img: "assets/images/portfolio/portfolio-3.jpg", tags: "E-commerce" },
+  { title: "White-line Face Beauty", img: "assets/images/portfolio/portfolio-4.jpg", tags: "Branding" },
+  { title: "Website Development", img: "assets/images/portfolio/portfolio-14.jpg", tags: "Development" },
+  { title: "Search Engine Optimization", img: "assets/images/portfolio/portfolio-15.jpg", tags: "SEO" },
+];
 
 const PortfolioArea = () => {
   return (
-    <>
-      <section className="portfolio-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">D-Form Business Strategy</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
+    <section className="portfolio-section fix section-bg section-padding">
+      <div className="container">
+        <div className="row g-4">
+          {items.map((item, i) => (
+            <div key={i} className="col-lg-6 wow fadeInUp" data-wow-delay={`.${3 + i * 2}s`}>
+              <div className="portfolio-box-items">
+                <div className="project-wrap">
+                  <div className="content">
+                    <span>{item.tags}</span>
+                    <h3><Link to="/portfolio-details">{item.title}</Link></h3>
+                  </div>
                 </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-1.jpg" alt="" /></figure>
-                </div>
+                <Link to="/portfolio-details" className="radius-btn">
+                  <i className="fa-sharp fa-solid fa-arrow-right"></i>
+                  Ver Detalles
+                </Link>
+                <div className="project-hover d-none d-md-block bg-cover" style={{ backgroundImage: `url('${item.img}')` }}></div>
               </div>
             </div>
-            <div className="col-lg-7 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">Mark Wide Marketing Strategy</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
-                </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-2.jpg" alt="" /></figure>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-7 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">Decorator Hard Carpet.</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
-                </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-3.jpg" alt="" /></figure>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">White-line Face Beauty</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
-                </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-4.jpg" alt="" /></figure>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">Website Development</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
-                </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-14.jpg" alt="" /></figure>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-7 col-md-12 col-sm-12 block-column">
-              <div className="portfolio-block-one">
-                <div className="text-box">
-                  <h3><Link to="/portfolio-details">Search Engine Optimization</Link></h3>
-                  <div className="link"><Link to="/portfolio-details"><span>View Details</span><i className="icon-1"></i></Link></div>
-                </div>
-                <div className="image-box">
-                  <figure className="image"><img src="assets/images/portfolio/portfolio-15.jpg" alt="" /></figure>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

@@ -1,27 +1,17 @@
  
-import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
-import ServiceHomeFour from "../homes/home-4/ServiceHomeFour";
-import ProcessHomeFour from "../homes/home-1/ProcessHomeFour";
-import TestimonialHomeFour from "../homes/home-4/TestimonialHomeFour";
 import Wrapper from "../../layouts/Wrapper";
-import HeaderFive from "../../layouts/headers/HeaderFive";
+import HeaderOne from "../../layouts/headers/HeaderOne";
 import Breacrumb from "../../common/Breacrumb";
-import FooterFour from "../../layouts/footers/FooterFour";
-
- 
+import FooterOne from "../../layouts/footers/FooterOne";
+import ServiceList from "./ServiceList";
 
 const Service = () => {
   return (
     <Wrapper>
-      <div className="boxed_wrapper">
-        <HeaderFive />
-        <Breacrumb title="Nuestros Servicios" subtitle="Servicios" />
-        <ServiceHomeFour />
-        <ProcessHomeFour />
-        <TestimonialHomeFour />
-        <CtaHomeFour />
-        <FooterFour />
-      </div>
+      <HeaderOne />
+      <Breacrumb title="Nuestros Servicios" subtitle="Servicios" />
+      <ServiceList />
+      <FooterOne />
     </Wrapper>
   );
 };

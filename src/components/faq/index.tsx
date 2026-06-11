@@ -1,23 +1,17 @@
  
 import Breacrumb from "../../common/Breacrumb";
-import FooterFour from "../../layouts/footers/FooterFour";
-import HeaderFive from "../../layouts/headers/HeaderFive";
+import FooterOne from "../../layouts/footers/FooterOne";
+import HeaderOne from "../../layouts/headers/HeaderOne";
 import Wrapper from "../../layouts/Wrapper";
-import CtaHomeFour from "../homes/home-4/CtaHomeFour"; 
 import FaqArea from "./FaqArea";
-
- 
 
 const Faq = () => {
   return (
     <Wrapper>
-      <div className="boxed_wrapper">
-        <HeaderFive />
-        <Breacrumb title="Our FAQ" subtitle="FAQ" />
-        <FaqArea />
-        <CtaHomeFour />
-        <FooterFour />
-      </div>
+      <HeaderOne />
+      <Breacrumb title="Our FAQ" subtitle="FAQ" />
+      <FaqArea />
+      <FooterOne />
     </Wrapper>
   );
 };
