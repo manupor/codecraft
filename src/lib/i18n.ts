@@ -31,6 +31,9 @@ export const translations = {
     techMarquee: {
       title: "Technologies we work with",
     },
+    clientsLogos: {
+      title: "Trusted by growing brands",
+    },
     services: {
       eyebrow: "What we build",
       headline: "Design, brand, and",
@@ -189,6 +192,9 @@ export const translations = {
     },
     techMarquee: {
       title: "Tecnologías con las que trabajamos",
+    },
+    clientsLogos: {
+      title: "Marcas que confían en nosotros",
     },
     services: {
       eyebrow: "Lo que hacemos",
