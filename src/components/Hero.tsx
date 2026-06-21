@@ -113,8 +113,8 @@ export default function Hero() {
         >
           {[...marquee, ...marquee].map((item, i) => (
             <span key={i} className="inline-flex items-center gap-6 px-6">
-              <span className="text-[11px] uppercase tracking-[0.22em] text-[#2e3138]">{item}</span>
-              <span className="w-1 h-1 rounded-full bg-[#1f2229] shrink-0" />
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#6b7280]">{item}</span>
+              <span className="w-1 h-1 rounded-full bg-[#4b5563] shrink-0" />
             </span>
           ))}
         </motion.div>
