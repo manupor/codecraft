@@ -84,16 +84,11 @@ export default function Hero() {
         >
           <div className="h-px bg-white/[0.06] mb-8" />
           <div className="pb-12 grid grid-cols-2 sm:grid-cols-4 gap-8">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.9 + i * 0.07 }}
-              >
+            {stats.map((s) => (
+              <div key={s.label}>
                 <p className="text-3xl sm:text-4xl font-bold text-[#efece7]">{s.value}</p>
                 <p className="text-xs text-[#9ca3af] mt-1.5">{s.label}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

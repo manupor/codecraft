@@ -42,14 +42,16 @@ export default function WhyUs() {
           </motion.div>
 
           {/* Right — stacked rows */}
-          <div className="flex flex-col divide-y divide-white/[0.07]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-60px" }}
+            className="flex flex-col divide-y divide-white/[0.07]"
+          >
             {reasons.map((r, i) => (
-              <motion.div
+              <div
                 key={r.title}
-                initial={{ opacity: 0, x: 16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-40px" }}
                 className="py-8 first:pt-0 last:pb-0 flex gap-6 items-start"
               >
                 <span className="text-4xl font-bold text-[#8b5cf6]/20 leading-none shrink-0 w-12 text-right tabular-nums">
@@ -62,9 +64,9 @@ export default function WhyUs() {
                   </div>
                   <p className="text-sm text-[#9ca3af] leading-relaxed">{r.description}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>

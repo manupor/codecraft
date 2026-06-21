@@ -18,9 +18,9 @@ export default function BigStatement() {
 
           {/* Left — text */}
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
             viewport={{ once: true, margin: "-80px" }}
           >
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0]">
@@ -44,9 +44,9 @@ export default function BigStatement() {
 
           {/* Right — floating image */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.0, delay: 0.1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
             viewport={{ once: true, margin: "-80px" }}
             className="relative flex items-center justify-center lg:justify-end"
           >

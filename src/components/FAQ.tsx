@@ -35,21 +35,23 @@ export default function FAQ() {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e89230] mb-4">{t.faq.eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5cf6] mb-4">{t.faq.eyebrow}</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
             {t.faq.headline} <span className="gradient-text">{t.faq.headlineAccent}</span>
           </h2>
         </motion.div>
 
-        <div className="space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-3"
+        >
           {faqs.map((faq, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: i * 0.04, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-40px" }}
-              className="rounded-xl border border-white/[0.1] bg-white/[0.03] overflow-hidden"
+              className="rounded-sm border border-white/[0.1] bg-white/[0.03] overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
@@ -73,9 +75,9 @@ export default function FAQ() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

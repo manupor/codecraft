@@ -32,14 +32,16 @@ export default function Services() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-5">
-          {services.map((s, i) => (
-            <motion.div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid sm:grid-cols-2 gap-5"
+        >
+          {services.map((s) => (
+            <div
               key={s.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: i * 0.07, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-60px" }}
               className="group flex gap-6 p-8 rounded-sm border border-white/[0.1] bg-white/[0.03] hover:border-[#8b5cf6]/35 hover:bg-white/[0.06] transition-all duration-300"
             >
               <div className="w-11 h-11 rounded-sm bg-[#8b5cf6]/10 flex items-center justify-center shrink-0 group-hover:bg-[#8b5cf6]/20 transition-colors">
@@ -52,9 +54,9 @@ export default function Services() {
                 </div>
                 <p className="text-sm text-[#b8b5ae] leading-relaxed">{s.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 8 }}
