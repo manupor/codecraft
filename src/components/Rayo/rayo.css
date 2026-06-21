@@ -1,0 +1,72 @@
+/* Rayo Framework Overrides */
+:root {
+  --accent: #10B981;
+  --base: #FAF7F6;
+  --base-opp: #161616;
+}
+
+body {
+  background-color: var(--base-opp);
+  color: var(--base);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.mxd-section {
+  position: relative;
+  width: 100%;
+}
+
+.mxd-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col-12 { width: 100%; padding: 0 15px; }
+.col-md-6 { width: 50%; padding: 0 15px; }
+.col-xl-10 { width: 83.33%; padding: 0 15px; }
+
+@media (max-width: 768px) {
+  .col-md-6, .col-xl-10 { width: 100%; }
+  .mxd-container { padding: 0 20px; }
+}
+
+/* Marquee Animation */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee__toleft {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee-anim 30s linear infinite;
+}
+
+@keyframes marquee-anim {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #161616;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10B981;
+}
