@@ -18,8 +18,8 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[700px] h-[700px] rounded-full bg-violet-600/[0.06] blur-[180px]" />
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-purple-700/[0.04] blur-[140px]" />
+        <div className="absolute top-0 left-1/3 w-[700px] h-[700px] rounded-full bg-violet-800/[0.04] blur-[200px]" />
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-purple-900/[0.03] blur-[160px]" />
       </div>
 
       <div className="relative z-10 flex-1 flex flex-col max-w-7xl mx-auto w-full px-6 lg:px-8">

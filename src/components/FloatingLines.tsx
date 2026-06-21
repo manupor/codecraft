@@ -60,8 +60,8 @@ uniform vec3 lineGradient[8];
 uniform int lineGradientCount;
 
 const vec3 BLACK = vec3(0.0);
-const vec3 PINK  = vec3(120.0, 60.0, 200.0) / 255.0;
-const vec3 BLUE  = vec3(60.0,  20.0, 120.0) / 255.0;
+const vec3 PINK  = vec3(90.0, 50.0, 160.0) / 255.0;
+const vec3 BLUE  = vec3(30.0, 15.0, 70.0) / 255.0;
 
 mat2 rotate(float r) {
   return mat2(cos(r), sin(r), -sin(r), cos(r));

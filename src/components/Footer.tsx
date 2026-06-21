@@ -19,8 +19,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <a href="/" className="text-xl font-bold tracking-tight text-[#efece7]">
-              Code<span className="text-[#8b5cf6]">craftt</span>
+            <a href="/">
+              <img src="/codecraftt-logo.png" alt="CodeCraftt" className="h-8 w-auto brightness-0 invert" />
             </a>
             <p className="mt-3 text-sm text-[#5c5f66] leading-relaxed max-w-xs">
               {t.footer.tagline}
