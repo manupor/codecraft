@@ -30,7 +30,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7 }}
-            className="text-xs font-semibold uppercase tracking-[0.25em] text-[#5c5f66]"
+            className="text-xs font-semibold uppercase tracking-[0.25em] text-[#8b5cf6]"
           >
             {t.hero.label}
           </motion.p>
@@ -49,7 +49,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="mt-7 text-lg sm:text-xl text-[#b8b5ae] leading-relaxed max-w-2xl"
+            className="mt-7 text-xl sm:text-2xl text-[#d4d0ca] leading-relaxed max-w-2xl"
           >
 {t.hero.subtitle}
           </motion.p>
@@ -92,7 +92,7 @@ export default function Hero() {
                 transition={{ duration: 0.4, delay: 0.9 + i * 0.07 }}
               >
                 <p className="text-3xl sm:text-4xl font-bold text-[#efece7]">{s.value}</p>
-                <p className="text-xs text-[#5c5f66] mt-1.5">{s.label}</p>
+                <p className="text-xs text-[#9ca3af] mt-1.5">{s.label}</p>
               </motion.div>
             ))}
           </div>

@@ -93,11 +93,11 @@ const duplicated = [...techs, ...techs];
 export default function TechMarquee() {
   const { t } = useLanguage();
   return (
-    <section aria-label="Technologies we work with" className="relative py-16 overflow-hidden border-y border-white/[0.05]">
+    <section aria-label="Technologies we work with" className="relative py-10 overflow-hidden border-t border-white/[0.05]">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#090a0c] via-transparent to-[#090a0c] z-10" />
 
-      <div className="mb-10 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#5c5f66]">
+      <div className="mb-6 text-center">
+        <p className="text-[10px] uppercase tracking-[0.2em] text-[#3e4149]">
           {t.techMarquee.title}
         </p>
       </div>
@@ -111,12 +111,12 @@ export default function TechMarquee() {
           {duplicated.map((tech, i) => (
             <div
               key={i}
-              className="flex flex-col items-center gap-3 px-5 py-4 shrink-0 rounded-sm bg-white/[0.08] border border-white/[0.12] hover:bg-white/[0.13] transition-colors duration-300"
+              className="flex flex-col items-center gap-2 px-4 py-3 shrink-0 rounded-sm bg-white/[0.05] border border-white/[0.08]"
             >
-              <div className="text-[#d4d0ca] hover:text-[#efece7] transition-colors duration-300">
+              <div className="text-[#6b7280]">
                 {tech.icon}
               </div>
-              <span className="text-[10px] font-medium text-[#6b7280] uppercase tracking-wider">
+              <span className="text-[9px] font-medium text-[#4b5563] uppercase tracking-wider">
                 {tech.name}
               </span>
             </div>

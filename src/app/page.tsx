@@ -19,12 +19,12 @@ export default function Home() {
         <div className="relative z-10">
           <NavMenuWrapper />
           <Hero />
-          <TechMarquee />
           <ClientLogos />
           <Services />
           <BigStatement />
           <WhyUs />
           <HowItWorks />
+          <TechMarquee />
           <FAQ />
           <Footer />
         </div>

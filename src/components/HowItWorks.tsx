@@ -16,7 +16,7 @@ export default function HowItWorks() {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e89230] mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5cf6] mb-4">
             {t.howItWorks.eyebrow}
           </p>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
@@ -28,21 +28,21 @@ export default function HowItWorks() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 gap-x-16 gap-y-0 max-w-4xl mx-auto">
           {steps.map((step, i) => (
             <motion.div
               key={step.num}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="group relative p-7 rounded-sm bg-white/[0.03] border border-white/[0.1] hover:border-[#e89230]/40 hover:bg-white/[0.06] transition-all duration-300"
+              transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-40px" }}
+              className="flex gap-5 py-7 border-b border-white/[0.06] last:border-0"
             >
-              <span className="text-5xl font-bold text-white/[0.12] leading-none block mb-4 group-hover:text-[#e89230]/20 transition-colors">
-                {step.num}
-              </span>
-              <h3 className="text-base font-semibold text-[#efece7] mb-2">{step.title}</h3>
-              <p className="text-sm text-[#b8b5ae] leading-relaxed">{step.description}</p>
+              <span className="text-2xl font-bold text-[#8b5cf6]/30 leading-none shrink-0 pt-0.5 w-8 tabular-nums">{step.num}</span>
+              <div>
+                <h3 className="text-sm font-semibold text-[#efece7] mb-1">{step.title}</h3>
+                <p className="text-sm text-[#9ca3af] leading-relaxed">{step.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>

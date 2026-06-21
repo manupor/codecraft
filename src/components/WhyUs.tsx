@@ -1,55 +1,71 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Palette, Zap, TrendingUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const icons = [Palette, Zap, TrendingUp];
+import { useContactModal } from "@/components/HomeClient";
 
 export default function WhyUs() {
   const { t } = useLanguage();
-  const reasons = t.whyUs.items.map((item, i) => ({ ...item, icon: icons[i] }));
+  const { openModal } = useContactModal();
+  const reasons = t.whyUs.items;
   return (
-    <section id="about" className="relative py-28">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-violet-600/[0.025] to-transparent" />
-
+    <section id="about" className="relative py-28 border-t border-white/[0.05]">
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-16"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b5cf6] mb-4">
-            {t.whyUs.eyebrow}
-          </p>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">
-            {t.whyUs.headline}{" "}
-            <span className="gradient-text">{t.whyUs.headlineAccent}</span>
-          </h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-        <div className="grid sm:grid-cols-3 gap-6 mt-12">
-          {reasons.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="group relative p-9 rounded-sm bg-white/[0.03] border border-white/[0.1] hover:border-[#8b5cf6]/40 hover:bg-white/[0.06] transition-all duration-300"
+          {/* Left — sticky claim */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="lg:sticky lg:top-32"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8b5cf6] mb-5">
+              {t.whyUs.eyebrow}
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1]">
+              {t.whyUs.headline}{" "}
+              <span className="gradient-text">{t.whyUs.headlineAccent}</span>
+            </h2>
+            <p className="mt-6 text-base text-[#9ca3af] leading-relaxed max-w-sm">
+              {t.whyUs.items[0].description}
+            </p>
+            <button
+              onClick={openModal}
+              className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-sm bg-[#8b5cf6] text-white font-semibold text-sm hover:shadow-xl hover:shadow-violet-500/30 transition-all duration-200"
             >
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-10 h-10 rounded-sm bg-[#8b5cf6]/10 flex items-center justify-center group-hover:bg-[#8b5cf6]/20 transition-colors">
-                  <r.icon size={20} className="text-[#8b5cf6]" />
+              {t.bigStatement.cta}
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </motion.div>
+
+          {/* Right — stacked rows */}
+          <div className="flex flex-col divide-y divide-white/[0.07]">
+            {reasons.map((r, i) => (
+              <motion.div
+                key={r.title}
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-40px" }}
+                className="py-8 first:pt-0 last:pb-0 flex gap-6 items-start"
+              >
+                <span className="text-4xl font-bold text-[#8b5cf6]/20 leading-none shrink-0 w-12 text-right tabular-nums">
+                  0{i + 1}
+                </span>
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-lg font-semibold text-[#efece7]">{r.title}</h3>
+                    <span className="text-[10px] font-bold text-[#8b5cf6] bg-[#8b5cf6]/10 px-2 py-0.5 rounded-sm shrink-0">{r.stat}</span>
+                  </div>
+                  <p className="text-sm text-[#9ca3af] leading-relaxed">{r.description}</p>
                 </div>
-                <span className="text-[11px] font-bold text-[#8b5cf6]/80 bg-[#8b5cf6]/10 px-2 py-1 rounded-sm">{r.stat}</span>
-              </div>
-              <h3 className="text-base font-semibold text-[#efece7] mb-2">{r.title}</h3>
-              <p className="text-sm text-[#b8b5ae] leading-relaxed">{r.description}</p>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
