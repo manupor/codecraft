@@ -8,7 +8,6 @@ import BigStatement from "@/components/BigStatement";
 import WhyUs from "@/components/WhyUs";
 import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
         <WhyUs />
         <HowItWorks />
         <FAQ />
-        <FinalCTA />
         <Footer />
       </div>
     </main>
