@@ -11,9 +11,10 @@ export default function NavMenuWrapper() {
 
   const menuItems = [
     { label: t.nav.home, ariaLabel: t.nav.home, link: '#home' },
-    { label: t.nav.about, ariaLabel: t.nav.about, link: '#about' },
     { label: t.nav.services, ariaLabel: t.nav.services, link: '#services' },
+    { label: t.nav.about, ariaLabel: t.nav.about, link: '#about' },
     { label: t.nav.process, ariaLabel: t.nav.process, link: '#process' },
+    { label: t.nav.faq, ariaLabel: t.nav.faq, link: '#faq' },
     { label: t.nav.contact, ariaLabel: t.nav.contact, link: '#contact' },
   ];
 

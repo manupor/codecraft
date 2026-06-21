@@ -69,9 +69,12 @@ export const metadata: Metadata = {
     google: "kIP48Fe7zzAh9a8Fn71-wRp333vS6HQoH2ALXvh0oGk",
   },
   icons: {
-    icon: "/codecraftt-logo.png",
-    shortcut: "/codecraftt-logo.png",
-    apple: "/codecraftt-logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 
