@@ -111,12 +111,12 @@ export default function TechMarquee() {
           {duplicated.map((tech, i) => (
             <div
               key={i}
-              className="flex flex-col items-center gap-3 px-6 shrink-0"
+              className="flex flex-col items-center gap-3 px-5 py-4 shrink-0 rounded-sm bg-white/[0.05] border border-white/[0.07] hover:bg-white/[0.09] transition-colors duration-300"
             >
-              <div className="text-[#b8b5ae] hover:text-[#efece7] transition-colors duration-300">
+              <div className="text-[#d4d0ca] hover:text-[#efece7] transition-colors duration-300">
                 {tech.icon}
               </div>
-              <span className="text-[11px] font-medium text-[#5c5f66] uppercase tracking-wider">
+              <span className="text-[10px] font-medium text-[#6b7280] uppercase tracking-wider">
                 {tech.name}
               </span>
             </div>

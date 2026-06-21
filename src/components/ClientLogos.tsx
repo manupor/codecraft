@@ -110,13 +110,13 @@ export default function ClientLogos() {
           {allClients.map((client, i) => (
             <div
               key={`${client.name}-${i}`}
-              className="shrink-0 flex items-center justify-center h-[60px]"
+              className="shrink-0 flex items-center justify-center h-[70px] px-6 py-3 rounded-sm bg-white/[0.06] border border-white/[0.08]"
             >
               <img
                 src={client.logo}
                 alt={client.name}
                 draggable={false}
-                className="h-[60px] w-auto max-w-[200px] object-contain brightness-0 invert pointer-events-none"
+                className="h-[44px] w-auto max-w-[180px] object-contain brightness-0 invert opacity-90 pointer-events-none"
               />
             </div>
           ))}
