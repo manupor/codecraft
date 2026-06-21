@@ -60,8 +60,8 @@ uniform vec3 lineGradient[8];
 uniform int lineGradientCount;
 
 const vec3 BLACK = vec3(0.0);
-const vec3 PINK  = vec3(90.0, 50.0, 160.0) / 255.0;
-const vec3 BLUE  = vec3(30.0, 15.0, 70.0) / 255.0;
+const vec3 PINK  = vec3(55.0, 30.0, 100.0) / 255.0;
+const vec3 BLUE  = vec3(18.0, 8.0, 40.0) / 255.0;
 
 mat2 rotate(float r) {
   return mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -75,7 +75,7 @@ vec3 background_color(vec2 uv) {
 
   col += mix(BLUE, BLACK, smoothstep(0.0, 1.0, abs(m)));
   col += mix(PINK, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
-  return col * 0.3;
+  return col * 0.15;
 }
 
 vec3 getLineColor(float t, vec3 baseColor) {
@@ -100,7 +100,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
     gradientColor = mix(c1, c2, f);
   }
   
-  return gradientColor * 0.5;
+  return gradientColor * 0.25;
 }
 
   float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
