@@ -26,7 +26,7 @@ html {
 }
 
 ::selection {
-  background: rgba(232, 146, 48, 0.3);
+  background: rgba(139, 92, 246, 0.3);
   color: #efece7;
 }
 
@@ -58,7 +58,7 @@ body::before {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 146, 48, 0.5);
+  background: rgba(139, 92, 246, 0.5);
 }
 
 @keyframes gradient-shift {
@@ -67,7 +67,7 @@ body::before {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #e89230, #d97a1e, #f0a856, #e89230);
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed, #a855f7, #8b5cf6);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -85,7 +85,7 @@ body::before {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(232, 146, 48, 0.5), rgba(240, 168, 86, 0.5));
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(168, 85, 247, 0.5));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -93,5 +93,5 @@ body::before {
 }
 
 .glow {
-  box-shadow: 0 0 60px rgba(232, 146, 48, 0.12), 0 0 120px rgba(232, 146, 48, 0.05);
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.12), 0 0 120px rgba(139, 92, 246, 0.05);
 }

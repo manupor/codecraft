@@ -2,9 +2,11 @@
 
 import { Github, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useContactModal } from "@/components/HomeClient";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { openModal } = useContactModal();
   const footerServices = t.footer.services;
   const industries = t.footer.industries;
   const company = t.footer.company;
@@ -18,7 +20,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <a href="/" className="text-xl font-bold tracking-tight text-[#efece7]">
-              Code<span className="text-[#e89230]">craftt</span>
+              Code<span className="text-[#8b5cf6]">craftt</span>
             </a>
             <p className="mt-3 text-sm text-[#5c5f66] leading-relaxed max-w-xs">
               {t.footer.tagline}
@@ -35,9 +37,9 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <a href="#contact" className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#e89230] text-[#090a0c] text-xs font-semibold hover:shadow-lg hover:shadow-orange-500/20 transition-all">
+            <button onClick={openModal} className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-[#8b5cf6] text-white text-xs font-semibold hover:shadow-lg hover:shadow-violet-500/30 transition-all">
               {t.footer.cta} <ArrowRight size={11} />
-            </a>
+            </button>
           </div>
 
           {/* Services */}

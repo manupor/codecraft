@@ -113,10 +113,10 @@ export default function TechMarquee() {
               key={i}
               className="flex flex-col items-center gap-3 px-6 shrink-0"
             >
-              <div className="text-[#5c5f66] hover:text-[#b8b5ae] transition-colors duration-300">
+              <div className="text-[#b8b5ae] hover:text-[#efece7] transition-colors duration-300">
                 {tech.icon}
               </div>
-              <span className="text-[11px] font-medium text-[#3e4149] uppercase tracking-wider">
+              <span className="text-[11px] font-medium text-[#5c5f66] uppercase tracking-wider">
                 {tech.name}
               </span>
             </div>

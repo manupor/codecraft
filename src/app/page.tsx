@@ -9,23 +9,26 @@ import WhyUs from "@/components/WhyUs";
 import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import HomeClient from "@/components/HomeClient";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#090a0c]">
       <GlobalBackground />
-      <div className="relative z-10">
-        <NavMenuWrapper />
-        <Hero />
-        <TechMarquee />
-        <ClientLogos />
-        <Services />
-        <BigStatement />
-        <WhyUs />
-        <HowItWorks />
-        <FAQ />
-        <Footer />
-      </div>
+      <HomeClient>
+        <div className="relative z-10">
+          <NavMenuWrapper />
+          <Hero />
+          <TechMarquee />
+          <ClientLogos />
+          <Services />
+          <BigStatement />
+          <WhyUs />
+          <HowItWorks />
+          <FAQ />
+          <Footer />
+        </div>
+      </HomeClient>
     </main>
   );
 }

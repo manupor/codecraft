@@ -116,7 +116,7 @@ export default function ClientLogos() {
                 src={client.logo}
                 alt={client.name}
                 draggable={false}
-                className="h-[60px] w-auto max-w-[200px] object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                className="h-[60px] w-auto max-w-[200px] object-contain brightness-0 invert pointer-events-none"
               />
             </div>
           ))}

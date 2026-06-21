@@ -4,12 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useContactModal } from "@/components/HomeClient";
 
 export default function BigStatement() {
   const { t } = useLanguage();
+  const { openModal } = useContactModal();
   return (
     <section className="relative py-24 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.025] to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-violet-600/[0.025] to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -31,13 +33,13 @@ export default function BigStatement() {
               {t.bigStatement.paragraph}
             </p>
 
-            <a
-              href="#contact"
+            <button
+              onClick={openModal}
               className="group mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-sm border border-[#efece7]/[0.12] text-[#b8b5ae] font-medium text-sm hover:bg-white/[0.05] hover:border-[#efece7]/25 transition-all duration-200"
             >
               {t.bigStatement.cta}
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </button>
           </motion.div>
 
           {/* Right — floating image */}

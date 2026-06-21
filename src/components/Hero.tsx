@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useContactModal } from "@/components/HomeClient";
 
 export default function Hero() {
   const { t } = useLanguage();
+  const { openModal } = useContactModal();
   const stats = t.hero.stats;
   const marquee = t.hero.marquee;
   return (
@@ -16,8 +18,8 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[700px] h-[700px] rounded-full bg-orange-500/[0.04] blur-[180px]" />
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-amber-600/[0.03] blur-[140px]" />
+        <div className="absolute top-0 left-1/3 w-[700px] h-[700px] rounded-full bg-violet-600/[0.06] blur-[180px]" />
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-purple-700/[0.04] blur-[140px]" />
       </div>
 
       <div className="relative z-10 flex-1 flex flex-col max-w-7xl mx-auto w-full px-6 lg:px-8">
@@ -58,13 +60,13 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
             className="mt-10 flex flex-wrap justify-center gap-3"
           >
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#e89230] text-[#090a0c] font-bold hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-200"
+            <button
+              onClick={openModal}
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-sm bg-[#8b5cf6] text-white font-bold hover:shadow-2xl hover:shadow-violet-500/30 transition-all duration-200"
             >
               {t.hero.cta1}
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </button>
             <a
               href="#services"
               className="inline-flex items-center px-8 py-4 rounded-sm border border-[#efece7]/10 text-[#b8b5ae] font-medium hover:bg-[#efece7]/[0.04] hover:border-[#efece7]/20 transition-all duration-200"
