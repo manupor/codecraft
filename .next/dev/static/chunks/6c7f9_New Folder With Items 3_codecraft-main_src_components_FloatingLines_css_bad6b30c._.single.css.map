@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Downloads/New Folder With Items 3/codecraft-main/src/components/FloatingLines.css"],"sourcesContent":[".floating-lines-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  overflow: hidden;\n}\n\n.floating-lines-fallback {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  overflow: hidden;\n  background:\n    radial-gradient(120% 80% at 80% 50%, rgba(82, 39, 255, 0.18) 0%, transparent 55%),\n    radial-gradient(100% 60% at 10% 40%, rgba(100, 30, 120, 0.12) 0%, transparent 50%),\n    radial-gradient(80% 50% at 50% 90%, rgba(20, 30, 80, 0.25) 0%, transparent 60%),\n    #000000;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA"}}]
-}
