@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | CodeCraftt",
   },
   description:
-    "CodeCraftt is a web design and branding studio based in Costa Rica. We craft brand identities and build high-converting custom websites for startups and businesses across the US, Mexico, and Latin America.",
+    "Codecraftt is a web design, branding, and digital development studio based in Costa Rica. We design brand identities and build high-converting websites for law firms, professional services, and businesses across Costa Rica, the US, and Latin America.",
   keywords: [
     "web design company Costa Rica",
     "branding studio Costa Rica",
@@ -84,13 +84,27 @@ const orgSchema = {
   name: "CodeCraftt",
   url: "https://www.codecraftt.com",
   logo: "https://www.codecraftt.com/codecraftt-logo.png",
-  description: "CodeCraftt es un estudio de diseño web y branding en Costa Rica. Creamos identidades de marca y sitios web de alta conversión para despachos jurídicos, pymes y empresas en Costa Rica, Estados Unidos y América Latina. Fundado por Manuel Portuguez, con más de 10 años de experiencia en UX/UI, branding y desarrollo full-stack.",
+  description: "Codecraftt is a web design, branding, and digital development studio based in Costa Rica, founded by Manuel Portuguez. We design brand identities and build high-converting websites for law firms, professional service firms, and businesses across Costa Rica, the US, and Latin America. 10+ years of experience in UX/UI, branding, and full-stack development.",
   address: { "@type": "PostalAddress", addressLocality: "Curridabat", addressRegion: "San José", addressCountry: "CR" },
   contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "hello@codecraftt.com", telephone: "+50683442522", availableLanguage: ["English", "Spanish"] },
   sameAs: ["https://github.com/manupor", "https://linkedin.com/in/manuelportuguez", "https://instagram.com/codecraftt", "https://manuportuguez.com"],
   founder: { "@type": "Person", name: "Manuel Portuguez", url: "https://manuportuguez.com", jobTitle: "Founder, Web Designer & Developer" },
   knowsAbout: ["Web Design", "Brand Identity", "UX/UI Design", "Next.js", "Webflow", "Shopify", "WordPress", "Legaltech Costa Rica", "Diseño web Costa Rica", "Sitios web para abogados"],
   areaServed: ["Costa Rica", "United States", "Mexico", "Latin America"],
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Web Design, Branding & Digital Development",
+  provider: {
+    "@type": "Organization",
+    name: "Codecraftt",
+    url: "https://www.codecraftt.com",
+  },
+  areaServed: ["Costa Rica", "United States", "Latin America"],
+  serviceType: ["Web Design", "Brand Identity", "Logo Design", "Landing Pages", "E-commerce", "UX/UI Design"],
+  description: "Custom web design, brand identity, and digital development for law firms, professional services, and businesses in Costa Rica and the United States.",
 };
 
 const faqSchema = {
@@ -155,6 +169,7 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
       <body className={`${spaceGrotesk.variable} antialiased bg-[#090a0c] text-[#efece7]`}>

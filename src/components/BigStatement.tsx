@@ -56,7 +56,7 @@ export default function BigStatement() {
             >
               <Image
                 src="/rayo-img/demo/01_fea-img.webp"
-                alt="CodeCraftt — SaaS and AI product development"
+                alt="CodeCraftt — Web design and branding studio in Costa Rica"
                 width={680}
                 height={460}
                 className="w-full max-w-[580px] h-auto object-contain drop-shadow-2xl"

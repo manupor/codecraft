@@ -39,6 +39,17 @@ export const translations = {
       ctaDescription: "Branding and websites built to sell.",
       ctaButton: "Start Your Project",
     },
+    brandDef: {
+      ariaLabel: "What is Codecraftt",
+      eyebrow: "What is Codecraftt",
+      headline: "A web design, branding, and digital development studio.",
+      definition: "Codecraftt is a studio based in Costa Rica that designs brands and builds websites for companies that want to look premium and grow faster. We work with law firms, professional services, and ambitious businesses across Costa Rica, the US, and Latin America.",
+      pillars: [
+        { title: "Web Design & Development", desc: "Custom websites built on Next.js, Webflow, or WordPress — fast, responsive, and engineered to convert." },
+        { title: "Brand Identity", desc: "Logos, color systems, and visual guidelines that give your company a distinct, memorable presence." },
+        { title: "Digital Strategy", desc: "Positioning, content structure, and technical SEO — so your brand is found and chosen." },
+      ],
+    },
     techMarquee: {
       title: "Technologies we work with",
     },
@@ -78,8 +89,8 @@ export const translations = {
       headline1: "From blank page",
       headlineAccent: "to a brand",
       headline2: "that sells.",
-      paragraph: "We handle strategy, design, copy, and development — so your brand looks premium and your website converts.",
-      cta: "Let's build your brand",
+      paragraph: "We handle strategy, design, and development end to end — so your brand looks premium and your website drives real results.",
+      cta: "Start Your Project",
     },
     whyUs: {
       eyebrow: "Why CodeCraftt",
@@ -136,11 +147,11 @@ export const translations = {
       eyebrow: "Behind the work",
       headline: "Built by someone who has shipped it before.",
       sentencePre: "Codecraftt is led by",
-      sentencePost: "— 10+ years designing and building digital products for companies across the US and Latin America.",
+      sentencePost: "— a web designer and developer with 10+ years delivering digital products for companies across the US and Latin America. Based in Costa Rica, working globally.",
       points: [
-        { label: "100+ projects delivered", sub: "SaaS, e-commerce, fintech, education, and enterprise" },
-        { label: "Clients include AWS and Texas Tech University", sub: "Plus 50+ growing brands across the US and Latin America" },
-        { label: "Full-stack execution", sub: "Strategy, design, and development under one roof" },
+        { label: "100+ projects delivered", sub: "Web design, branding, e-commerce, and digital products" },
+        { label: "Clients include AWS and Texas Tech University", sub: "Plus 50+ growing brands in Costa Rica, the US, and LATAM" },
+        { label: "Strategy, design & development under one roof", sub: "No handoffs, no gaps, no agency overhead" },
       ],
     },
     finalCta: {
@@ -223,6 +234,17 @@ export const translations = {
       ctaDescription: "Branding y sitios web diseñados para vender.",
       ctaButton: "Inicia Tu Proyecto",
     },
+    brandDef: {
+      ariaLabel: "Qué es Codecraftt",
+      eyebrow: "Qué es Codecraftt",
+      headline: "Un estudio de diseño web, branding y desarrollo digital.",
+      definition: "Codecraftt es un estudio con sede en Costa Rica que diseña marcas y construye sitios web para empresas que quieren verse premium y crecer más rápido. Trabajamos con despachos jurídicos, servicios profesionales y negocios ambiciosos en Costa Rica, EE. UU. y América Latina.",
+      pillars: [
+        { title: "Diseño Web y Desarrollo", desc: "Sitios a medida en Next.js, Webflow o WordPress — rápidos, responsivos y pensados para convertir." },
+        { title: "Identidad de Marca", desc: "Logos, sistemas de color y guías visuales que le dan a tu empresa una presencia distintiva y memorable." },
+        { title: "Estrategia Digital", desc: "Posicionamiento, estructura de contenido y SEO técnico — para que tu marca sea encontrada y elegida." },
+      ],
+    },
     techMarquee: {
       title: "Tecnologías con las que trabajamos",
     },
@@ -262,8 +284,8 @@ export const translations = {
       headline1: "De una página en blanco",
       headlineAccent: "a una marca",
       headline2: "que vende.",
-      paragraph: "Nos encargamos de la estrategia, el diseño, el copy y el desarrollo — para que tu marca luzca premium y tu sitio web convierta.",
-      cta: "Construyamos tu marca",
+      paragraph: "Manejamos estrategia, diseño y desarrollo de principio a fin — para que tu marca luzca premium y tu sitio web genere resultados reales.",
+      cta: "Inicia Tu Proyecto",
     },
     whyUs: {
       eyebrow: "Por qué CodeCraftt",
@@ -320,11 +342,11 @@ export const translations = {
       eyebrow: "Detrás del trabajo",
       headline: "Construido por alguien que ya lo ha hecho antes.",
       sentencePre: "Codecraftt es liderado por",
-      sentencePost: "— más de 10 años diseñando y desarrollando productos digitales para empresas en EE. UU. y América Latina.",
+      sentencePost: "— diseñador web y desarrollador con más de 10 años entregando productos digitales para empresas en EE. UU. y América Latina. Con sede en Costa Rica, trabajando globalmente.",
       points: [
-        { label: "100+ proyectos entregados", sub: "SaaS, e-commerce, fintech, educación y enterprise" },
-        { label: "Clientes incluyen AWS y Texas Tech University", sub: "Más 50+ marcas en crecimiento en EE. UU. y América Latina" },
-        { label: "Ejecución full-stack", sub: "Estrategia, diseño y desarrollo bajo un mismo techo" },
+        { label: "100+ proyectos entregados", sub: "Diseño web, branding, e-commerce y productos digitales" },
+        { label: "Clientes incluyen AWS y Texas Tech University", sub: "Más 50+ marcas en crecimiento en Costa Rica, EE. UU. y LATAM" },
+        { label: "Estrategia, diseño y desarrollo bajo un mismo techo", sub: "Sin intermediarios, sin brechas, sin overhead de agencia" },
       ],
     },
     finalCta: {
