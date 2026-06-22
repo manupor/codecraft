@@ -1,4 +1,40 @@
+# ──────────────────────────────────────────
+#  Standard search engines — full access
+# ──────────────────────────────────────────
 User-agent: *
+Allow: /
+
+# ──────────────────────────────────────────
+#  OpenAI — block training, allow search
+# ──────────────────────────────────────────
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# ──────────────────────────────────────────
+#  Anthropic (Claude)
+# ──────────────────────────────────────────
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# ──────────────────────────────────────────
+#  Google Extended — allow AI Overviews
+# ──────────────────────────────────────────
+User-agent: Google-Extended
+Allow: /
+
+# ──────────────────────────────────────────
+#  Perplexity
+# ──────────────────────────────────────────
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://www.codecraftt.com/sitemap.xml

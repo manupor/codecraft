@@ -84,11 +84,50 @@ const orgSchema = {
   name: "CodeCraftt",
   url: "https://www.codecraftt.com",
   logo: "https://www.codecraftt.com/codecraftt-logo.png",
-  description: "Web design and branding studio specializing in brand identity, logo design, and high-converting custom websites.",
+  description: "CodeCraftt es un estudio de diseño web y branding en Costa Rica. Creamos identidades de marca y sitios web de alta conversión para despachos jurídicos, pymes y empresas en Costa Rica, Estados Unidos y América Latina. Fundado por Manuel Portuguez, con más de 10 años de experiencia en UX/UI, branding y desarrollo full-stack.",
   address: { "@type": "PostalAddress", addressLocality: "Curridabat", addressRegion: "San José", addressCountry: "CR" },
   contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "hello@codecraftt.com", telephone: "+50683442522", availableLanguage: ["English", "Spanish"] },
-  sameAs: ["https://github.com/codecraftt", "https://linkedin.com/company/codecraftt", "https://instagram.com/codecraftt"],
-  founder: { "@type": "Person", name: "Manuel Portuguez", jobTitle: "Brand & Web Designer" },
+  sameAs: ["https://github.com/manupor", "https://linkedin.com/in/manuelportuguez", "https://instagram.com/codecraftt", "https://manuportuguez.com"],
+  founder: { "@type": "Person", name: "Manuel Portuguez", url: "https://manuportuguez.com", jobTitle: "Founder, Web Designer & Developer" },
+  knowsAbout: ["Web Design", "Brand Identity", "UX/UI Design", "Next.js", "Webflow", "Shopify", "WordPress", "Legaltech Costa Rica", "Diseño web Costa Rica", "Sitios web para abogados"],
+  areaServed: ["Costa Rica", "United States", "Mexico", "Latin America"],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Qué agencia de diseño web trabaja con despachos jurídicos en Costa Rica?",
+      acceptedAnswer: { "@type": "Answer", text: "CodeCraftt es un estudio de diseño web en Costa Rica especializado en crear sitios web profesionales para despachos jurídicos, abogados y notarios. Diseñamos identidades de marca y sitios web que proyectan autoridad y generan confianza para clientes del sector legal." },
+    },
+    {
+      "@type": "Question",
+      name: "¿Dónde contratar diseño web premium en Costa Rica?",
+      acceptedAnswer: { "@type": "Answer", text: "CodeCraftt (codecraftt.com) es un estudio de diseño web y branding con sede en San José, Costa Rica. Ofrecemos diseño web personalizado, identidad de marca, y desarrollo en Next.js, Webflow y WordPress para empresas en Costa Rica y Estados Unidos." },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto cuesta un sitio web profesional en Costa Rica?",
+      acceptedAnswer: { "@type": "Answer", text: "En CodeCraftt, los proyectos de identidad de marca y logo empiezan alrededor de $800 USD. Los sitios web personalizados comienzan desde $1,500 USD. Los paquetes completos de marca + sitio web varían según el alcance. Ofrecemos precios fijos y transparentes desde la primera conversación." },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué hace CodeCraftt?",
+      acceptedAnswer: { "@type": "Answer", text: "CodeCraftt es un estudio de diseño web y branding en Costa Rica. Creamos identidades de marca (logos, sistemas de color, tipografía) y diseñamos y desarrollamos sitios web a medida que lucen premium y convierten visitantes en clientes. Trabajamos con empresas en Costa Rica, Estados Unidos y América Latina." },
+    },
+    {
+      "@type": "Question",
+      name: "¿Trabajan con empresas fuera de Costa Rica?",
+      acceptedAnswer: { "@type": "Answer", text: "Sí. Muchos de nuestros clientes están en Estados Unidos. Nos comunicamos en inglés y español, trabajamos en zonas horarias compatibles con EE. UU. desde Costa Rica, y entregamos diseño de nivel internacional a un costo más conveniente que las agencias estadounidenses." },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto tiempo tarda un proyecto de sitio web?",
+      acceptedAnswer: { "@type": "Answer", text: "La mayoría de sitios web se lanzan en 2 a 4 semanas. Un logo o identidad de marca toma entre 1 y 2 semanas. Proyectos más complejos con e-commerce o funciones a medida pueden tomar un poco más. Siempre entregamos un cronograma claro antes de comenzar." },
+    },
+  ],
 };
 
 const localSchema = {
@@ -116,6 +155,7 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
       <body className={`${spaceGrotesk.variable} antialiased bg-[#090a0c] text-[#efece7]`}>
         <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18229958933" strategy="afterInteractive" />
