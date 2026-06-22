@@ -310,17 +310,17 @@ export function CinematicHero({
           <div className="card-sheen" aria-hidden="true" />
 
           {/* Layout: brand top-center, phone center, text below, badges on sides */}
-          <div className="relative w-full h-full flex flex-col items-center justify-between z-10 px-4 py-6 md:py-10">
+          <div className="relative w-full h-full flex flex-col items-center justify-center z-10 px-4 py-4">
 
             {/* Brand name — top center */}
-            <div className="cc-card-right gsap-reveal flex justify-center w-full">
+            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-[-8px] sm:mb-[-16px] md:mb-[-24px] lg:mb-[-32px]">
               <h2 className="text-[2rem] sm:text-[3rem] md:text-[5rem] lg:text-[7rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
                 {brandName}
               </h2>
             </div>
 
             {/* Phone mockup + badges — center row */}
-            <div className="cc-mockup-wrapper relative w-full flex-1 flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
+            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10" style={{ perspective: "1000px", height: '320px' }}>
               <div className="relative flex items-center justify-center scale-[0.38] sm:scale-[0.52] md:scale-[0.68] lg:scale-[0.9]" style={{ transformOrigin: 'center center' }}>
                 <div ref={mockupRef} className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform">
                   <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
@@ -408,11 +408,11 @@ export function CinematicHero({
             </div>
 
             {/* Text — below phone, center */}
-            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl px-4">
-              <h3 className="text-white text-base sm:text-xl md:text-2xl lg:text-4xl font-bold mb-1 md:mb-3 tracking-tight">
+            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl px-4 mt-[-8px] sm:mt-[-16px] md:mt-[-24px]">
+              <h3 className="text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 tracking-tight">
                 {cardHeading}
               </h3>
-              <p className="hidden sm:block text-purple-100/70 text-xs md:text-sm lg:text-base font-normal leading-relaxed">
+              <p className="text-purple-100/70 text-[11px] sm:text-sm md:text-base font-normal leading-relaxed">
                 {cardDescription}
               </p>
             </div>
