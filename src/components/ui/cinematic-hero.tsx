@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -169,22 +170,25 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
 
 export function CinematicHero({
   brandName = "Codecraftt",
-  tagline1 = "Premium brands.",
-  tagline2 = "Sites that sell.",
-  cardHeading = "Web design, redefined.",
-  cardDescription = (
-    <>
-      <span className="text-white font-semibold">Codecraftt</span> builds brands and websites that help businesses look premium and convert better.
-    </>
-  ),
   metricValue = 150,
-  metricLabel = "Projects",
-  ctaHeading = "Start your project.",
-  ctaDescription = "Branding and websites built to sell.",
   ctaHref = "#contact",
   className,
   ...props
 }: CinematicHeroProps) {
+  const { t } = useLanguage();
+  const ch = t.cinematicHero;
+  const tagline1 = ch.tagline1;
+  const tagline2 = ch.tagline2;
+  const cardHeading = ch.cardHeading;
+  const cardDescription = (
+    <>
+      <span className="text-white font-semibold">Codecraftt</span> {ch.cardDescription}
+    </>
+  );
+  const metricLabel = ch.metricLabel;
+  const ctaHeading = ch.ctaHeading;
+  const ctaDescription = ch.ctaDescription;
+  const ctaButton = ch.ctaButton;
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
@@ -297,7 +301,7 @@ export function CinematicHero({
           {ctaDescription}
         </p>
         <a href={ctaHref} className="btn-modern-light inline-flex items-center gap-2 px-10 py-4 rounded-[1.25rem] text-lg font-bold">
-          Start Your Project
+          {ctaButton}
         </a>
       </div>
 

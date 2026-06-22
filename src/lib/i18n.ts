@@ -29,6 +29,16 @@ export const translations = {
         "E-commerce", "Webflow & Next.js", "Art Direction", "UX/UI Design",
       ],
     },
+    cinematicHero: {
+      tagline1: "Premium brands.",
+      tagline2: "Sites that sell.",
+      cardHeading: "Web design, redefined.",
+      cardDescription: "builds brands and websites that help businesses look premium and convert better.",
+      metricLabel: "Projects",
+      ctaHeading: "Start your project.",
+      ctaDescription: "Branding and websites built to sell.",
+      ctaButton: "Start Your Project",
+    },
     techMarquee: {
       title: "Technologies we work with",
     },
@@ -191,6 +201,16 @@ export const translations = {
         "Diseño Web", "Identidad de Marca", "Diseño de Logo", "Landing Pages",
         "E-commerce", "Webflow & Next.js", "Dirección de Arte", "Diseño UX/UI",
       ],
+    },
+    cinematicHero: {
+      tagline1: "Marcas premium.",
+      tagline2: "Sitios que venden.",
+      cardHeading: "Diseño web, redefinido.",
+      cardDescription: "crea marcas y sitios web que ayudan a los negocios a verse premium y convertir mejor.",
+      metricLabel: "Proyectos",
+      ctaHeading: "Empieza tu proyecto.",
+      ctaDescription: "Branding y sitios web diseñados para vender.",
+      ctaButton: "Inicia Tu Proyecto",
     },
     techMarquee: {
       title: "Tecnologías con las que trabajamos",
