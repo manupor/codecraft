@@ -38,7 +38,7 @@ export default function Credibility() {
                 <img
                   src="/mp.jpg"
                   alt="Manuel Portuguez"
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-[#8b5cf6]/40 hover:ring-[#8b5cf6] transition-all duration-200"
+                  className="w-20 h-20 rounded-full object-cover object-[center_20%] ring-2 ring-[#8b5cf6]/40 hover:ring-[#8b5cf6] transition-all duration-200"
                 />
               </a>
               <p className="text-[#9ca3af] text-base leading-relaxed">
