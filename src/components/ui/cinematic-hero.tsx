@@ -2,12 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const INJECTED_STYLES = `
   .gsap-reveal { visibility: hidden; }
@@ -214,68 +209,36 @@ export function CinematicHero({
   }, []);
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const ctx = gsap.context(() => {
-      gsap.set(".cc-text-track", { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 });
-      gsap.set(".cc-text-days", { autoAlpha: 1, clipPath: "inset(0 100% 0 0)" });
-      gsap.set(".cc-main-card", { y: window.innerHeight + 200, autoAlpha: 1 });
+      const tl = gsap.timeline({ delay: 0.2 });
+
+      gsap.set(".cc-text-track", { autoAlpha: 0, y: 50, filter: "blur(16px)" });
+      gsap.set(".cc-text-days", { autoAlpha: 0, y: 30, filter: "blur(12px)" });
+      gsap.set(".cc-main-card", { autoAlpha: 0, y: 80, scale: 0.96 });
       gsap.set([".cc-card-left", ".cc-card-right", ".cc-mockup-wrapper", ".cc-badge", ".cc-phone-widget"], { autoAlpha: 0 });
-      gsap.set(".cc-cta-wrapper", { autoAlpha: 0, scale: 0.8, filter: "blur(30px)" });
 
-      const introTl = gsap.timeline({ delay: 0.3 });
-      introTl
-        .to(".cc-text-track", { duration: 1.8, autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", rotationX: 0, ease: "expo.out" })
-        .to(".cc-text-days", { duration: 1.4, clipPath: "inset(0 0% 0 0)", ease: "power4.inOut" }, "-=1.0");
-
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=7000",
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-        },
-      });
-
-      scrollTl
-        .to([".cc-hero-text", ".cc-bg-grid"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
-        .to(".cc-main-card", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
-        .to(".cc-main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.5 })
+      tl.to(".cc-text-track", { duration: 1.2, autoAlpha: 1, y: 0, filter: "blur(0px)", ease: "expo.out" })
+        .to(".cc-text-days", { duration: 1.0, autoAlpha: 1, y: 0, filter: "blur(0px)", ease: "expo.out" }, "-=0.7")
+        .to(".cc-main-card", { duration: 1.4, autoAlpha: 1, y: 0, scale: 1, ease: "expo.out" }, "-=0.6")
+        .to(".cc-card-left", { duration: 0.9, autoAlpha: 1, x: 0, ease: "power3.out" }, "-=0.8")
+        .to(".cc-card-right", { duration: 0.9, autoAlpha: 1, x: 0, ease: "power3.out" }, "<")
         .fromTo(".cc-mockup-wrapper",
-          { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
-          { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 }, "-=0.8"
+          { y: 60, autoAlpha: 0, scale: 0.9 },
+          { y: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.2 }, "-=0.6"
         )
-        .fromTo(".cc-phone-widget", { y: 40, autoAlpha: 0, scale: 0.95 }, { y: 0, autoAlpha: 1, scale: 1, stagger: 0.15, ease: "back.out(1.2)", duration: 1.5 }, "-=1.5")
-        .to(".cc-progress-ring", { strokeDashoffset: 60, duration: 2, ease: "power3.inOut" }, "-=1.2")
-        .to(".cc-counter-val", { innerHTML: metricValue, snap: { innerHTML: 1 }, duration: 2, ease: "expo.out" }, "-=2.0")
-        .fromTo(".cc-badge", { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 }, { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
-        .fromTo(".cc-card-left", { x: -50, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
-        .fromTo(".cc-card-right", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
-        .to({}, { duration: 2.5 })
-        .set(".cc-hero-text", { autoAlpha: 0 })
-        .set(".cc-cta-wrapper", { autoAlpha: 1 })
-        .to({}, { duration: 1.5 })
-        .to([".cc-mockup-wrapper", ".cc-badge", ".cc-card-left", ".cc-card-right"], {
-          scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05,
-        })
-        .to(".cc-main-card", {
-          width: isMobile ? "92vw" : "85vw",
-          height: isMobile ? "92vh" : "85vh",
-          borderRadius: isMobile ? "32px" : "40px",
-          ease: "expo.inOut", duration: 1.8,
-        }, "pullback")
-        .to(".cc-cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
-        .to(".cc-main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
-
+        .fromTo(".cc-phone-widget", { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.1, ease: "power2.out", duration: 0.8 }, "-=0.8")
+        .to(".cc-progress-ring", { strokeDashoffset: 60, duration: 1.8, ease: "power3.inOut" }, "-=0.6")
+        .to(".cc-counter-val", { innerHTML: metricValue, snap: { innerHTML: 1 }, duration: 1.8, ease: "expo.out" }, "-=1.8")
+        .fromTo(".cc-badge", { y: 30, autoAlpha: 0, scale: 0.85 }, { y: 0, autoAlpha: 1, scale: 1, ease: "back.out(1.4)", duration: 0.9, stagger: 0.15 }, "-=1.4");
     }, containerRef);
     return () => ctx.revert();
   }, [metricValue]);
 
   return (
-    <div
+    <section
       ref={containerRef}
-      className={cn("relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#090a0c] text-[#efece7] font-sans antialiased", className)}
+      id="home"
+      className={cn("relative w-full min-h-screen flex flex-col items-center justify-center bg-[#090a0c] text-[#efece7] overflow-hidden pt-24 pb-16 px-4", className)}
       style={{ perspective: "1500px" }}
       {...props}
     >
@@ -283,37 +246,21 @@ export function CinematicHero({
       <div className="film-grain" aria-hidden="true" />
       <div className="cc-bg-grid bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
 
-      {/* Hero text layer */}
-      <div className="cc-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4">
-        <h1 className="cc-text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
+      {/* Hero text */}
+      <div className="relative z-10 flex flex-col items-center text-center mb-10">
+        <h1 className="cc-text-track text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
           {tagline1}
         </h1>
-        <h1 className="cc-text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
+        <h1 className="cc-text-days text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
           {tagline2}
         </h1>
       </div>
 
-      {/* CTA layer */}
-      <div className="cc-cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto">
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-silver-matte">
-          {ctaHeading}
-        </h2>
-        <p className="text-[#b8b5ae] text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
-          {ctaDescription}
-        </p>
-        <a
-          href={ctaHref}
-          className="btn-modern-light inline-flex items-center gap-2 px-10 py-4 rounded-[1.25rem] text-lg font-bold"
-        >
-          Start Your Project
-        </a>
-      </div>
-
-      {/* Foreground card */}
-      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
+      {/* Card */}
+      <div className="relative z-20 w-full flex items-center justify-center" style={{ perspective: "1500px" }}>
         <div
           ref={mainCardRef}
-          className="cc-main-card premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[92vw] md:w-[85vw] h-[92vh] md:h-[85vh] rounded-[32px] md:rounded-[40px]"
+          className="cc-main-card premium-depth-card relative overflow-hidden flex items-center justify-center w-full max-w-6xl min-h-[520px] md:min-h-[600px] rounded-[32px] md:rounded-[40px]"
         >
           <div className="card-sheen" aria-hidden="true" />
 
@@ -427,6 +374,6 @@ export function CinematicHero({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
