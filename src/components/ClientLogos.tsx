@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const clients = [
-  { name: "Book IQ", logo: "/assets/images/clients/Book-IQ-Logo_long_WHITE.png" },
-  { name: "Clenivax", logo: "/assets/images/clients/Clenivax-LOGO.png" },
-  { name: "Egsu", logo: "/assets/images/clients/Egsu-logo-versiones_dorado.png" },
-  { name: "HiHub", logo: "/assets/images/clients/Logo%20Hihub.png" },
-  { name: "Chamo Gourmet", logo: "/assets/images/clients/Logo_CG_.png" },
-  { name: "Med", logo: "/assets/images/clients/logho%20med%20white.png" },
-  { name: "Marianela Ibarra", logo: "/assets/images/clients/mibarra-web.png" },
+  { name: "Book IQ", logo: "/assets/images/clients/Book-IQ-Logo_long_WHITE.png", url: null },
+  { name: "Clenivax", logo: "/assets/images/clients/Clenivax-LOGO.png", url: "https://clenivax.com" },
+  { name: "Egsu", logo: "/assets/images/clients/Egsu-logo-versiones_dorado.png", url: null },
+  { name: "HiHub", logo: "/assets/images/clients/Logo%20Hihub.png", url: "https://hihubglobal.com" },
+  { name: "Chamo Gourmet", logo: "/assets/images/clients/Logo_CG_.png", url: "https://chamogourmetcr.com" },
+  { name: "Med", logo: "/assets/images/clients/logho%20med%20white.png", url: "https://medicaldcr.com" },
+  { name: "Marianela Ibarra", logo: "/assets/images/clients/mibarra-web.png", url: "https://mibarranutricion.com" },
 ];
 
 const allClients = [...clients, ...clients];
@@ -24,11 +24,13 @@ export default function ClientLogos() {
   const dragStartX = useRef(0);
   const initialX = useRef(0);
   const currentX = useRef(0);
+  const didDrag = useRef(false);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!trackRef.current) return;
     setIsDragging(true);
     setIsPaused(true);
+    didDrag.current = false;
     dragStartX.current = e.clientX;
     const matrix = new window.WebKitCSSMatrix(window.getComputedStyle(trackRef.current).transform);
     initialX.current = matrix.m41;
@@ -38,6 +40,7 @@ export default function ClientLogos() {
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isDragging || !trackRef.current) return;
     const delta = e.clientX - dragStartX.current;
+    if (Math.abs(delta) > 4) didDrag.current = true;
     const newX = initialX.current + delta;
     currentX.current = newX;
     trackRef.current.style.transform = `translateX(${newX}px)`;
@@ -112,12 +115,30 @@ export default function ClientLogos() {
               key={`${client.name}-${i}`}
               className="shrink-0 flex items-center justify-center h-[70px] px-6 py-3 rounded-sm bg-white/[0.10] border border-white/[0.14]"
             >
-              <img
-                src={client.logo}
-                alt={client.name}
-                draggable={false}
-                className="h-[44px] w-auto max-w-[180px] object-contain brightness-0 invert pointer-events-none"
-              />
+              {client.url ? (
+                <a
+                  href={client.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={client.name}
+                  onClick={(e) => { if (didDrag.current) e.preventDefault(); }}
+                  className="flex items-center"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    draggable={false}
+                    className="h-[44px] w-auto max-w-[180px] object-contain brightness-0 invert pointer-events-none"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  draggable={false}
+                  className="h-[44px] w-auto max-w-[180px] object-contain brightness-0 invert pointer-events-none"
+                />
+              )}
             </div>
           ))}
         </motion.div>
