@@ -320,7 +320,7 @@ export function CinematicHero({
             </div>
 
             {/* Phone mockup + badges — center row */}
-            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10" style={{ perspective: "1000px", height: '320px' }}>
+            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10 h-[320px] md:h-[480px] lg:h-[560px]" style={{ perspective: "1000px" }}>
               <div className="relative flex items-center justify-center scale-[0.38] sm:scale-[0.52] md:scale-[0.68] lg:scale-[0.9]" style={{ transformOrigin: 'center center' }}>
                 <div ref={mockupRef} className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform">
                   <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
@@ -408,11 +408,11 @@ export function CinematicHero({
             </div>
 
             {/* Text — below phone, center */}
-            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl px-4 mt-[-8px] sm:mt-[-16px] md:mt-4 lg:mt-6">
-              <h3 className="text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 tracking-tight">
+            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-2xl px-4 mt-[-8px] sm:mt-[-16px] md:mt-10 lg:mt-14">
+              <h3 className="text-white text-base sm:text-xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-3 tracking-tight">
                 {cardHeading}
               </h3>
-              <p className="text-purple-100/70 text-[11px] sm:text-sm md:text-base font-normal leading-relaxed">
+              <p className="text-purple-100/70 text-[11px] sm:text-sm md:text-lg lg:text-xl font-normal leading-relaxed">
                 {cardDescription}
               </p>
             </div>
