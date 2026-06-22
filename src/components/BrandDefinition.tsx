@@ -25,32 +25,28 @@ export default function BrandDefinition() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8b5cf6] mb-4">
               {b.eyebrow}
-            <"use client";
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] text-[#efece7]">
+              {b.headline}
+            </h2>
+            <p className="mt-5 text-base text-[#9ca3af] leading-relaxed">
+              {b.definition}
+            </p>
+          </div>
 
-import { motion } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-exp  
-import { moineimport { useLanguage } from "@/contextss
-export default function BrandDefinition() {
-  const { tw-l  const { t } = useLanguage();
-  const b =    const b = t.brandDef;
-
-  re  
-  return (
-    <secti pillars */}
-          <div      aria-label={b.ari     s-3 lg:grid-cols-1 xl:grid    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-               <motion.div
-          initial={{ opacity: 0,             initial=ro          whileInView={{ opacity: 1, y: hi          transition={{ duration: 0.6, easeio          viewport={{ once: true, margin: "-80px" }}
-  <p           className="grid lg:grid-cols[#efece7] mb-1"        >
-          {/* Left — definition */}
-          <div>
-     ea        ax          <div>
-            <p class>
-            <p}
-              {b.eyebrow}
-       .div>
+          {/* Right — pillars */}
+          <div className="grid grid-cols-1 gap-5">
+            {b.pillars.map((pillar: { title: string; desc: string }, i: number) => (
+              <div key={i} className="flex gap-4 items-start p-5 rounded-sm border border-white/[0.07] bg-white/[0.02]">
+                <span className="text-lg font-bold text-[#8b5cf6]/30 shrink-0 w-6 tabular-nums">0{i + 1}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[#efece7] mb-1">{pillar.title}</h3>
+                  <p className="text-sm text-[#9ca3af] leading-relaxed">{pillar.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
