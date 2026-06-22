@@ -132,6 +132,16 @@ export const translations = {
         { q: "What does a project cost?", a: "Logo and brand identity projects start around $800 USD. Custom websites typically start at $1,500 USD, and full brand + website packages scale from there. We're transparent about pricing from day one — no surprises." },
       ],
     },
+    credibility: {
+      eyebrow: "Behind the work",
+      headline: "Built by someone who has shipped it before.",
+      sentence: "Codecraftt is led by Manuel Portuguez — 10+ years designing and building digital products for companies across the US and Latin America.",
+      points: [
+        { label: "100+ projects delivered", sub: "SaaS, e-commerce, fintech, education, and enterprise" },
+        { label: "Clients include AWS and Texas Tech University", sub: "Plus 50+ growing brands across the US and Latin America" },
+        { label: "Full-stack execution", sub: "Strategy, design, and development under one roof" },
+      ],
+    },
     finalCta: {
       eyebrow: "Ready to stand out?",
       headline1: "Let's build a brand",
@@ -303,6 +313,16 @@ export const translations = {
         { q: "¿Pueden rediseñar mi sitio web o marca actual?", a: "Sí. Los rebrands y rediseños de sitios web son de nuestros proyectos más solicitados. Auditamos tu presencia actual, identificamos qué te está frenando y la reconstruimos en algo moderno, cohesivo y de alta conversión." },
         { q: "¿Ofrecen proyectos a precio fijo?", a: "Sí. Para alcances bien definidos — como un sitio web o paquete de marca — ofrecemos precios fijos con entregables claros. Para necesidades continuas también ofrecemos planes mensuales de mantenimiento. Te recomendaremos la mejor opción tras nuestra llamada inicial." },
         { q: "¿Cuánto cuesta un proyecto?", a: "Los proyectos de logo e identidad de marca empiezan alrededor de $800 USD. Los sitios web a medida típicamente desde $1,500 USD, y los paquetes completos de marca + sitio escalan desde ahí. Somos transparentes con los precios desde el día uno — sin sorpresas." },
+      ],
+    },
+    credibility: {
+      eyebrow: "Detrás del trabajo",
+      headline: "Construido por alguien que ya lo ha hecho antes.",
+      sentence: "Codecraftt es liderado por Manuel Portuguez — más de 10 años diseñando y desarrollando productos digitales para empresas en EE. UU. y América Latina.",
+      points: [
+        { label: "100+ proyectos entregados", sub: "SaaS, e-commerce, fintech, educación y enterprise" },
+        { label: "Clientes incluyen AWS y Texas Tech University", sub: "Más 50+ marcas en crecimiento en EE. UU. y América Latina" },
+        { label: "Ejecución full-stack", sub: "Estrategia, diseño y desarrollo bajo un mismo techo" },
       ],
     },
     finalCta: {

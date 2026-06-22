@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import BigStatement from "@/components/BigStatement";
 import WhyUs from "@/components/WhyUs";
 import HowItWorks from "@/components/HowItWorks";
+import Credibility from "@/components/Credibility";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import HomeClient from "@/components/HomeClient";
@@ -23,6 +24,7 @@ export default function Home() {
           <Services />
           <BigStatement />
           <WhyUs />
+          <Credibility />
           <HowItWorks />
           <TechMarquee />
           <FAQ />
