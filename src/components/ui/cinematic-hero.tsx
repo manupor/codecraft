@@ -227,7 +227,7 @@ export function CinematicHero({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=7000",
+          end: "+=3500",
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -312,9 +312,9 @@ export function CinematicHero({
           {/* Layout: brand top-center, phone center, text below, badges on sides */}
           <div className="relative w-full h-full flex flex-col items-center justify-center z-10 px-4 py-4">
 
-            {/* Brand name — top center */}
-            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-[-8px] sm:mb-[-16px] md:mb-[-24px] lg:mb-[-32px]">
-              <h2 className="text-[2rem] sm:text-[3rem] md:text-[5rem] lg:text-[7rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
+            {/* Brand name — mobile only */}
+            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-[-8px] sm:mb-[-16px] md:hidden">
+              <h2 className="text-[2rem] sm:text-[3rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
                 {brandName}
               </h2>
             </div>
@@ -408,7 +408,7 @@ export function CinematicHero({
             </div>
 
             {/* Text — below phone, center */}
-            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl px-4 mt-[-8px] sm:mt-[-16px] md:mt-[-24px]">
+            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl px-4 mt-[-8px] sm:mt-[-16px] md:mt-4 lg:mt-6">
               <h3 className="text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2 tracking-tight">
                 {cardHeading}
               </h3>
