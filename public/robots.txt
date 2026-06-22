@@ -1,39 +1,27 @@
-# ──────────────────────────────────────────
-#  Standard search engines — full access
-# ──────────────────────────────────────────
+# Regla general: permitir rastreo estándar
 User-agent: *
-Allow: /
+Disallow:
 
-# ──────────────────────────────────────────
-#  OpenAI — block training, allow search
-# ──────────────────────────────────────────
+# Bloquear entrenamiento de modelos de OpenAI (GPTBot)
 User-agent: GPTBot
 Disallow: /
 
+# Permitir bot de búsqueda de OpenAI (para aparecer en ChatGPT Search)
 User-agent: OAI-SearchBot
 Allow: /
 
+# Permitir que usuarios de ChatGPT abran la web desde la interfaz
 User-agent: ChatGPT-User
 Allow: /
 
-# ──────────────────────────────────────────
-#  Anthropic (Claude)
-# ──────────────────────────────────────────
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-# ──────────────────────────────────────────
-#  Google Extended — allow AI Overviews
-# ──────────────────────────────────────────
+# Permitir rastreo para resúmenes / overviews de Google
 User-agent: Google-Extended
 Allow: /
 
-# ──────────────────────────────────────────
-#  Perplexity
-# ──────────────────────────────────────────
+# Permitir bots de IA conversacional relevantes
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
