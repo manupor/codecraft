@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useContactModal } from "@/components/HomeClient";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -176,6 +177,7 @@ export function CinematicHero({
   ...props
 }: CinematicHeroProps) {
   const { t } = useLanguage();
+  const { openModal } = useContactModal();
   const ch = t.cinematicHero;
   const tagline1 = ch.tagline1;
   const tagline2 = ch.tagline2;
@@ -300,9 +302,9 @@ export function CinematicHero({
         <p className="text-[#b8b5ae] text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
           {ctaDescription}
         </p>
-        <a href={ctaHref} className="btn-modern-light inline-flex items-center gap-2 px-10 py-4 rounded-[1.25rem] text-lg font-bold">
+        <button onClick={openModal} className="btn-modern-light inline-flex items-center gap-2 px-10 py-4 rounded-[1.25rem] text-lg font-bold">
           {ctaButton}
-        </a>
+        </button>
       </div>
 
       {/* Foreground card */}
