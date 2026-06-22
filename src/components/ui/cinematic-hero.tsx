@@ -310,18 +310,18 @@ export function CinematicHero({
           <div className="card-sheen" aria-hidden="true" />
 
           {/* Layout: brand top-center, phone center, text below, badges on sides */}
-          <div className="relative w-full h-full flex flex-col items-center justify-center z-10 px-4">
+          <div className="relative w-full h-full flex flex-col items-center justify-center z-10 px-4 gap-0">
 
             {/* Brand name — top center */}
-            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-4 md:mb-6">
-              <h2 className="text-[4rem] md:text-[7rem] lg:text-[9rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
+            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-1 md:mb-4">
+              <h2 className="text-[2.2rem] sm:text-[3.5rem] md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
                 {brandName}
               </h2>
             </div>
 
             {/* Phone mockup + badges — center row */}
-            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10" style={{ perspective: "1000px", minHeight: "420px" }}>
-              <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-[0.85] lg:scale-100">
+            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10" style={{ perspective: "1000px", minHeight: "280px" }}>
+              <div className="relative w-full h-full flex items-center justify-center transform scale-[0.42] sm:scale-[0.55] md:scale-[0.75] lg:scale-100" style={{ transformOrigin: 'center center' }}>
                 <div ref={mockupRef} className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform">
                   <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
                   <div className="absolute top-[160px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
@@ -408,11 +408,11 @@ export function CinematicHero({
             </div>
 
             {/* Text — below phone, center */}
-            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl mt-6 md:mt-8 px-4">
-              <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
+            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl mt-2 md:mt-6 px-4">
+              <h3 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight">
                 {cardHeading}
               </h3>
-              <p className="text-purple-100/70 text-sm md:text-base lg:text-lg font-normal leading-relaxed">
+              <p className="text-purple-100/70 text-xs sm:text-sm md:text-base lg:text-lg font-normal leading-relaxed">
                 {cardDescription}
               </p>
             </div>
