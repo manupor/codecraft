@@ -1,6 +1,6 @@
 import NavMenuWrapper from "@/components/NavMenuWrapper";
 import GlobalBackground from "@/components/GlobalBackground";
-import Hero from "@/components/Hero";
+import { CinematicHero } from "@/components/ui/cinematic-hero";
 import TechMarquee from "@/components/TechMarquee";
 import ClientLogos from "@/components/ClientLogos";
 import Services from "@/components/Services";
@@ -18,7 +18,7 @@ export default function Home() {
       <HomeClient>
         <div className="relative z-10">
           <NavMenuWrapper />
-          <Hero />
+          <CinematicHero />
           <ClientLogos />
           <Services />
           <BigStatement />
