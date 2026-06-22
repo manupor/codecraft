@@ -57,13 +57,9 @@ const INJECTED_STYLES = `
   }
 
   .premium-depth-card {
-      background: linear-gradient(145deg, #1a0a3d 0%, #0a0612 100%);
-      box-shadow: 
-          0 40px 100px -20px rgba(0, 0, 0, 0.9),
-          0 20px 40px -20px rgba(0, 0, 0, 0.8),
-          inset 0 1px 2px rgba(139, 92, 246, 0.2),
-          inset 0 -2px 4px rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(139, 92, 246, 0.1);
+      background: transparent;
+      box-shadow: none;
+      border: none;
       position: relative;
   }
 
@@ -275,13 +271,12 @@ export function CinematicHero({
     <div
       ref={containerRef}
       id="home"
-      className={cn("relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#090a0c] text-[#efece7]", className)}
+      className={cn("relative w-screen h-screen overflow-hidden flex items-center justify-center bg-transparent text-[#efece7]", className)}
       style={{ perspective: "1500px" }}
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
-      <div className="cc-bg-grid bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
 
       {/* Hero text layer */}
       <div className="cc-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4">
@@ -310,21 +305,22 @@ export function CinematicHero({
       <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
         <div
           ref={mainCardRef}
-          className="cc-main-card premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[92vw] md:w-[85vw] h-[92vh] md:h-[85vh] rounded-[32px] md:rounded-[40px]"
+          className="cc-main-card premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-full h-full"
         >
           <div className="card-sheen" aria-hidden="true" />
 
-          <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
+          {/* Layout: brand top-center, phone center, text below, badges on sides */}
+          <div className="relative w-full h-full flex flex-col items-center justify-center z-10 px-4">
 
-            {/* Brand name */}
-            <div className="cc-card-right gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte">
+            {/* Brand name — top center */}
+            <div className="cc-card-right gsap-reveal flex justify-center w-full mb-4 md:mb-6">
+              <h2 className="text-[4rem] md:text-[7rem] lg:text-[9rem] font-black uppercase tracking-tighter text-card-silver-matte leading-none">
                 {brandName}
               </h2>
             </div>
 
-            {/* Phone mockup */}
-            <div className="cc-mockup-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
+            {/* Phone mockup + badges — center row */}
+            <div className="cc-mockup-wrapper relative w-full flex items-center justify-center z-10" style={{ perspective: "1000px", minHeight: "420px" }}>
               <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-[0.85] lg:scale-100">
                 <div ref={mockupRef} className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform">
                   <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
@@ -389,7 +385,7 @@ export function CinematicHero({
                 </div>
 
                 {/* Floating badges */}
-                <div className="cc-badge absolute flex top-6 lg:top-12 left-[-15px] lg:left-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
+                <div className="cc-badge absolute flex top-[20%] left-[2%] md:left-[5%] lg:left-[8%] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
                   <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-purple-500/20 to-purple-900/10 flex items-center justify-center border border-purple-400/30">
                     <span className="text-base lg:text-xl" aria-hidden="true">✦</span>
                   </div>
@@ -399,7 +395,7 @@ export function CinematicHero({
                   </div>
                 </div>
 
-                <div className="cc-badge absolute flex bottom-12 lg:bottom-20 right-[-15px] lg:right-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
+                <div className="cc-badge absolute flex bottom-[15%] right-[2%] md:right-[5%] lg:right-[8%] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
                   <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-violet-500/20 to-violet-900/10 flex items-center justify-center border border-violet-400/30">
                     <span className="text-base lg:text-lg" aria-hidden="true">🚀</span>
                   </div>
@@ -411,12 +407,12 @@ export function CinematicHero({
               </div>
             </div>
 
-            {/* Left text */}
-            <div className="cc-card-left gsap-reveal order-3 lg:order-1 flex flex-col justify-center text-center lg:text-left z-20 w-full px-4 lg:px-0">
-              <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-0 lg:mb-5 tracking-tight">
+            {/* Text — below phone, center */}
+            <div className="cc-card-left gsap-reveal flex flex-col items-center text-center z-20 w-full max-w-xl mt-6 md:mt-8 px-4">
+              <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
                 {cardHeading}
               </h3>
-              <p className="hidden md:block text-purple-100/70 text-sm md:text-base lg:text-lg font-normal leading-relaxed max-w-sm lg:max-w-none">
+              <p className="text-purple-100/70 text-sm md:text-base lg:text-lg font-normal leading-relaxed">
                 {cardDescription}
               </p>
             </div>
