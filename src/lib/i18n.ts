@@ -135,7 +135,8 @@ export const translations = {
     credibility: {
       eyebrow: "Behind the work",
       headline: "Built by someone who has shipped it before.",
-      sentence: "Codecraftt is led by Manuel Portuguez — 10+ years designing and building digital products for companies across the US and Latin America.",
+      sentencePre: "Codecraftt is led by",
+      sentencePost: "— 10+ years designing and building digital products for companies across the US and Latin America.",
       points: [
         { label: "100+ projects delivered", sub: "SaaS, e-commerce, fintech, education, and enterprise" },
         { label: "Clients include AWS and Texas Tech University", sub: "Plus 50+ growing brands across the US and Latin America" },
@@ -318,7 +319,8 @@ export const translations = {
     credibility: {
       eyebrow: "Detrás del trabajo",
       headline: "Construido por alguien que ya lo ha hecho antes.",
-      sentence: "Codecraftt es liderado por Manuel Portuguez — más de 10 años diseñando y desarrollando productos digitales para empresas en EE. UU. y América Latina.",
+      sentencePre: "Codecraftt es liderado por",
+      sentencePost: "— más de 10 años diseñando y desarrollando productos digitales para empresas en EE. UU. y América Latina.",
       points: [
         { label: "100+ proyectos entregados", sub: "SaaS, e-commerce, fintech, educación y enterprise" },
         { label: "Clientes incluyen AWS y Texas Tech University", sub: "Más 50+ marcas en crecimiento en EE. UU. y América Latina" },

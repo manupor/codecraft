@@ -25,9 +25,35 @@ export default function Credibility() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.15] text-[#efece7]">
               {c.headline}
             </h2>
-            <p className="mt-4 text-[#9ca3af] text-base leading-relaxed">
-              {c.sentence}
-            </p>
+
+            {/* Author row */}
+            <div className="mt-5 flex items-center gap-4">
+              <a
+                href="https://manuportuguez.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 block"
+                aria-label="Manuel Portuguez"
+              >
+                <img
+                  src="/mp.jpg"
+                  alt="Manuel Portuguez"
+                  className="w-12 h-12 rounded-full object-cover ring-2 ring-[#8b5cf6]/40 hover:ring-[#8b5cf6] transition-all duration-200"
+                />
+              </a>
+              <p className="text-[#9ca3af] text-base leading-relaxed">
+                {c.sentencePre}{" "}
+                <a
+                  href="https://manuportuguez.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#efece7] font-semibold hover:text-[#8b5cf6] transition-colors duration-200 underline underline-offset-2 decoration-[#8b5cf6]/40 hover:decoration-[#8b5cf6]"
+                >
+                  Manuel Portuguez
+                </a>
+                {" "}{c.sentencePost}
+              </p>
+            </div>
           </div>
 
           {/* Right — three proof points */}
