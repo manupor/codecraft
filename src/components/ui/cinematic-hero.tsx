@@ -358,27 +358,32 @@ export function CinematicHero({
                         </div>
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="cc-phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/5 flex items-center justify-center mr-3 border border-purple-400/20">
-                            <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                      <div className="space-y-2">
+                        <div className="cc-phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/5 flex items-center justify-center border border-purple-400/20 shrink-0">
+                            <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-20 bg-neutral-300 rounded-full mb-2" />
-                            <div className="h-1.5 w-12 bg-neutral-600 rounded-full" />
+                          <div>
+                            <p className="text-white text-[11px] font-bold leading-tight">+150 proyectos</p>
+                            <p className="text-purple-200/50 text-[9px]">entregados</p>
                           </div>
                         </div>
-                        <div className="cc-phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-600/5 flex items-center justify-center mr-3 border border-violet-400/20">
-                            <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
+                        <div className="cc-phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-600/5 flex items-center justify-center border border-violet-400/20 shrink-0">
+                            <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                           </div>
-                          <div className="flex-1">
-                            <div className="h-2 w-16 bg-neutral-300 rounded-full mb-2" />
-                            <div className="h-1.5 w-24 bg-neutral-600 rounded-full" />
+                          <div>
+                            <p className="text-white text-[11px] font-bold leading-tight">Websites en 2 semanas</p>
+                            <p className="text-purple-200/50 text-[9px]">diseño &amp; desarrollo</p>
+                          </div>
+                        </div>
+                        <div className="cc-phone-widget widget-depth rounded-2xl p-3 flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500/20 to-indigo-600/5 flex items-center justify-center border border-indigo-400/20 shrink-0">
+                            <svg className="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                          </div>
+                          <div>
+                            <p className="text-white text-[11px] font-bold leading-tight">Mobile apps y automatizaciones</p>
+                            <p className="text-purple-200/50 text-[9px]">React Native &amp; AI</p>
                           </div>
                         </div>
                       </div>
@@ -388,26 +393,6 @@ export function CinematicHero({
                   </div>
                 </div>
 
-                {/* Floating badges */}
-                <div className="cc-badge absolute flex top-[20%] left-[2%] md:left-[5%] lg:left-[8%] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-purple-500/20 to-purple-900/10 flex items-center justify-center border border-purple-400/30">
-                    <span className="text-base lg:text-xl" aria-hidden="true">✦</span>
-                  </div>
-                  <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Brand Identity</p>
-                    <p className="text-purple-200/50 text-[10px] lg:text-xs font-medium">Delivered in 2 weeks</p>
-                  </div>
-                </div>
-
-                <div className="cc-badge absolute flex bottom-[15%] right-[2%] md:right-[5%] lg:right-[8%] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-violet-500/20 to-violet-900/10 flex items-center justify-center border border-violet-400/30">
-                    <span className="text-base lg:text-lg" aria-hidden="true">🚀</span>
-                  </div>
-                  <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Site Launched</p>
-                    <p className="text-purple-200/50 text-[10px] lg:text-xs font-medium">Conversions +40%</p>
-                  </div>
-                </div>
               </div>
             </div>
 
